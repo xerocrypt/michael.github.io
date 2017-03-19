@@ -151,7 +151,7 @@ table {
     padding-bottom: 10px;
 }
 
-buton {
+#button {
     background: #9200E7;
     border: 0px;
 }
@@ -225,10 +225,10 @@ buton {
     border: 2px solid #9200E7;
     top: 0px;
 
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
     
     padding-left: 10px;
     padding-right: 10px;
