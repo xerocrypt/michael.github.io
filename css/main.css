@@ -239,11 +239,11 @@ button {
 
 #footer {
         font-family: Arial, Verdana;
-    font-size: 1em;
+    font-size: 0.7em;
     color: #ffffff;
     background-color:  #9200E7;
     width: 100%;
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
