@@ -12,8 +12,8 @@ h2 {
 #menu-bar {
   width: 95%;
   margin: 0px 0px 0px 0px;
-  padding: 0px 0px 4px 4px;
-  height: 25px;
+  padding: 6px 6px 4px 6px;
+  height: 40px;
   line-height: 100%;
   border-radius: 0px;
   -webkit-border-radius: 0px;
@@ -21,28 +21,24 @@ h2 {
   box-shadow: 0px 0px 0px #666666;
   -webkit-box-shadow: 0px 0px 0px #666666;
   -moz-box-shadow: 0px 0px 0px #666666;
-  background: #FFFFFF;
-  background: linear-gradient(top,  #FFFFFF,  #E6E6E6);
-  background: -ms-linear-gradient(top,  #FFFFFF,  #E6E6E6);
-  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#E6E6E6));
-  background: -moz-linear-gradient(top,  #FFFFFF,  #E6E6E6);
-  border: solid 1px #6D6D6D;
+  background: #FAFAFA;
+  border: solid 1px #620A87;
   position:relative;
   z-index:999;
 }
 #menu-bar li {
   margin: 0px 0px 6px 0px;
-  padding: 0px 4px 0px 4px;
+  padding: 0px 6px 0px 6px;
   float: left;
   position: relative;
   list-style: none;
 }
 #menu-bar a {
-  font-weight: bold;
-  font-family: verdana;
+  font-weight: normal;
+  font-family: arial;
   font-style: normal;
   font-size: 12px;
-  color: #9200E7;
+  color: #620A87;
   text-decoration: none;
   display: block;
   padding: 6px 20px 6px 20px;
@@ -57,12 +53,12 @@ h2 {
   margin: 0;
 }
 #menu-bar .active a, #menu-bar li:hover > a {
-  background: #9200E7;
+  background: #620A87;
   color: #FFFFFF;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-  text-shadow: 0px 0px 0px #FFFFFF;
+  text-shadow: 0px 0px 1px #FFFFFF;
 }
 #menu-bar ul li:hover a, #menu-bar li:hover li a {
   background: none;
@@ -73,7 +69,7 @@ h2 {
   -moz-box-shadow: none;
 }
 #menu-bar ul a:hover {
-  background: #9200E7 !important;
+  background: #620A87 !important;
   color: #FFFFFF !important;
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -92,7 +88,7 @@ h2 {
   position: absolute;
   top: 30px;
   left: 0;
-  border: solid 1px #9200E7;
+  border: solid 1px #620A87;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -107,10 +103,10 @@ h2 {
 }
 #menu-bar ul a {
   padding:10px 0px 10px 15px;
-  color:#9200E7 !important;
+  color:#424242 !important;
   font-size:12px;
   font-style:normal;
-  font-family:verdana;
+  font-family:arial;
   font-weight: normal;
   text-shadow: 0px 0px 0px #FFFFFF;
 }
