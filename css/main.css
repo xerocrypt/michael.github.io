@@ -151,6 +151,11 @@ table {
     padding-bottom: 10px;
 }
 
+buton {
+    background: #9200E7;
+    border: 0px;
+}
+
 #section {
     font-family: Arial, Verdana;
     font-size: 1em;
