@@ -1,51 +1,61 @@
 <html>
-<head>
-<title>Healthcare</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
+  <head>
+    <title>Healthcare</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
 
-<body>
-<h1>Healthcare/Clinical Projects</h2>
+  <body>
+    <h1>Healthcare/Clinical Projects</h2>
 
- <ul id="menu-bar">
- <li><a href="index.html">Home</a></li>
- <li><a href="about.html">About</a></li>
- <li class="active"><a href="#">Healthcare</a></li>
- <li><a href="toolkit.html">Toolkit</a></li>
-  <li><a href="resources.html">Resources</a></li>
-</ul>
+    <ul id="menu-bar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="active"><a href="#">Healthcare</a></li>
+      <li><a href="toolkit.html">Toolkit</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
  
   <div id="article">
-  <h2>Test Automation</h2>
-  C# and Coded UI Test libraries. This was used for automating the testing of .NET applications.
-  </article>
+    <h2>Test Automation</h2>
+    I have delivered an test automation capability and basic C# training to an organisation, based on C# and the Microsoft Coded UI Test libraries. Regression tests that previously required several weeks when done manually were completed within a matter of hours.
+  </div>
+
+  <div id="article">
+    <h2>Web Services</h2>
+    Used for passing of data between several nationally-deployed clinical systems. The Web Service architecture followed the SOLID principles of software design, being loosely coupled across five layers:
+    <ul>
+      <li>API repository</li>
+      <li>Web Service helpers</li>
+      <li>Data access: Data response</li>
+      <li>Data access: Data response body</li>
+      <li>Data access: Data response items</li>
+    </ul>
+
+    Testing and debugging was performed using SoapUI.
+  </div>
+
+  <div id="article">
+    <h2>Messaging Dashboard</h2>
+    Uses:
+    <ul>
+      <li>ASP.NET MVC 5</li>
+      <li>Entity Framework</li>
+      <li>Service Broker and Stored Procedures</li>
+    </ul>
+
+    This is a dashboard that reformats and displays messages on an error queue in Service Broker, enabling the system administrators to determine the cause of message processing failures. Selected messages could be deleted, resubmitted or moved between Service Broker queues.
 </div>
 
-<div id="article">
-<h2>Web Services</h2>
-Uses:
-C#.
-</article>
-</div>
-
-<div id="article">
-<h2>Messaging Dashboard</h2>
-Uses:
-<ul>
-  <li>ASP.NET MVC 5</li>
-  <li>Entity Framework</li>
-  <li>Service Broker and Stored Procedures</li>
-  </ul>
-</div>
-
-<div id="article">
-<h2>Messaging Metrics Dashboard</h2>
-Uses:
-<ul>
-  <li>ASP.NET MVC 5</li>
-  <li>Entity Framework</li>
-  <li>amCharts and Chart.js</li>
-  </ul>
+  <div id="article">
+    <h2>Messaging Metrics Dashboard</h2>
+    This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br>
+    The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
+    Uses:
+    <ul>
+      <li>ASP.NET MVC 5</li>
+      <li>Entity Framework</li>
+      <li>amCharts and Chart.js</li>
+    </ul>
 </div>
 
 <div id="footer">
