@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>ACS ACOS3</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+<h1>SmartCard Research: ACS ACOS3</h1>
+
+<div id="article">
+    <h2>Microprocessor (Fixed Function) Smart Card Development Kit</h2>
+    <img src="images/acos-card-dev-kit-small.jpg"></br>
+    <ul>
+        <li>ACS ACOS3 Smart Card</li>
+        <li>Gemalto GemPlus Card Reader</li>
+        </ul>
+        </div>
+
+<div id="article">
+<h2>ACOS3 Smart Card</h2>
+The ACOS3 card has 32KB of EEPROM, and initially it seemed ideal for my project. As it turns out, the card functions more as a storage medium with native functionality limited to read/write operations. These operations are performed by sending machine code instructions known as Application Protocol Data Units (APDUs) to the card.</br></br>
+
+Read operation:
+<img src="images/APDU-read-data.png"></br></br>
+
+Write operation:
+<img src="images/APDU-write-data.png"></br></br>
+
+For example, the following command:
+<code>WRITE: 11 BYTES TO 00 3Ah: HELLO WORLD</code></br></br>
+
+Would be sent to the card as:
+<code>91 00 3A 48 65 6C 6C 6F 20 57 6F 72 6C 64</code></br></br>
+
+So using the ACOS card would likely require the development of a custom application with its own hardware drivers. However, it's just about possible to script a series of actions using the g(scriptor) application, which is available for Linux.</br></br>
+ <button onclick="window.location.href='acos3.html'">More information...</button>
+</div>
+
+
+
+<div id="article">
+<h2>References</h2>
+
+</div>
+
+</body>
+</html>

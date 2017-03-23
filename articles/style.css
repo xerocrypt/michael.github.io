@@ -238,6 +238,12 @@ button {
     padding-bottom: 5px;
 }
 
+button {
+    background: #9200E7;
+    color: #FFFFFF;
+    border: 0px;
+}
+
 #footer {
         font-family: Arial, Verdana;
     font-size: 1em;
