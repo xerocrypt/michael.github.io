@@ -12,10 +12,9 @@
 
         <div id="article">
             <h2>Single Responsibility Principle</h2>
-            Robert C. Martin explains this principle with the statement: 'A class should have only one reason to change.'. What it actually means is that each module or function should have only one specific responsibility, and it should be encapsulated.</br>
-            Anyone who's done some object-oriented programming should be familiar with this concept. Functions are the building blocks of software, and we use them even when we're not aware of it.
-            An ideal program is designed so that every function or method does something very specific, and we avoid creating a function that does multiple things. This is one of the ways to make code more readable.
+            Robert C. Martin explains this principle with the statement: 'A class should have only one reason to change.'. What it actually means is that each module or function should have only one specific responsibility. We should avoid creating a module that does more than one specific thing. A <i>class<i> should perform one <i>type</i> of function  only. For example, a class shouldn't perform one function and log errors - a separate class, for logging, should be used for the latter.
             </br></br>
+
             To give a real-world example:</br></br>
             <img src="images/single-responsibility-example.png"></br></br>
 
@@ -30,23 +29,21 @@
 
     <div id="article">
         <h2>Open/Closed Principle</h2>
+        Basically means it should be possible to modify or extend the behaviour of a module without changing its source code. If a module is 'open' it could be extended to accommodate additional data structures. If the module is 'closed' it has a stable and defined behaviour.
         Modules 'should be open for extension but closed for modification', as the Wikipedia entry states. The following rules are also stated:</br>
         <ul>
             <li>A module is considered open if it can be extended.</li>
             <li>A module is closed if it's available to use by other modules, and has a well-defined and stable description.</li>
         </ul>
 
-        Basically this expands on the principle of single responsibility, the two being a guide to the proper design of a module.
+        Basically this expands on the principle of single responsibility, the two being a guide to the proper design of a module. It should be possible to create multiple instances of a 'closed' module as an abstract base class.
         </br></br>
     </div>
 
     <div id="article">
         <h2>Liskov Substitution Principle</h2>
-        This principle is essentially all about base classes and derived classes. A way to make code reusable, so the programmer isn't creating the same function multiple times. Instead, the programmer uses instances of a base class where needed.</br></br>
- 
-        '<quote>if S is a subtype of T, then objects of type T in a program may be replaced with objects of type S without altering any of the desirable properties of that program</quote>'.</br></br>
- 
-        Another general rule is derived classes shouldn't throw exceptions if their base classes don't.
+        The official definition is '<quote>if S is a subtype of T, then objects of type T in a program may be replaced with objects of type S without altering any of the desirable properties of that program</quote>'</br>
+        All this means is a derived class should function exactly as if its base class was used. The derived class implements the base class, thereby making the code re-usable as needed. This enables multiple instances of a class to be extended and used without duplicating its code.
         </br></br>
     </div>
 

@@ -6,38 +6,65 @@
 
     <body>
 
-<h1>SmartCard Research: ACS ACOS3</h1>
+        <h1>SmartCard Research: ACS ACOS3</h1>
 
-<div id="article">
-    <h2>Microprocessor (Fixed Function) Smart Card Development Kit</h2>
-    <img src="images/acos-card-dev-kit-small.jpg"></br>
-    <ul>
-        <li>ACS ACOS3 Smart Card</li>
-        <li>Gemalto GemPlus Card Reader</li>
-        </ul>
+        <div id="article">
+            <h2>Microprocessor (Fixed Function) Smart Card Development Kit</h2>
+            <img src="images/acos-card-dev-kit-small.jpg"></br>
+            <ul>
+                <li>ACS ACOS3 Smart Card</li>
+                <li>Gemalto GemPlus Card Reader</li>
+            </ul>
         </div>
 
-<div id="article">
-<h2>ACOS3 Smart Card</h2>
-The ACOS3 card has 32KB of EEPROM, and initially it seemed ideal for my project. As it turns out, the card functions more as a storage medium with native functionality limited to read/write operations. These operations are performed by sending machine code instructions known as Application Protocol Data Units (APDUs) to the card.</br></br>
+        <div id="article">
+            <h2>ACOS3 Smart Card</h2>
+            Manufactured by ACS as a 'flexible microprocessor' card. The ACOS3 card has 32KB of EEPROM, and initially it seemed ideal for my project. As it turns out, the card functions more as a storage medium with native functionality limited to read/write operations. These operations are performed by sending machine code instructions known as Application Protocol Data Units (APDUs) to the card.</br></br>
 
-Read operation:
-<img src="images/APDU-read-data.png"></br></br>
+            Read operation:</br>
+            <img src="images/APDU-read-data.png"></br></br>
 
-Write operation:
-<img src="images/APDU-write-data.png"></br></br>
+            Write operation:</br>
+            <img src="images/APDU-write-data.png"></br></br>
 
-For example, the following command:
-<code>WRITE: 11 BYTES TO 00 3Ah: HELLO WORLD</code></br></br>
+            For example, the following command:</br>
+            <code>WRITE: 11 BYTES TO 00 3Ah: HELLO WORLD</code></br></br>
 
-Would be sent to the card as:
-<code>91 00 3A 48 65 6C 6C 6F 20 57 6F 72 6C 64</code></br></br>
+            Would be sent to the card as:</br>
+            <code>91 00 3A 48 65 6C 6C 6F 20 57 6F 72 6C 64</code></br></br>
 
-So using the ACOS card would likely require the development of a custom application with its own hardware drivers. However, it's just about possible to script a series of actions using the g(scriptor) application, which is available for Linux.</br></br>
- <button onclick="window.location.href='acos3.html'">More information...</button>
-</div>
+            So using the ACOS card would likely require the development of a custom application with its own hardware drivers. However, it's just about possible to script a series of actions using the g(scriptor) application, which is available for Linux.
+        </div>
 
+        <div id="article">
+            <h2>Examples from the Manufacturer's Documentation</h2>
+            To perform actions with the card, I needed to consult the manufacturer's documentation.</br></br>
 
+            Submit IC code: <code>80 20 07 00 08 41 43 4F 53 54 45 53 54</code></br></br>
+
+            Select FF 07: <code>80 A4 00 00 02 FF 07</code></br></br>
+
+            Write 4 bytes to ATR file: <code>80 D2 00 00 04 96 02 12 34</code></br></br>
+
+            Get random number: <code>80 84 00 00 08</code></br>
+            Create session key from random number: <code>80 82 00 00 10 [Eight bytes rnd num] [8 bytes rnd terminal num]</code></br></br>
+
+            Submit PIN and code: <code>80 20 06 00 08 [8-byte code]</code></br>
+            New PIN: 80 24 00 00 08 [PIN]</br></br>
+
+            Get card serial number: <code>80 14 00 00 08</code></br>
+            Get card revision number: <code>80 14 06 00 00</code></br>
+            The last two bytes of the above two commands are status codes.</br></br>
+
+            Get card EEPROM size: <code>80 14 05 00 00</code></br>
+            The last byte of the response indicates the EEPROM size.</br></br>
+
+            Select file: <code>80 A4 00 00 02 [2-byte file ID]</code></br>
+            The Personalisation File address is 'FF 02'</br>
+            The Security File is at address 'FF 03'.</br>
+            The User File Management File is at address 'FF04'.</br>
+            The Account File is at 'FF 05'.</br>
+    </div>
 
 <div id="article">
 <h2>References</h2>

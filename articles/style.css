@@ -271,3 +271,9 @@ blockquote {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+code {
+  font-family: "Courier New";
+  color: #620A87;
+  background-color: #EEEEEE;
+}
