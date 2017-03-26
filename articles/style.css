@@ -233,6 +233,7 @@ button {
     font-size: 1em;
 
         width: 70%;
+        line-height: 25px;
 
     border: 2px solid #9200E7;
     top: 0px;
@@ -246,6 +247,12 @@ button {
     padding-right: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+button {
+    background: #9200E7;
+    color: #FFFFFF;
+    border: 0px;
 }
 
 #footer {
@@ -274,4 +281,10 @@ blockquote {
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+code {
+  font-family: "Courier New";
+  color: #620A87;
+  background-color: #EEEEEE;
 }

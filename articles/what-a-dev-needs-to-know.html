@@ -9,53 +9,39 @@
 <h1>What Developers Need to Know</h1>
 
 
-<div id="article">
-Back in 2003/2004, during my college days, we had a module called Internet Technologies, taught by an accomplished Web developer who made a fair amount of money. All he needed to know, and all we needed to learn, was HTML, CSS and JavaScript.</br></br>
+    <div id="article">
+        Back in 2003/2004, during my college days, we had a module called Internet Technologies, taught by an accomplished Web developer who made a fair amount of money. All he needed to know, and all we needed to learn, was HTML, CSS and JavaScript.</br>
+        Some years later I started my undergraduate degree in computer security, but had decided to spend the three years and whatever resources were available sharpening my programming and software development skills. By the end of my first year, I was able to develop several passable Windows Forms applications and publish them on SourceForge. The point is I my skills didn't need to exend beyond Visual Basic and Python at this point, and every programming course I've experienced only taught the core programming languages.</br></br>
 
-Some years later I started my undergraduate degree in computer security, but had decided to spend the three years and whatever resources were available sharpening my programming and software development skills. By the end of my first year, I was able to develop several passable Windows Forms applications and publish them on SourceForge. The point is I my skills didn't need to exend beyond Visual Basic and Python at this point.</br></br>
-
-Come the Masters' degree, which included a 'Major Group Project' module that required a group of us to produce commercial-grade software. I had just four months to design the software, improve my Python skills, teach the other team members Python and make a prototype of the application in that language. That's when I needed to start thinking about version control, merging multiple instances of the source code, maintaining documentation as evidence we followed the Agile development process and assigning tasks.</br></br>
-
-Within a couple of years after that, I started my first proper development/DevOps job. For the first time, I had to work with about 50-odd developers who have a specific way of doing things, working on software that needed to meet real-world requirements, that needed real-world bug fixes, that needed interoperability with other system, and with code that needed to be engineered for maintainability. We also had to develop and test our software for the specific environment. Everything must also be thoroughly documented.</br>
-In the real world, there is a whole lot more to learn than just the programming language.</br></br>
-
-So, the point is that developers need to become increasingly multi-skilled. It's no longer enough to know just one or two programming languages and just one framework. Developers need to become skilled in the range of things that makes their software work.</br></br>
-
-<h2>Software Engineering Principles</h2>
-The first thing I needed was to get away from the old methods of purely functional programming - in the past it was enough to follow the old coding conventions, ensure the source was readable and somewhat structured.</br>
-This is not enough in the real world. In the real world, code is maintained by multiple developers, a developer might change or extend only some highly specific function, and some component need to be tested in isolation.</br>
-For these reasons, we follow closely as possible <a href="solid.html">the SOLID Principles of Software Design</a>.</br>
-So, what does SOLID mean? It means you need to know about 'loose coupling', abstractions, interfaces and implementations, repositories and inheritance.</br></br>
-
-<h2>SQL or Other Database Stuff</br>
-Most applications are developed as front-ends for some database or other. Therefore, a database is part of the application's core functionality, and would likely need to be analysed and modified.</br>
-Basically it's a good idea to gain some competence with SQL.</br></br>
-
-<h2>Unit Testing</h2>
-I'm fortunate enough not to need to do unit testing much, but it's necessary to learn if a development team insists on test-driven development.</br></br>
+     It wasn't until a group project during my Masters' degree course that I came to appreciate there's a whole lot more inviolved in producing software as a team for a client. How would I assign tasks between a team of developers? How would features be prioritised? How would I merge several instances of the source code so we always had a definitive version? How would I document evidence that we followed an Agile development process? Which third-party code was the safest to re-use?
+     </br>
+    A couple of years later, I started my first proper development/DevOps job. For the first time, I had to work with about 50-odd developers on applications that needed to meet specific requirements, needed to be interoperable with a range of things and needed to be maintained.</br></br>
 
 
-<h2>Application Lifecycle Management / Task Boards</h2>
-How are development tasks managed and allocated to members of a development team? How are test scripts and software components mapped to features?</br>
-If you're using an ALM system, such as Team Foundation Server, you'd ned to know about iterations, features, user stories and tasks.</br>
-For other situations all I want is a Kanban board, and for that I use Trello.</br>
+        So, the general point is that developers need to become increasingly multi-skilled. It's no longer enough to know just one or two programming languages and just one framework. Developers need to become skilled in the range of things that makes their software work.</br></br>
 
-We have iterations - features - user stories - tasks.</br></br>
+        <h2>Software Engineering Principles</h2>
+        The first thing I needed was to get away from the old methods of purely functional programming - in the past I was happy with something that followed the old coding conventions, ensure the source was readable and somewhat structured.</br>
+        In the real world, where code is maintained by multiple developers, a developer might change or extend only some highly specific function, and some component need to be tested in isolation. For these reasons, we follow closely as possible <a href="solid.html">the SOLID Principles of Software Design</a>. What does SOLID mean? It means you need to know about 'loose coupling', abstractions, interfaces and implementations, repositories and inheritance.</br></br>
 
+        <h2>SQL or Other Database Skills</h2>
+        Most applications are developed as user interfaces for some database or other. Therefore, a database is part of the application's core functionality, and would likely need to be analysed and modified. Most developers I know are comfortable with SQL.</br></br>
 
+        <h2>Unit Testing</h2>
+        I'm fortunate enough not to need to do unit testing much, but it's necessary to learn if a development team insists on test-driven development.</br></br>
 
-<h2>Version Control</h2>
-This brings us to the problem of how multiple developers merge their instances of the source code, so there is always a definitive version being tested and released. There are two common version control systems in particular: TFS version control and Git.</br>
-It's useful to get some experience with both. Learn how to map a repository to a local directory, and how to push changes. Fortunately it's possible to get practical exposure to both, as both Microsoft Team Services and GitHub accounts are free.
+        <h2>Application Lifecycle Management / Task Boards</h2>
+        How are development tasks managed and allocated to members of a development team? How are test scripts and software components mapped to features?  If you're using an ALM system, such as Team Foundation Server, you'd ned to know about iterations, features, user stories and tasks.</br>
+        For other situations all I want is a Kanban board, and for that I use Trello.</br>
 
+        We have iterations - features - user stories - tasks.</br></br>
 
+        <h2>Version Control</h2>
+        This brings us to the problem of how multiple developers merge their instances of the source code, so there is always a definitive version being tested and released. There are two common version control systems in particular: TFS version control and Git.</br>
+        It's useful to get some experience with both. Learn how to map a repository to a local directory, and how to push changes. Fortunately it's possible to get practical exposure to both, as both Microsoft Team Services and GitHub accounts are free.</br></br>
 
-<h2>Server Administration</h2>
-Where are you going to deploy applications to, and how do you know the application is suitable for the deployment environment?
-
-
+        <h2>Server Administration</h2>
+        Where are you going to deploy applications to, and how do you know the application is suitable for the deployment environment?
     </div>
-
-
-    </body>
+</body>
 </html>
