@@ -8,6 +8,13 @@
   src: url('fonts/Italianno-Regular.ttf')  format('truetype');
 }
 
+body {
+    background-image: url('images/column.jpg');
+        background-repeat: no-repeat;
+    background-position: left top;
+
+}
+
 h1 {
     font-family: 'TitleFont';
     color: #9200E7;
