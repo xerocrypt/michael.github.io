@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'MyWebFont';
-  src: url('fonts/Hind-Regular.ttf')  format('truetype');
+  src: url('fonts/Nunito-Regular.ttf')  format('truetype');
 }
 
 @font-face {
@@ -10,8 +10,18 @@
 
 body {
     background-image: url('images/column.jpg');
+<<<<<<< HEAD
+
         background-repeat: no-repeat;
     background-position: left top;
+=======
+        background-repeat: no-repeat;
+    background-position: left top;
+<<<<<<< HEAD
+
+>>>>>>> Add background for site and articles.
+=======
+>>>>>>> Added background image for site and articles.
 }
 
 h1 {
@@ -242,6 +252,7 @@ button {
         line-height: 25px;
 
     border: 2px solid #9200E7;
+    border-left-width: 15px;
     top: 0px;
 
     margin-top: 5px;
@@ -255,10 +266,63 @@ button {
     padding-bottom: 5px;
 }
 
+#rightpanel  {
+    float:right;
+    width: 40%;
+    min-width: 20%;
+    max-width: 20%;
+
+    font-family: 'MyWebFont';
+    font-size: 1em;
+
+        line-height: 30px;
+
+    border: 2px solid #9200E7;
+        border-left-width: 15px;
+    top: 0px;
+
+        margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#sectionright {
+    font-family: Arial, Verdana;
+    font-size: 1em;
+    float: right;
+    background-color:  #dddddd;
+    right: 0px;
+    width: 45%;
+    border: 2px solid #9200E7;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 button {
     background: #9200E7;
     color: #FFFFFF;
     border: 0px;
+}
+
+code {
+  background-color: #EDEDED;
+  display: block;
+    border: 1px solid #AAAAAA;
+        border-left-width: 10px;
 }
 
 #footer {
@@ -267,7 +331,7 @@ button {
     color: #ffffff;
     background-color:  #9200E7;
     width: 100%;
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;

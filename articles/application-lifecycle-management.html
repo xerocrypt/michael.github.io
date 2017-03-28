@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Application Lifecycle Managent</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Application Lifecycle Management with Visual Studio</h1>
+
+        <div id="article">
+            The  ‘Application Lifecycle Management’ (ALM) event hosted by the <a href="https://blogs.msdn.microsoft.com/visualstudiouk/">Visual Studio UK Team</a> was mainly a demonstration of Team Foundation Server and Team Services. I’ve been using both (as well as Visual Studio Ultimate and Azure virtual networking) for a couple of years for work-related things and personal projects.
+            Microsoft has two Application Lifecycle Management products: Team Services, which is hosted and provided by Microsoft, and Team Foundation Server, which is the on-premises installation. Both are very much the same thing, but new features are added to Team Services before they’re included with TFS. Anyone with an MSDN account can get some hands-on experience with Team Services (available features might depend on the subscription).</br></br>
+
+            Team Services and TFS provide a portal through which teams involved in the development lifecycle can communicate and manage projects, from requirements specification to release and maintainance. To demonstrate this, the Microsoft people took some prepared code for a simple Web application, and went through what would be the development lifecycle in Team Services before deploying it as an Azure application.
+        </div>
+
+        <div id="article">
+            <h2>Code</h2>
+            At the core of a project are the source files and directories themselves, which can be viewed under the ‘<i>Explorer</i>’ tab. Basically everything that’s posted by developers through the version control system is viewable here – this should therefore be the definitive version of the source code.</br>
+            The ‘<i>Compare</i>’ link should open two windows, enabling the source of two versions to be compared line-by-line. Comments that developers made when pushing their code to the server can be viewed by clicking the ‘<i>History</i>’ link.</br>
+            For version control, Git and Team Foundation Version Control (TFVC) are supported, and both can be used in the same project – theoretically a project could be cloned from a Git repo and pushed onto TFS or Team Services. There is also better integration with GitHub, so fit should be easier to take existing published code and push it to TFS. Apparently Microsoft has deprecated support for Subversion.</br>
+        </div>
+
+        <div id="article">
+            <h2>Work</h2>
+            Every large project will have ‘work items’, and here they’re viewed or managed under the ‘<i>WORK</i>’ tab. The ‘Backlog’ here is simply a list of items to be delivered throughout the development lifecycle, such as a feature request or bug. Items can be assigned to individual members of the development team, and the completion/resolution status monitored. This should help assess the progress or readiness of a product for deployment. To make this easier, there are some visualisation features, including the Board view and ability to create various charts.</br>
+            External members can be added to a project as ‘stakeholders’ if they have an MSDN account.</br></br>
+
+            Using the Queries, we can filter backlog items, for example, to get a list of bugs with a high severity value – tasks might also be organised into ‘sprints’ or iterations according to their priority. This is also a good way of tracking what exactly is in each ‘sprint’.</br>
+            If the query is stored, it’s possible to connect to the Team Foundation Server from within Microsoft Excel (under the <i>TEAM</i> tab), select that query, and import the results to a local spreadsheet file. Work items can also be managed in an Excel sheet and published back to TFS.
+        </div>
+
+        <div id="article">
+            <h2>Build</h2>
+            Under this tab is where ‘build definitions’ are created for compiling the source that’s currently in the project repository. Recently Microsoft added more configuration options here, such as the target environment, deployment type, versioning, etc. XAML definitions are supported, but the feature is deprecated.</br>
+            Builds can also be scheduled, which is useful in situations where much of the workflow is automated and we want to schedule a test run. Alternatively, builds can be configured to occur whenever new code is ‘checked in’ (Continuous Integration).</br></br>
+
+            The default build steps are:
+            <ul>
+                <li>Build</li>
+                <li>Test</li>
+                <li>Index and source symbols</li>
+                <li>Publish build artifacts</li>
+            </ul>
+
+            Other steps can be added, for example, we might want to add the completion of other tests, or the deployment on certain environments, as a pre-requisite for publishing an application.</br>
+            To do this on our own system, we’d have to install and configure a ‘build agent’. The agent authenticates with the TFS and posts the list of capabilities and resources on the target machine. Console messages relating to this can be viewed within the Web portal.
+        </div>
+
+        <div id="article">
+            <h2>Test</h2>
+            Application test suites and test cases can be managed under the ‘<i>TEST</i>’ tab. A test analyst could access a test case in the portal, click the ‘<i>Run</i>’ button, and run through the steps displayed in an Internet Explorer panel. Steps are marked as pass/fail.</br></br>
+
+            Test cases in TFS become work items, and should be listed under the <i>WORK</i> tab. Bugs encountered during testing can also be added as work items.</br></br>
+
+            TFS and Team Services support load testing. To some extent, the load test can be tailored to mimic the type of traffic that the target application could realistically be expected to handle, but not with the same level of accuracy or granularity as HP LoadRunner.
+        </div>
+
+        <div id="article">
+            <h2>Release</h2>
+            The last I checked, this feature is only available in Team Services. It is closely related to ‘build definitions’, and is used for actually deploying the built projects when certain criteria are met and the build has been approved. Like builds, deployments can also be continuous, performed whenever changes are made to the project.</br></br>
+
+            A deployment task is added as a step in the build definition. The target deployment platform is called a ‘Service Endpoint’. When setting up an Azure instance as a Service Endpoint, the details are copied from its certificate.</br>
+            Microsoft has now changed this a little, so the product can be built and packaged, following the build steps mentioned earlier, without deploying it immediately after. Deployment types can be queued, so that one release would have to be tested and approved before the next build is deployed. We could also choose which environment to push a release to.</br></br>
+
+            The Continuous Integration option can trigger this process on each build.
+        </div>
+
+        <div id="footer">Michael, March 2017</div>
+    </body>
+</html>
