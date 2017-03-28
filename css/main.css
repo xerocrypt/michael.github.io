@@ -1,16 +1,17 @@
 @font-face {
   font-family: 'MyWebFont';
-  src: url('../fonts/Hind-Regular.ttf')  format('truetype');
+  src: url('../fonts/Kanit-Light.ttf')  format('truetype');
 }
 
 @font-face {
   font-family: 'TitleFont';
-  src: url('../fonts/Italianno-Regular.ttf')  format('truetype');
+  src: url('../fonts/Gruppo-Regular.ttf')  format('truetype');
 }
 
 body {
     background-image: url('../images/column.jpg');
-        background-repeat: no-repeat;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
     background-position: left top;
 }
 
@@ -18,12 +19,20 @@ h1 {
     font-family: 'TitleFont';
     color: #9200E7;
     font-size: 2.6em;
+    font-style: normal;
 }
 
 h2 {
     font-family: 'TitleFont';
     color: #9200E7;
-    font-size: 2em;
+    font-size: 1.6em;
+}
+
+h3 {
+    font-family: 'MyWebFont';
+    color: #9200E7;
+    font-size: 1.2em;
+    line-height: 10%;
 }
 
 #menu-bar {
@@ -38,11 +47,12 @@ h2 {
   box-shadow: 0px 0px 0px #666666;
   -webkit-box-shadow: 0px 0px 0px #666666;
   -moz-box-shadow: 0px 0px 0px #666666;
-  background: #FAFAFA;
-  border: solid 1px #620A87;
+  background: transparent;
+  border: solid 0px #9200E7;
   position:relative;
   z-index:999;
 }
+
 #menu-bar li {
   margin: 0px 0px 6px 0px;
   padding: 0px 6px 0px 6px;
@@ -50,12 +60,13 @@ h2 {
   position: relative;
   list-style: none;
 }
+
 #menu-bar a {
   font-weight: normal;
-  font-family: arial;
+  font-family: MyWebFont;
   font-style: normal;
-  font-size: 12px;
-  color: #620A87;
+  font-size: 1em;
+  color: #9200E7;
   text-decoration: none;
   display: block;
   padding: 6px 20px 6px 20px;
@@ -66,11 +77,13 @@ h2 {
   -moz-border-radius: 0px;
   text-shadow: 0px 0px 0px #000000;
 }
+
 #menu-bar li ul li a {
   margin: 0;
 }
+
 #menu-bar .active a, #menu-bar li:hover > a {
-  background: #620A87;
+  background: #9200E7;
   color: #FFFFFF;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -86,7 +99,7 @@ h2 {
   -moz-box-shadow: none;
 }
 #menu-bar ul a:hover {
-  background: #620A87 !important;
+  background: #9200E7 !important;
   color: #FFFFFF !important;
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -105,7 +118,7 @@ h2 {
   position: absolute;
   top: 30px;
   left: 0;
-  border: solid 1px #620A87;
+  border: solid 1px, #9200E7;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -172,66 +185,7 @@ button {
     background: #9200E7;
     color: #FFFFFF;
     border: 0px;
-}
-
-#section {
-    font-family: Arial, Verdana;
-    font-size: 1em;
-    float: left;
-    margin: 0px;
- 
-    border: 2px solid #9200E7;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#tablesection {
-      font-family: Arial, Verdana;
-    font-size: 1em;
-    float: left;
-    margin: 0px;
-    width: 90%;
-    height: 90%;
-    border: 2px solid #9200E7;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-#sectionright {
-    font-family: Arial, Verdana;
-    font-size: 1em;
-    float: right;
-    background-color:  #dddddd;
-    right: 0px;
-    width: 45%;
-    border: 2px solid #9200E7;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 7px 7px;
 }
 
 #article {
@@ -243,6 +197,7 @@ button {
     line-height: 25px;
 
     border: 2px solid #9200E7;
+        border-left-width: 15px;
     top: 0px;
 
     margin-top: 5px;
@@ -256,9 +211,38 @@ button {
     padding-bottom: 5px;
 }
 
+#rightpanel  {
+    float:right;
+    width: 40%;
+    min-width: 20%;
+    max-width: 20%;
+    font-family: 'MyWebFont';
+    font-size: 1em;
+        line-height: 30px;
+    border: 2px solid #9200E7;
+        border-left-width: 15px;
+    top: 0px;
+        margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+code {
+  background-color: #EDEDED;
+  display: block;
+    border: 1px solid #AAAAAA;
+        border-left-width: 10px;
+}
+
 #footer {
         font-family: Arial, Verdana;
-    font-size: 0.7em;
+    font-size: 0.8em;
     color: #ffffff;
     background-color:  #9200E7;
     width: 100%;
@@ -268,15 +252,20 @@ button {
   left: 0;
 }
 
+quote {
+    font-style: Italic;
+}
+
+
 blockquote {
     font-style: Italic;
     font-size: 1em;
 
-    background-color:  #dddddd;
+    background-color:  #f2ccff;
     margin: 0px;
         width: 90%;
 
-    border: 2px solid #9200E7;
+    border: 0px solid #9200E7;
     top: 0px;
     padding-left: 10px;
     padding-right: 10px;
