@@ -1,27 +1,18 @@
 @font-face {
   font-family: 'MyWebFont';
-  src: url('fonts/Nunito-Regular.ttf')  format('truetype');
+  src: url('fonts/Kanit-Light.ttf')  format('truetype');
 }
 
 @font-face {
   font-family: 'TitleFont';
-  src: url('fonts/Italianno-Regular.ttf')  format('truetype');
+  src: url('fonts/Gruppo-Regular.ttf')  format('truetype');
 }
 
 body {
-    background-image: url('images/column.jpg');
-<<<<<<< HEAD
-
-        background-repeat: no-repeat;
+    background-image: url('../images/column.jpg');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
     background-position: left top;
-=======
-        background-repeat: no-repeat;
-    background-position: left top;
-<<<<<<< HEAD
-
->>>>>>> Add background for site and articles.
-=======
->>>>>>> Added background image for site and articles.
 }
 
 h1 {
