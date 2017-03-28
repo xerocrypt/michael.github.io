@@ -8,6 +8,11 @@
   src: url('../fonts/Gruppo-Regular.ttf')  format('truetype');
 }
 
+@font-face {
+  font-family: 'ButtonFont';
+  src: url('../fonts/Kanit-Light.ttf')  format('truetype');
+}
+
 body {
     background-image: url('../images/column.jpg');
     background-repeat: repeat-x;
@@ -182,6 +187,8 @@ table {
 }
 
 button {
+    font-family: 'ButtonFont';
+    font-size: 0.9em;
     background: #9200E7;
     color: #FFFFFF;
     border: 0px;
