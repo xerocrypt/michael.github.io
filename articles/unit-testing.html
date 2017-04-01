@@ -5,31 +5,28 @@
     </head>
 
     <body>
+        <h1>Unit Testing</h1>
 
-<h1>Unit Testing</h1>
+        <div id="article">
+            If the SOLID principles of software design are followed, each module in the software should perform a single, well-defined function, and therefore the output of each module could be predicted with certainty given known inputs. We could then create unit tests.</br>
+            It's commonly argued that one should create unit tests for each module before coding the module itself.
+        </div>
 
-<div id="article">
-If the SOLID principles of software design are followed, each module in the software should perform a single, well-defined function, and therefore the output of each module could be predicted with certainty given known inputs. We could then create unit tests.</br>
-It's commonly argued that one should create unit tests for each module before coding the module itself.
-</div>
+        <div id="article">
+            <h2>Disadvantages</h2>
+            In my humble opinion, based solely on the few projects I've worked on, and my prior experience of test automation, Test Driven Development would likely be a very inefficient approach. Not only is the developer producing at least twice the amount of code, the unit test methods would need to be just as complex as the modules under test. Potentially it means spending more time coding the unit tests than the application itself.</br>
+            Assuming a considerable amount of unit testing code is produced, that code would require maintenance, modification and version control to reflect changes in the application under test. This could mean a lot of additional work.</br>
+            A counter-argument to this I commonly hear is that TDD should reduce the amount of time spent debugging the application after it's coded. Plus, most the application lifecycle is spent on maintaining the software, so ideally we'd want tested modules to provide a strong foundation for this.</br></br>
 
-<div id="article">
-<h2>Disadvantages</h2>
-In my humble opinion, based solely on the few projects I've worked on, and my prior experience of test automation, Test Driven Development would likely be a very inefficient approach. Not only is the developer producing at least twice the amount of code, the unit test methods would need to be just as complex as the modules under test. Potentially it means spending more time coding the unit tests than the application itself.</br>
-Assuming a considerable amount of unit testing code is produced, that code would require maintenance, modification and version control to reflect changes in the application under test. This could mean a lot of additional work.</br>
-A counter-argument to this I commonly hear is that TDD should reduce the amount of time spent debugging the application after it's coded. Plus, most the application lifecycle is spent on maintaining the software, so ideally we'd want tested modules to provide a strong foundation for this.</br></br>
+            Psychology is also a factor. As a general rule, proper testing requires objectivity, so development and testing should be decoupled. The developer could have a bias that hinders the ability to find defects in the code. When developing Coded UI Tests, I was often tempted to modify scripts to overlook minor defects - the cumulative effect of this would eventually have defeated the whole point of test automation.
+        </div>
 
-Psychology is also a factor. As a general rule, proper testing requires objectivity, so development and testing should be decoupled. The developer could have a bias that hinders the ability to find defects in the code. When developing Coded UI Tests, I was often tempted to modify scripts to overlook minor defects - the cumulative effect of this would eventually have defeated the whole point of test automation.</br></br>
+        <div id="article">
+            <h2>References</h2>
+            COPLIEN, JAMES. 2014. RBCS. <i>Why Most Unit Testing is Waste</i>. [PDF]. <a href="http://rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf">http://rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf</a>. 22nd March 2017.</br></br>
 
-</div>
+            WARNE, H. 2014. Henrik Warne's Blog. <i>A Response to “Why Most Unit Testing is Waste”</i>. [WWW]. <a href="https://henrikwarne.com/2014/09/04/a-response-to-why-most-unit-testing-is-waste/">https://henrikwarne.com/2014/09/04/a-response-to-why-most-unit-testing-is-waste/</a>. 22nd March 2017.
+        </div>
 
-<div id="article">
-<h2>References</h2>
-COPLIEN, JAMES. 2014. RBCS. <i>Why Most Unit Testing is Waste</i>. [PDF]. <a href="http://rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf">http://rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf</a>. 22nd March 2017.</br></br>
-
-WARNE, H. 2014. Henrik Warne's Blog. <i>A Response to “Why Most Unit Testing is Waste”</i>. [WWW]. <a href="https://henrikwarne.com/2014/09/04/a-response-to-why-most-unit-testing-is-waste/">https://henrikwarne.com/2014/09/04/a-response-to-why-most-unit-testing-is-waste/</a>. 22nd March 2017.
-
-</div>
-
-</body>
+    </body>
 </html>

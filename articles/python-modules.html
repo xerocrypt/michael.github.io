@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Python Modules</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1>Python Modules</h1>
+
+       <div id="article">
+            <h2>distutils</h2>
+            Python Module Distribution Utilities. Used for distributing, packaging and installing Python modules. A <i>setup.py</i> file is read, which specifies the modules to install on execution.</br>
+            An alternative is <i>setuptools</i>.</br></br>
+
+            The distutils module includes:</br>
+            <ul>
+                <li>ccompiler</li>
+                <li>cmd</li>
+                <li>core</li>
+                <li>extension</li>
+            <ul>
+        </div>
+
+        <div id="article">
+            <h2>hashlib</h2>
+            Used for hashing files or text input. The following algorithms are included by default:
+            <ul>
+                <li>md5()</li>
+                <li>sha1()</li>
+                <li>sha224()</li>
+                <li>sha256()</li>
+                <li>sha384()</li>
+                <li>sha512()</li>
+            </ul></br>
+            Example:</br>
+            <code>hashlib.sha256(txtPassword).hexdigest()</code>
+        </div>
+
+        <div id="article">
+            <h2>PythonCard</h2>
+            For creating GUI Python applications. The following can be imported:
+            <ul>
+                <li>dialog</li>
+                <li>model</li>
+            </ul>
+
+            For example:</br>
+            <code>import PythonCard</code></br>
+            <code>from PythonCard import model</code></br>
+
+            The GUI element position, sizes and colours are defined in the associated <i>.rsrc.py</i> source file.</br></br>
+
+            Use the following to declare the GUI's background from the model</br>
+            <code>class: class MyBackground(model.Background):</code>
+
+            To capture events, or make the GUI event-driven, we can use <code>(self, event)</code>, referencing an element in the <i>rsrc.py</i> file. For example, if we have defined an element '<i>cmdButton</i>', we read a mouse click with:</br>
+            <code>on_cmdEncrypt_mouseClick(self, event)</code></br>
+
+            <a href="http://pythoncard.sourceforge.net/">PythonCard @ SourceForge.net</a>
+        </div>
+
+        <div id="article">
+            <h2>PyCrypto</h2>
+            The commonly-used crypto module for Python.
+        </div>
+
+        <div id="article">
+            <h2>sqlite3</h2>
+        </div>
+
+        <div id="article">
+            <h2>wx</h2>
+            GUI?
+        </div>
+
+    </body>
+</html>

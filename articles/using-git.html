@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Using Git</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1>Using Git</h1>
+
+        <div id="article">
+            Sometimes the command line is a better and more reliable way of pushing changes to a Git repository. The sync feature on the Windows client does something the Linux GUI client wasn't doing, and the latter was refusing to update the remote directory.</br></br>
+
+            First navigate the command line to the local github subdirectory for the project. Next thing is to check a few global variables, if the client hasn't been set up already. The important ones are username/password and the text editor, otherwise you'd probably be stuck in vim if the '<i>-m</i>' option isn't used for adding a commit message:</br>
+            <code>$ git config --global user.name "Michael"</code></br>
+            <code>$ git config --global user.email michael@example.com</code></br>
+            <code>$ git config --global core.editor nano</code></br>
+
+            It's quite possible my local working directory was in a 'detached HEAD state', which basically means I could have actually been trying to modify an older version of the project instead of the current one - '<i>git checkout [commit identifier]</i>' allows this, and '<i>git checkout master</i>' will point the local directory back to the repository's master branch.</br>
+            The '<i>pull</i>' and '<i>push</i>' commands should ensure both local and remote directories are in sync again:</br>
+            <code>$git checkout [branch]</code></br>
+            <code>$git pull origin [branch]</code></br>
+            <code>$git push origin [branch]</code></br>
+
+            The output should show everything being up to date at this point. This seems to retrieve all files and history, which might be intensive depending on the size of the project.
+        </div>
+
+        <div id="article">
+            <h2>Submitting the Changes</h2>
+            To see the current status, the differences between the local and remote directories:</br>
+            <code>$git status</code></br>
+
+            To commit the changes, both files must be 'staged' - the concept is the same as including and excluding files in Visual Studio's Team Explorer before committing.</br>
+            <code>$git add [file1] [file2] [file3]</code></br>
+
+            Running '<i>git status</i>' again lists the staged changes. Now the changes are ready to commit:</br>
+            <code>$git commit -m "Updated home page and CSS"</code></br>
+
+            The command without the '<i>-m</i>' option will open a text editor for entering the commit message.</br></br>
+
+            Finally the changes need to be 'pushed' to the remote directory/server.</br>
+            <code>$git push origin master</code></br>
+
+            Note the 7-digit hexadecimal numbers. These are the first part of the changes' SHA fingerprints and their identifiers in the history log.
+        </div>
+
+        <div id="article">
+            <h2>Restore</h2>
+            The change log can be viewed with the '<i>git reflog</i>' command, with identifiers and HEAD numbers. Either could be used for selecting entries.</br></br>
+
+            To view the details of a specific entry, use the '<i>git show</i>' command again. The '<i>git show [identifier]</i>' command will print the SHA fingerprint, the date/time, change author, files and section(s) of code that were changed.</br>
+            <code>$git show [change identifier]</code></br>
+
+            To revert to an older version of a file, we can checkout that file from an earlier commit:</br>
+            <code>$git checkout [commit] [filename]</code></br>
+
+            Omitting the filename will revert everything in the local directory to the specified version. Because the checked out file might differ from the current version in the master branch, it should appear as another change to be committed.
+        </div>
+
+    </body>
+</html>
