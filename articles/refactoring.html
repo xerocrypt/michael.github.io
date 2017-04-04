@@ -8,16 +8,10 @@
         <h1>Refactoring Code</h1>
 
         <div id="article">
-            This is a term for resructuring code without affecting its behaviour, in order to make source more readable, consistent and maintainable. This can involve the renaming and re-arranging of code.</br>
-            A number of refactoring options are available as native Visual Studio features.
-            <ul>
-                <li>Extract Method</li>
-                <li>Rename</li>
-                <li>Encapsulate Field</li>
-                <li>Extract Interface</li>
-                <li>Remove Parameters</li>
-                <li>Reorder Parameters</li>
-            </ul>
+            This is a term for restructuring code without affecting its behaviour, in order to make source more readable, consistent and maintainable. This can involve the renaming and re-arranging of code.</br>
+            A number of refactoring options are available in Visual Studio under the '<i>EDIT</i>' -- '<i>Refactor</i>' menu options:</br></br>
+
+            <img src="images/vs-refactor-options.png">
         </div>
 
         <div id="article">
@@ -26,18 +20,42 @@
         </div>
 
         <div id="article">
+            <h2>Field Encapsulation</h2>
+            Instead of accessing fields directly, methods (commonly named 'get' and 'set') are created for reading and writing to the fields. Typically a field is set as private, while the method accessing it is public. Using this technique, a programmer could limit the actions performed on the field.
+        </div>
+
+        <div id="article">
             <h2>Method Extraction</h2>
+            Creates a new method based on a selected section of code. Variables are detected and used as the new method's parameters. Commonly used if there's a need to break a larger method into multiple smaller methods for readability or maintainability.
+            </br>
+            <img src="images/vs-before-extract-method.png" width="90%"></br></br>
+            <img src="images/vs-after-extract-method.png" width="90%"></br>
+
         </div>
 
         <div id="article">
             <h2>Abstract Class and Interface Conversion, or Extract Interface</h2>
-            A new interface can be created containing members extracted from a class.
+            Creates  a new source file containing interface, populated with selected public members. This is useful if multiple classes have a set of members in common.
         </div>
 
+        <div id="article">
+            <h2>Remove Parameters</h2>
+            Remove parameter from method and its declaration.
+        </div>
 
+        <div id="article">
+            <h2>Reorder Parameters</h2>
+        </div>
+
+        <div id="article">
+            <h2>ReSharper</h2>
+            Third-party refactoring tool released by JetBrains. Can be installed in Visual Studio under 'Extensions and Updates'.
+        </div>
 
         <div id="article">
             <h2>References</h2>
+            JETBRAINS. 2017. <i>ReSharper: Visual Studio Extension for .NET Developers</i>. [WWW]. <a href="www.jetbrains.com/resharper/">www.jetbrains.com/resharper/</a>. April 2017.</br></br>
+
             LOWY, JUVAL. 2004. Code Magazine. Issue 2004: January/February. <i>C#2.0 Code Refactoring</i>. [WWW]. <a href="http://www.codemag.com/Article/0401071">http://www.codemag.com/Article/0401071</a>. April 2017.</br></br>
 
             MICROSOFT. 2015. Developer Network. <i>Refactoring (C#)</i>. [WWW]. <a href="https://msdn.microsoft.com/en-us/library/719exd8s.aspx">https://msdn.microsoft.com/en-us/library/719exd8s.aspx</a>. April 2017.

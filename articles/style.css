@@ -311,9 +311,10 @@ button {
 
 code {
   background-color: #EDEDED;
+  font-size: 0.8em;
   display: block;
-    border: 1px solid #AAAAAA;
-        border-left-width: 10px;
+  border: 1px solid #AAAAAA;
+  border-left-width: 10px;
 }
 
 #footer {

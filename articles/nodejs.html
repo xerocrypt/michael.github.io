@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>Node.js</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Node.js</h1>
+
+        <div id="article">
+            Server-Side JavaScript Framework, or a JavaScript runtime environment. Node.js was introduced in 2009/2010, but is already widely used and well-supported.</br></br>
+            
+           The main purpose of Node.js is to enable the creation of Web servers and associated network tools using JavaScript, and there are additional modules for performing server-side operations.  Node.js enables communication between the client-side JavaScript and the server.</br></br>
+
+            A Node.js application has the following:
+            <ul>
+                <li>Module imports</li>
+                <li>Server creation</li>
+                <li>Response</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>Creating a Simple Server</h2>
+            The server-side code for this is simple. First line imports the http module:</br>
+            <code>var http = require("http");</code></br>
+      
+
+            The following lines create the server using <i>createServer()</i>. Within this, we want to define the server response for client browsers starting a session on port 8090:</br>
+
+            <code>
+                http.createServer(function (request, response)</br> 
+                {</br>
+                    response.writeHead(200, {'Content-Type': 'text/plain'});</br>
+                    response.end('Hello World\n');</br>
+                }).listen(8090);</br>
+            </code></br>
+
+            Also, we might want a response sent to the command line to indicate the server is started:</br>
+            <code>console.log('Server running at http://127.0.0.1:8090/');</code>
+        </div>
+
+        <div id="article">
+            <h2>File Operations</h2>
+            Perhaps the main reason we want server-side code, rather than something entirely client-based is data persistence - storing and retrieving data on a server is a core feature of a Web application.</br></br>
+
+            Here I have two files: <i>file-op.js</i> server-side script, and the <i>serverdata.txt</i> data file. The latter simply contains two lines of text.</br></br>
+
+            This time we import both the http and filesystem (fs) modules:</br>
+
+            <code>
+                var http = require("http");</br>
+                var fs = require("fs");
+            </code>
+
+            And specify the file to read:</br>
+            <code>var data = fs.readFileSync('serverdata.txt');</code></br>
+
+            And this time, the HTTP response is defined as the contents of <i>serverdata.txt</i>:
+            
+            <code>
+            http.createServer(function (request, response)</br> 
+            {</br>
+                response.writeHead(200, {'Content-Type': 'text/plain'});</br>
+                response.end(data.toString());</br>
+            }).listen(8090);</br>
+            </code>
+        </div>
+
+
+        <div id="article">
+            <h2>Streaming Data and Files</h2>
+            The filesystem module enables the JavaScript to perform I/O with files using createReadStream() and createWriteStream().</br></br>
+
+            As before, we import http and the filesystem modules, but declare the data as null. Another variable is needed to declare is the read stream.</br>
+
+            <code>
+                var http = require("http");</br>
+                var fs = require("fs");</br>
+                var data = '';</br>
+                var readerStream = fs.createReadStream('serverdata.txt');</br></br>
+
+                readerStream.setEncoding('UTF8');</br></br>
+
+                readerStream.on('data', function(chunk)</br> 
+                {</br>
+                    data += chunk;</br>
+                });</br>
+
+                http.createServer(function (request, response)</br> 
+                {</br>
+                    response.writeHead(200, {'Content-Type': 'text/plain'});</br>
+                    response.end(data.toString());</br>
+                }).listen(8090);</br>
+            </code></br>
+
+            And to stream data to a file:</br>
+
+            <code>
+                var fs = require("fs");</br>
+                var writedata = 'This is another new line written to the file';</br></br>
+
+                var writerStream = fs.createWriteStream('serverdata.txt');</br></br>
+
+                writerStream.write(writedata,'UTF8');</br>
+                writerStream.end();</br></br>
+
+                writerStream.on('finish', function()</br> 
+                {</br>
+                    console.log("Write completed.");</br>
+                });
+            </code></br>
+
+        </div>
+       
+
+        <div id="article">
+            <h2>References</h2>
+            <a href="https://nodejs.org/en/">Node.js Home...</a></br>
+            <a href="https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm">TutorialsPoint Node.js Introduction</a>
+        </div>
+
+
+        <div id="article">
+            <h2>React.js</h2>
+            Currently maintained by FaceBook, and used almost universally across Web 2.0 and social media.
+            This framework is used for developing interfaces.</br></br>
+
+            <a href="https://facebook.github.io/react/">React.js Home...</a>
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

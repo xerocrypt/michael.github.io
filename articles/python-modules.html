@@ -33,7 +33,11 @@
                 <li>sha512()</li>
             </ul></br>
             Example:</br>
-            <code>hashlib.sha256(txtPassword).hexdigest()</code>
+            <code>hashlib.sha256(txtPassword).hexdigest()</code></br></br>
+
+            PyCrypto could also be used for hashing input. e.g.</br>
+            <code>from Crypto.Hash import SHA256</code></br>
+            <code>SHA256.new('abc').hexdigest()</code></br>
         </div>
 
         <div id="article">
@@ -61,7 +65,55 @@
 
         <div id="article">
             <h2>PyCrypto</h2>
-            The commonly-used crypto module for Python.
+            This is the Python Cryptography Toolkit.  The commonly-used crypto module for Python.</br></br>
+
+            An operation to encrypt text can theoretically be simple, with certain text lengths and cipher modes. For example, to use DES in ECB mode to encrypt an eight character string:
+
+            <code>
+                from Crypto.Cipher import DES</br>
+                des = DES.new('01234567', DES.MODE_ECB)</br>
+                plainText = 'abcdefgh'</br>
+                cipherText = des.encrypt(plainText)</br>
+                print(cipherText)
+            </code>
+
+            In order to use a more secure cipher block chaining mode, we need to specify a random initial value (IV) and declare two instances of the cipher function since random values would be generated for both:</br>
+            <code>
+                from Crypto.Cipher import DES</br>
+                from Crypto import Random</br>
+                iv = Random.get_random_bytes(8)</br>
+                </br>
+                desInstance1 = DES.new('01234567', DES.MODE_CFB, iv)</br>
+                desInstance2 = DES.new('01234567', DES.MODE_CFB, iv)</br>
+                text = 'abcdefghijklmnop'</br>
+                </br>
+                cipher_text = desInstance1.encrypt(text)</br>
+                print(cipher_text)</br>
+                desInstance2.decrypt(cipher_text)</br>
+            </code>
+
+            PyCrypto could also be used for public key cryptography operations. First, we could use it to generate a private key from which the public key could also be derived:</br>
+            <code>
+                from Crypto.PublicKey import RSA</br>
+                from Crypto import Random</br>
+                randomOut = Random.new().read</br>
+               privateKey = RSA.generate(1024, randomOut)</br>
+                print(privateKey)
+            </code></br>
+            To encrypt data:</br>
+
+            <code>
+                publicKey = key.publickey()</br>
+                cipherText = publicKey.encrypt('abcdefgh', 32)</br>
+                print(cipherText)
+            </code></br>
+
+            And to decrypt data:</br>
+            <code>
+                privateKey.decrypt(cipherText)
+            </code></br>
+
+            <a href="https://www.dlitz.net/software/pycrypto/">Site here...</a>
         </div>
 
         <div id="article">

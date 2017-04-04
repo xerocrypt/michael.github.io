@@ -5,75 +5,67 @@
     </head>
 
     <body>
+        <h1>SmartCard Research</h1>
 
-<h1>SmartCard Research</h1>
+        <div id="article">
+            <h2>Microprocessor (Fixed Function) Smart Card Development Kit</h2>
+            <img src="images/acos-card-dev-kit-small.jpg"></br>
+            <ul>
+                <li>ACS ACOS3 Smart Card</li>
+                <li>Gemalto GemPlus Card Reader</li>
+            </ul>
+        </div>
 
+        <div id="article">
+            <h2>Programmable Smart Card Development Kit</h2>
+            <img src="images/basiccard-dev-kit-small.jpg"></br>
+            <ul>
+                <li>ZeitControl BasicCard ZC5.4 Smart Card</li>
+                <li>Identive SCR500 Portable USB Card Reader</li>
+            </ul>
+        </div>
 
+        <div id="article">
+            <h2>ACOS3 Smart Card</h2>
+            The ACOS3 card has 32KB of EEPROM, and initially it seemed ideal for my project. As it turns out, the card functions more as a storage medium with native functionality limited to read/write operations. These operations are performed by sending machine code instructions known as Application Protocol Data Units (APDUs) to the card.</br></br>
+            Using the ACOS card would likely require the development of a custom application with its own hardware drivers. However, it's just about possible to script a series of actions using the g(scriptor) application, which is available for Linux.</br></br>
+            <button onclick="window.location.href='acos3.html'">More information...</button>
+        </div>
 
-
-<div id="article">
-    <h2>Microprocessor (Fixed Function) Smart Card Development Kit</h2>
-    <img src="images/acos-card-dev-kit-small.jpg"></br>
-    <ul>
-        <li>ACS ACOS3 Smart Card</li>
-        <li>Gemalto GemPlus Card Reader</li>
-        </ul>
+        <div id="article">
+            <h2>BasicCard ZC5.4 Smart Card</h2>
+            Has 16KB EEPROM and limited processor functions. The card is programmable and customisable to some degree, using the ZeitControl BasicCard development software. This seems more promising for the storage and use of OpenPGP keys, though I've yet to test this.</br></br>
+            <button onclick="window.location.href='basiccard.html'">More information...</button>
         </div>
 
 
-<div id="article">
-    <h2>Programmable Smart Card Development Kit</h2>
-    <img src="images/basiccard-dev-kit-small.jpg"></br>
-    <ul>
-        <li>ZeitControl BasicCard ZC5.4 Smart Card</li>
-        <li>Identive SCR500 Portable USB Card Reader</li>
-        </ul>
+        <div id="article">
+            <h2>PKCS #15 Tool (Linux)</h2>
+            <code>$pkcs15-tool --list-applications</code> [List supported applications]</br>
+            <code>$pkcs15-tool --list-keys</code> [List private keys]</br>
+            <code>$pkcs15-tool --list-public-keys</code> [List public keys]</br>
+            <code>$pkcs15-tool --change-pin</code> [Change card PIN]</br>
+            <code>$pkcs15-tool --list-data-objects</code> [List all data objects]</br>
+            <code>$pkcs15-tool --dump</code> [Dump all data objects]</br>
         </div>
 
+        <div id="article">
+            <h2>Python</h2>
+            Information on modules and their usage to be added.</br>
+            Gemalto has released the 'psycard' module.</br>
+            <code>import smartcard</code>
+        </div>
 
+        <div id="article">
+            <h2>References</h2>
+            ENGLISH, M. 2014. Atomic Object. <i>Using an OpenPGP Smartcard with GnuPG</i>. [WWW]. <a href="https://spin.atomicobject.com/2014/02/09/gnupg-openpgp-smartcard/">https://spin.atomicobject.com/2014/02/09/gnupg-openpgp-smartcard/</a>. 20th March 2017.</br></br>
 
+            G10 CODE. 2011. <i>The OpenPGP Card</i>. [WWW]. <a href="https://www.g10code.com/p-card.html"> https://www.g10code.com/p-card.html,/a>. 20th March 2017.</br></br>
 
-    <div id="article">
-<h2>ACOS3 Smart Card</h2>
-The ACOS3 card has 32KB of EEPROM, and initially it seemed ideal for my project. As it turns out, the card functions more as a storage medium with native functionality limited to read/write operations. These operations are performed by sending machine code instructions known as Application Protocol Data Units (APDUs) to the card.</br></br>
-Using the ACOS card would likely require the development of a custom application with its own hardware drivers. However, it's just about possible to script a series of actions using the g(scriptor) application, which is available for Linux.</br></br>
- <button onclick="window.location.href='acos3.html'">More information...</button>
-</div>
+            SMARTCARD FOCUS. 2017. <i>SCR3500 (CLOUD 2900 R)</i>. [WWW]. <a href="https://www.smartcardfocus.com/shop/ilp/id~385/scr3500-cloud-2900-r-/p/index.shtml">https://www.smartcardfocus.com/shop/ilp/id~385/scr3500-cloud-2900-r-/p/index.shtml</a>. 20th March 2017.</br></br>
 
-<div id="article">
-<h2>BasicCard ZC5.4 Smart Card</h2>
-Has 16KB EEPROM and limited processor functions. The card is programmable and customisable to some degree, using the ZeitControl BasicCard development software. This seems more promising for the storage and use of OpenPGP keys, though I've yet to test this.</br></br>
- <button onclick="window.location.href='basiccard.html'">More information...</button>
-</div>
+            ZEITCONTROL CARDSYSTEMS. 2016. <i>BasicCard Development Software</i>. [WWW]. <a href="http://www.basiccard.com/instkit.htm">http://www.basiccard.com/instkit.htm</a>. 20th March 2017.
+        </div>
 
-
-<div id="article">
-    <h2>PKCS #15 Tool (Linux)</h2>
-<code>$pkcs15-tool --list-applications</code> [List supported applications]</br>
-<code>$pkcs15-tool --list-keys</code> [List private keys]</br>
-<code>$pkcs15-tool --list-public-keys</code> [List public keys]</br>
-<code>$pkcs15-tool --change-pin</code> [Change card PIN]</br>
-<code>$pkcs15-tool --list-data-objects</code> [List all data objects]</br>
-<code>$pkcs15-tool --dump</code> [Dump all data objects]</br>
-</div>
-
-<div id="article">
-<h2>Python</h2>
-Information on modules and their usage to be added.</br>
-Gemalto has released the 'psycard' module.</br>
-<code>import smartcard</code>
-</div>
-
-<div id="article">
-<h2>References</h2>
-ENGLISH, M. 2014. Atomic Object. <i>Using an OpenPGP Smartcard with GnuPG</i>. [WWW]. <a href="https://spin.atomicobject.com/2014/02/09/gnupg-openpgp-smartcard/">https://spin.atomicobject.com/2014/02/09/gnupg-openpgp-smartcard/</a>. 20th March 2017.</br></br>
-
-G10 CODE. 2011. <i>The OpenPGP Card</i>. [WWW]. <a href="https://www.g10code.com/p-card.html"> https://www.g10code.com/p-card.html,/a>. 20th March 2017.</br></br>
-
-SMARTCARD FOCUS. 2017. <i>SCR3500 (CLOUD 2900 R)</i>. [WWW]. <a href="https://www.smartcardfocus.com/shop/ilp/id~385/scr3500-cloud-2900-r-/p/index.shtml">https://www.smartcardfocus.com/shop/ilp/id~385/scr3500-cloud-2900-r-/p/index.shtml</a>. 20th March 2017.</br></br>
-
-ZEITCONTROL CARDSYSTEMS. 2016. <i>BasicCard Development Software</i>. [WWW]. <a href="http://www.basiccard.com/instkit.htm">http://www.basiccard.com/instkit.htm</a>. 20th March 2017.
-</div>
-
-</body>
+    </body>
 </html>
