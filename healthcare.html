@@ -8,6 +8,7 @@
   
 		<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
 			<a href="index.html">// Home //</a>
 			<a href="about.html">// About //</a>
 			<a href="healthcare.html">// Clinical Projects //</a>
@@ -47,6 +48,7 @@
 				Disadvantages:
 				<ul>
 					<li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
+					<li>The above point also means the creators and maintainers of the automation scripts would need some familiarity with the scripting language.</li>
 					<li>Automation scripts must be created for each feature added during a development iteration, which requires performing regression tests manually anyway.</li>
 				</ul>
 				We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
@@ -65,7 +67,6 @@
 
 				<img src="images/webservice-structure.png"></br></br>
 				The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations.  The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
-				
 				Testing and debugging was performed using SoapUI.
 			</div>
 
@@ -77,14 +78,18 @@
 					<li>Entity Framework</li>
 					<li>Service Broker and Stored Procedures</li>
 				</ul>
+				
+				<img src="images/messaging-dashboard-index-view.png" width="60%"></br></br>
 
-				The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues. It provides database administrators to quickly determine the cause of message processing failures.</br>
-				Selected messages could be deleted, resubmitted or moved between Service Broker queues.
+				The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues, enabling the system administrators to more quickly determine the cause of message processing failures. Selected messages could be deleted, resubmitted or moved between Service Broker queues.
 			</div>
 
 			<div id="article">
 				<h2>Messaging Metrics Dashboard</h2>
-				This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br>
+				This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br></br>
+				
+				<img src="images/metrics-dashboard-ui.png" width="50%"></br></br>
+				
 				The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
 				Uses:
 				<ul>

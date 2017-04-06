@@ -14,10 +14,7 @@
 }
 
 body {
-    background-image: url('../images/column.jpg');
-    background-repeat: repeat-x;
-    background-attachment: fixed;
-    background-position: left top;
+
 }
 
 h1 {
@@ -30,7 +27,7 @@ h1 {
 h2 {
     font-family: 'TitleFont';
     color: #7a00cc;
-    font-size: 1.6em;
+    font-size: 1.8em;
 }
 
 h3 {
@@ -200,8 +197,8 @@ button {
 #article {
     font-family: 'MyWebFont';
     font-size: 1em;
-
-        width: 70%;
+	background-color: #f5e6ff;
+    width: 70%;
 
     line-height: 25px;
 
@@ -285,7 +282,16 @@ blockquote {
 
 #navlogo {
 	position: center;
-	
+	padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.centerimage
+{
+	position: center;
 }
 
 /* The side navigation menu */
