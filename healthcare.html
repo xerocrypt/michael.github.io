@@ -1,69 +1,104 @@
 <html>
-  <head>
-    <title>Healthcare</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-  </head>
+	<head>
+		<title>Healthcare</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
 
-  <body>
-    <h1>Healthcare/Clinical Projects</h2>
+	<body>
+  
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<a href="index.html">// Home //</a>
+			<a href="about.html">// About //</a>
+			<a href="healthcare.html">// Clinical Projects //</a>
+			<a href="resources.html">// Resources //</a>
+			<a href="toolkit.html">// Toolkit //</a>
+		</div>
+  
+		<script>
+			function openNav() 
+			{
+				document.getElementById("mySidenav").style.width = "100%";
+				document.getElementById("main").style.marginLeft = "100%";
+			}
 
-    <ul id="menu-bar">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li class="active"><a href="#">Healthcare</a></li>
-      <li><a href="toolkit.html">Toolkit</a></li>
-      <li><a href="resources.html">Resources</a></li>
-    </ul>
- 
-    <div id="article">
-      <h2>Test Automation</h2>
-      I have delivered a test automation capability based on C# and the Microsoft Coded UI Test libraries. Regression tests that previously required several weeks when done manually were completed within a matter of hours. We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
-    </div>
+			function closeNav() 
+			{
+				document.getElementById("mySidenav").style.width = "0";
+				document.getElementById("main").style.marginLeft = "0";
+			}
+		</script>
+  
+		<div id="main">
+  
+			<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; Menu</span>
+   
+			<h1>Healthcare/Clinical Projects</h2>
 
-    <div id="article">
-      <h2>Web Services</h2>
-      Used for passing of data between several nationally-deployed clinical systems. The Web Service architecture followed the SOLID principles of software design, being loosely coupled across five layers:
-      <ul>
-        <li>API repository</li>
-        <li>Web Service helpers</li>
-        <li>Data access: Data response</li>
-        <li>Data access: Data response body</li>
-        <li>Data access: Data response items</li>
-      </ul>
+			<div id="article">
+				<h2>Test Automation</h2>
+				Using Microsoft's Coded UI Test libraries and a little knowledge of C#, I was able to deliver a test automation capability to a large healthcare software provider. Regression tests that previously required several weeks' manual work could be completed within a few hours. As it's not always possible to perfectly replicate user actions and get the same level of test coverage, automation was mainly used for testing the core functionality of applications.</br></br>
+				
+				Advantages:
+				<ul>
+					<li>Best used for automating regression tests against core features of an application, to avoid duplication of manual testing efforts.</li>
+				</ul>
+				
+				Disadvantages:
+				<ul>
+					<li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
+					<li>Automation scripts must be created for each feature added during a development iteration, which requires performing regression tests manually anyway.</li>
+				</ul>
+				We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
+			</div>
 
-      <img src="images/webservice-structure.png">
+			<div id="article">
+				<h2>Web Services</h2>
+				Used for passing of data between several nationally-deployed clinical systems. The Web Service architecture followed the SOLID principles of software design, being loosely coupled across five layers:
+				<ul>
+					<li>API repository</li>
+					<li>Web Service helpers</li>
+					<li>Data access: Data response</li>
+					<li>Data access: Data response body</li>
+					<li>Data access: Data response items</li>
+				</ul>
 
-      Testing and debugging was performed using SoapUI.
-    </div>
+				<img src="images/webservice-structure.png"></br></br>
+				The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations.  The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
+				
+				Testing and debugging was performed using SoapUI.
+			</div>
 
-    <div id="article">
-      <h2>Messaging Dashboard</h2>
-      Uses:
-      <ul>
-        <li>ASP.NET MVC 5</li>
-        <li>Entity Framework</li>
-        <li>Service Broker and Stored Procedures</li>
-      </ul>
+			<div id="article">
+				<h2>Messaging Dashboard</h2>
+				Uses:
+				<ul>
+					<li>ASP.NET MVC 5</li>
+					<li>Entity Framework</li>
+					<li>Service Broker and Stored Procedures</li>
+				</ul>
 
-      The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues. It provides database administrators to quickly determine the cause of message processing failures.</br>
-      Selected messages could be deleted, resubmitted or moved between Service Broker queues.
-    </div>
+				The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues. It provides database administrators to quickly determine the cause of message processing failures.</br>
+				Selected messages could be deleted, resubmitted or moved between Service Broker queues.
+			</div>
 
-    <div id="article">
-      <h2>Messaging Metrics Dashboard</h2>
-      This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br>
-      The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
-      Uses:
-      <ul>
-        <li>ASP.NET MVC 5</li>
-        <li>Entity Framework</li>
-        <li>amCharts and Chart.js</li>
-      </ul>
-    </div>
+			<div id="article">
+				<h2>Messaging Metrics Dashboard</h2>
+				This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br>
+				The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
+				Uses:
+				<ul>
+					<li>ASP.NET MVC 5</li>
+					<li>Entity Framework</li>
+					<li>amCharts and Chart.js</li>
+				</ul>
+			</div>
 
-    <div id="footer">
-      Updated: March 2017
-    </div>
+			<div id="footer">
+				Updated: April 2017
+			</div>
 
-  </body>
+		</div>
+
+	</body>
 </html>

@@ -22,20 +22,20 @@ body {
 
 h1 {
     font-family: 'TitleFont';
-    color: #9200E7;
+    color: #7a00cc;
     font-size: 2.6em;
     font-style: normal;
 }
 
 h2 {
     font-family: 'TitleFont';
-    color: #9200E7;
+    color: #7a00cc;
     font-size: 1.6em;
 }
 
 h3 {
     font-family: 'MyWebFont';
-    color: #9200E7;
+    color: #7a00cc;
     font-size: 1.2em;
     line-height: 10%;
 }
@@ -53,7 +53,7 @@ h3 {
   -webkit-box-shadow: 0px 0px 0px #666666;
   -moz-box-shadow: 0px 0px 0px #666666;
   background: transparent;
-  border: solid 0px #9200E7;
+  border: solid 0px #7a00cc;
   position:relative;
   z-index:999;
 }
@@ -71,7 +71,7 @@ h3 {
   font-family: MyWebFont;
   font-style: normal;
   font-size: 1em;
-  color: #9200E7;
+  color: #7a00cc;
   text-decoration: none;
   display: block;
   padding: 6px 20px 6px 20px;
@@ -88,7 +88,7 @@ h3 {
 }
 
 #menu-bar .active a, #menu-bar li:hover > a {
-  background: #9200E7;
+  background: #7a00cc;
   color: #FFFFFF;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -106,7 +106,7 @@ h3 {
 }
 
 #menu-bar ul a:hover {
-  background: #9200E7 !important;
+  background: #7a00cc !important;
   color: #FFFFFF !important;
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -125,7 +125,7 @@ h3 {
   position: absolute;
   top: 30px;
   left: 0;
-  border: solid 1px, #9200E7;
+  border: solid 1px, #7a00cc7;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -191,7 +191,7 @@ table {
 button {
     font-family: 'ButtonFont';
     font-size: 0.9em;
-    background: #9200E7;
+    background: #7a00cc;
     color: #FFFFFF;
     border: 0px;
     padding: 2px 10px;
@@ -205,7 +205,7 @@ button {
 
     line-height: 25px;
 
-    border: 2px solid #9200E7;
+    border: 2px solid #7a00cc;
         border-left-width: 15px;
     top: 0px;
 
@@ -253,7 +253,7 @@ code {
         font-family: Arial, Verdana;
     font-size: 0.8em;
     color: #ffffff;
-    background-color:  #9200E7;
+    background-color:  #7a00cc;
     width: 100%;
   position: relative;
   right: 0;
@@ -274,10 +274,67 @@ blockquote {
     margin: 0px;
         width: 90%;
 
-    border: 0px solid #9200E7;
+    border: 0px solid #7a00cc;
     top: 0px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+
+#navlogo {
+	position: center;
+	
+}
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #7a00cc;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+	font-family: 'MyWebFont';
+    font-size: 25px;
+    color: #d699ff;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #FFFFFF;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
