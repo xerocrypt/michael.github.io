@@ -7,6 +7,29 @@
     <body>
         <h1>Python Modules</h1>
 
+		<div id="article">
+			<h2>curses</h2>
+			There are situations where one might want to develop a user interface without making use of an X server, especially where the user might be limited to the command line while requiring some form of application menu.  The curse API is provided as one of the core Python modules, and rendering a GUI doesn't require the maintenance of multiple resource files or the coding of logic as GUI element handlers. Overall it's a more portable and lightweight alternative to using PythonCard. The following is an example of a UI rendered using the curses API:</br></br>
+			
+			<img src="images/xerodrive-ui.png"></ br></br>
+			
+			The following lines imports the curses API and initialises the main UI are:
+			<code>import curses</code></br>
+			<code>myscreen = curses.initscr()</code></br></br>
+			
+			Next, we might set the UI border and position for a UI element:</br>
+			<code>
+				myscreen.border(0);</br>
+				myscreen.addstr(5,5, "Hello World")</br>
+				input = myscreen.getstr(12, 20, 50)</br>
+				myscreen.refresh()</br>
+				curses.endwin()
+			</code></br></br>
+				
+			<a href="https://www.ibm.com/developerworks/library/l-python6/">IBM developerWorks: Curses programming</a></br>
+		</div>
+		
+		
        <div id="article">
             <h2>distutils</h2>
             Python Module Distribution Utilities. Used for distributing, packaging and installing Python modules. A <i>setup.py</i> file is read, which specifies the modules to install on execution.</br>

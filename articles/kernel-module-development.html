@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Creating a Kernel Module</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Creating a Linux Kernel Module</h1>
+
+        <div id="article">
+			There are two main types of kernel module: static and loadable. The static modules are added into the kernel as its compiled. Loadable modules, on the other hand, are dynamic, and they’re loaded/unloaded during runtime. When loaded, they pretty much become part of the kernel.
+
+			There are two locations in the file system to note:
+			<ul>
+				<li>/lib/modules is where the kernel modules are stored. There are subdirectories for the different types.</li>
+				<li>/etc/modules lists the modules to load during system boot.</li>
+			</ul></br>
+
+			A standard Linux installation also ships with something called modutils, that is a group of programs for manipulating loadable kernel modules (LKMs):
+			<ul>
+				<li>insmod: Load module</li>
+				<li>rmmod: Unload module</li>
+				<li>depmod: Find dependencies</li>
+				<li>kerneld: Kernel daemon</li>
+				<li>ksyms: Show exported symbols</li>
+				<li>lsmod: List loaded modules</li>
+				<li>modinfo: Show module information</li>
+				<li>modprobe: Load module and resolve dependencies</li>
+			</ul></br>
+			
+			But these can only be used with whatever’s already in the file system.
+		</div>
+		
+		<div id="article">
+			<h2>Structure of a Kernel Module</h2>
+			A module is created a little differently from the typical C program. Whereas the typical program has a <i>main()</i> function, these have entry and exit functions, <i>module_init()</i> and <i>module_exit()</i>, as they must receive and hand over kernel execution. These correspond to the loading and unloading from kernel’s memory space, and they probably invoke whatever system calls for sorting out memory allocation.
+		</div>
+
+		<div id="article">
+			<h2>Writing the Module</h2>
+			The concept is simple: we merely write a C program, compile it, then use the insmod command. A simple ‘Hello World’ program is all we need to get things going, as the learning curve here is in getting our own module successfully loaded.
+
+			First we might need to install kernel headers, or <i>kernel-dev</i>, from the distribution’s repository. Other tutorials recommend compiling and running from the most recent kernel.</br>
+			The following is an edited ‘Hello World’ example from The Linux Documentation Project:</br>
+			
+			<code>
+				#include <linux/module.h> /* Needed by all modules */</br>
+				#include <linux/kernel.h> /* Needed for KERN_INFO */</br></br>
+
+				int init_module(void)</br>
+				{</br>
+					printk(KERN_INFO "Hello world 1.\n");</br></br>
+
+					*/ Non-0 return if init_module failed;*/</br>
+					return 0;</br>
+				}</br></br>
+
+				void cleanup_module(void)</br>
+				{</br>
+					printk(KERN_INFO "Goodbye world 1.\n");</br>
+				}
+			</code></br>
+
+			We might think the next step is a matter of putting the code in an IDE, clicking compile/build, then loading the resulting object file. Unfortunately it’s not that simple. If we try, the compiler will throw up an error because it can’t find the headers to include. Also, the compiler links code to whatever objects are available in the standard library, and the objects for this module aren’t available until it’s loaded into kernel space.</br>
+			Instead, we use a ‘makefile’. Create a new directory (here I’ve called it ‘<i>MyModule</i>‘). This will contain <i>mymodule.c</i> and the makefile. Next, open a new file in the IDE or text editor, then add the following:</br>
+
+			<code>obj-m += mymodule.o</code></br>
+
+			all:</br>
+			<code>make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules</code></br>
+
+			clean:</br>
+			<code>make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></br>
+
+			Save this as ‘Makefile‘, in the directory that was just created. Now that directory will contain mymodule.c and Makefile. The next step is to build this using ‘<i>make</i>‘. The directory should now be populated by the newly-created module and several other files (.zip archive here). The module here is <i>mymodule.ko</i>.</br></br>
+
+			The next step is to load mymodule.ko into the kernel’s memory space using <i>insmod()</i> as root.</br>
+			<code>$su root</code></br>
+			<code>#insmod mymodule.ko</code></br></br>
+
+			Since I used ‘<i>printk</i>‘ and not ‘<i>printf</i>‘, nothing was printed to the screen. How can we determine whether it was successfully loaded? Use <i>lsmod</i>, of course. And by checking syslog, we should find that the module has indeed printed a kernel message.</br></br>
+
+			<code>#cd /var/log</code></br>
+			<code>#cat syslog</code></br>
+
+			The entry looking something like:
+
+			<code>Sep 29 23:12:05 BEATRIX kernel: [19161.607371] Hello world 1.</code></br></br>
+
+			And that’s it. The module doesn’t do much, but the important thing is we managed to create a module and load it.</br></br>
+		</div>
+
+		<div id="article">
+			<h2>Practical Uses and Security Implications</h2>
+			By writing our own kernel modules, we can extend the functionality of the kernel, add our own drivers, interfaces and features, and as we’ve seen, a kernel module can be any C program created to perform any conceivable function.</br>
+			On a standard Linux installation there could be hundreds of them, even if only a fraction are ever used. A malicious program, for example a kernel-mode rootkit, could easily be hidden anywhere here. Next we could look in <i>/etc/modules</i> to see which of them load when the system boots. This seems the perfect way to hide a rootkit, short of compiling it into the kernel itself.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

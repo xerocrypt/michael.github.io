@@ -104,8 +104,9 @@ button {
     font-family: 'MyWebFont';
     font-size: 1em;
 
-        width: 70%;
-        line-height: 25px;
+	background-color: #f5e6ff;
+	width: 70%;
+	line-height: 25px;
 
     border: 2px solid #7a00cc;
     border-left-width: 15px;

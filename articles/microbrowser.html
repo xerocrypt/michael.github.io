@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>MicroBrowser</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1>MicroBrowser</h1>
+
+		<div id="article">
+			A Visual Basic application I put together back in late-2010, during my first year as an undegraduate, this demonstrates the use of browser controls in a simple Windows Forms application.</br></br>
+			
+			Created in Visual Studio 2008 as a small web browser program, it should run in any Microsoft Windows system from any storage device, like a USB drive or MP3 player, without any installation required. I’ve so far tested it in Windows 7 and XP with few problems. I’ve also released MicroBrowser as an open source project, so anyone can download it free, modify the code, or use it in their own projects.
+		</div>
+
+		<div id="article">
+			<h2>Form and Form Elements</h2>
+			Although it appears we’re starting off with a blank form in the editor when we begin a Visual Basic project, it’s important to note there are already several lines in the code editor referring to a function that displays the form. Much of the code is stored in other project files, such as <i>frmName.Designer.vb</i>, and won’t appear in the code editor. Other things are called from the .NET Framework at runtime.</br>
+			While it’s not really essential to know this, it’s useful when working with larger projects where using the wrong function, such as a text box instead of a text label, would crash the program.</br></br>
+
+			A web browser will need, at a minimum, a browser element to render web pages, a text box for the user to enter a web address, and a couple of navigation buttons.
+		</div>
+		
+			<div id="article">
+				<h2>Naming and Coding Conventions</h2>
+				Much of the initial work involves adding elements to a form, moving them about and changing their properties, but a lot of code is being added along the way. Therefore, properly naming each element and adding comments is good practice, and makes life much easier later on. It’s especially important if more than one person’s working on the same project. Also, not everyone works with a visual form editor.</br>
+				Generally accepted naming conventions are:
+				<ul>
+					<li>Form: <i>frmFormName</i></li>
+					<li>Buttons: <i>cmdButtonName</i></li>
+					<li>Text Boxes: <i>txtTextBoxName</i></li>
+					<li>Browser Window: <i>brwBrowserWindow</i></li>
+					<li>Labels: <i>lblLabelName</i></li>
+					<li>Progress Bar: <i>prgProgressBarMain</i></li>
+				</ul>
+			</div>
+
+			<div id="article">
+				<h2>Browser Element, Address Bar and Navigation</h2>
+				Programs created in Visual Basic are essentially event-driven, in the sense that one event in the form triggers another event. The central component in the MicroBrowser form is the browser element (<i>brwBrowser</i>), which fetches and renders HTML pages, and reacts to most other elements on the form. The IXquick button is probably the most straightforward example of this, containing the following code:</br>
+				<code>
+					‘Load IXquick search engine page</br>
+					Private Sub cmdGoGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)</br>
+					Handles cmdIxquick.Click</br>
+					brwBrowser.Navigate(“https://www.ixquick.com&#8221;)</br>
+					End Sub
+				</code></br></br>
+
+				This tells element brwBrowser to navigate to whatever web address has been defined, in this case https://www.iquick.com, and render it whenever the user clicks on the IXquick button.</br>
+				But the user would want to navigate to other web sites, so we need to add a text box (<i>txtWebAddress</i>) to the form, and a command button to tells the browser to navigate to whatever address the user entered into <i>txtWebAddress</i>. The code that does this is placed in the <i>Go</i> button (<i>cmdGo)</i>:</br>
+
+				<code>
+					‘Go button</br>
+					Private Sub cmdGo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)</br>
+					Handles cmdGo.Click</br>
+					brwBrowser.Navigate(txtWebAddress.Text)</br>
+					End Sub
+				</code></br></br>
+				
+				Next the browser should have several navigation buttons, which contain the following within their code:</br>
+				<code>
+					brwBrowser.GoBack()</br>
+					brwBrowser.GoForward()</br>
+					brwBrowser.Stop()</br>
+					brwBrowser.Refresh()
+				</code>
+		</div>
+		
+		<div id="article">
+			<h2>Progress Bar and Status Messages</h2>
+			While this isn’t essential to a functioning web browser, most have something that indicates whether a page is loading or loaded, and this is where many people have problems when creating one in Visual Studio, since it’s assumed the relevant code goes straight into the browser element. Actually a new event handler is needed in this case, and can be created by adding the following just below the browser code (not within it):</br></br>
+			
+			<code>
+				‘Progress bar event handler code</br>
+				Private Sub brwBrowser_ProgressChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.WebBrowserProgressChangedEventArgs)</br>
+				Handles brwBrowser.ProgressChanged</br>
+				ProgressBar.Maximum = e.MaximumProgress</br>
+				ProgressBar.Value = e.CurrentProgress</br>
+				End Sub
+			</code></br>
+
+			Adding a status message is a little easier, as it’s just a matter of adding a label element (<i>lblCompleted</i>), preferably near the progress bar, and inserting the following line within the browser element:</br></br>
+
+			<code>lblCompleted.Text = “Complete”</code></br>
+
+			This will change the text within <i>lblCompleted</i> to ‘Complete’ when a page has been loaded into the browser element.
+		</div>
+
+		<div id="article">
+			<h2>Making the Multiform Application</h2>
+			It helps to add a couple of other forms to the project. In addition to the main form (<i>frmMicroBrowser</i>), MicroBrowser currently has a help dialogue (frmAbout) and another one (<i>frmUtilities</i>) for other features to be added in future. The following code can be used for opening, hiding and closing forms:</br>
+			
+			<code>
+				frmForm.Show()</br>
+				Me.Close()</br>
+				Me.Hide()
+			</code>
+		</div>
+		
+		<div id="article">
+			<h2>Finishing Touches</h2>
+			I’ve also modified the project settings, and the compiled executable (<i>MicroBrowser.exe</i>) will be found in the <i>/bin/Release</i> directory whenever the project is built.
+		</div>
+			
+    </body>
+</html>

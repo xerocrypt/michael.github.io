@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>MySQL Server</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Getting Started with MySQL Server</h1>
+
+        <div id="article">
+			MySQL is the database component of the LAMP stack, being a common method for storing web application data, but its use isn’t limited to this. I’ve been working on a case management system that enables a security department to share malware information on an internal network, with a MySQL server providing a central data source. Here’s how I got the server running, created a database and prototyped a basic front-end UI in LibreOffice.</br></br>
+
+			The default MySQL installation includes a set of command line tools for administrating the server and databases. To start and stop the MySQL server (<i>mysqld</i>):</br>
+			<code>$sudo /etc/init.d/mysql stop</code></br>
+			<code>$sudo /etc/init.d/mysql start</code></br>
+		</div>
+
+		<div id="article">
+			<h2>MySQL Workbench</h2>
+			There are also a number of GUI applications for working with MySQL servers. One of these is the default <i>mysqlnavigator</i> utility, but the common application is the freely-available <a href="http://www.mysql.com/products/workbench/">MySQL Workbench</a>. Later it becomes useful for sorting out replication, backups, performance and access management. In order to work with a server in MySQL Workbench, a ‘server instance’ must be created.</br></br>
+
+			After that, we can start administrating the applications/user accounts registered with it, later sorting out the permissions and importing or exporting databases.
+		</div>
+		
+		<div id="article">
+			<h2>Setting Up the Database in the Command Line</h2>
+			It’s best to acquire some experience of working in the command line. Create the database by logging into the MySQL server:
+			<code>$mysql -u root -p</code>
+
+			Here ‘root’ is the database server (not the system) admin account. The best practice is to assign applications their own accounts to restrict access to specific databases, and to define the actions they could perform on the server. The ‘-p‘ option tells the server to prompt for the account password, if it’s been set.</br>
+			In case you’ve experimented with MySQL before and lost the password as I did, Rackspace has <a href="http://www.rackspace.com/knowledge_center/article/mysql-resetting-a-lost-mysql-root-password">outlined a process</a> for resetting native user database.</br></br>
+
+			Creating the database is simple as the following command:
+			<code>mysql> CREATE DATABASE nexus;</code></br></br>
+
+			Notice that a semi-colon is appended to each statement, which marks the end of an instruction. Next, switch to the database and list the tables it contains (initially there are none):</br>
+			<code>mysql> USE nexus</code></br>
+			<code>mysql> SHOW TABLES;</code></br></br>
+
+			Records are stored in tables, each table having columns and rows. A database can have multiple tables, and the next stage is to create one. For application development I strongly recommend designing it on paper first, making a note of the table and field names before actually implementing the design.</br>
+			The following command writes a table (entities), the fields within the tables, their data types and the field lengths:</br>
+			<code>mysql> CREATE TABLE entities (Entity VARCHAR(60), Description VARCHAR(140), Category VARCHAR(20), EntryDate VARCHAR(20), Source VARCHAR(80),
+			Target VARCHAR(80), RelatedTo VARCHAR(140), Outcome VARCHAR(160), Notes VARCHAR(160), Reference VARCHAR(160));</code></br></br>
+
+			To confirm the table’s existence after this, use the ‘SHOW TABLES‘ command, and to view the table layout:</br>
+			<code>mysql> DESCRIBE entities;</code></br></br>
+
+			Alternatively, the Workbench application can later be used to modify the database under the SQL Development panel:</br></br>
+
+			We simply need to select ‘<i>Open Connection to Start Querying</i>‘ to start editing.
+		</div>
+
+		<div id="article">
+			<h2>Adding Records</h2>
+			For the moment I’ll use the command line for this. Knowing the table columns is important here, as the INSERT statement will add the data from a one-dimensional array. e.g.</br>
+			<code>mysql> INSERT INTO entities (Entity, Description, Category, EntryDate, Source)
+			-> VALUES ('Test Entity','Test Entity','Object','October 2014','localhost');</code></br></br>
+
+			To view the records in the table:</br>
+			<code>mysql> SELECT * FROM entities;</code>
+		</div>
+			
+		<div id="article">
+			<h2>MySQL and OpenOffice</h2>
+			Now we come to developing a front-end. This is an independent application that connects to the server (localhost, through the network interface), and presents a UI for users to manipulate records. The front-end and the MySQL server can also be on two different machines.
+			Later I’ll make custom software for this, but for now I’m using LibreOffice Base. Since the whole front-end here was based on Java, I made sure the connection driver and OpenOffice MySQL Connector extension were installed:</br>
+			<code>#apt-get install libmysql-java</code>
+
+			Then enter the LibreOffice/OpenOffice Java settings, and change the connector settings.</br></br>
+
+			The Oracle JRE makes sense, since MySQL seems heavily supported by Oracle. The Class Path here is <i>/usr/share/java/mysql-connector-java.jar</i>. Restart LibreOffice and you’re good to go. When LibreOffice/OpenOffice Base is next started, MySQL will be listed in the Database Wizard dialogue, in the drop-down menu for ‘<i>Connect to an existing database</i>’.</br></br>
+
+			Enter the connection details (typically localhost on port 3306), and register the database in LibreOffice. If successful, a screen like the following will appear after saving the file, with our database listed.</br>
+			Now it’s possible to create the UI for querying and updating records. In the Form Wizard dialogue, the available databases, tables and fields are listed.</br></br>
+		</div>
+		
+		<div id="article">
+			<h2>Resolving Form Connector Problems</h2>
+			Now you might find that the new LibreOffice form won’t allow the modification of records. One of the fields must be defined as the primary key with the following:
+			<code>mysql>USE nexus</code></br>
+			<code>mysql>ALTER TABLE entities ADD PRIMARY KEY (Entity);</code></br>
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>SQL Relay 2016</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1>SQL Relay 2016</h1>
+
+		<div id="article">
+			<h2>Azure Machine Learning</h2>
+			The point of this demonstration is that one doesn’t need to be a data scientist in order to apply Azure’s machine learning to data sets. All that’s needed is a general understanding of the available algorithms to determine which is best (a cheat sheet is available for this), and some fine tuning of the machine learning model.</br>
+			This included a run-through of creating a Microsoft Azure Machine Learning Studio project using the tutorial and readily-available data sets.</br></br>
+
+			After describing the main algorithms (clustering, tree, etc.), Andre Melancia took us through the Experiment Tutorial that performed income predictions based on a database of demographics, and showed us how the machine learning model can be tuned for greater accuracy.</br></br>
+
+			Web Services can be created to enable other applications to use the machine learning model, and no coding is required for this either – the input and output components are simply dropped into the graphical editor.
+		</div>
+
+		<div id="article">
+			<h2>Career Development and the Cloud</h2>
+			Ryan Yates, one of the main founders of the PowerShell community in the UK, gave us some words of wisdom on career development – the main one being that a typical IT professional must become increasingly multi-skilled to survive. Which is very true, within reason. I’d counter that some recruiters, for lack of understanding, grossly underestimate what it takes to develop and maintain technical expertise. It’s kind of unrealistic to expect anyone to be a ‘full stack engineer’, to match the collective expertise of a team of specialists. Just a few days ago some recruiter contacted me for advised on LinkedIn, because he couldn’t find someone experienced in systems administration, DevOps, and some vendor-specific infrastructure management things.</br>
+			We also had some pointers to developer communities and conferences.
+		</div>
+			
+		<div id="article">
+			<h2>Internet of Things, Rasberry Pi, Azure and Analytics</h2>
+			Basically how to make a Rasberry Pi stream data to the Azure IoT Hub and get some analytics. At some point I might replicate this demo to show what actually happens behind the Internet of Things. Or perhaps to show how IoT data streams could be used with a machine learning model.</br></br>
+
+			I didn’t know it was possible to install Windows 10 on a Rasberry Pi. Well, it’s actually a scaled-down version of it called ‘Windows 10 IoT Core‘, and it requires Windows 10 on the development machine also, unless you’re using the NOOBS installer. Once it’s loaded, Windows IoT Core runs a Web server and RDP server – either can be used to manage the device. What Paul Andrew did was set this up, on a Pi with a sensor board, and basically get it streaming data to Azure.</br></br>
+
+			On the Azure side, there’s an ‘Azure IoT Hub’, which mediates between the device and the Stream Analytics feature. It’s also where the device is registered and the connection string to the Azure service is acquired.</br></br>
+
+			Result? The whole setup worked flawlessly, and Andrew ended up with a dashboard showing the temperature and light sensor readings from the Pi.
+		</div>
+		
+		<div id="article">
+			<h2>Microsoft Data Platform</h2>
+			Essentially an hour-long marketing session with a few cringeworthy videos thrown in, but it’s an exposition of the direction Microsoft’s technologies/services are progressing. The long and short of this was that things are moving away from on-premises servers to Azure, and from the old analytics to machine learning and the Cortana Intelligence Suite.</br>
+			Also important to note is that almost all the businesses sponsoring this event specialise in analytics services.
+		</div>
+		
+		<div id="article">
+			<h2>How not to do Collaboration</h2>
+			There’s not much to say about this, but it’s about how not to communicate if you want to get things done. Richard Munn was entertaining nonetheless. The points I can recall:</br>
+			<ul>
+				<li>How teleconferencing doesn’t work with too many people.</li>
+				<li>Don’t give meeting rooms stupid names that don’t indicate their location. Think about whether you actually need to have a meeting in the first place, and definitely don’t arrange meetings for the first thing in the morning, or last thing on Friday.</li>
+				<li>Developers and project managers have different ideas of what Agile is.</li>
+				<li>Products/solutions should be piloted by the people expected to use them.</li>
+				<li>Collaboration isn’t the same thing as management, and likely shouldn’t involve hierarchy.</li>
+			</ul>
+		</div>
+		
+		<div id="article">
+			<h2>Summary</h2>
+			That the conference focussed primarily on Azure rather than SQL itself is important. In Microsoft’s data platform vision, SQL is just one of several components, an enabler for the analytics, machine learning and other abstractions that businesses are expected to make use of. As such, a much broader range of skills would likely be expected of future database admins.
+        </div>
+
+    </body>
+</html>
