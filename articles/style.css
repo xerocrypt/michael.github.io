@@ -177,7 +177,7 @@ button {
 
 code {
   background-color: #EDEDED;
-	width: inherit;
+	max-width: 100%;
   font-size: 0.8em;
   display: block;
   border: 1px solid #AAAAAA;
