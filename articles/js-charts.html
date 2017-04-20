@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>JavaScript Chart Frameworks</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>JavaScript Chart Frameworks</h1>
+
+        <div id="article">
+            In ASP.NET MVC 5, the frameworks are imported using:</br>
+            
+            <code>
+                @Scripts.Render("~/amcharts/amcharts.js")</br>
+                @Scripts.Render("~/amcharts/serial.js")</br>
+                @Scripts.Render("~/Scripts/jquery-3.1.1.js")
+            </code>
+
+            <code>
+                @Scripts.Render("~/amcharts/plugins/dataloader/dataloader.min.js")</br>
+                @Scripts.Render("~/amcharts/themes/appcolours.js")</br>
+                @Scripts.Render("~/Scripts/Chart.js")
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>amCharts</h2>
+            Declare a new instance of AmCharts:</br>
+
+            <code>
+                chart1 = new AmCharts.makeChart("chartdiv",</br>
+                {</br>
+                    "type": "serial",</br>
+                    "theme": "appcolours",</br>
+                    "dataLoader":</br>
+                    {</br>
+                        "url": "/api/prMessagesProcessedByDay_Result/",</br>
+                        "format": "json",</br>
+                        "async": true</br>
+                    }</br>
+                </code>
+
+                This section of code determines the data source (Web API <i>/api/prMessagesProcessedByDay_Result/</i>), and which HTML element the chart is to be displayed in (<i>chartdiv</i>) 
+        </div>
+
+        <div id="article">
+            <h2>Chart.js</h2>
+            Uses jQuery to make the AJAX request to get the JSON response.</br>
+            
+            <code>
+                $.ajax({
+                    url: "/api/prWRRSMessagesProcessedByDay_Result/",</br>
+                    method: "GET",</br>
+                    success: function (data) {</br>
+                        console.log(data);</br>
+                        var myDate = [];</br>
+                        var myMessages = [];</br></br>
+
+                        for (var i in data) {</br>
+                        myDate.push("Date: " + data[i].Date);</br>
+                        myMessages.push(data[i].MessagesProcessed);</br>
+                    }</br>
+                </code>
+
+                The following code determines the type of chart to be displayed, and which HTML element the chart is to be displayed in:</br>
+
+                <code>
+                    var ctx = $("#mycanvas2");</br>
+                    var barGraph = new Chart(ctx, {</br>
+                        type: 'bar',</br>
+                        data: chartdata</br>
+                    });</br>
+                </code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            AMCHARTS. 2017. <i>JavaScript Charts & Maps</i>. [WWW]. <a href="https://www.amcharts.com">https://www.amcharts.com</a>. 19th April 2017.</br></br>
+
+            CHART.JS. 2017. Chart.js. <i>API Documentation</i>. [WWW]. <a href="http://www.chartjs.org/docs/">http://www.chartjs.org/docs/</a>. 19th April 2017.</br></br>
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

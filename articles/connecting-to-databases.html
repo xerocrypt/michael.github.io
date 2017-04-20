@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Database Connections</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Connecting to Databases</h1>
+
+        <div id="article">
+            <h2>Visual Studio</h2>
+            Visual Studio includes the 'Data Source Configuration Wizard' for most common data sources, so the chances are a connection wouldn't need to be manually coded. Other features include:
+            <ul>
+                <li><b>Data Source Configuration Wizard:</b> A connection is configured when the database path is selected.</li>
+                <li><b>TableAdapter Configuration Wizard:</b> Creates a connection.</li>
+                <li><b>TableAdapter Query Configuration Wizard:</b> Creates a connection.</li>
+                <li><b>Component Designer:</b> A connection object is created when items are added in from the Data Sources window to the Component Designer.</li>
+                <li><b>Server/Database Explorer:</b> This windows lists the available connections.</li> 
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>Imports (Using Entity Framework)</h2>
+            <ul>
+                <li>System.Data.Common</li>
+                <li>System.Data.Entity</li>
+                <li>System.Data.Entity.Infrastructure</li>
+                <li>System.Data.Entity.Core.Objects</li>
+                <li>System.Data.Entity.Validation</li>
+                <li>System.Diagnostics.CodeAnalysis</li>
+                <li>System.Linq</li>
+            </ul>
+        </div>
+
+        <div id="article">
+                <h2>Connection Strings</h2>
+                A ConnectionString property consists of a connection string for an OleDbConnection object. This enables the application to establish a connection with the database object and provide authentication data. </br>
+                An example of a simple connection string:</br>
+                <code>
+                    Provider=SQLOLEDB.1;Data Source=MySQLServer;Initial Catalog=NORTHWIND;Integrated Security=SSPI
+                </code>
+                
+                The following is a connection string from an ASP.NET MVC  project's '<i>Web.config</i>' file:</br>
+
+                <code>
+                    add name="DatabaseEntities" connectionString="metadata=res://*/Models.DatabaseEntityModel.csdl|res://*/Models.DatabaseEntityModel.ssdl|res://*/Models.DatabaseEntityModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SQLSERVERNAME1,3023;initial catalog=DatabaseName;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /><add name="DatabaseEntities1" connectionString="metadata=res://*/Models.DRS.csdl|res://*/Models.DRS.ssdl|res://*/Models.DatabaseName.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SQLSERVERNAME1,3023;initial catalog=DatabaseName;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient"</code>
+                </code>
+
+                Authentication could be username/password, or use Windows Integrated Security (SSPI). The latter is recommended where possible, to avoid compiling the application with a username/password combination.
+        </div>
+
+
+
+
+        <div id="article">
+
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            MSDN: Connecting to Data in Visual Studio Overview. <a href="https://msdn.microsoft.com/library/wxt2cwcc(v=vs.90).aspx">https://msdn.microsoft.com/library/wxt2cwcc(v=vs.90).aspx</a></br>
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

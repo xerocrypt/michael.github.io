@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <title>Metrics Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Messaging Metrics Dashboard</h1>
+        <h2>Developer Notes</h2>
+
+        <div id="article">
+            <h2>Contents</h2>
+            <ul>
+                <li>Overview</li>
+                <li>View Layer</li>
+                <li>JavaScript Chart Frameworks</li>
+                <li>View and Web API Controllers</li>
+                <li>Model Layer</li>
+            </ul>
+        </div>
+    
+        <div id="article">
+            <h2>Overview</h2>
+
+            The WRRS Messaging Metrics Dashboard provides a quick way to view the number of messages being processed from NDR. Users can also view the number of messages processed by message type and by health board.
+            The application has been developed and tested specifically for Internet Explorer 11, but is compatible with other browsers with HTML5 and JavaScript enabled.</br></br>
+
+
+            Developed on the ASP.NET MVC 5 framework, the Dashboard uses the following technologies:
+            <ul>
+                <li>Web API</li>
+                <li>amCharts and Chart.js JavaScript charting frameworks</li>
+                <li>jQuery</li>
+                <li>Entity Framework</li>
+                <li>SQL Server 204 or SQL Server 2016</li>
+            </ul>
+
+            The Messaging Metrics Dashboard is an ASP.NET MVC 5 application that displays the volume of messages successfully processed between clinical systems. Message volume can be viewed by department or system type.</br>
+            It supports three system categories:
+            <ul>
+                <li>Pathology</li>
+                <li>Radiology</li>
+                <li>Cardiology</li>
+            </ul>
+
+
+            The metrics themselves are stored in Service Broker queues, and retrieved through stored procedures. The data access layer of the application converts the returned data to JSON format, which is forwarded to the view layer on an AJAX request.</br></br>
+
+            To render the graphs for the metrics, the application uses amCharts and Chart.js.</br></br>
+
+            Under the application title/header, there is the drop-down menu. Eventually this might be used to enable the user to switch between dashboards for Pathology, Radiology and Cardiology:
+        </div>
+
+        <div id="article">
+            <h2>JavaScript Chart Frameworks</h2>
+            The application imports amCharts and Chart.js, which are third-party frameworks for rendering the metrics charts. Chart.js requires jQuery also to make AJAX requests.</br></br>
+
+            The main chart in the Dashboard currently shows the total number of messages processed over the past several days. The maximum period is determined by the stored procedure, but any period within that can be selected using amCharts' slider at the top of the graph
+        </div>
+
+        <div id="article">
+            <h2>View and Web API Controllers</h2>
+            Refers here to the view controllers. The view controllers themselves are very basic, without any additional logic other than routing the browser requests to the appropriate view.</br>
+            The actual logic for returning the data to the charts is found in the Web API controllers:
+            <ul>
+                <li>prMessagesProcessedByDay_LHB_ResultController.cs</li>
+                <li>prMessagesProcessedByDay_ResultController.cs</li>
+            </ul>
+
+            The Web API controllers handle the access of objects representing the data returned by the stored procedures in the data access layer.</br>
+            In the view layer, a Web API controller is invoked by AJAX requests. The code for this varies between AmCharts and Chart.js. The latter depends on jQuery's '<li>$.ajax</li>' function to make this request to the Web API controller.
+        </div>
+
+        <div id="article">
+            <h2>Model</h2>
+            Entity Framework is used to model the stored procedures and the return data, rather than the application being designed to query the database directly.</br>
+            In the messaging database is stored procedure called ‘<i>prMessagesProcessedByDay</i>’. This takes one input parameter, ‘<i>NoOfDays</i>’ and returns a table with three column fields: <i>Date</i>, <i>Id</i> and <i>MessagesProcessed</i>.  These were imported as an Entity Framework model.</br></br>
+
+            The <i>Context.cs</i> file determines the parameters or values to be passed to the stored procedure through the EF model. Here it’s simply <i>NoOfDays</i> as an integer.</br>
+
+            <code>
+                public virtual ObjectResult<prMessagesProcessedByDay_Result> prMessagesProcessedByDay(Nullable<int> noOfDays)</br>
+                {</br>
+                    var noOfDaysParameter = noOfDays.HasValue ?</br>
+      	            new ObjectParameter("NoOfDays", noOfDays) :</br>
+    		        new ObjectParameter("NoOfDays", typeof(int));</br></br>
+    
+ 	                return((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prMessagesProcessedByDay_Result>("prMessagesProcessedByDay", 	noOfDaysParameter);</br>
+                }
+            </code>
+
+            The values returned by the stored procedure are:
+            <code>
+                public Nullable<System.Guid> Id { get; set; }</br>
+                public Nullable<System.DateTime> Date { get; set; }</br>
+                public Nullable<int> MessagesProcessed { get; set; }</br>
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            AMCHARTS. 2017. <i>JavaScript Charts & Maps</i>. [WWW]. <a href="https://www.amcharts.com">https://www.amcharts.com</a>. 19th April 2017.</br></br>
+
+            CHART.JS. 2017. Chart.js. <i>API Documentation</i>. [WWW]. <a href="http://www.chartjs.org/docs/">http://www.chartjs.org/docs/</a>. 19th April 2017.</br></br>
+
+            JQUERY FOUNDATION. 2017. jQuery API Documentation. <i>jQuery.ajax()</i>. [WWW]. <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a>. 19th April 2017.
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

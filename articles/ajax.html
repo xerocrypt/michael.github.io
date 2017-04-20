@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>AJAX</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1>AJAX</h1>
+
+       <div id="article">
+           An acronym for 'Asynchronous JavaScript And XML', this uses the browser's XMLHttpRequest API to communicate with a server. Normally the return data is text, JSON, XML or HTML. As it's asynchronous, the data could be returned and handled by the client without having to refresh the HTML page from which the request originated.
+           </br></br>
+           In the Mozilla browser, the XMLHttpRequest API contains multiple functions for handling the return data and return status of the request.</br></br>
+
+           A simple example, using some JavaScript to fetch a document:</br>
+
+           <code>
+                function loadDoc()</br> 
+                {</br>
+                    var xhttp = new XMLHttpRequest();</br>
+                    xhttp.onreadystatechange = function()</br>
+                    {</br>
+                        document.getElementById("demo").innerHTML = this.responseText;</br>
+                    }</br>
+                    xhttp.open("GET", "ajax_info.txt", true);</br>
+                    xhttp.send();</br>
+                } </br>
+            </code>
+
+           AJAX is also found in jQuery, with the <code>jQuery.ajax()</code> function, and it supports the following return data types: JSON, XML, text, HTML and script.
+           
+           </br></br>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            JQUERY FOUNDATION. 2017. jQuery API Documentation. <i>jQuery.ajax()</i>. [WWW]. <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a>. 19th April 2017.</br></br> 
+
+            MOZILLA. 2017. Mozilla Developer Network. <i>Ajax: Getting Started</i>. [WWW]. <a href="https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started">https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started</a>. 19th April 2017.</br></br>
+
+            MOZILLA. 2017. Mozilla Developer Network. <i>Web APIs: XMLHttpRequest</i>. [WWW]. <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest</a>. 19th April 2017.
+
+        </div>
+
+    </body>
+</html>
