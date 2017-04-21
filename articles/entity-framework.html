@@ -9,8 +9,20 @@
         <h1>Entity Framework</h1>
 
         <div id="article">
-        Requires <i>EntityFramework.dll</i>.
-        
+        Requires <i>EntityFramework.dll</i>.</br></br>
+
+        When creating an Entity Framework model, several options are available:</br>
+        <ul>
+            <li><b>Code First:</b> Define the model using code, then generate the database from this.</li>
+            <li><b>Code First to Existing Database:</b> Use code to create the model that maps to an existing database.</li>
+            <li><b>Model First:</b> Define the model in a graphical editor and generate a database from this.</li>
+            <li><b>Database First:</b> Create a model in the graphical editor that maps to an existing database.</li>
+        </ul>        
+        </div>
+
+        <div id="article">
+            <h2>Architecture</h2>
+            <img src="images/ef-model-code-map.png">
         </div>
 
         <div id="article">
@@ -33,6 +45,40 @@
             </ul>          
         </div>
 
+        <div id="article">
+            <h2>Sending Data to Stored Procedures</h2>
+            The following code is found in <i>[DatabaseName].Context.cs</i>:</br>
+
+            <code>
+                public virtual ObjectResult<prStoredProcedure_Result> prStoredProcedure(Nullable<int> noOfDays)</br>
+                {</br>
+                    var noOfDaysParameter = noOfDays.HasValue ?</br>
+                    new ObjectParameter("NoOfDays", noOfDays) :</br>
+                    new ObjectParameter("NoOfDays", typeof(int));</br></br>
+    
+                    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prStoredProcedure_Result>("prStoredProcedure", noOfDaysParameter);</br>
+                }</br>
+            </code>
+        </div>
+
+
+        <div id="article">
+            <h2>Return Data</h2>
+            <code>
+                public partial class prStoredProcedure_Result</br>
+                {</br>
+                    public Nullable<System.Guid> Id { get; set; }</br>
+                    public string HealthBoard { get; set; }</br>
+                    public string HealthBoardDescription { get; set; }</br>
+                    public Nullable<int> MessagesProcessed { get; set; }</br>
+                }</br>
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            ENTITYFRAMEWORKTUTORIAL.NET. 2016. <i>Entity Framework Tutorial</i>. [WWW]. <a href="http://www.entityframeworktutorial.net">www.entityframeworktutorial.net</a>. 21st April 2017.</br></br>
+        </div>
 
         <div id="footer">Michael, April 2017</div>
     </body>

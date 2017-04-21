@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Using GDB</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Using GDB</h1>
+        
+        <div id="article">
+            <h2>Compiling a Program</h2>
+            The straightforward way to compile a program on a Linux system is:</br>
+            <code>g++ gdb-example.cpp -o example</code></br>
+
+            However, if the program might need debugging, it's better to add the following options to the compiler directive:</br>
+            <code>g++ example.cpp -g -Wall -Werror -o example</code></br>
+
+            The '<i>-Wall</i>' option enables all warning flags, and '<i>-Werror</i>' marks the warnings as errors. Even if there are no warnings or errors during the compilation, the debug symbols would still be present.
+        </div>
+
+        <div id="article">
+            The GDB utility can be used simply with the '<i>gdb</i>' command. This loads the compiled program and presents the '<i>(gdb)</i>' prompt.</br>
+            To run the program in the debugger:</br>
+            <code>(gdb) run</code></br>
+
+            To set breakpoints, use '<i>break</i>' to set the breakpoint line numbers before running the program:</br>
+            <code>
+                (gdb) break 5</br>
+                (gdb) run
+            </code></br>
+
+            The output should display the contents of the buffers at the point where execution was stopped. Just in case wwe don't know where the program had stopped, the '<i>list</I>' command would print the 10 lines of code around the breakpoint.
+        </div>
+
+        <div id="article">
+            <h2>Reading and Manipulating Variables</h2>
+            <code>(gdb) print variable</code></br>
+
+            Change the variable with:</br>
+            <code>(gdb) set variable = value</code></br>
+
+            We can also watch for changes in a variable's buffer with:</br>
+            <code>(gdb) watch variable</code>
+        </div>
+
+		<div id="article">
+			<h2>References</h2>
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

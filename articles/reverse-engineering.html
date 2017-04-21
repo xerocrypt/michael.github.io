@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Reverse Engineering</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Reverse Engineering</h1>
+
+        <div id="article">
+            <h2>strings</h2>
+                Attempting to open a compiled program in a text editor would show unintelligible output. The <i>strings</i> utility enables us to extract strings from a compiled binary. e.g.
+                <code>strings program.exe</code></br>
+
+                Usually this results in a lot of output. To get around this, we can limit the output to strings over x number of characters, or search the output for a specific string:</br>
+
+                <code>strings program.exe | grep [keyword]</code></br>
+                <code>strings program.exe -n [num of characters]</code></br>
+
+            </div>
+
+            <div id="article">
+                <h2>Functions and Data Structures</h2>
+                Two other programs included with binutils can be used to determine the structure of a compiled program. The <i>nm</i> utility searches a binary for data structures and functions called during runtime.</br>
+                The <i>objdump</i> utility reads the file's bytecode and translates it into the assembler instructions.</br>
+                To dump the object code and discovered strings:</br>
+                <code>objdump program.exe -s</code></br>
+
+                To translate the bytecode to assembler:</br>
+                <code>objdump -d</code></br>          
+            </div>
+
+            <div id="article">
+                <h2>Decompiling</h2>
+                This operation is a little harder to perform, as it involves the discovery of high-level programming structures within assembler code and grouping instructions into functions.</br>
+                Some free decompilers are available, including the Reverse Engineering Compiler (REC).
+            </div>
+
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            CAPRINO, G. 2015. <i>REC Studio 4 - Reverse Engineering Compiler</i>. [WWW]. <a href="http://www.backerstreet.com/rec/rec.htm">www.backerstreet.com/rec/rec.htm</a>. 21st April 2017.</br></br>
+
+            FREE SOFTWARE FOUNDATION. 2014. <i>GNU Binutils</i>. [WWW]. <a href="http://www.gnu.org/software/binutils/">www.gnu.org/software/binutils/</a>. 21st April 2017</br>
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>
