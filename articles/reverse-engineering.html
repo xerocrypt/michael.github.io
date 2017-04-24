@@ -9,6 +9,39 @@
         <h1>Reverse Engineering</h1>
 
         <div id="article">
+            <h2>Executable File Structure (Portable Execuable)</h2>
+
+            The good thing about UNIX systems is they could read <i>.exe</i> files as archives, which means their contents can be extracted and viewed as a file/directory structure. Most the Portable Executable headers are shown as individual files and directories.</br>
+            There are nine possible section headers in the executable format, which marks it out as an application for Windows NT, but AccessEnum.exe uses just the following:
+            <ul>
+                <li><b>.text:</b> Main code instructions here.</li>
+                <li><b> .debug:</b> Debug information and references to debug sections in <i>.rdata</i>.</li>
+                <li><b>.rdata:</b> Generally read-only data and persistent handles go here.</li>
+                <li> <b>.data:</b> Strings used and displayed by the executable at runtime.</li>
+                <li><b>.rsrc:</b> Resources used within the executable. Icons, bitmaps, etc.</li>
+            </ul>
+
+            But this doesn’t tell us much about the resources the program uses when running. The file can be dissected using the <i>binutils</i> set of utilities.
+        </div>
+
+        <div id="article">
+            <h2>objdump</h2>
+                To dump the object code and discovered strings:</br>
+                <code>objdump program.exe -s</code></br>
+
+                To translate the bytecode to assembler:</br>
+                <code>objdump -d</code></br>  
+
+                Using objdump we can get the section headers used and their virtual memory addresses:
+                <code>$objdump -h AccessEnum.exe</code>
+
+                Also, objdump also provides a list of DLLs, their associated handles used by the executable and their virtual memory addresses:</br>
+                <code>$objdump -p AccessEnum.exe</code>
+
+                Out of curiosity, I also ran <i>objdump</i> against <i>XeroCrypt.exe</i>, a small application I developed some years ago. As expected, the import tables were instead found in <i>.text</i> because my application simply consisted of calls to .NET components.
+        </div>
+
+        <div id="article">
             <h2>strings</h2>
                 Attempting to open a compiled program in a text editor would show unintelligible output. The <i>strings</i> utility enables us to extract strings from a compiled binary. e.g.
                 <code>strings program.exe</code></br>
@@ -18,18 +51,39 @@
                 <code>strings program.exe | grep [keyword]</code></br>
                 <code>strings program.exe -n [num of characters]</code></br>
 
+                Another way to access the strings is to read the <i>.rdata</i> section of the executable. 
             </div>
 
             <div id="article">
                 <h2>Functions and Data Structures</h2>
                 Two other programs included with binutils can be used to determine the structure of a compiled program. The <i>nm</i> utility searches a binary for data structures and functions called during runtime.</br>
-                The <i>objdump</i> utility reads the file's bytecode and translates it into the assembler instructions.</br>
-                To dump the object code and discovered strings:</br>
-                <code>objdump program.exe -s</code></br>
-
-                To translate the bytecode to assembler:</br>
-                <code>objdump -d</code></br>          
+                The <i>objdump</i> utility reads the file's bytecode and translates it into the assembler instructions.</br>     
             </div>
+
+            <div id="article">
+                <h2>Dissasembling an Executable</h2>
+                    Now the memory addresses and general purpose of each section is known, it’s possible to start making deductions about what the program does by examining the contents of those memory locations in a disassembler. The information should be displayed in a text field in whatever disassembler’s being used for this.</br></br>
+
+                    I loaded an EXE into <a href="http://bokken.re/docu.html">Bokken</a>, and moved directly to the <i>.text</i> section where the program’s instructions themselves should be. To the left, we can see the virtual memory address (0x1000) and the size (0xf18) match the objdump output, so this was definitely the right section.</br></br>
+
+                    The output is typically x86 assembler instructions, and certain sequences are  directly translatable to generic C programming structures, which is how a disassembled program’s function could be derived. See the first chapter of <i>The Shellcoder’s Handbook</i> and <i>Appendix E of Programming From the Ground Up</i> for examples of this.</br></br>
+
+                    The sections of code separated by dashed lines are discrete functions. Taking just one of these functions:</br>
+                    <code>
+                        push esi</br>
+                        mov esi, ecx</br>
+                        mov ecx, [esi+0x1c]</br>
+                        test ecx, ecx</br>
+                        jz 0x0000103d</br>
+                    </code>
+
+                    Memory register <i>ESI</i> seems the main one used here, and as I understand it, <i>ESI</i> differs from other registers in that it holds 32 bits, unlike the 8-bit or 16-bit segment registers.
+                    The first instruction pushes the contents of <i>ESI</i> (which could be anything) onto the stack, then the contents of <i>ESI</i> are replaced with whatever’s in <i>ECX</i>. The contents of <i>ECX</i> in turn is replaced with whatever’s stored at address <i>ESI +0x1c</I>.
+                    The last two instructions check the value stored in register <i>ECX</i>, and if <i>ECX=0</i> the program jumps to address <i>0x0000103d</i>.</br></br>
+
+                    So what does that mean? It seems like our function was designed simply to check a specific value within a memory register. It’s almost impossible to determine exactly why – that would be a matter of translating every function into pseudo-code before stringing it all together. Probably.        
+            </div>
+
 
             <div id="article">
                 <h2>Decompiling</h2>
@@ -37,13 +91,13 @@
                 Some free decompilers are available, including the Reverse Engineering Compiler (REC).
             </div>
 
-        </div>
-
         <div id="article">
             <h2>References</h2>
             CAPRINO, G. 2015. <i>REC Studio 4 - Reverse Engineering Compiler</i>. [WWW]. <a href="http://www.backerstreet.com/rec/rec.htm">www.backerstreet.com/rec/rec.htm</a>. 21st April 2017.</br></br>
 
-            FREE SOFTWARE FOUNDATION. 2014. <i>GNU Binutils</i>. [WWW]. <a href="http://www.gnu.org/software/binutils/">www.gnu.org/software/binutils/</a>. 21st April 2017</br>
+            FREE SOFTWARE FOUNDATION. 2014. <i>GNU Binutils</i>. [WWW]. <a href="http://www.gnu.org/software/binutils/">www.gnu.org/software/binutils/</a>. 21st April 2017</br></br>
+
+            TESO, H. 2015. Bokken. <i>Documentation How to...</i>. [WWW]. <a href="http://bokken.re/docu.html">http://bokken.re/docu.html</a>. 24th April 2017.</br>
 
         </div>
 

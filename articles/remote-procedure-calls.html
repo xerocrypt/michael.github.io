@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Remote Procedure Calls</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Remote Procedure Calls</h1>
+
+        <div id="article">
+            How are remote procedures/functions called without resorting to socket programming to move data around the network? The answer is to use an API that mediates things for the main program and the remote procedures/functions, so the programmer calls a remote function in almost the same way as one that exists locally. This is essentially what RPC is about. Again, there should be little difference, from the programmer’s perspective, whether the function exists locally or elsewhere.</br>
+            There are several RPC modules/libraries available for Python, but I chose RPyC in particular because it’s well maintained and excellently documented, and with some good tutorials on the developers’ site.
+            A default server script is included with the RPyC download (<i>/rpyc/scripts/rpyc_classic.py</i>), and this listens on port 18812 for an RPC call. It must be run first, otherwise there’s a ‘connection refused’ error when running a client script.</br></br>
+
+            In the following example, both the client and server are running on the same machine. Remember that a server, by definition, is simply a process listening on a network port, regardless of which system it’s running on. Here the client script sends an RPC to the local network interface, and the call is looped back to the port on which the server is listening.
+            Notice that each time the client makes a call, its own port number might change. This is important, because it’s one way of differentiating between multiple calls from the same client, and the client might initiate new TCP sessions with each call.</br></br>
+
+            The next client script demonstrates something a little more practical – two way communication between two physical machines, over RPC. For this to work, RPyC must be installed on both ends, and the <i>rpyc_classic.py</i> script must be running on one to provide the server.
+
+            <code>
+                import os</br>
+                import rpyc</br></br>
+
+                #Establish connection with RPC server</br>
+                conn = rpyc.classic.connect("192.168.1.2")</br></br>
+
+                #Print remote working directory</br>
+                print("Remote working directory: ")</br>
+                currentDir = conn.modules.os.getcwd()</br>
+                print(currentDir)</br>
+                print " "</br></br>
+
+                #Send message to RPC server</br>
+                conn.modules.sys.stdout.write("This is a message from the RPC client.\n")</br></br>
+
+                #Retreive list of installed modules on server</br>
+                print("Installed modules: ")</br>
+                for i in conn.modules.sys.path:</br>
+                print i
+            </code>
+
+            Notice there’s very little socket programming in the script itself. But isn’t RPC about calling functions on a remote system? Well, the client did that indirectly, using the RPyC API to mediate between the script and functions on the remote system. Notice that the RPyC module called stdout() on the remote system to print the highlighted message on the server, passing the parameter through the RPC layer.
+        </div>
+
+        <div id="article">
+            <h2>IDL and C</h2>
+            While the Python examples can show RPC in action, others have done most the hard work, and later on the programmer might want to define his/her own services.</br>
+            To implement the Python examples in the C language and Sun RPC, some of the API code must be created manually using the Interface Definition Language (IDL) and a special compiler called <i>rpcgen</i>. This generates a set of files that handle the RPC stuff for us. Borrowing an example from <a href="http://www.cprogramming.com/tutorial/rpc/remote_procedure_call_start.html">Cprogramming.com</a>, I copied a small IDL file (<i>rpc-example.x</i>) into a text editor and compiled it with <i>rpcgen</i>:
+            <code>$rpcgen rpc-example.x</code>
+
+            The following were generated:
+            <ul>
+                <li>rpc-example.h: A header file to include in a C program.</li>
+                <li>rpc-example_svc.c: Server ‘stub’.</li>
+                <li>rpc-example_clnt.c: Client ‘stub’.</li>
+                <li>rpc-example_xdr.c: Ensures data is encoded in a common format between client and server.</li>
+            </ul>
+
+            The <i>rpc-example.h</i> file is analogous to the Python module created in my last post, being a header file included in a program, and a file that defines services. In turn, <i>rpc-example.h</i> calls header files for socket programming, networking, memory management, native RPC objects and a couple other things. I haven’t figured out which functions belong to which libraries yet, so there might be another post on this.</br></br>
+
+            The ‘server stub’ creates a socket (essentially a temporary file in a UNIX system) with an arbitrary port number and uses the operating system’s native RPC library to register a service with that port number and process ID. Now there is a server listening on the port for incoming connections.</br></br>
+
+            The ‘client stub’ contacts the other machine’s network interface to determine the RPC server’s port, and communicates with the ‘server stub’ on behalf of the program intiating the function call.
+            Since there’s communication between two machines, possible with different operating systems and architectures, establishing a common encoding method between the client and server is also a good idea. This is what <i>rpc-example_xdr.c</i> handles.
+        </div>
+
+        <div id="article">
+            <h2>Security Issues</h2>
+            With anything network communication related, there are also security issues. There are two obvious questions: How does the server know it’s providing services to an authorised client? What prevents the extraction of sensitive data from captured RPC traffic?</br>
+            By 1989, Sun Microsystems had already developed a solution called ‘Secure RPC’, which is used for both client-server authentication and for encrypting traffic between the endpoints. Here Diffie-Hellman asymmetric encryption was used, which enabled the server to authenticate the client (or user account) by requesting it encrypt a timestamp with the symmetric key – only an endpoint with the client’s private key would know also the symmetric key.</br></br>
+
+            On the Windows side, there have been vulnerabilities that enabled RPC exploits through malformed RPC requests, and sometimes an attacker to ultimately gain control of the remote system from an authenticated account/client. This is commonly termed ‘remote code execution’. Remedy? Close the RPC ports inbound on the perimeter firewall. Also patch the relevant DLLs.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>
