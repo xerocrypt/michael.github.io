@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>C# Backdoor</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Creating a General Purpose Backdoor</h1>
+        </div>
+        
+        <div id="article">
+            Hopefully the following is a worthy demonstration of roughly what happens after a system is infected with a backdoor-type malware. It’s based on a simple Trojaned application I created for a security firm, and has two components: a beacon and a TCP listener. The backdoor I’ve created here is relatively lame, but most the features in ‘sophisticated’ malware are for camouflage and concealment, rather than functionality. Likewise, the remote access backdoor here can be the basis for something more sophisticated.
+        </div>
+
+        <div id="article">
+            <h2>Overview of the Code</h2>
+            The program is very simple, and the pseudocode is something like:
+
+            <code>
+                import system library</br>
+                import networking library</br></br>
+
+                define UDP payload, IP address and port number for beaconing</br>
+                write payload, IP address and port number to socket</br>
+                start netcat listener on port 1997
+            </code>
+
+            I have kept the program itself as basic as possible, at roughly 30 lines of code. It could easily be copied and pasted into another C# application, if a developer wanted to use it as a Trojan Horse.
+        </div>
+
+        <div id="article">
+            <h2>The Server</h2>
+            At the core of a Remote Access Toolkit is a server. Don’t confuse this with a C&C, as the definition of a ‘server’ is any process that listens on a given port for incoming commands. The server in this context is the backdoor program.</br>
+            After trying to code a server that passes I/O between a client and the local command shell, I decided to use <i>netcat</i> instead. Freely available with <a href="https://nmap.org/download.html">the nmap download</a>, netcat pipes standard I/O to something other than a local keyboard and monitor, and thereby enables us to interact with a remote command shell using a Telnet client. It’s pretty useful as a standalone backdoor tool, if it’s in the right place on a system with a known IP address.</br></br>
+
+            My code starts ncat.exe with the options to listen on port 1997 (<i>-l -p 1997</i>) and connect with <i>cmd.exe</i>. The program will do this while keeping the windows hidden on the backdoored system.
+        </div>
+
+        <div id="article">
+            <h2>Beaconing</h2>
+            The chances are an infected system would have a dynamic IP address. How would an attacker know what that IP address is at a given time? The answer is we add a beacon. Here we have some code that send a UDP packet to the C&C address (which itself should be static).</br>
+            The C# socket programming library also allows for DNS requesting to obtain the IP address for a C&C domain. If there’s a problem resolving the address, there’d be a Windows error message that would alert the user. One way around that is to add a <i>try{}</i> <i>catch{}</i> exception handler, leaving the <i>catch{}</i> method empty. If this was a Trojaned application, there’d also be code to quietly fetch a renamed ncat.exe file.</br>
+            With a bit more work, the program could also send a few other things about the local system, such as keyboard captures, network status, operating system version, etc. Or that data could be written to text files and fetched at some point over a remote connection.
+        </div>
+
+        <div id="article">
+            <h2>How to Trojan</h2>
+            Most people might think of Trojans as two distinct programs: the legit software and the malicious one. Here the Trojan is a dual-purpose software application, or a remote admin program disguised as a legit application – one and the same program.</br></br>
+
+            The beauty of the Portcullis code is that it can be copied and pasted into any C# project, included in whatever software application is being developed. This is likely what happens when people get stuff like screensavers and MP3s that require a special downloader application.</br></br>
+
+            There’s also nothing to stop people using a hex editor to change the values contained within the compiled binary, unless it’s obfuscated.
+        </div>
+
+        <div id="article">
+            <h2>Deploying Portcullis</h2>
+            As I’ve mentioned, this is only the basic backdoor. Other components are required for installation and concealment. It requires an exploit to get admin privileges, and code to open the Telnet/netcat port in the Windows Firewall and add the backdoor to the startup services. The other method is to do this manually, perhaps <a href="https://sathisharthars.wordpress.com/2014/07/07/evade-windows-firewall-by-ssh-tunneling-using-metasploit/">using Meterpreter</a>.</br>
+            Assuming the backdoor is installed, simply Telnet into the system on port 1997. This gives us the command shell on the backdoored system.</br></br>
+
+            One catch is the Windows Firewall must be configured to allow the ncat service to enable access from elsewhere on the network. Here is the connection from a UNIX system. But the Windows Firewall is just one problem to solve. The thing is this backdoor is among the oldest tricks known, and since the days of Windows XP computer security has evolved around reventing Internet-based threats. That’s why today’s remote access malware has to be more ‘sophisticated’, capable of hiding itself and making a number of changes to the target system.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

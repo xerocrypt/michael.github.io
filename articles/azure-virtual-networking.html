@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Azure Networking</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+        	<h1>Azure Virtual Networking</h1>
+		</div>
+
+        <div id="article">
+            Stripping away the marketing jargon, <a href="https://azure.microsoft.com/">Microsoft’s Azure</a> is essentially a platform onto which customers can deploy almost any kind of computing service relatively quickly. The service might be a public-facing web site, a HPC cluster, a test environment or an extension to the corporate network. Practically anything that could be done with a data centre is possible with Azure.</br>
+            The pricing system is kind of messy. Not only is Azure usage billed by the time and number of CPUs, but there are several tiers for things like Visual Studio, TFS and Windows Server. A VM with 35 processor cores running Visual Studio Ultimate would cost far more than a VM with two cores running Visual Studio Express.
+        </div>
+
+        <div id="article">
+            <h2>The Services</h2>
+            Azure has an extensive range of options for provisioning VMs, web applications, databases and other services. Some of them are actually developed by third-parties and resold by Microsoft. By clicking the ‘<i>NEW</i>’ button, we can browse through the panels showing the available Azure services. One of the first things I did was set up a couple of Windows Server and Linux VMs, initially thinking I could run public-facing web applications with just these.</br>
+            Azure includes the admin dashboard, status messages and some fancy performance analytics for each VM.
+        </div>
+
+        <div id="article">
+            <h2>Connecting to the VM</h2>
+            Unless a desktop environment and remote desktop server are installed on a Linux VM, we must use SSH to access it. Of course, this could be done from another Linux machine or using <a href="http://www.putty.org/">PuTTY</a> on Windows.</br>
+            Getting a remote desktop session with the Windows VMs is much easier, a matter of clicking the <i>Connect</i> button to start the local Remote Desktop program.
+        </div>
+
+        <div id="article">
+            <h2>Virtual Networks</h2>
+            At this stage there are virtual machines that we can connect to individually over SSH/RDP. Unfortunately it appears each VM runs in a sandbox with an isolated private address. To get several VMs sharing resources and communicating, they need to be placed in a virtual network.</br>
+            In ‘<i>NETWORK SERVICES</i>’ – ‘<i>VIRTUAL NETWORK</i>’ – ‘<i>CUSTOM CREATE</i>’, enter the name of the network. On the next dialogue, we get options for setting the DNS Servers and VPN connectivity. These settings don’t really need to be configured at this point. For the Virtual Network Address Spaces, we could divide the addresses into subnets. For example, we might have a subnet for client-facing machines, and a subnet for back-end database servers. We’ll come back to this shortly.</br></br>
+
+            And that’s how simple it is to create a ‘virtual network’, which at this point, is merely an address space. At least one VM is added to make use of this ‘network’, and the image must be selected FROM GALLERY.
+            Proceed with the VM configuration as before. Under the <i>REGION/AFFINITY GROUP/VIRTUAL NETWORK</i> drop-down menu, the network is listed. If the VM was successfully added, it will be listed as a network resource.</br></br>
+
+            SSH/RDP connections to each VM can also be established from outside the virtual network, using the <i>[name].cloudapp.net addresses</i>. Connectivity between VMs can be tested by pinging each other. From here, all kinds of services can be added, from SQL back-end servers, to IDS and firewalls.
+        </div>
+
+        <div id="article">
+            <h2>Joining Local Resources to the Virtual Network</h2>
+            Using a VPN connection it’s possible to join local and remote resources into a single logical network. The process for setting this up is pretty straightforward. A root certificate needs to be supplied for VPN connections. This can be generated on the local machine using the <i>makecert.exe</i> program.</br></br>
+
+            Although a client certificate isn’t really required at this stage, it might be a good idea to create one using <i>makecert.exe</i> against the root certificate. Copy the root certificate to another location before doing this, as it’ll be overwritten. Both files should have the <i>.cer</i> extension. We’ll come back to these shortly.</br></br>
+
+            Two more things are required for a VPN connection: a subnet from which IP addresses are allocated to clients, and a VPN gateway. Both are configured in the Azure portal. In the network configuration, tick the checkbox for ‘<i>point-to-site connectivity</i>’ and add a VPN subnet.</br>
+            Next we create the VPN gateway in the main dashboard interface. It’s at this point the root certificate created earlier is uploaded. If successful, the interface will show the gateway’s public IP address and hyperlinks for the <i>Client VPN Package</i>. The <i>Client VPN Package</i>, once installed, adds the network settings that enable us to establish a VPN connection from the Control Panel.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>Service Broker</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Service Broker</h1>
+        </div>
+        
+        <div id="article">
+            SQL Server provides a relatively easy way to decouple the messaging from the data being communicated between applications, and provides a service bus for inter-service messaging. Service Broker takes the form of a separate collection of tables in an SQL database, each table being a messaging queue, and the operations are performed using a special variant of the SQL query language.
+        </div>
+
+        <div id="article">
+            <h2>Advantages of Asynchronous Messaging</h2>
+            With synchronous communication, one application will send a message to the address of the receiving application, which might have a listener process on a TCP/UDP port. An acknowledgement message might be returned to the sending/requesting application, enabling it to switch to another messaging task.</br>
+
+            While this pont-to-point method of communication might be more efficient on a network with relatively few services, it’s not scalable. Dependencies might exist between the applications, and there must be a way of tracking or resolving application addresses.</br>
+            Asynchronous messaging is a possible solution to these limitations. With asynchronous messaging, applications can ‘fire and forget’ messages, regardless of whether the recipient is online, by pushing messages to a queue. In Microsoft’s Service Broker model, the receiving application (the target or subscriber) might poll the Service Broker regularly for messages with a specific value on the queue. This exchange might be part of a ‘dialogue’.</br>
+            Communicating endpoints wouldn’t necessarily be the client applications themselves. They could instead be services with an API that applications might call.</br></br>
+
+            <img src="images/service-broker-with-api.png">
+        </div>
+
+        <div id="article">
+            <h2>The Service Broker Message Queue</h2>
+            If configured, the Service Broker tables can be viewed using SQL Server Management Studio. While a messaging queue can be queried like any database table, other main operations are performed using the Service Broker Data Description Language (Service Broker DDL).</br></br>
+
+            In the message queue, each message has the following fields:
+            <ul>
+                <li>status</li>
+                <li>priority</li>
+                <li>conversation_group_id</li>
+                <li>conversation_handle</li>
+                <li>service_name</li>
+                <li>service_id</li>
+                <li>service_contract_name</li>
+                <li>message_type_name</li>
+                <li>message_type_id</li>
+                <li>message_body</li>
+            </ul>
+
+            The sending application calls a stored procedure, perhaps through a Web Service or Web API. The sending stored procedure might be called something like ‘<i>dbo.spSendMessageToReceivingQueue</i>‘ and the receiving stored procedure might be called ‘<i>dbo.spGetMessageFromReceivingQueue</i>‘.</br>
+
+            As we can see, the stored procedure sets the conversation handle for the message and the service it’s being sent for. It then sends the message and ends the conversation.
+        </div>
+
+        <div id="article">
+            <h2>Message Flow</h2>
+            An exchange between two endpoints or services is part of a ‘dialogue’. This stage creates a ‘contract’ to determine the message type(s) that can be sent and received on the messaging queue. When this is done, the dialogue is given a 32-digit hexadecimal handle, so the initiating service/application is referencing the correct thread.</br>
+            As already mentioned, messages aren’t pushed to the queue using the <i>SQL INSERT</i> statement. Instead, the initiator (or a stored procedure) uses the ‘<i>SEND</i>‘ command. Accompanying the <i>SEND</i> command are the dialogue handle, message type ID and message body.
+        </div>
+
+        <div id="article">
+            <h2>Message Queue and Entity Framework</h2>
+            Since I had problems adding a Service Broker queue directly into an Entity Framework model, I had to create a view within SQL Server Management Studio first. This view isn’t created within the Service Broker directory, but within the database Views directory.</br> 
+            Creating a View seems to duplicate the message queue as a conventional table that could be accessed by Entity Framework when creating an MVC model.
+        </div>
+
+        <div id="article">
+            <h2>Microsoft Message Queue Server</h2>
+            I’ve also very recently come across the Microsoft Message Queue Server (MSMQ), which is an optional feature of Windows Server (you should also find this within Windows Features on Windows 7). MSMQ does roughly the same thing as Service Broker, but messages are buffered as files on the server, instead of being pushed to a SQL database table/queue. I haven’t done any development work with this yet.
+            To get this installed, open the Server Manager interface and find the Message Queuing services in Add Roles and Features.
+
+            Messages are stored at C:\Windows\System32\msmq. The message queue, rules and triggers are accessible using the Computer Management utility.
+
+            A MSMQ rule can be applied to one of the following message fields to launch a specific EXE or COM component:
+            <ul>
+                <li>Message label</li>
+                <li>Message body</li>
+                <li>Message priority</li>
+                <li>Application-specific message number</li>
+                <li>Message source computer ID</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>Service Broker and MVC</h2>
+            Initially my application displayed a message body as a large block of digits when it should have been an XML message. When looking at the Service Broker view, each message body was prefixed with ‘0x’, so the message was being read in hexadecimal form and translated into its denary representation. To rectify this, first alter the database view, so that the var-binary is cast as a string. Next, update the MVC model, so that it accepts the column data as a string.</br>
+            The data should still be passed from the model, through the controller and displayed as its original XML when running the application.
+        </div>
+
+        <div id="footer">Michael, March 2017</div>
+    </body>
+</html>

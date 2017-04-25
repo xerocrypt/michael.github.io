@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>WCF</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Windows Communication Foundation</h1>
+        </div>
+
+        <div id="article">
+            Microsoft provides a load of documentation on this, so it’s definitely well documented and maintained, which makes it ideal for a Service Oriented Architecture (SOA) solution with numerous applications. A service provided by a WCF application should be accessible to other applications, regardless of the programming languages they were created with or the platforms they might be running on, which is the whole point of adding APIs to services. WCF is basically another interoperability solution that which can communicate using SOAP and REST, and also make use of commonly used WS components.</br></br>
+
+            When creating a new WCF project, there are four project type templates. For the purpose of this demo I selected ‘<i>WCF Service Application</i>‘.</br></br>
+
+            The project template uses the following libraries:
+            <ul>
+                <li>System.Runtime.Serialization</li>
+                <li>System.ServiceModel</li>
+                <li>System.ServiceModel.Web</li>
+            </ul></br></br>
+
+            The project template gives us three source files we’re interested in:
+            <ul>
+                <li><b>Web.config:</b> Configuration for the Web server and service bindings (such as HTTPS).</li>
+                <li><b>Service1.svc:</b> Contains the procedures/methods that implement whatever functionality for the services, and the data returned.</li>
+                <li><b>IService1.cs:</b> Defines the interface for the called procedures, and the data types they handle.</li>
+            </ul>
+
+            This is where the concept of interfaces and implementations becomes important. Typically this is used in ASP.NET MVC as a way to ‘decouple’ methods from the core application, which makes it easier to modify an application’s functionality as a modular system. Where methods are called directly in a conventional program, here a requesting object calls an interface that contains references to whichever methods implement the requested functionality. This is sometimes referred to as a ‘loosely coupled’ system.
+            In the WCF project we have a source file (<i>Service1.svc.cs</i>) that contains the methods that implement services by processing and returning variables. In another source file (<i>IService1.cs</i>) we have an interface that contains references to the methods.</br></br>
+
+            The project template can be executed as is in Visual Studio, without any modification. Click on <i>Service1.svc</i> and hit F5. This will launch the WCF Test Client.
+            In the window to the left, there is an entry for the <i>IService</i> interface, and the references to the <i>GetData()</i> and <i>GetDataUsingDataContract()</i> methods. Return values are displayed in the main window after the methods are invoked.
+        </div>
+
+        <div id="article">
+            <h2>Adding a New Service/Procedure</h2>
+            This is a simple matter of creating a new method, then adding an interface reference to it. In <i>Service1.svc.cs</i>, add a method and then add an interface reference to it. When executed, the ‘<i>Invoke</i>’ is simply a trigger for the method to execute and return the defined string.
+        </div>
+
+        <div id="article">
+            <h2>Interactive Procedures</h2>
+            A WCF application can also process incoming data and return the output. The procedure/method below is no different from a conventional function that takes two variables, performs an arithmetic operation and returns an integer. The same principle will apply to whatever functions you want to make available through WCF.</br>
+            The interface reference is simply a single line declaring the method/procedure name, the input data types and the return data type.</br></br>
+
+            On executing the application, the XML for the Request and Response looks remarkably like what we get with an XML-RPC transaction. The request payload has a tag for the function name, and a tag for each value being sent to it. Based on this concept, we should be able to provide almost anything as a WCF service. It also means we are able to call any WCF method and send arbitrary values to it.
+        </div>
+
+        <div id="article">
+            <h2>WCF Configuration and Service Options</h2>
+            Right-click the <i>Web.config</i> entry in the Solution Explorer, and select ‘<i>Edit WCF Configuration</i>‘. This will open the Microsoft Service Configuration Editor.</br></br>
+
+            The important options here:
+            <ul>
+                <li>Services: Create New Service appears to enable the developer to import a class/service from another object on the local system that has .NET classes. The ‘GAC’ option lists numerous other resources that could provide WCF services.</li>
+                <li>Client: A client configuration can be created for accessing a service. This configuration defines the message transport method (TCP, HTTP, pipes, P2P, etc.), the contract used and the endpoint address.</li>
+                <li>Bindings: The Bindings option specifies the transport protocol for requests and responses.</li>
+                <li>Standard Endpoints: The types of service to be provided, such as service announcement, service discovery, message exchange and workflow control.</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>A Custom WCF Client</h2>
+            Obviously WCF services are pretty useless without clients to access them. The simplest implementation of WCF is the <i>WCF Service Library</li> project, with which we can create the service as a DLL.</br>
+            In both <i>IService1.cs</i> and <i>Service1.cs</i>, I changed the data type for <i>GetData()</i> from int to string. e.g.
+            <code>string GetData(string value);</code>
+
+            This is enough to have a service that returns a string when responding to a request. Next, I added a Windows Form project to the solution – this will be used as the UI instead of the WCF Test Client. In the Windows Form, there are text boxes for the input and output, and a Send button.</br>
+            In order for the client application to make use of the WCF Service, a service reference must be added to the project. Right-click the References part of the client application project, and select ‘<i>Add Service Reference…</i>‘. Click the ‘<i>Discover</i>‘ button to find the available services.</br></br>
+
+            Notice that entries to the WCF service appear under the <i>DataSources and Service References</i> in the Solution Explorer. The <i>DataSources</i> entry contains what looks like a connection string. The <i>Service References</i> entry will open itself in the Object Explorer, and we can view the available functions provided by the WCF Service. With the client application set as the startup project, hit <i>F5</i> to run.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

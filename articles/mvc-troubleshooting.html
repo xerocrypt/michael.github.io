@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>MVC 5 Troubleshooting</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>MVC 5 Troubleshooting</h1>
+        </div>
+
+        <div id="article">
+            <h2>Message Queue Doesn’t Appear in Entity Framework Model</h2>
+            Unlike a conventional database table, a message queue in the Service Broker part of the database cannot be imported into the Entity Framework model, and Entity Framework can’t read the queue through a stored procedure either (at least not without going through a Web Service). As a workaround, in the SQL Server Management Studio, create a view for whichever message queue in the Service Broker. Next, import that view into the Entity Framework model for the application.
+        </div>
+
+        <div id="article">
+            <h2>Error 404: Cannot Find Resource</h2>
+            In my case the problem was related to routing and the startup order of the application components. To resolve this, open the project’s properties and enter the <i>Web</i> section. Clear the <i>Specific Page</i> text box, and check the ‘<i>Current Page</i>‘ radio button.
+
+            After doing this, the application should be able to execute in debug mode, either by right-clicking whichever <i>.cshtml</i> file and selecting ‘<i>Set As Start Page</i>‘ or ‘<i>View in Browser</i>'.</br></br>
+
+            If the same problem persists, run the IIS Manager and ensure the application has an entry under <i>Default Sites</i> while it’s executing. In the <i>Browse for Directory</i>, find and select the location where the Visual Studio project is stored.</br></br>
+
+            Back in the Visual Studio project’s properties, within the <i>Servers</i> section, click the <i>Create Virtual Directory</i> button, to load the virtual directory into IIS.
+        </div>
+
+        <div id="article">
+            <h2>CS1061: Does Not Contain Definition and no Extension Method</h2>
+            As far as I can determine, the problem is a mismatch somewhere between the Model, Controller and View layers when referencing the object, and I think this happened because Visual Studio didn’t build the Controller-View ‘scaffold’ properly.</br>
+            Scrap the Controller and Views for the database table/queue, and leave the Model in place. Next, create a new Controller, this time by selecting ‘<i>Add</i>‘ – ‘<i>Controller…</i>‘ instead of ‘<i>New Scaffolded Item…</i>‘, and as before, select the ‘<i>MVC 5 Controller with with views, using Entity Framework</i>‘.</br></br>
+
+            This time, double-check the ‘<i>Reference script libraries</i>‘ option is not selected, and leave the ‘<i>Use a layout page</i>‘ field is blank.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

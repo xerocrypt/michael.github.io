@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>VS Performance Testing</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Performance Testing with Visual Studio</h1>
+        </div>
+        
+        <div id="article">
+            Another form of automated test that can be done using Visual Studio is the Web Performance and Load Test. Required for this are Visual Studio Ultimate and Team Foundation Server (installation or managed service), although it is possible to run load tests using just a Visual Studio Online account.
+        </div>
+
+        <div>
+            <h2>Creating a Web Performance Test</h2>
+            To set up a load test in Visual Studio, a <i>Web Performance and Load Test</i> project must first be created. A blank project has the settings and empty script in the Solution Explorer, and the empty script. Actions can be added manually under ‘<i>WebTest1</i>‘, but the steps can also be generated from a recording. Right-click on ‘<i>WebTest1</i>‘ and select ‘<i>Add Recording…</i>‘. By default this starts Internet Explorer with the <i>Web Test Recorder</i> panel to the left. Normally the URL of the target application is entered into the address bar, and performance data is gathered as various actions are replayed for that application.</br></br>
+
+            When the recording is stopped, the buffered Web Test Recorder actions are converted into the test script and displayed in Visual Studio’s main window. Save and build the project at this point.
+        </div>
+
+        <div id="article">
+            <h2>The Load Test</h2>
+            Once the web performance test script has been created, it can be used as a scenario for a load test. With the project open, click ‘<i>PROJECT > Add Load Test…</i>‘ and apply whatever settings as needed in the Create New Load Test Wizard dialogue. It’s best to have a number of Web Performance Test scripts to reflect the real-life usage of the deployed application.</br></br>
+
+            The <i>New Load Test Wizard</i> requires at least one Web Performance Test scenario. This is where already created scripts are added. Most the configuration steps here are about shaping the number of users, browser variety, connection types and think times.</br>
+            When done, Visual Studio will create a load test tab in the main window, populated with steps and parameters that can be modified as required. Under the <i>Counter Sets</i> entry parameters can be removed for whatever metrics aren’t needed. Save and build the project again. Now click the ‘<i>Run Load Test</i>‘ icon at the top left.</br>
+            The script will be sent to the connected Team Foundation Server or the Visual Studio Online service, which will queue it and acquire the resources. A usage quota might apply with the managed service, depending on the subscription.</br></br>
+
+            The results from the completed load tests can be accessed in the Load Test Manager (‘<i>LOAD TEST > Load Test Manager</i>‘). A full report with all the included metrics can be downloaded by clicking the ‘<i>Download report</i>‘ link.
+        </div>
+
+        <div id="article">
+            <h2>The Quicker Method using TFS or Visual Studio Online</h2>
+            This is a simpler test that isn’t based on web performance test scenarios. Under the ‘<i>Load test</i>‘ tab, the target application’s URL and number of virtual users is set before the test is launched. A few of the test parameters that were present in the Visual Studio test also appear here. It takes a little longer for Visual Studio Online to acquire the resources this time.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, March 2017</div>
+    </body>
+</html>

@@ -12,7 +12,6 @@
         
         <div id="article">
             <h2>Executable File Structure (Portable Execuable)</h2>
-
             The good thing about UNIX systems is they could read <i>.exe</i> files as archives, which means their contents can be extracted and viewed as a file/directory structure. Most the Portable Executable headers are shown as individual files and directories.</br>
             There are nine possible section headers in the executable format, which marks it out as an application for Windows NT, but AccessEnum.exe uses just the following:
             <ul>
@@ -28,64 +27,119 @@
 
         <div id="article">
             <h2>objdump</h2>
-                To dump the object code and discovered strings:</br>
-                <code>objdump program.exe -s</code></br>
+            To dump the object code and discovered strings:</br>
+            <code>objdump program.exe -s</code></br>
 
-                To translate the bytecode to assembler:</br>
-                <code>objdump -d</code></br>  
+            To translate the bytecode to assembler:</br>
+            <code>objdump -d</code></br>  
 
-                Using objdump we can get the section headers used and their virtual memory addresses:
-                <code>$objdump -h AccessEnum.exe</code>
+            Using objdump we can get the section headers used and their virtual memory addresses:
+            <code>$objdump -h AccessEnum.exe</code>
 
-                Also, objdump also provides a list of DLLs, their associated handles used by the executable and their virtual memory addresses:</br>
-                <code>$objdump -p AccessEnum.exe</code>
+            Also, objdump also provides a list of DLLs, their associated handles used by the executable and their virtual memory addresses:</br>
+            <code>$objdump -p AccessEnum.exe</code>
 
-                Out of curiosity, I also ran <i>objdump</i> against <i>XeroCrypt.exe</i>, a small application I developed some years ago. As expected, the import tables were instead found in <i>.text</i> because my application simply consisted of calls to .NET components.
+            Out of curiosity, I also ran <i>objdump</i> against <i>XeroCrypt.exe</i>, a small application I developed some years ago. As expected, the import tables were instead found in <i>.text</i> because my application simply consisted of calls to .NET components.
         </div>
 
         <div id="article">
             <h2>strings</h2>
-                Attempting to open a compiled program in a text editor would show unintelligible output. The <i>strings</i> utility enables us to extract strings from a compiled binary. e.g.
-                <code>strings program.exe</code></br>
+            Attempting to open a compiled program in a text editor would show unintelligible output. The <i>strings</i> utility enables us to extract strings from a compiled binary. e.g.
+            <code>strings program.exe</code></br>
 
-                Usually this results in a lot of output. To get around this, we can limit the output to strings over x number of characters, or search the output for a specific string:</br>
+            Usually this results in a lot of output. To get around this, we can limit the output to strings over x number of characters, or search the output for a specific string:</br>
 
-                <code>strings program.exe | grep [keyword]</code></br>
-                <code>strings program.exe -n [num of characters]</code></br>
+            <code>strings program.exe | grep [keyword]</code></br>
+            <code>strings program.exe -n [num of characters]</code></br>
 
-                Another way to access the strings is to read the <i>.rdata</i> section of the executable. 
+            Another way to access the strings is to read the <i>.rdata</i> section of the executable. 
+        </div>
+
+        <div id="article">
+            <h2>Functions and Data Structures</h2>
+            Two other programs included with binutils can be used to determine the structure of a compiled program. The <i>nm</i> utility searches a binary for data structures and functions called during runtime.</br>
+            The <i>objdump</i> utility reads the file's bytecode and translates it into the assembler instructions.</br>     
+        </div>
+
+        <div id="article">
+            <h2>Dissasembling an Executable</h2>
+            Now the memory addresses and general purpose of each section is known, it’s possible to start making deductions about what the program does by examining the contents of those memory locations in a disassembler. The information should be displayed in a text field in whatever disassembler’s being used for this.</br></br>
+
+            I loaded an EXE into <a href="http://bokken.re/docu.html">Bokken</a>, and moved directly to the <i>.text</i> section where the program’s instructions themselves should be. To the left, we can see the virtual memory address (0x1000) and the size (0xf18) match the objdump output, so this was definitely the right section.</br></br>
+
+            The output is typically x86 assembler instructions, and certain sequences are  directly translatable to generic C programming structures, which is how a disassembled program’s function could be derived. See the first chapter of <i>The Shellcoder’s Handbook</i> and <i>Appendix E of Programming From the Ground Up</i> for examples of this.</br></br>
+
+            The sections of code separated by dashed lines are discrete functions. Taking just one of these functions:</br>
+            <code>
+                push esi</br>
+                mov esi, ecx</br>
+                mov ecx, [esi+0x1c]</br>
+                test ecx, ecx</br>
+                jz 0x0000103d</br>
+            </code>
+
+            Memory register <i>ESI</i> seems the main one used here, and as I understand it, <i>ESI</i> differs from other registers in that it holds 32 bits, unlike the 8-bit or 16-bit segment registers.
+            The first instruction pushes the contents of <i>ESI</i> (which could be anything) onto the stack, then the contents of <i>ESI</i> are replaced with whatever’s in <i>ECX</i>. The contents of <i>ECX</i> in turn is replaced with whatever’s stored at address <i>ESI +0x1c</I>.
+            The last two instructions check the value stored in register <i>ECX</i>, and if <i>ECX=0</i> the program jumps to address <i>0x0000103d</i>.</br></br>
+
+            So what does that mean? It seems like our function was designed simply to check a specific value within a memory register. It’s almost impossible to determine exactly why – that would be a matter of translating every function into pseudo-code before stringing it all together. Probably.        
+        </div>
+
+        <div id="article">
+            <h2>Using GDB for Reverse-Engineering</h2>
+            For this I used just two utilities that should be present on a typical Linux system: the Gnu Debugger and <i>objdump</i>. The following commands are quick methods of getting straight into disassembling the executable sections of an ELF file:
+
+            <code>(gdb) disas /m main</code>
+            Or:
+            <code>$objdump -d [file name]</code>
+
+            The first disassembles the <i>main()</i> function of whatever program was loaded into GDB. The <i>$objdump -d</i> command is useful for analysing shared objects, as its output enables us to look at what’s inside each function.</br></br>
+
+            Why disassemble an executable into something that’s much harder to understand than <i>decompiled</i> code? That’s a very interesting question. I suppose it’s because the bytecode of an executable is directly translatable to assembler instructions, with less chance of error. A decompiler would have to go a step further and accurately group assembler instructions to recreate higher-level code, which is a task better performed with human expertise.
+        </div>
+
+        <div id="article">
+            <h2>Reverse-Engineering a Simple Program</h2>
+            When looking at the output of a disassembled execuable, the first three instructions are what some refer to as a ‘prologue’, which sets up the stack. This initialises the stack pointer by pushing the base pointer address (<i>EBP</i>) onto the stack, then setting that as the current stack pointer address (<i>ESP</i>), so the stack pointer should increment from that address as data is pushed onto the stack. The third instruction forces the stack pointer address to become a multiple of 16 by ANDing the bits with 0xFFFFFFF0. Next, subtract 16 bytes (0x10) from the stack pointer address. With this section of code it becomes possible to identify the beginning of a function in a disassembled executable.</br></br>
+
+            Offsets that are positive or negative to the base pointer address should indicate whether data is being pushed onto the stack or the heap.</br>
+            For example, a program would fetch the contents of an address within the <i>.rodata</i> section of the executable), push it onto the stack and update the stack pointer. The code would look something like:
+            <code>movl $0x80484D0, (%esp)</code>
+
+            If a program prints a string, the data is fetched from the <i>.rodata</i> section address immediately before <i>printf()</i> is called.
             </div>
 
-            <div id="article">
-                <h2>Functions and Data Structures</h2>
-                Two other programs included with binutils can be used to determine the structure of a compiled program. The <i>nm</i> utility searches a binary for data structures and functions called during runtime.</br>
-                The <i>objdump</i> utility reads the file's bytecode and translates it into the assembler instructions.</br>     
-            </div>
+        <div id="article">
+            <h2>Calling Functions</h2>
+            In the past I’ve discussed function calls as direct references to something in a linked object such as a DLL or <i>.so</i>. file. Obviously it doesn’t happen exactly like that here, as there are references to entries in a ‘Program Linkage Table’. This exists in the .plt section of the executable. I’m assuming the value at this address is the location of the actual <i>printf()</i> function in the linked object.
+            I’m also assuming, therefore, that the <i>printf()</i>, when called, automatically fetches and handles whatever’s at the top of the stack.
+        </div>
 
-            <div id="article">
-                <h2>Dissasembling an Executable</h2>
-                    Now the memory addresses and general purpose of each section is known, it’s possible to start making deductions about what the program does by examining the contents of those memory locations in a disassembler. The information should be displayed in a text field in whatever disassembler’s being used for this.</br></br>
+        <div id="article">
+            <h2>Mapping the Program</h2>
+            When all sections of the executable are disassembled using <i>objdump</i>, other stuff that was statically linked when the program was compiled are listed, and this is where the workings of our simple ‘Hello World’ program become far more complex.</br>
+            Even if we don’t fully understand the assembler code, this is enough to identify the start of each function (the prologue), the functions they’re calling and the parameters being passed between them. We’re also able to identify addresses and offsets among the many hexadecimal values in the code. This should enable us to develop a map of the program and get a fairly detailed view of what it does.</br></br>
 
-                    I loaded an EXE into <a href="http://bokken.re/docu.html">Bokken</a>, and moved directly to the <i>.text</i> section where the program’s instructions themselves should be. To the left, we can see the virtual memory address (0x1000) and the size (0xf18) match the objdump output, so this was definitely the right section.</br></br>
+            By looking at the map, we can see that certain address ranges are important. Why? Looking at the output of <i>objdump</i>, these addresses are pointers to other sections of the executable, such as <i>.rodata</i>, the Global Offset Table and <i>.bss</i>.
+            The other functions being called exist in the <i>libc</i> module (<i>/lib/i386-linux-gnu/libc-2.19.so</i>), and this can also be disassembled to see the functions themselves. This isn’t much for an isolated executable that uses native libraries, but it’s very useful when examining an executable that could be malware.
+        </div>
 
-                    The output is typically x86 assembler instructions, and certain sequences are  directly translatable to generic C programming structures, which is how a disassembled program’s function could be derived. See the first chapter of <i>The Shellcoder’s Handbook</i> and <i>Appendix E of Programming From the Ground Up</i> for examples of this.</br></br>
+        <div id="article">
+            <h2>Working with Variables</h2>
+            After compiling and disassembling a 'Hello World' program, we should see function calls for <i>printf()</i> and <i>scanf()</i>, and some jump instructions for the branching statements. We also expect to find variables being compared to a static variable.</br></br>
 
-                    The sections of code separated by dashed lines are discrete functions. Taking just one of these functions:</br>
-                    <code>
-                        push esi</br>
-                        mov esi, ecx</br>
-                        mov ecx, [esi+0x1c]</br>
-                        test ecx, ecx</br>
-                        jz 0x0000103d</br>
-                    </code>
+            There are a couple of noteworthy things about the way such a program works. First of all, fixed data isn’t pushed onto the stack directly. They are again stored and read from another part of the executable. Secondly, the user-defined variable is compared with a value built into the code.</br></br>
 
-                    Memory register <i>ESI</i> seems the main one used here, and as I understand it, <i>ESI</i> differs from other registers in that it holds 32 bits, unlike the 8-bit or 16-bit segment registers.
-                    The first instruction pushes the contents of <i>ESI</i> (which could be anything) onto the stack, then the contents of <i>ESI</i> are replaced with whatever’s in <i>ECX</i>. The contents of <i>ECX</i> in turn is replaced with whatever’s stored at address <i>ESI +0x1c</I>.
-                    The last two instructions check the value stored in register <i>ECX</i>, and if <i>ECX=0</i> the program jumps to address <i>0x0000103d</i>.</br></br>
+            Flow control can be identified by the jump instructions and the <i>CMP</i> (compare) instructions preceeding them, commonly compared to something in register <i>EAX</i>.</br>
+            User input that does not match either of the above conditions will cause the program to execute until the JMP instruction, which jumps to whichever address. Here 0x0 is moved into EAX (clearing the register?) and the function is exited.
+        </div>
 
-                    So what does that mean? It seems like our function was designed simply to check a specific value within a memory register. It’s almost impossible to determine exactly why – that would be a matter of translating every function into pseudo-code before stringing it all together. Probably.        
-            </div>
+        <div id="article">
+            <h2>Writing to File</h2>
+            This uses the <i>fopen()</i>, <i>fwrite()</i> and <i>fclose()</i> functions to stream I/O to a file. The function calls for <i>fclose()</i>, <i>fwrite()</i> and <i>fopen()</i> are in the Private Linkage Table. These entries in the PLT again refer to the functions within the <i>libc</i> module.</br>
 
+            What about the strings that are passed to <i>fopen()</i> and <i>fprint()</i>? These also live in the ‘<i>.rodata</i>’ section of the executable. As before, the strings to be written, inluding the file path are fetched from <i>.rodata</i> before the functions are called.
+        </div>
 
             <div id="article">
                 <h2>Decompiling</h2>

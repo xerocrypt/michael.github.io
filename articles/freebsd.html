@@ -1,0 +1,205 @@
+<html>
+    <head>
+        <title>FreeBSD</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+        	<h1>Setting up FreeBSD</h1>
+		</div>
+
+        <div id="article">
+            From what I’ve seen so far, FreeBSD is almost identical to Linux. The difference is we don’t get everything out of the box, as we would with Ubuntu or Linux Mint. Instead we get a lightweight and efficient operating system to build on.</br>
+            This post goes through the process of getting FreeBSD running with a full desktop environment, though perhaps not in the most direct way, as I’ve done a bit of guesswork and improvisation to get there. It should take a couple of hours at most, starting with a basic installation disc or ISO.</br>
+
+            Essentially what’s happening here are the following steps:
+            <ul>
+                <li>Install a base system from the disc image.</li>
+                <li>Fetch and install X Windows and desktop environment components.</li>
+                <li>Configure the operating system to load X Windows and the desktop environment at startup.</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>Installing the Base System</h2>
+            For this I used the i386 ‘disc 1’ ISO file in VirtualBox, but the following should apply when running FreeBSD from a disc on generic hardware. The first thing we get is the boot screen. From the menu select the ‘<i>Boot Multi-user</i>’ option, then at the next menu launch the FreeBSD Installer. Since the installer copies just the base system with a command line interface at this point, it’s fairly quick and straightforward. When prompted, we definitely need to create a second user account.</br></br>
+
+            Reboot the system and login as root. The next stage will require the ‘<i>pkg</i>’ tool to fetch and install other components, so enter the ‘<i>pkg</i>’ command.
+            <code>#pkg</code>
+
+            Since getting a graphical interface working involves modifying configuration files, I installed the nano text editor. This was before I discovered FreeBSD already includes the ‘ee’ editor, which seems just as usable.
+            <code>#pkg install nano</code>
+
+            Now we need to enable certain components, such as <i>dbus</i>, <i>hald</i> and <i>kdm4</i> (we’ll come to this). The Hardware Abstraction Layer daemon (<i>hald</i>) is used for handling display-related hardware, and dbus is used for inter-process communication.</br>
+            Edit <i>/etc/rc.conf</i> to add the following lines:
+
+            <code>
+                dbus_enable="YES"</br>
+                hald_enable="YES"</br>
+                kdm4_enable="YES"
+            </code>
+
+            The thing is hald relies indirectly on procfs, the <i>/etc/fstab</i> file should contain the entry for <i>proc</i>:
+            <code>#nano /etc/fstab</code>
+        </div>
+
+        <div id="article">
+            <h2>Installing X Server and Desktop Environment</h2>
+            There are some pages on this in the official FreeBSD documentation, but I’ve skipped certain things. The X Window System is the underlying component for rendering windows, desktops and graphical menus, and where most graphics-related issues are fixed later.</br></br>
+
+            First we require X server.
+            <code>#pkg install xorg</code>
+
+            As the status messages indicate, this also fetches and installs the TWM environment. Also required are the X Display Manager (xdm) and Session Manager (xsm).
+            <code>
+                #pkg install x11/xdm
+                #pkg install x11/xsm
+            </code>
+
+            Run ‘<i>X -configure</i>’ and copy the generated file with the following command:
+            <code>cp /root/xorg.conf.new /etc/X11/xorg.conf</code>
+
+            In the new file (<i>/etc/X11/xorg.conf</i>) add the following section:
+        </div>
+
+        <div id="article">
+            <h2>Sorting KDE and KDM</h2>
+            Now we’re ready to install a full desktop environment on this. As with Linux, we have a range of possible environments to choose from. I chose KDE, which gives users something very similar to the Windows 7 desktop.
+            <code>#pkg install x11/kde4</code>
+
+            Roughly 950MB of KDE and KDE-related packages are fetched (many of them we don’t really need), and installation takes up around 3GB. When this is done, we modify /etc/ttys so TTY8 uses KDM instead of XDM:
+            <code>ttyv8 "/opt/kde/bin/kdm" xterm on secure</code>
+
+            I also entered the following to see whether KDM runs as a service at this point.
+            <code>#service kdm4 start</code>
+
+            In the user’s home directory we require a file that starts KDE as the default GUI. Enter the following command:
+            <code>#nano ~/.xinitrc</code>
+
+            And add the following line to the <i>.xinitrc</i> file:
+            <code>exec /usr/local/kde4/bin/startkde</code>
+
+            Then the system can be rebooted.
+        </div>
+
+        <div id="article">
+            <h2>Fixing the Display Problem</h2>
+            After installing FreeBSD with a desktop environment, the first thing I wanted to fix was the virtual screen size, which was much smaller than the physical screen. I eventually managed it, after several hours’ experimenting and trying <a href="http://superuser.com/questions/597280/how-to-adjust-screen-size-for-virtualbox-vms">various fixes posted on the Web</a>.</br>
+            Before getting to that, a fresh installation doesn’t have the ‘<i>sudo</i>’ program to enable the execution of specific tasks with root privilieges. Switch to another terminal, e.g. <i>Ctrl+Alt+F4</i>, log in as root, then install ‘<i>sudo</i>‘.</br></br>
+            Then:
+            <code>#pkg install sudo</code>
+
+            Now we need to add the user to the sudoers file, using the visudo command. Unfortunately we must use <i>vi</i>. All we need to know here is the ‘<i>I</i>’ key is used for inserting text, and when done the ‘<i>Esc</i>’ key, followed by the ‘<i>:wq</i>’ command.</br>
+            Add something like the following into the file:</br>
+            <code>michael All=(ALL) ALL</code>
+
+            As often happens when installing Linux/UNIX on VirtualBox, and sometimes when installing on physical hardware, the desktop is much smaller than the physical screen.</br>
+            In this case, I’m guessing the underlying problem was the operating system attempted to detect the video hardware and load the appropriate driver for it. Failing that (because it’s VirtualBox), the operating system falls back to a generic driver module. We need to replace this module with something from the VirtualBox Additions package. The following solution was taken from <a href="https://wiki.freebsd.org/VirtualBox">the FreeBSD wiki</a> (the last place I looked!).
+        </div>
+
+        <div id="article">
+            <h2>VirtualBox Additions</h2>
+            To install the VirtualBox Additions:
+            <code>#sudo pkg install virtualbox-ose-additions-4.3.32</code>
+
+            Then enable the VirtualBox guest services by adding the following lines to <i>/etc/rc.conf</i>:
+            <code>
+                vboxguest_enable=”YES”</br>
+                vboxservice_enable=”YES”
+            </code>
+
+            Skip the other steps in the wiki page and go straight to the bit about <i>xorg.conf</i>. The following lines in the <i>Device</i> section are the important ones:
+            <code>
+                Identifier "Card0"</br>
+                Driver "vboxvideo"</br>
+                VendorName "InnoTek Systemberatung GmbH"</br>
+                BoardName "VirtualBox Graphics Adapter"</br>
+                BusID "PCI:0:2:0"
+            </code>
+
+            Hopefully the boot messsages would show the VirtualBox additions being loaded successfully whenever the system is rebooted, and a full size desktop should appear.
+        </div>
+
+        <div id="article">
+            <h2>Installations without a Desktop Environment</h2>
+            Before resolving the KDE problem, I managed to fix the display size for the command line by playing with the video mode. As far as I can tell, this only works when the generic display driver module’s loaded.  The following command displays a list of video modes:
+            <code>#vidcontrol -i mode</code>
+
+            Whichever one of those listed is used is a matter of trial and error, of trying the ones that appear right, with something like:
+            <code>#vidcontrol MODE_279</code>
+
+            When you’ve hit the correct one, the mode can be made persistent by adding the following line to <i>/etc/rc.conf</i>:
+            <code>allscreens_flags="MODE_279"</code>
+        </div>
+
+        <div id="article">
+            <h2>System Security Configuration</h2>
+            Patching, a properrly configured firewall and updated anti-malware protection will prevent 99% of security threats. Fortunately all three can be readily added to a FreeBSD installation, and there are some other native features in this operating system that can provide pretty solid security.</br>
+            The most important things, in my opinion, are exploit prevention and mitigation – that is, making it hard as possible for something to exploit software vulnerabilities, and restricting what an exploit could do if executed.</br></br>
+
+            Already present in a FreeBSD installation is the ‘<i>bsdconfig</i>’ utility, which enables low-level configuration changes. The Security and Startup options are the ones we might want to configure, after everything’s set up.</br></br>
+
+            The <i>Securelevel</i> options are used for limiting the actions that could be performed with root privileges, assuming no malicious program is capable of undoing these configuration changes. In Highly secure mode, the loading/unloading of kernel modules, the mounting of additional filesystems and certain configuration changes are disabled. This could provide an additional safeguard against the installation of kenel-mode rootkits. There is a help page describing what each <i>Securelevel</i> option does.
+        </div>
+
+        <div id="article">
+            <h2>Patching</h2>
+            If an anti-malware system has reacted to a malware infection attempt, it typically means a vulnerability has already been exploited and shellcode was executed. Patching known vulnerabilities and removing software we don’t need really is the first line of defence, if the operating system doesn’t have native exploit prevention measures such as <a href="https://www.bsdcan.org/2014/schedule/events/452.en.html">ASLR</a>. The following commands are used to fetch available updates to the base system, and install whatever has been fetched:
+            <code>
+                #freebsd-update fetch</br>
+                #freebsd-update install
+            </code>
+
+            This sorts the updates for the core operating system, but there are also a load of other packages that were added later. The following looks for vulnerability notices associated with installed applications:
+            <code>#pkg audit -F</code>
+
+            Vulnerability disclosures are posted quite regularly, so it makes sense to make periodic checks. To check for packages that could be upgraded to a more recent version:
+            <code>#pkg version</code>
+
+            Another tool we could use for checking for outdated pakages is <i>portmaster</i>.
+            <code>#portmaster -a</code>
+        </div>
+
+        <div id="article">
+            <h2>Exploit Mitigation</h2>
+            PolicyKit/PolKit is something I’d need to look into further, but it seems the rough equivalent of SELinux here. Essentially it checks a request to a privileged process from an unpriviliged process, according to specific policies. The idea is that an exploited or compromised program remains limited by whatever policies are set. A configured PolKit is included as part of the base system, and a GUI for it’s included with KDE by default.</br></br>
+
+            There is a ‘jail’ utility native to the system, which is based on the chroot concept. Essentially this changes the root directory location for a given process, so that it cannot refer to anything beyond it. The FreeBSD jail adds further mechanisms to restrict access to hardware resources from a process in the chroot, so it almost provides a fake environment with predefined resources. For this to work, the FreeBSD jail requires its own jail name, host name and IP address attributes. A jail could be made to resemble a complete FreeBSD system, or a ‘service’ jail dedicated to one or two processes.</br>
+            We might use this for compiling a new Linux/UNIX system within a pre-existing host installation, and the FreeBSD handbook makes reference to extracting the contents of an ISO file into the </i>/mnt</i> directory.
+        </div>
+
+        <div id="article">
+            <h2>Anti-Malware</h2>
+            With UNIX-based systems, the anti-malware solutions have the advantage of performing more thorough checks for anything suspicious in the operating system components. With FreeBSD’s package repositories, we have a choice of <i>rkhunter</i>, <i>chkrootkit</i> and <i>clamAV</i>. Each has a different method of looking for activity associated with malicious programs, but generally they check for signs of privilege escalation, replaced binaries and processes being hidden from user space.</br></br>
+
+            It might take a little knowledge and experience to understand the command line output from these programs. Of course, the full output of these programs can be dumped to a text file using a command like:
+            <code>#rkhunter -c >> scanlog.txt</code>
+
+            Since all three employ slightly different methods for uncovering rootkits, best results are gained by running all three separately periodically.
+        </div>
+
+        <div id="article">
+            <h2>Firewall and Packet Filtering</h2>
+            Packet filtering in FreeBSD (and Linux) happens at the kernel level, with the packets passing through the network interface and then the packet filtering module. I think this is more for FreeBSD boxes on the network perimeter, or even to use a FreeBSD box as a firewall, but it’s not a bad idea to have a host-based setup as threats are stopped at the kernel level.</br></br>
+
+            FreeBSD includes <a href="https://www.freebsd.org/doc/handbook/firewalls.html">three firewalls</a>: PF, IPFW and IPF. IPFW seems the default choice here, as there’s already a ruleset file in <i>/etc/rc.firewall</i>, and it might be easier for most users to simply modify this as needed. There seems to be a disadvantage that IPFW only works with IP addresses, port numbers and transport layers, whereas PF looks at the session layer as well and includes a few other proxying and NAT features.</br></br>
+
+            The firewall profiles are listed in rc.firewall. The alternative for a desktop system is ‘<i>client</i>’. For an offline machine it might be ‘<i>closed</i>’. Or we could set this variable to ‘filename’ if we wanted to load all the rules from elsewhere. To list the currently applied firewall rules:
+            <code>#ipfw list</code>
+
+            Then, if any changes were made and the ruleset needs reloading:
+            <code>#service ipfw restart</code>
+        </div>
+
+        <div id="article">
+            <h2>inetd</h2>
+            Slightly related to the packet filtering and firewall features, FreeBSD’s <a href="https://xerocrypt.wordpress.com/2013/06/17/ips-features-of-xinetd/">repositories include</a> <i>xinetd</i>, which can replace the pre-installed <i>inetd</i>. These programs listen for incoming network traffic, and starts a predefined server process to handle requests for whichever port, while applying any relevant policies. This ensures the right programs respond to incoming requests, and to prevent servers being misused. For example, we might want Apache to handle incoming traffic on ports 80 and 443 only, and to limit the number of session attempts for each IP address.</br></br>
+
+            The rules are defined in <i>/etc/inetd.conf</i>, and the port-service mappings in <i>/etc/services</i>.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

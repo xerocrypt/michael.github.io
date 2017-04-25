@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>JavcaScript, Entity Framework and Stored Procedures</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Getting JavaScript to Work with Entity Framework and Stored Procedures</h1>
+        </div>
+        
+        <div id="article">
+            After adding one of the AmCharts examples in the CSHTML source, I had the graphics rendering code and a static array providing the chart data, and everything was displayed as it should. This application needed to be adapted so it displayed the metrics relating to the messages being processed by systems using Service Broker.</br>
+            Again I used a stored procedure. This returns a table of dates against the number of messages processed on those dates, and takes as inputs <i>startDate</i> and <i>endDate</i>, both of which could be null. We’ll call this stored procedure ‘<i>prMessagesProcessedByDay</i>‘.</br></br>
+
+            What I needed to achieve here was: a) Use Entity Framework to model the stored procedure and its response body, b) Add a controller to pass data between the Entity Framework model and the view layer, and c) Add some JavaScript to call the controller and render the data set as a chart.
+        </div>
+
+        <div id="article">
+            <h2>Entity Framework Model</h2>
+            Right-click the Models folder in the Solution Explorer, and add new item. Here we want to add ADO.NET Entity Data Model, which will be a Database First (EF Designer from database). When generating the model Entity Framework should have assigned the returned data as a ‘Complex Type’, which didn’t happen for some reason. In the Model Browser, I right-clicked on the ‘<i>Complex Types</i>‘ object for the model, and ‘<i>Add New Complex Type…</i>‘</br></br>.
+
+            Again both input variables are nullable, as the entire table should be returned if no date range is specified, and I should have the option of adding a feature for doing this later. And the returned variables were also nullable in case there was an empty table.</br>
+            The next problem is that Entity Framework runs on the application server, whereas the JavaScript executes in the client’s browser, so the application would need to fetch the data through a controller that calls the stored procedure whenever the page loads.
+        </div>
+
+        <div id="article">
+            <h2>Web API Controller</h2>
+            The way I’m doing this is through a Web API controller. Apparently it handles JSON and serialisation, which is required for the JavScript to populate an array.</br>
+            When doing this, you might encounter error messages about variable types. The first thing to check is whether the Stored Procedure is assigning a primary key to the returned table – especially if the Web API template includes select, edit and delete actions. Here I needed to modify the stored procedure by prefixing one of the instructions with ‘<i>SELECT NEWID()as Id</i>‘.</br></br>
+
+            Second problem that might be encountered is an HTTP 404 error when attempting to call the Web API when the application’s running. Removing all the NuGet packages and re-installing them fixed the problem.</br></br>
+
+            Thirdly, the controller needed to perform some typecasting, as it didn’t work well with ‘complex types’. It needed the object <i>GetprMessagesProcessedByDay_Result()</i> to be declared as a list.
+        </div>
+
+        <div id="article">
+            <h2>View Layer and Testing the Controller with JavaScript</h2>
+            Now there’s hopefully an Entity Framework model that’s accesible to the Web API controller, the next requirement is some JavaScript to send requests to it. This JavaScript section was repurposed from another tutorial, just to ascertain there was was a JSON response.
+        </div>
+
+        <div id="article">
+            <h2>Loading the Data into AmCharts</h2>
+            The <i>chartData</i> array included with the AmCharts example is in the same format as the JSON response, so switching the two should be straightforward. To adapt the AmCharts code, I imported <i>dataloader.min.js</i> and inserted the following JSON request code in place of the <i>dataProvider</i> section. And set the <i>categoryField</i> and <i>valueField</i> variables to the JSON response field names.
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

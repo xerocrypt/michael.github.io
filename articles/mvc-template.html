@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <title>ASP.NET MVC Basics</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Starting with an MVC Application Template</h1>
+        </div>
+
+        <div id="article">
+            From what I understand of the literature around MVC, which is tricky to digest, the application server handles the requests and parameters, executes whatever was coded in C#, then renders the site content just as a conventional Web server would. We therefore find two categories of code in an MVC project: a variant of HTML, and C#. The C# handlers are stored under ‘Controllers’, and the HTML markup under ‘Views’. There is also a ‘Models’ folder, but it’s not used in the following project.
+        </div>
+
+        <div id="article">
+            <h2>Opening an MVC Template</h2>
+            When creating a new ASP.NET Web Application project in Visual Studio, we get the option to create it from an MVC template. When all the prerequisites are loaded, a basic application should be displayed.</br>
+            The template Web application has three default pages, a navigation menu and a layout. It can be launched by pressing the F5 key.
+        </div>
+        
+        <div id="article">
+            <h2>Appearance</h2>
+            One of the first things I wanted to do was change the appearance and colours of the site. The CSS file for an MVC 5 Web application is bootstrap.css, in the Content directory. Normally editing CSS is a matter of changing a few items in a short file, but unfortunately the template file has almost 7,000 lines.
+            What I did was launch the developer feature in Firefox (with the <i>F12</i> key), and hovered the mouse cursor over each line in the source until I found the element I wanted to change. I then searched for the relevant item in bootstrap.css with Ctrl+F. Firefox’s developer feature can also give us the line numbers of interest in the CSS file.</br></br>
+
+            As an example, the navigation bar’s background in the template is ‘<i>navbar-inverse</i>‘. In Visual Studio, I used <i>Ctrl+F</i> to search through the relevant lines in <i>bootstrap.css</i> until I found the entry that determined the background colour. I also did the same for the elements I wanted to change, and eventually ended up with something like this:
+        </div>
+
+        <div id="article">
+            <h2>Site Content</h2>
+            Adding and modifying the static content is straightforward, as this is done with standaard markup in the CSHTML files. Viewing the files, you’ll notice they contain only the text and associated tags, and not the full HTML source. This is because ASP.NET handles the presentation for us, and much of it only needs to be created once in <i>_Layout.cshtml</i> file.
+        </div>
+
+        <div id="article">
+            <h2>Adding a Page</h2>
+            A new page in this application would need two things: a ‘View’, and a ‘Controller’ in the <i>HomeControllers.cs</i> file. Here I’ll add a ‘Links’ page to the Web application, firstly by creating a handler method for the page within <i>HomeControllers.cs</i>:
+            <code>
+                public ActionResult Links()
+                {
+                    ViewBag.Message = "Links and resources go here.";
+                    return View();
+                }
+            </code>
+
+            With the controller in place, it is time to add the new page. In the <i>/Views/Home</i> directory there are <i>.cshtml</i> files for the three existing template pages. Right-click on the Views directory, then ‘<i>Add…</i> ‘<i>View…</i>‘.</br>
+            After changing the name to ‘<i>Links</i>’ and proceeding with the default options, Visual Studio generated a Links.cshtml file that references the recently added controller. Now any browser pointing to the site will send a request to the server for the URL. The server, or ASP.NET framework, will then execute the handler for Links.</br>
+            The final step to adding this page is to include it as an option in the site’s navigation menu, which is determined in the <i>_Layout.cshtml</i> file.
+        </div>
+
+        <div id="article">
+            <h2>Adding C# Code</h2>
+            Throughout the source files there are embedded references to something outside the HTML markup, for example, ‘<i>@DateTime.Now.Year</i>‘, ‘<i>@RenderBody()</i>’ and ‘<i>@Html.ActionLink</i>’. These are known as ‘Razor helpers’, Razor being Microsoft’s method of embedding calls to C# functions within HTML source.
+            Again, these functions are called, compiled and executed before the rendered HTML is returned by the server. My first example calls <i>DateTime</i> to display a clock on the <i>Contact.cshtml</i> page:
+
+            <code>
+                @DateTime.Now
+            </code>
+
+            I decided to add custom tags around it to change the format of the output in <i>bootstrap.css</i>. As expected, the date and time is displayed in the Contacts page.</br>
+            Small sections of C# code can also be placed directly within the HTML source, by adding it within the ‘<i>@{ ... }</i>‘ container. The following is an example of using Razor markup to declare a string as a variable and to display it on the Web page:
+
+            <code>
+                @{ var message = “This is a message”; }
+                @message
+            </code>
+
+            If it’s possible to declare variables and print them to a page, there should also be a way of reading variables from another source. Here I have added a text file to the <i>App_Data</i> directory with some data, then inserted the following code in one of the CSHTML files:
+            <code>
+                @{</br>
+                    var dataFile = Server.MapPath(“~/App_Data/applicationDataFile.txt”);</br>
+                    userData = File.ReadAllLines(dataFile);</br>
+                }</br></br>
+
+                @foreach (string dataLine in userData)</br>
+                {</br>
+                    @dataLine</br> 
+                }
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>Input and Output</h2>
+            Razor and C# can also make the Web application interactive. As before, I added a method in HomeController.cs for the page, and created a typical Web form with standard HTML controls.
+        </div>
+
+        <div id="article">
+            <h2>Graphs</h2>
+            Another Razor helper is available for rendering charts from a set of given values. First add the following graph rendering function in HomeController.cs.</br>
+            Then add the following line to whichever CSHTML file you want to display the graphs:
+            <code><img src=”@Url.Action(“DrawChart1”)></code>
+        </div>
+
+        <div id="article">
+            <h2>MVC 5 and Databases</h2>
+            After trying numerous suggestions posted on Stack Overflow without luck, I eventually came across a much easier way of getting an ASP.NET application to display, modify and remove SQL database records, and very little actual coding was involved.</br>
+            Because I totally screwed my local installation of SQL Server, the database in this example is instead hosted on Azure. The important thing is we have a working SQL database that an application can connect to, and a note is made of the server address, user name and password.</br></br>
+
+            For the next stage we need the Microsoft SQL Server Management Studio, to set up the database table. An initial connection attempt to an Azure-hosted SQL Server results in an error message. This is normal, and is resolved by adding a firewall entry for the local machine (Client IP address) in the Azure portal.</br></br>
+
+            In the database, a table is created (in this case using SQL Server Management Studio) with three columns: <i>userID</i>, <i>userTitle</i> and <i>userData</i>. For Visual Studio to build an Entity Framework model from this, one of the columns must be set as the primary key. Here it’s <i>userID</i>, and in the Column Properties I set the Identity Specification to ‘Yes’.
+        </div>
+
+        <div id="article">
+            <h2>Creating the Application</h2>
+            As I’ve pointed out, this could be done either with an existing MVC project, or with a Visual Studio template. Normally when connecting an application to a database, we import a driver, add a connection string then pass queries within our code. It works a little differently with MVC.</br>
+            The MVC project requires a ‘Model’, which is added by right-clicking on the Model folder and ading an ADO.NET Entity Data Model. In the Entity Data Model Wizard, I chose to use ‘<i>EF Designer from database</i>’. The details entered into the Connection Properties will determine the connection string for the project. Here it doesn’t really matter whether sensitive information is included in the connection string.</br></br>
+
+            With a bit of luck Visual Studio will fetch the information required to build an Entity Framework model for the database.  Now the project has a connection string and EF model, it needs to be rebuilt so the model can be referenced by the source files to be added.
+        </div>
+
+        <div id="article">
+            <h2>Controller and Views</h2>
+            The application requires a Controller to fetch records from the database, display them in whichever CSHTML page and perform whatever actions when the user interacts with the application.  Right-click the Controllers directory, and select the option to add a Controller. It’s possible to code this from scratch, but here I’ve added ‘<i>MVC 5 Controller with views, using Entity Framework</i>’.</br></br>
+
+            The important options in the next window are for ‘<i>Model Class</i>’ and ‘<i>Generate views</i>’. From the Model Class drop-down, select the database table/model. With the ‘<i>Generate views</i>’ option ticked, Visual Studio will set up the new MVC page to enable users to interact with the database.</br></br>
+
+            At this point there should be a sub-directory and a set of CSHTML files within ‘<i>Views</i>’ for the model. Right-click on its <i>index.cshtml</i> entry, and select ‘<i>View in Browser</i>’. The result should be a working application that can query, modify and delete records are stored in the Azure database.
+            And finally add the following line to <i>_Layout.cshtml</i> to add the table page to the navigation menu:
+            <code>@Html.ActionLink("Database","../exampleTables/index", "Home")</code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

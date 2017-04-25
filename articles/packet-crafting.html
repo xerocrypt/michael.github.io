@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Packet Crafting</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Packet Crafting</h1>
+        </div>
+        
+        <div id="article">
+            I was hoping to create <a href="http://sourceforge.net/projects/m556/files/C-Sharp/PacketCrafter.zip/download">a packet crafting application</a> for no particular reason, but had to leave it unfinished for a while. You’ll see why. If nothing else, the project should be educational to anyone learning about the networking layers, protocols and packet crafting tools.</br>
+            In networking theory TCP/IP packets are usually discussed as a logical structure, with clearly defined header and payload sections, and we visualise those blocks travelling across the Internet (or network) and through the OSI layers. The OSI model, I argue, is actually descriptive rather than prescriptive: Think of it as an assembly line for packets, starting at the application layer and ending at the hardware layer. Each layer adds something specific to the packet.
+        </div>
+
+        <div id="article">
+            <h2>Sockets</h2>
+            One of the first things we come across in network programming is ‘sockets’. Basically the socket is a data structure with a file handle that’s created to ensure data is piped to the network interface in the correct format – a network-enabled application should write an IP address, port number, TCP state and payload as variables, the variables should then be strung together into a sequence of bytes, becoming the TCP/UDP packet. The operating system might append a source IP address. The packet is then passed to the network interface. A <a href="http://sourceforge.net/projects/card-telepresence/files/Client%20and%20Server/live-client.py/download">Python script I created last year</a> shows this at work nicely.</br></br>
+
+            The first line of interest creates an Internet stream (usually TCP) socket:
+            <code>
+                s = socket(AF_INET, SOCK_STREAM)
+            </code>
+
+            The next lines dump the variables <i>serverHost</i>, <i>serverPort</i> and <i>raw_input</i> to the socket:
+            <code>
+                s.connect((serverHost, serverPort))
+                s.send(raw_input(“MESSAGE: “))
+            </code>
+
+            Anyone running a packet capture would see the bytecode for these variables leaving the network interface in that order. Also important to note is the ‘<i>s.recv(1024)</i>’ line in the script, as this creates a 1024-byte socket buffer for incoming data. An incoming payload larger than 1024 bytes might cause a buffer overflow.</br>
+            To demonstrate this further, I’ve added a feature to my little C# packet crafting application that enables users compare the bytecode being sent with the captured packet in Wireshark.
+        </div>
+
+        <div id="article">
+            <h2>The Packet</h2>
+            The simplest form of packet is the UDP datagram. Since there is no session control or handshake, there are just three variables: destination address, port number and payload. The UDP header has fewer fields and is smaller, thereby reducing the overhead of processing each packet. This is why it’s useful in case where a load of packets are going one-way, and where large numbers of them are redundant packets – video streaming, for example. A person doesn’t need to receive every UDP packets being streamed in order to get decent quality video or audio.</br></br>
+
+            TCP socket programming is slightly more complex, as the program must establish a session with the server prior to sending a payload. This is handled by the operating system at the session/transport layer.
+        </div>
+
+        <div id="article">
+            <h2>The Hardware Layer</h2>
+            So far the code worked for creating TCP/IP packets by writing to buffers. Data from the buffers are sent in sequence to the network interface, which prefixes the TCP/IP packets with an Ethernet header. It becomes an ‘Ethernet frame’. Because Ethernet works mainly at the hardware layer, we can’t manipulate this directly using C#. There is a <i>NetworkInterface</i> library, but it’s used for reading the status of a network interface.</br></br>
+
+            So what’s needed is a driver that provides an API to the hardware layer, and something like this is provided by <a href="https://pcapdotnet.codeplex.com/releases/view/611178">Pcap.Net</a>. A few alternatives are available, and I might create my own drivers later in C/C++, if there’s a demand for it.</br>
+            To use the Pcap.Net libraries, download the binaries from the project page. It will include a collection of DLL files that are referenced in Visual Studio (make sure the Copy Local property is set as ‘True’ for each. From this we require <i>PcapDotNet.Base</i>, <i>PcapDotNet.Core</i>, <i>PcapDotNet.Packets</i> and <i>PcapDotNet.Ethernet</i>.
+            It does cause ambiguity problems if the System.Net and the PcapDotNet libraries are both used, so the full namespaces must be defined at certain points in the code.</br></br>
+
+            I ran into problems at this point. As far as I can tell, my program constructs the Ethernet headers but doesn’t write them to the outgoing TCP/IP packets because the native <i>Client.Send()</i> already does this. Since I had already coded most the program before including the Pcap.Net library, it needs a rewrite to use it throughout.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>
