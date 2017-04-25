@@ -6,8 +6,10 @@
 
     <body>
 
-        <h1>Remote Procedure Calls</h1>
-
+        <div id="header">
+            <h1>Remote Procedure Calls</h1>
+        </div>
+        
         <div id="article">
             How are remote procedures/functions called without resorting to socket programming to move data around the network? The answer is to use an API that mediates things for the main program and the remote procedures/functions, so the programmer calls a remote function in almost the same way as one that exists locally. This is essentially what RPC is about. Again, there should be little difference, from the programmer’s perspective, whether the function exists locally or elsewhere.</br>
             There are several RPC modules/libraries available for Python, but I chose RPyC in particular because it’s well maintained and excellently documented, and with some good tutorials on the developers’ site.

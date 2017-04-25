@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Load Testing with Visual Studio</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        
+        <div id="header">
+            <h1>Load Testing with Visual Studio</h1>
+        </div>
+
+        <div id="article">
+            This is very different to the coded UI tests, and the process isn’t quite as straightforward.  The following are required:
+            <ul>
+                <li>Visual Studio (Ultimate)</li>
+                <li>Visual Studio Online account or Team Foundation Server</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>Setting Up</h2>
+            A load test uses a ‘Team Foundation Server’ (TFS), which is either an individual installation or obtained by registering a Visual Studio Online account at https://visualstudio.com. When that’s sorted, sign into the TFS by clicking the icon at the top-right of the Visual Studio environment. The project details will appear in Team Explorer window, where the Solution Explorer normally is.
+        </div>
+
+        <div id="article">
+            <h2>Creating a Web Performance Testing Session</h2>
+            A Web Performance Test Project must be set up before any load testing is done. In Visual Basic or Visual C#,navigate to ‘<i>Test</i>’ and select ‘<i>Web Performance and Load Test Project</i>’. The Solution Explorer will re-appear. Add a Web Performance Test to the project.</br></br>
+
+            Visual Studio should automatically begin recording the Internet Explorer session, unless an existing project is selected and the <i>Add Recording</i> button is clicked. The Microsoft Web Test Recorder browser add-on must be enabled at this point.</br></br>
+
+            When finished, click the Stop Recording button. The steps will be displayed in the main window, and can be replayed using the <i>Run Test</i> button above.  A successful run will produce output similar to the following example:
+        </div>
+
+        <div id="article">
+            <h2>The Load Test</h2>
+            With a recorded Web test session, the project should be ready for a load test. This time, add a Load Test to the project. This will start the <i>New Load Test Wizard</i> – this is where the ‘load test scenario’ is created and the Web test scripts imported.</br></br>
+
+            When the dialogue closes, a tree structure will appear in Visual Studio’s main window. With a bit of luck Visual Studio will connect to the right server, queue the test and execute it when the <i>Run Test</i> icon is clicked.
+        </div>
+
+        <div id="article">
+            <h2>Analysing the Results</h2>
+            But how to get the metrics and flashy graphs we’re after? Simple: Just double-click the load test name to get the tree structure in the main window, then click the Open and Manage Results button at the top-left.
+            In the <i>Open and Manage Load Test Results</i>, click ‘<i>Open…</i>’, and the metrics will appear in Visual Studio’s main window.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

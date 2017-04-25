@@ -9,7 +9,7 @@
 }
 
 body {
-    background-image: url('../images/column.jpg');
+    background-color: #222222;
     background-repeat: repeat-x;
     background-attachment: fixed;
     background-position: left top;
@@ -17,15 +17,37 @@ body {
 
 h1 {
     font-family: 'TitleFont';
-    color: #7a00cc;
+    color: #333333;
         font-size: 2.6em;
 }
 
 h2 {
     font-family: 'TitleFont';
-    color: #7a00cc;
+    color: #00e600;
     font-size: 2em;
 }
+
+/* unvisited link */
+a:link {
+    color: #00ff00;
+}
+
+/* visited link */
+a:visited {
+    color:  #00ff00;
+}
+
+/* mouse over link */
+a:hover {
+    color:  #00ff00;
+}
+
+/* selected link */
+a:active {
+    color:  #00ff00;
+}
+
+
 
 table {
       padding-left: 10px;
@@ -38,25 +60,6 @@ button {
     background: #7a00cc;
     color: #FFFFFF;
     border: 0px;
-}
-
-#section {
-    font-family: Arial, Verdana;
-    font-size: 1em;
-    float: left;
-    margin: 0px;
- 
-    border: 2px solid #7a00cc;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 #tablesection {
@@ -103,12 +106,13 @@ button {
 #article {
     font-family: 'MyWebFont';
     font-size: 1em;
+    color: #00ff55;
 
-	background-color: #f5e6ff;
+	background-color: #003300;
 	width: 70%;
 	line-height: 25px;
 
-    border: 2px solid #7a00cc;
+    border: 2px solid  #00ff55;
     border-left-width: 15px;
     top: 0px;
 
@@ -121,6 +125,18 @@ button {
     padding-right: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+#header {
+    font-family: Arial, Verdana;
+    font-size: 1em;
+    color:  #000000;
+    background-color:   #00ff55;
+    width: 100%;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 #rightpanel  {
@@ -170,17 +186,18 @@ button {
 }
 
 button {
-    background: #7a00cc;
-    color: #FFFFFF;
+    background:  #00ff55;
+    color: #000000;
     border: 0px;
 }
 
 code {
-  background-color: #EDEDED;
+  background-color: #222222;
+  color: #00ff55;
 	max-width: 100%;
-  font-size: 0.8em;
+  font-size: 1em;
   display: block;
-  border: 1px solid #AAAAAA;
+  border: 1px solid  #00ff55;;
   border-left-width: 10px;
 
     margin-top: 5px;
@@ -199,8 +216,8 @@ code {
 #footer {
         font-family: Arial, Verdana;
     font-size: 1em;
-    color: #ffffff;
-    background-color:  #7a00cc;
+    color:  #000000;
+    background-color:   #00ff55;
     width: 100%;
   position: relative;
   right: 0;
@@ -243,10 +260,4 @@ blockquote {
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-code {
-  font-family: "Courier New";
-  color: #620A87;
-  background-color: #EEEEEE;
 }
