@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <title>MVC and Authentication</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>MVC and OWIN Authentication</h1>
+        </div>
+        
+        <div id="article">
+            At the top of the Startup.cs file for an MVC application, we find import statements for <i>Microsoft.Owin</i> and <i>Owin</i>. These are imports are for the ‘Open Web Interface for .NET’, a technology for launching application modules, or ‘middleware’ between the application and IIS. One of the things OWIN makes use of is middleware for authentication with federated login systems and other Web services. The source code for the OWIN components used in Visual Studio can be examined on CodePlex.</br></br>
+
+            A major clue to how MVC makes use of OWIN can be found in <i>Startup.cs</i>, in which there is a call to <i>ConfigureAuth()</i> with the ‘<i>app</i>’ namespace passed as a parameter:</br></br>
+
+            <code>
+                public void Configuration (IAppBuilder app)</br>
+                {</br>
+                    ConfigureAuth(app);</br>
+                }
+            </code></br>
+
+            This is a reference to another function in <i>Startup.Auth.cs</i>:</br></br>
+
+            <img src="images/configure-auth-function.png"></br></br>
+
+            Both functions exist in different C# source files, but they are still within the same namespace and class. When the application is launched, <i>ConfigureAuth()</i> is called with the ‘<i>app</i>’ namespace as the parameter. Under the ‘<i>app</i>‘ namespace we see, within the <i>ConfigureAuth()</i> function, a number of components (possibly the ‘middleware’) for handling authentication tasks being called.</br>
+            The <i>app.Use[component name]</i> is a reference to one of the many ‘extension methods’ listed on Microsoft’s IAppBuilder page. The extension methods call whichever components provide the app with a given feature.
+        </div>
+
+        <div id="article">
+            <h2>OWIN and Third-Party Sign-In</h2>
+            Most of what an MVC application requires for third-party authentication (e.g. Google, Twitter, etc.) is provided by the OWIN library, and usually the hardest bit is getting the API key from the providers.</br>
+            For this, disable <i>Anonymous Authentication</i> in the project’s properties. In <i>Startup.Auth.cs</i> there are function calls for the following services:
+            <ul>
+                <li>app.UseMicrosoftAccountAuthentication()</li>
+                <li>app.UseTwitterAuthentication()</li>
+                <li>app.UseFacebookAuthentication()</li>
+                <li>app.UseGoogleAuthentication()</li>
+            </ul>
+
+            Uncomment whichever service is to be used for third-party sign-in.</br></br>
+
+            In order to use this, the <i>clientID</i> and <i>clientSecret</i> parameters must be populated. Since I already have an MSDN account, I was able to sign in, register the application and get the values. After entering the values and running the application again, the Microsoft sign-in button should appear on the login page, and that should direct the user to the actual Microsoft sign-in page. After the user signs in, the authentication ‘token’ is retained by the application.</br></br>
+        </div>
+
+        <div id="article">
+            <h2>Active Directory and Federated Sign-In</h2>
+            Getting the application to use Active Directory took a little more work. The following are required for this:
+            <ul>
+                <li>Active Directory domain</li>
+                <li>Several Microsoft.Owin libraries for Active Directory authentication</li>
+                <li>Calls to app.UseCookieAuthentication() and app.UseWsFederationAuthentication() in Startup.Auth.cs source</li>
+            </ul>
+
+            When creating a new project from an MVC template in Visual Studio, the application should be configured to use ‘<i>No Authentication</i>’ in the <i>Change Authentication</i> menu. In the <i>Properties</i> window for the project, set the <i>‘SSL Enabled</i>‘ attribute to ‘<i>True</i>‘. Finally, in <i>HomeController.cs</i>, add the <i>[Authorize]</i> attribute just above the <i>HomeController : Controller</i> class.</br>
+            When testing the application at this point, the user should be displayed the familiar Error 401 page. This means the application has attempted (unsuccessfully) to check whether the user was authorised to view the Web application.</br></br>
+
+            Onto the next stage of the project: We need an Active Directory domain that we can administrate. Fortunately there should be one set up in the Azure portal, in the Active Directory window. We need to add an application in order to get a <i>MetadataAddress</i> and <i>Wtrealm</i> value.</br>
+            In the <i>ADD APPLICATION</i> setup panel, the Sign-On URL is the address and port number of the application runing locally (e.g. http://localhost:48246/), and the App ID URI can be anything. In this case I used ‘<i>http://adtest/WsAuth1&#8217;</i>.</br></br>
+
+            Once the application has been added/registered, we need to make a note of the App ID URI and the Federation Metadata Document URL. Now we have a domain set up for the <i>OWIN Active Directory and Federated Authentication</i> modules to use. In <i>Startup.Auth.cs</i>, make sure you can add the following import statements:
+            <ul>
+                <li>using Microsoft.Owin.Security.Cookies;</li>
+                <li>using Microsoft.Owin.Security.WsFederation;</li>
+            </ul>
+
+            If not, use Visual Studio’s package manager to fetch them.
+
+            Next you’ll need to add the following calls into the source:</br></br>
+
+            <img src="images/owin-federated-auth-calls.png"></br></br>
+
+            When launching the application, the browser should now be redirected to a Microsoft sign-in page for the domain. On successful login, the home page for the application would load.
+        </div>
+
+
+       <div id="header">
+            <h1>ASP.NET MVC 5 and Active Directory</h1>
+        </div>
+        
+        <div id="article">
+            <h2>Controller</h2>
+            Here I've used the following imports:
+            <ul>
+                <li>System.ComponentModel.DataAnnotations</li>
+                <li>System.EnterpriseServices</li>
+                <li>System.Web</li>
+                <li>ADAuthenication.Models</li>
+                <li>Microsoft.Owin.Security</li>
+            </ul>
+
+
+            For authentication we use the following:</br>
+            <code>
+                IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;</br>
+                var authService = new AdAuthenticationService(authenticationManager);
+            </code>
+
+            To get the user name and password from the model:</br>
+            <code>
+                var authenticationResult = authService.SignIn(model.Username, model.Password);</br>
+                if (authenticationResult.IsSuccess())</br>
+                {</br>
+                    return RedirectToLocal("/Home/Index");</br>
+                }
+            </code></br>
+
+            And for the anti-forgery token:</br>
+            <code>
+                [ValidateAntiForgeryToken]</br>
+                public virtual ActionResult Logoff()</br>
+                {</br>
+                    IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;</br>
+                    authenticationManager.SignOut(MyAuthentication.ApplicationCookie);</br>
+                    return RedirectToAction("Index");</br>
+                }
+            </code></br>
+
+            And lastly the login view model:</br>
+            <code>
+                public class LoginViewModel</br>
+                {</br>
+                    [Required, AllowHtml]</br>
+                    public string Username{ get; set; }</br></br>
+        
+                    [Required]</br>
+                    [AllowHtml]</br>
+                    [DataType(DataType.Password)]</br>
+                    public string Password { get; set;</br> }
+                }
+                </code>
+        </div>
+       
+        <div id="article">
+            <h2>Model</h2>
+            The model uses:</br>
+            <ul>
+                <li>System.Net</li>
+                <li>System.Security.Claims</li>
+                <li>Microsoft.Owin.Security</li>
+                <li>System.DirectoryServices.AccountManagement</li>
+                <li>ADAuthenication</li>
+                <li>System.Configuration</li>
+                <li>System.Diagnostics.Eventing.Reader</li>
+            </ul>
+
+            The model is actually where the business logic is for Active Directory authentication. It performs and LDAP lookup to check whether the user name exists and checks the password with the Domain Controller.</br></br>
+
+            It takes the following variables:</br>
+            <code>
+                string myAccount = ConfigurationManager.AppSettings["MyServiceAccount"].ToString();</br>
+                string myPassword = ConfigurationManager.AppSettings["MyServicePassword"].ToString();</br>
+                var myDomain = ConfigurationManager.ConnectionStrings["ADConnection"].ToString()
+            </code>
+
+
+            And connects with the LDAP with:</br>
+            <code>
+                PrincipalContext principalContext = new PrincipalContext(ContextType.Domain,myDomain.Replace("LDAP://", "");
+            </code>
+        </div>
+
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

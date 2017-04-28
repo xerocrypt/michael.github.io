@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <title>Dependency Injection</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Dependency Injection</h1>
+        </div>
+
+        <div id="article">
+            Not to be confused with the Dependency Inversion Principle (DIP). The concept is easier to understand when looking at how my older programs used to be compiled with all dependencies included. You'd have a main component of the application, with oher features compiled as DLLs. The DLLs would be included with the application, and when the compiled application is executed, everything - the main component and all its dependencies, would be loaded into memory.</br></br>
+
+            Dependency injection abstracts the code into clients and services. The high-level component is a client, and the low-level implementations are services. The third component involved is an interface. The latter is, in some cases, handled by a 'Dependency Injection Framework' such as Spring. For ASP.NET we have Unity for managing dependency injections.</br></br>
+
+            Instead, with dependency injection, one available object would pass dependencies to the running program as needed. The provider object 'injects' the dependency into the main running program.</br></br>
+
+            There's more code, yes. And it's therefore probably harder to debug. But it separates the main code from the implementation, so the latter could be modified without affecting the main program. The implementation isn't hard-coded into the main
+            software. The class could also be tested in isolation without its dependencies.
+            The following are terms associated with dependency injection:
+            <ul>
+                <li>Service: The service to be used or injected.</li>
+                <li>Client: The object or component requiring the service.</li>
+                <li>Interface: Determines how the service can be used.</li>
+                <li>Injector: Constructs the requested service and injects it into the client.
+            </ul>
+
+
+            Instead of:
+            </code>
+                class Cake
+                {
+                    private icing icng = new homeSugar();
+                    private cherry chry = new bestRed();
+                }
+            </code>
+
+            It would look more like:
+            </code>
+                class Cake
+                {
+                    private icing icng = [Inject Instance of icing at runtime]
+                    private cherry chry = [Inject an Instance of cherry at runtime]
+                    Cake(icing icng,cherry chry)
+                    {
+                        this.icng = icng;
+                        this.chry = chry;
+                    }
+                }
+            </code>
+
+
+            As a result, someone developing the high-level components (clients) doesn't need to know how the lower-level features are implemented, and simply codes against the interface.
+            Basically one implementation could be modified or swapped for another with minimal changes to the code.</br></br>
+
+            An example of an interface:
+            <code>
+                public interface ILogger
+                {
+                    void LogMessage(string message);
+                }
+            </code>
+
+            The interface is defined as a 'public interface', with a name prefixed by 'I'. The name of the implementing class is defined here. The client class would set the interface name as a private variable, e.g.
+
+            <code>
+                private ILogger _logger;
+            </code>
+
+
+            And pass that variable into its method. e.g.
+
+            <code>
+                public DirectoryWatcher(ILogger logger)
+                {
+                    // Code here
+                }
+            </code>
+
+            The implementing class (the service) is defined as being dervid from the interface, using the interface name:
+
+            <code>
+                public class EventFileLogger: ILogger
+                {
+                    //Code here
+                }
+            </code>
+
+            Several classes might exist that implement the same interface.
+
+            Now all that's needed is to create an instance of the client, specifying the interface to be used:
+
+            <code>
+                ILogger logger = new EventFileLogger();
+                DirectoryWatcher watcher = new DirectoryWatcher(logger);
+            </code>
+
+            But how does the interface know which services to call or inject into the client? Turns out it's the client class that selects the service to use, passing it as a variable to the interface.</br></br>
+
+            <h2>Another Example</h2>
+
+            Create the interface:
+            <code>
+                namespace DependencyInjection.Services
+                {
+                    public interface IMyService
+                    {
+                        string getMyValue();
+                    }
+                }
+            </code>
+
+            Then create a service that implements the interface:
+
+            <code>
+                namespace DependencyInjection.Services
+                {
+                    public class MyService : IMyService
+                    {
+                        public string getMyValue()
+                        {
+                            return "Hash: " + getHash();
+                        }
+                    }
+                }
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            ENKARI. 2012. <i>Ninject: Open source dependency injector for .NET</i>. [WWW]. <a href="http://www.ninject.org/index.html">http://www.ninject.org/index.html</a>. 28th April 2017.</br></br>
+
+            FOWLER. M. 2004. MartinFowler.com. <i>Inversion of Control Containers and the Dependency Injection pattern</i>. [Blog]. 27th April 2017.</br></br>
+
+            HOBBS, C. 2017. <i>Dependency Injection: A Beginner's Guide</i>. [Blog]. <a href="https://stevescodingblog.co.uk/dependency-injection-beginners-guide/">https://stevescodingblog.co.uk/dependency-injection-beginners-guide/</a>. 28th April 2017.</br></br>
+        </div>
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

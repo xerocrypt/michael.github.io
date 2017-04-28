@@ -11,6 +11,8 @@
 		</div>
 
         <div id="article">
+            <img src="images/freebsd-boot-screen.png"></br>
+
             From what I’ve seen so far, FreeBSD is almost identical to Linux. The difference is we don’t get everything out of the box, as we would with Ubuntu or Linux Mint. Instead we get a lightweight and efficient operating system to build on.</br>
             This post goes through the process of getting FreeBSD running with a full desktop environment, though perhaps not in the most direct way, as I’ve done a bit of guesswork and improvisation to get there. It should take a couple of hours at most, starting with a basic installation disc or ISO.</br>
 
@@ -62,6 +64,13 @@
             <code>cp /root/xorg.conf.new /etc/X11/xorg.conf</code>
 
             In the new file (<i>/etc/X11/xorg.conf</i>) add the following section:
+
+            <code>
+                Section "Extensions"</br>
+                    Option "Composite" "Enable"</br>
+                EndSection
+            </code>
+
         </div>
 
         <div id="article">
@@ -131,7 +140,10 @@
             <code>#vidcontrol MODE_279</code>
 
             When you’ve hit the correct one, the mode can be made persistent by adding the following line to <i>/etc/rc.conf</i>:
-            <code>allscreens_flags="MODE_279"</code>
+            <code>allscreens_flags="MODE_279"</code></br>
+
+            <img src="images/freebsd-screensize-resolved.jpg"></br>
+
         </div>
 
         <div id="article">
@@ -140,6 +152,8 @@
             The most important things, in my opinion, are exploit prevention and mitigation – that is, making it hard as possible for something to exploit software vulnerabilities, and restricting what an exploit could do if executed.</br></br>
 
             Already present in a FreeBSD installation is the ‘<i>bsdconfig</i>’ utility, which enables low-level configuration changes. The Security and Startup options are the ones we might want to configure, after everything’s set up.</br></br>
+
+            <img src="images/freebsd-bsdconfig-securelevels.png"></br></br>
 
             The <i>Securelevel</i> options are used for limiting the actions that could be performed with root privileges, assuming no malicious program is capable of undoing these configuration changes. In Highly secure mode, the loading/unloading of kernel modules, the mounting of additional filesystems and certain configuration changes are disabled. This could provide an additional safeguard against the installation of kenel-mode rootkits. There is a help page describing what each <i>Securelevel</i> option does.
         </div>

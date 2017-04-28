@@ -15,7 +15,10 @@
             There are several RPC modules/libraries available for Python, but I chose RPyC in particular because it’s well maintained and excellently documented, and with some good tutorials on the developers’ site.
             A default server script is included with the RPyC download (<i>/rpyc/scripts/rpyc_classic.py</i>), and this listens on port 18812 for an RPC call. It must be run first, otherwise there’s a ‘connection refused’ error when running a client script.</br></br>
 
-            In the following example, both the client and server are running on the same machine. Remember that a server, by definition, is simply a process listening on a network port, regardless of which system it’s running on. Here the client script sends an RPC to the local network interface, and the call is looped back to the port on which the server is listening.
+            In the following example, both the client and server are running on the same machine. Remember that a server, by definition, is simply a process listening on a network port, regardless of which system it’s running on. Here the client script sends an RPC to the local network interface, and the call is looped back to the port on which the server is listening.</br></br>
+
+            <img src="images/simple-rpyc-connection.gif"></br></br>
+
             Notice that each time the client makes a call, its own port number might change. This is important, because it’s one way of differentiating between multiple calls from the same client, and the client might initiate new TCP sessions with each call.</br></br>
 
             The next client script demonstrates something a little more practical – two way communication between two physical machines, over RPC. For this to work, RPyC must be installed on both ends, and the <i>rpyc_classic.py</i> script must be running on one to provide the server.

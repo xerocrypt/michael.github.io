@@ -9,8 +9,10 @@
         <div id="header">
             <h1>SOLID Principles of Software Design</h1>
         </div>
-        
-        <img src="images/SOLID-points-diagram.png" width="500" height="400"></br>
+
+        <div id="article">
+            <img src="images/SOLID-points-diagram.png" width="500" height="400"></br>
+        </div>
 
         <div id="article">
             <h2>Single Responsibility Principle</h2>
@@ -20,7 +22,7 @@
             To give a real-world example:</br></br>
             <img src="images/single-responsibility-example.png"></br></br>
 
-            As you can see, it simply returns the date and time to the calling function. It doesn't print the time or do anything except return it.</br> 
+            As you can see, it simply returns the date and time to the calling function. It doesn't print the time or do anything except return it.</br>
             And another function that simply sets the username and password properties:</br></br>
 
             <img src="images/single-responsibility-example-2.png"></br></br>
@@ -52,10 +54,10 @@
             <h2>Interface Segregation Principles</h2>
             Apparently 'many client-specific interfaces are better than one general-purpose interface'. I think it refers to having multiple entry points, each for something specific. If the other principles are followed, it should be more straightforward to trace the code for each entry point and modify it as required.
             The other idea here is that clients shouldn't have dependencies on components it doesn't use.</br></br>
- 
+
             This principle is applied by breaking down large interfaces into smaller specific ones.
             Say, for example, we have a large interface. A problem with that interface could break the interoperability with clients that don't use the affected part of that interface. Conversely, if the interface was broken down into smaller interfaces, the problem would be isolated and would have more limited effects on the clients.</br></br>
- 
+
             This principle also creates layers of abstraction to reduce dependencies. You could design the software to have interfaces and implementation classes - interfaces describe the intention, and implementation classes perform the intended task.</br>
             If this principle is followed, a developer shouldn't need to be concerned with the details of how a feature works, but only with what the feature does. The developer should be able to make use of the function/component purely by its interface. The implementation could also be changed without breaking the software.</br>
             This information hiding is referred to as 'encapsulation'.
@@ -66,11 +68,13 @@
             <h2>Dependency Inversion Principle</h2>
             A program should depend upon abstractions instead of depending on concretions. In other words, the program should be dependent on the higher-level stuff instead of the low-level components. It's easy to see why.
             Everything should be determined on what the abstractions specify the program should do.</br></br>
- 
+
             In practice this refers to the decoupling or loose coupling of software modules. This is referred to as 'dependency inversion' because it inverts the way people think about object-oriented programming.
             Traditionally the higher-level functioning of a program depend on the lower level components that perform tasks. A defect in the lower-level could therefore break the high-level functions. Plus it limits the potential for re-using modules.</br>
-            One way to solve this is to add a mediation layer (or interface) between the high and low-level components.
-            </br></br>
+            One way to solve this is to add a mediation layer (or interface) between the high and low-level components.</br></br>
+
+            <button onclick="window.location.href='dependency-inversion.html'">Main Article...</button>
+
         </div>
 
     </body>

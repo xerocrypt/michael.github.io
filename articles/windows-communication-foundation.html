@@ -32,7 +32,10 @@
             This is where the concept of interfaces and implementations becomes important. Typically this is used in ASP.NET MVC as a way to ‘decouple’ methods from the core application, which makes it easier to modify an application’s functionality as a modular system. Where methods are called directly in a conventional program, here a requesting object calls an interface that contains references to whichever methods implement the requested functionality. This is sometimes referred to as a ‘loosely coupled’ system.
             In the WCF project we have a source file (<i>Service1.svc.cs</i>) that contains the methods that implement services by processing and returning variables. In another source file (<i>IService1.cs</i>) we have an interface that contains references to the methods.</br></br>
 
-            The project template can be executed as is in Visual Studio, without any modification. Click on <i>Service1.svc</i> and hit F5. This will launch the WCF Test Client.
+            The project template can be executed as is in Visual Studio, without any modification. Click on <i>Service1.svc</i> and hit F5. This will launch the WCF Test Client.</br></br>
+
+            <img src="images/wcf-test-client.png"></br></br>
+
             In the window to the left, there is an entry for the <i>IService</i> interface, and the references to the <i>GetData()</i> and <i>GetDataUsingDataContract()</i> methods. Return values are displayed in the main window after the methods are invoked.
         </div>
 
@@ -53,6 +56,8 @@
             <h2>WCF Configuration and Service Options</h2>
             Right-click the <i>Web.config</i> entry in the Solution Explorer, and select ‘<i>Edit WCF Configuration</i>‘. This will open the Microsoft Service Configuration Editor.</br></br>
 
+            <img src="images/microsoft-service-configuration-editor.png"></br></br>
+
             The important options here:
             <ul>
                 <li>Services: Create New Service appears to enable the developer to import a class/service from another object on the local system that has .NET classes. The ‘GAC’ option lists numerous other resources that could provide WCF services.</li>
@@ -64,11 +69,14 @@
 
         <div id="article">
             <h2>A Custom WCF Client</h2>
-            Obviously WCF services are pretty useless without clients to access them. The simplest implementation of WCF is the <i>WCF Service Library</li> project, with which we can create the service as a DLL.</br>
+            Obviously WCF services are pretty useless without clients to access them. The simplest implementation of WCF is the <i>WCF Service Library</i> project, with which we can create the service as a DLL.</br>
             In both <i>IService1.cs</i> and <i>Service1.cs</i>, I changed the data type for <i>GetData()</i> from int to string. e.g.
             <code>string GetData(string value);</code>
 
-            This is enough to have a service that returns a string when responding to a request. Next, I added a Windows Form project to the solution – this will be used as the UI instead of the WCF Test Client. In the Windows Form, there are text boxes for the input and output, and a Send button.</br>
+            This is enough to have a service that returns a string when responding to a request. Next, I added a Windows Form project to the solution – this will be used as the UI instead of the WCF Test Client. In the Windows Form, there are text boxes for the input and output, and a Send button.</br></br>
+
+            <img src="images/wcf-client-button-handler.png"></br></br>
+
             In order for the client application to make use of the WCF Service, a service reference must be added to the project. Right-click the References part of the client application project, and select ‘<i>Add Service Reference…</i>‘. Click the ‘<i>Discover</i>‘ button to find the available services.</br></br>
 
             Notice that entries to the WCF service appear under the <i>DataSources and Service References</i> in the Solution Explorer. The <i>DataSources</i> entry contains what looks like a connection string. The <i>Service References</i> entry will open itself in the Object Explorer, and we can view the available functions provided by the WCF Service. With the client application set as the startup project, hit <i>F5</i> to run.

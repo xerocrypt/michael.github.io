@@ -27,7 +27,9 @@
                 start netcat listener on port 1997
             </code>
 
-            I have kept the program itself as basic as possible, at roughly 30 lines of code. It could easily be copied and pasted into another C# application, if a developer wanted to use it as a Trojan Horse.
+            I have kept the program itself as basic as possible, at roughly 30 lines of code. It could easily be copied and pasted into another C# application, if a developer wanted to use it as a Trojan Horse.</br></br>
+
+            <img src="images/portcullis-code.gif"></br>
         </div>
 
         <div id="article">
@@ -58,6 +60,8 @@
             <h2>Deploying Portcullis</h2>
             As I’ve mentioned, this is only the basic backdoor. Other components are required for installation and concealment. It requires an exploit to get admin privileges, and code to open the Telnet/netcat port in the Windows Firewall and add the backdoor to the startup services. The other method is to do this manually, perhaps <a href="https://sathisharthars.wordpress.com/2014/07/07/evade-windows-firewall-by-ssh-tunneling-using-metasploit/">using Meterpreter</a>.</br>
             Assuming the backdoor is installed, simply Telnet into the system on port 1997. This gives us the command shell on the backdoored system.</br></br>
+
+            <img src="images/telnet-from-unix.gif"></br></br>
 
             One catch is the Windows Firewall must be configured to allow the ncat service to enable access from elsewhere on the network. Here is the connection from a UNIX system. But the Windows Firewall is just one problem to solve. The thing is this backdoor is among the oldest tricks known, and since the days of Windows XP computer security has evolved around reventing Internet-based threats. That’s why today’s remote access malware has to be more ‘sophisticated’, capable of hiding itself and making a number of changes to the target system.
         </div>

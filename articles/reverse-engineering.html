@@ -111,14 +111,19 @@
 
         <div id="article">
             <h2>Calling Functions</h2>
-            In the past I’ve discussed function calls as direct references to something in a linked object such as a DLL or <i>.so</i>. file. Obviously it doesn’t happen exactly like that here, as there are references to entries in a ‘Program Linkage Table’. This exists in the .plt section of the executable. I’m assuming the value at this address is the location of the actual <i>printf()</i> function in the linked object.
-            I’m also assuming, therefore, that the <i>printf()</i>, when called, automatically fetches and handles whatever’s at the top of the stack.
+            In the past I’ve discussed function calls as direct references to something in a linked object such as a DLL or <i>.so</i>. file. Obviously it doesn’t happen exactly like that here, as there are references to entries in a ‘Program Linkage Table’. This exists in the .plt section of the executable.</br></br>
+            
+            <img src="images/fourth-program-function-tables.png"></br></br>
+            
+             I’m assuming the value at this address is the location of the actual <i>printf()</i> function in the linked object. I’m also assuming, therefore, that the <i>printf()</i>, when called, automatically fetches and handles whatever’s at the top of the stack.
         </div>
 
         <div id="article">
             <h2>Mapping the Program</h2>
             When all sections of the executable are disassembled using <i>objdump</i>, other stuff that was statically linked when the program was compiled are listed, and this is where the workings of our simple ‘Hello World’ program become far more complex.</br>
             Even if we don’t fully understand the assembler code, this is enough to identify the start of each function (the prologue), the functions they’re calling and the parameters being passed between them. We’re also able to identify addresses and offsets among the many hexadecimal values in the code. This should enable us to develop a map of the program and get a fairly detailed view of what it does.</br></br>
+
+            <img src="images/libc-basic-program-map.png"></br></br>
 
             By looking at the map, we can see that certain address ranges are important. Why? Looking at the output of <i>objdump</i>, these addresses are pointers to other sections of the executable, such as <i>.rodata</i>, the Global Offset Table and <i>.bss</i>.
             The other functions being called exist in the <i>libc</i> module (<i>/lib/i386-linux-gnu/libc-2.19.so</i>), and this can also be disassembled to see the functions themselves. This isn’t much for an isolated executable that uses native libraries, but it’s very useful when examining an executable that could be malware.

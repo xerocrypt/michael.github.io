@@ -34,7 +34,9 @@
             All the basic features we’d expect are there. We can get a list of ports/sockets that were open when the memory dump was acquired, using the ‘<i>sockets</i>‘ option.</br>
             Notice the offsets and process IDs in the first two columns of the output. They tell us roughly where we can find the processes that were using the ports, although I’m guessing there’s an easier way of doing that.</br></br>
 
-            Then we have ‘<i>connections</i>‘ and ‘<i>connscan</i>‘, depending on the operating system in question. These reveal the TCP connections that were discovered, the remote and local addresses, and the PID. There wasn’t any information given in the particular memory dump I was looking at, which makes sense if the STUXNET capture was from an offline machine.
+            Then we have ‘<i>connections</i>‘ and ‘<i>connscan</i>‘, depending on the operating system in question. These reveal the TCP connections that were discovered, the remote and local addresses, and the PID. There wasn’t any information given in the particular memory dump I was looking at, which makes sense if the STUXNET capture was from an offline machine.</br></br>
+
+            <img src="images/volatility-sockets.gif"></br></br>
         </div>
 
         <div id="article">

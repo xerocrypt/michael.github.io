@@ -41,7 +41,7 @@
 
 		<div id="article">
 			<h2>Writing the Module</h2>
-			The concept is simple: we merely write a C program, compile it, then use the insmod command. A simple ‘Hello World’ program is all we need to get things going, as the learning curve here is in getting our own module successfully loaded.
+			The concept is simple: we merely write a C program, compile it, then use the insmod command. A simple ‘Hello World’ program is all we need to get things going, as the learning curve here is in getting our own module successfully loaded.</br>
 
 			First we might need to install kernel headers, or <i>kernel-dev</i>, from the distribution’s repository. Other tutorials recommend compiling and running from the most recent kernel.</br>
 			The following is an edited ‘Hello World’ example from The Linux Documentation Project:</br>
@@ -76,6 +76,8 @@
 			<code>make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean</code></br>
 
 			Save this as ‘Makefile‘, in the directory that was just created. Now that directory will contain mymodule.c and Makefile. The next step is to build this using ‘<i>make</i>‘. The directory should now be populated by the newly-created module and several other files (.zip archive here). The module here is <i>mymodule.ko</i>.</br></br>
+
+			<img src="images/mymoduledirectory.gif"></br></br>
 
 			The next step is to load mymodule.ko into the kernel’s memory space using <i>insmod()</i> as root.</br>
 			<code>$su root</code></br>
