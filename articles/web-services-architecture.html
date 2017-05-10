@@ -9,7 +9,7 @@
         <div id="header">
 	        <h1>Web Services Architecture</h1>
 		</div>
-		
+
         <div id="article">
 			At an ACM lecture in 1972, Edsger Dijkstra made a point about the human mind’s limited capacity to contain the logic of a sophisticated computer program from start to finish. Complexity is one of the reasons it’s easier to work with object-oriented code and abstraction, instead of creating something that might be unstructured but functional and syntactically correct. A book that I’ve found useful over the past couple of weeks is Code Complete (Steve McConnell, Microsoft Press), which goes into the best practices for designing and implementing complex software.</br></br>
 
@@ -17,12 +17,12 @@
 
 			Since this Web Service is one of many, the components are called from three separate repositories: Web Service APIs, Web Service Helpers and Data Access.
 		</div>
-		
+
 		<div id="article">
 			<h2>Web Service API</h2>
 			The API is just a public class that contains a call to method/class <i>GetMyWebServiceResponse()</i>. This function is the Web Service helper, and its return value is declared as the Web Service response.
 		</div>
-		
+
 		<div id="article">
 			<h2>Web Service Helper</h2>
 			A helper class is the core of the Web Service. A helper can be any program or function that returns a value to the exposed API. An important point is there’s a separation of the logic from the API, and the logic can only be called by the API since it’s an ‘internal static’ method.</br>
@@ -43,7 +43,7 @@
 
 			Also, think of <i>myDataItem</i> in terms of being a ‘blueprint’ with properties <i>userName</i> and <i>profileCode</i>, rather than as a class with variables. The properties of an instance of <i>myDataItems</i> can be over-ridden in a derived class.
 		</div>
-		
+
 		<div id="article">
 			<h2>Data Response Body</h2>
 			This section of code takes the data structure defined by <i>myDataItem</i> and forms the body of the Web Service response.</br></br>
@@ -55,9 +55,9 @@
 
 			Also notice the method below that, the ‘<code>public override myDataItem</code>‘. This overrides the base class that was instantiated. The override modifies the instance of the base class that was declared with whatever was declared in the derived class.
 		</div>
-		
+
 		<div id="article">
-			<h2>Data Response,/h2>
+			<h2>Data Response</h2>
 			Forms the entirety of what’s returned from a query. Again this <i>myDataItemResponse</i> is also derived from a base class. The body is returned as an <i>XmlElement</i>, as whatever is returned from the Web Service is an XML formatted response.</br>
         </div>
 

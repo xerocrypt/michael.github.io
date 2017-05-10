@@ -34,6 +34,16 @@
             This time, double-check the ‘<i>Reference script libraries</i>‘ option is not selected, and leave the ‘<i>Use a layout page</i>‘ field is blank.
         </div>
 
-        <div id="footer">Michael, April 2017</div>
+        <div id="article">
+            <h2>0x80070002: IIS Routing Error and 404</h2>
+
+            Problem might be caused by the following section on the <i>Web.config</i> file, if the '<i>add name</i>' and '<i>add resourceType</i>' lines are inserted before the '<i>remove name</i>' entries.</br>
+            The problem with this is that handlers are added by the config, then subsequently removed. This leaves the application with no handlers for the routing.</br></br>
+
+            <img src="images/mvc-handler-config.png"></br>
+
+        </div>
+
+        <div id="footer">Michael, May 2017</div>
     </body>
 </html>

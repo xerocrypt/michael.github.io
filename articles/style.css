@@ -9,8 +9,9 @@
 }
 
 body {
-    background-color: #222222;
-    background-repeat: repeat-x;
+    background-image: url("images/divbg.png");
+    background-repeat: repeat;
+    background-color: #22222;
     background-attachment: fixed;
     background-position: left top;
 }
@@ -124,7 +125,7 @@ button {
     margin-bottom: 5px;
     margin-right: 5px;
     margin-left: 5px;
-    
+
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
@@ -147,7 +148,7 @@ blink {
   animation: blinker 1s linear infinite;
 }
 
-@keyframes blinker {  
+@keyframes blinker {
   50% { opacity: 0; }
 }
 
@@ -171,7 +172,7 @@ blink {
     margin-bottom: 5px;
     margin-right: 5px;
     margin-left: 5px;
-    
+
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
@@ -217,7 +218,7 @@ code {
     margin-bottom: 5px;
     margin-right: 5px;
     margin-left: 5px;
-    
+
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
@@ -252,7 +253,7 @@ code {
     margin-bottom: 10px;
     margin-right: 10px;
     margin-left: 10px;
-	
+
 	padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;

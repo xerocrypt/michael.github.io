@@ -1,0 +1,395 @@
+<html>
+    <head>
+        <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="scripts/amcharts/amcharts.js"></script>
+        <script type="text/javascript" src="scripts/amcharts/serial.js"></script>
+        <script type="text/javascript" src="scripts/amcharts/pie.js"></script>
+        <script type="text/javascript" src="scripts/amcharts/plugins/dataloader/dataloader.js"></script>
+        <script type="text/javascript" src="scripts/amcharts/themes/light.js"></script>
+        <script type="text/javascript" src="scripts/chart.js"></script>
+	    <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+
+    <body>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <img class="centerimage" src="images/sp-profile.jpg" width="10%">
+            <a href="index.html">// Home</a>
+            <a href="about.html">// About</a>
+            <a href="healthcare.html">// Clinical Projects</a>
+            <a href="resources.html">// Resources</a>
+            <a href="toolkit.html">// Toolkit</a>
+        </div>
+
+      <script>
+          function openNav()
+          {
+              document.getElementById("mySidenav").style.width = "100%";
+              document.getElementById("main").style.marginLeft = "100%";
+          }
+
+          function closeNav()
+          {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft = "0";
+          }
+      </script>
+
+      <div id="main">
+
+          <script>
+            var chart = AmCharts.makeChart("chartdiv", {
+	               "type": "serial",
+                   "theme": "light",
+	               "categoryField": "week",
+	               "rotate": true,
+	               "startDuration": 1,
+	               "categoryAxis": {
+		                     "gridPosition": "start",
+		                     "position": "left"
+	               },
+	               "trendLines": [],
+	               "graphs": [
+		           {
+                       "balloonText": "Clients:[[value]]",
+			           "fillAlphas": 0.8,
+			           "id": "AmGraph-1",
+			           "lineAlpha": 0.2,
+                       "title": "Clients",
+                       "type": "column",
+                       "valueField": "clients"
+                   },
+                   {
+                       "balloonText": "Expenses:[[value]]",
+                       "fillAlphas": 0.8,
+                       "id": "AmGraph-2",
+                       "lineAlpha": 0.2,
+                       "title": "Expenses",
+                       "type": "column",
+                       "valueField": "expenses"
+		            }
+	                ],
+                    "guides": [],
+	                "valueAxes": [
+                        {
+                            "id": "ValueAxis-1",
+                            "position": "top",
+                            "axisAlpha": 0
+                        }
+                        ],
+                        "allLabels": [],
+                        "balloon": {},
+                        "titles": [],
+                        "dataProvider": [
+                            {
+                                "week": "March 1",
+                                "clients": 23,
+                                "expenses": 18.1
+                            },
+                            {
+                                "week": "March 2",
+                                "clients": 26,
+                                "expenses": 22.8
+                            },
+                            {
+                                "week": "March 3",
+                                "clients": 30,
+                                "expenses": 23.9
+                            },
+                            {
+                                "week": "March 4",
+                                "clients": 30,
+                                "expenses": 23.9
+                            },
+                            {
+                                "week": "March 5",
+                                "clients": 30,
+                                "expenses": 23.9
+                            },
+                            {
+                                "week": "March 6",
+                                "clients": 30,
+                                "expenses": 23.9
+                            },
+                            {
+                                "week": "March 7",
+                                "clients": 30,
+                                "expenses": 23.9
+                            },
+                            {
+                                "week": "March 8",
+                                "clients": 29,
+                                "expenses": 25.1
+                            },
+                            {
+                                "week": "March 9",
+                                "clients": 24,
+                                "expenses": 25
+                            }
+                        ],
+                        "export": {
+                            "enabled": true
+                        }
+                    });
+          </script>
+
+          <script>
+            var chart = AmCharts.makeChart( "chartdiv2", {
+                "type": "pie",
+                "theme": "light",
+                "dataProvider": [ {
+                    "title": "Accommodation",
+                    "value": 4852
+                }, {
+                    "title": "Food",
+                    "value": 9899
+                },
+                {
+                    "title": "Clothing",
+                    "value": 9899
+                },
+                {
+                    "title": "Accessories",
+                    "value": 9899
+                },
+                {
+                    "title": "Other Items",
+                    "value": 9899
+                }
+                ],
+                "titleField": "title",
+                "valueField": "value",
+                "labelRadius": 5,
+
+                "radius": "40%",
+                "innerRadius": "80%",
+                "labelText": "[[title]]",
+                "export": {
+                    "enabled": true
+                }
+            });
+          </script>
+
+
+          <script>
+          var chart = AmCharts.makeChart( "chartdiv3", {
+              "type": "pie",
+              "theme": "light",
+              "dataProvider": [ {
+                  "title": "Accommodation",
+                  "value": 4852
+              }, {
+                  "title": "Food",
+                  "value": 9899
+              },
+              {
+                  "title": "Clothing",
+                  "value": 9899
+              },
+              {
+                  "title": "Accessories",
+                  "value": 9899
+              },
+              {
+                  "title": "Other Items",
+                  "value": 9899
+              }
+              ],
+              "titleField": "title",
+              "valueField": "value",
+              "labelRadius": 5,
+
+              "radius": "40%",
+              "innerRadius": "80%",
+              "labelText": "[[title]]",
+              "export": {
+                  "enabled": true
+              }
+          });
+          </script>
+
+          <script>
+          var chart = AmCharts.makeChart("chartdiv4", {
+              "type": "serial",
+              "theme": "light",
+              "dataProvider": [{
+                  "date": "2009-10-02",
+                  "value": 5
+              }, {
+                  "date": "2009-10-03",
+                  "value": 15
+              }, {
+                  "date": "2009-10-04",
+                  "value": 13
+              }, {
+                  "date": "2009-10-05",
+                  "value": 17
+              }, {
+                  "date": "2009-10-06",
+                  "value": 15
+              }, {
+                  "date": "2009-10-09",
+                  "value": 19
+              }, {
+                  "date": "2009-10-10",
+                  "value": 21
+              }, {
+                  "date": "2009-10-11",
+                  "value": 20
+              }, {
+                  "date": "2009-10-12",
+                  "value": 20
+              }, {
+                  "date": "2009-10-13",
+                  "value": 19
+              }, {
+                  "date": "2009-10-16",
+                  "value": 25
+              }, {
+                  "date": "2009-10-17",
+                  "value": 24
+              }, {
+                  "date": "2009-10-18",
+                  "value": 26
+              }, {
+                  "date": "2009-10-19",
+                  "value": 27
+              }, {
+                  "date": "2009-10-20",
+                  "value": 25
+              }, {
+                  "date": "2009-10-23",
+                  "value": 29
+              }, {
+                  "date": "2009-10-24",
+                  "value": 28
+              }, {
+                  "date": "2009-10-25",
+                  "value": 30
+              }, {
+                  "date": "2009-10-26",
+                  "value": 72,
+                  "customBullet": "https://www.amcharts.com/lib/3/images/redstar.png"
+              }, {
+                  "date": "2009-10-27",
+                  "value": 43
+              }, {
+                  "date": "2009-10-30",
+                  "value": 31
+              }, {
+                  "date": "2009-11-01",
+                  "value": 30
+              }, {
+                  "date": "2009-11-02",
+                  "value": 29
+              }, {
+                  "date": "2009-11-03",
+                  "value": 27
+              }, {
+                  "date": "2009-11-04",
+                  "value": 26
+              }],
+              "valueAxes": [{
+                  "axisAlpha": 0,
+                  "dashLength": 4,
+                  "position": "left"
+              }],
+              "graphs": [{
+                  "bulletSize": 14,
+                  "valueField": "value",
+                   "balloonText":"<div style='margin:10px; text-align:left;'><span style='font-size:13px'>[[category]]</span><br><span style='font-size:18px'>Value:[[value]]</span>",
+              }],
+              "marginTop": 20,
+              "marginRight": 70,
+              "marginLeft": 40,
+              "marginBottom": 20,
+              "chartCursor": {
+                  "graphBulletSize": 1.5,
+               	"zoomable":false,
+                	"valueZoomable":false,
+                   "cursorAlpha":0,
+                   "valueLineEnabled":true,
+                   "valueLineBalloonEnabled":true,
+                   "valueLineAlpha":0.2
+              },
+              "autoMargins": false,
+              "dataDateFormat": "YYYY-MM-DD",
+              "categoryField": "date",
+              "valueScrollbar":{
+                "offset":30
+              },
+              "categoryAxis": {
+                  "parseDates": true,
+                  "axisAlpha": 0,
+                  "gridAlpha": 0,
+                  "inside": true,
+                  "tickLength": 0
+              },
+              "export": {
+                  "enabled": true
+              }
+          });
+          </script>
+
+
+          <span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; menu</span>
+
+          <h1>How We Are Doing</h1>
+
+          <div id="article">
+              This graph provides an overview of how we are doing at the centre. It shows the number of clients and the allocation of resources.
+          </div>
+
+          <div id="container">
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td width="50%">
+                      <h2>Number of Clients</h2>
+                      <div id="article">
+                          Shows the number of clients throughout the period.
+                      </div>
+                      <div id="chartdiv" style="min-width: 00px; max-width: 100%; height: 250px; left: 0px"></div></br></br>
+                  </td>
+
+                  <td width="50%">
+                      <h2>Resource Allocation</h2>
+                      <div id="article">
+                          Shows how we allocate resources.
+                      </div>
+                      <div id="chartdiv2" style="min-width: 0px; max-width: 100%; height: 250px;"></div></br></br>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td>
+                      <h2>Length of Service</h2>
+                      <div id="article">
+                          The length of time (in weeks) that clients have used our service.
+                      </div>
+                      <div id="chartdiv3" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
+                  </td>
+                  <td>
+                      <h2>Clients</h2>
+                      <div id="article">
+                          Placeholder.
+                      </div>
+                      <div id="chartdiv4" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
+                  </td>
+
+              </tr>
+          </table>
+
+      </div>
+
+</br></br>
+
+    <div id="footer">
+      Michael, May 2017
+    </div>
+
+</div>
+
+  </body>
+
+</html>

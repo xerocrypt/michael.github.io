@@ -11,14 +11,12 @@
         </div>
 
         <div id="article">
-            Not to be confused with the Dependency Inversion Principle (DIP). The concept is easier to understand when looking at how my older programs used to be compiled with all dependencies included. You'd have a main component of the application, with oher features compiled as DLLs. The DLLs would be included with the application, and when the compiled application is executed, everything - the main component and all its dependencies, would be loaded into memory.</br></br>
+            Not to be confused with the <a href="dependency-inversion.html">Dependency Inversion Principle (DIP)</a>. The concept is easier to understand when looking at how my older programs used to be compiled with all dependencies included. Conventionally the core of the application would be loaded into system memory along with its dependencies (DLLs, modules, etc.), which, of course, means the application is consuming more memory regardless of whether the additional components are used.</br></br>
 
-            Dependency injection abstracts the code into clients and services. The high-level component is a client, and the low-level implementations are services. The third component involved is an interface. The latter is, in some cases, handled by a 'Dependency Injection Framework' such as Spring. For ASP.NET we have Unity for managing dependency injections.</br></br>
-
+            Dependency injection abstracts the code into clients and services. The high-level component is a client, and the low-level implementations are services. The third component involved is an interface. The latter is, in some cases, handled by a 'Dependency Injection Framework' such as Spring. For ASP.NET we have Unity for managing dependency injections.</br>
             Instead, with dependency injection, one available object would pass dependencies to the running program as needed. The provider object 'injects' the dependency into the main running program.</br></br>
 
-            There's more code, yes. And it's therefore probably harder to debug. But it separates the main code from the implementation, so the latter could be modified without affecting the main program. The implementation isn't hard-coded into the main
-            software. The class could also be tested in isolation without its dependencies.
+            There's more code, yes. And it's therefore probably harder to debug. But it separates the main code from the implementation, so the latter could be modified without affecting the main program. The implementation isn't hard-coded into the main software. The class could also be tested in isolation without its dependencies.
             The following are terms associated with dependency injection:
             <ul>
                 <li>Service: The service to be used or injected.</li>
@@ -29,25 +27,25 @@
 
 
             Instead of:
-            </code>
-                class Cake
-                {
-                    private icing icng = new homeSugar();
-                    private cherry chry = new bestRed();
+            <code>
+                class Cake</br>
+                {</br>
+                    private icing icng = new homeSugar();</br>
+                    private cherry chry = new bestRed();</br>
                 }
             </code>
 
             It would look more like:
-            </code>
-                class Cake
-                {
-                    private icing icng = [Inject Instance of icing at runtime]
-                    private cherry chry = [Inject an Instance of cherry at runtime]
-                    Cake(icing icng,cherry chry)
-                    {
-                        this.icng = icng;
-                        this.chry = chry;
-                    }
+            <code>
+                class Cake</br>
+                {</br>
+                    private icing icng = [Inject Instance of icing at runtime]</br>
+                    private cherry chry = [Inject an Instance of cherry at runtime]</br>
+                    Cake(icing icng,cherry chry)</br>
+                    {</br>
+                        this.icng = icng;</br>
+                        this.chry = chry;</br>
+                    }</br>
                 }
             </code>
 
@@ -57,9 +55,9 @@
 
             An example of an interface:
             <code>
-                public interface ILogger
-                {
-                    void LogMessage(string message);
+                public interface ILogger</br>
+                {</br>
+                    void LogMessage(string message);</br>
                 }
             </code>
 
@@ -73,27 +71,25 @@
             And pass that variable into its method. e.g.
 
             <code>
-                public DirectoryWatcher(ILogger logger)
-                {
-                    // Code here
+                public DirectoryWatcher(ILogger logger)</br>
+                {</br>
+                    // Code here</br>
                 }
             </code>
 
             The implementing class (the service) is defined as being dervid from the interface, using the interface name:
 
             <code>
-                public class EventFileLogger: ILogger
-                {
-                    //Code here
+                public class EventFileLogger: ILogger</br>
+                {</br>
+                    //Code here</br>
                 }
             </code>
 
-            Several classes might exist that implement the same interface.
-
-            Now all that's needed is to create an instance of the client, specifying the interface to be used:
+            Several classes might exist that implement the same interface. Now all that's needed is to create an instance of the client, specifying the interface to be used:
 
             <code>
-                ILogger logger = new EventFileLogger();
+                ILogger logger = new EventFileLogger();</br>
                 DirectoryWatcher watcher = new DirectoryWatcher(logger);
             </code>
 
@@ -103,27 +99,27 @@
 
             Create the interface:
             <code>
-                namespace DependencyInjection.Services
-                {
-                    public interface IMyService
-                    {
-                        string getMyValue();
-                    }
+                namespace DependencyInjection.Services</br>
+                {</br>
+                    public interface IMyService</br>
+                    {</br>
+                        string getMyValue();</br>
+                    }</br>
                 }
             </code>
 
             Then create a service that implements the interface:
 
             <code>
-                namespace DependencyInjection.Services
-                {
-                    public class MyService : IMyService
+                namespace DependencyInjection.Services</br>
+                {</br>
+                    public class MyService : IMyService</br>
                     {
-                        public string getMyValue()
-                        {
-                            return "Hash: " + getHash();
-                        }
-                    }
+                        public string getMyValue()</br>
+                        {</br>
+                            return "Hash: " + getHash();</br>
+                        }</br>
+                    }</br>
                 }
             </code>
         </div>
@@ -137,6 +133,6 @@
             HOBBS, C. 2017. <i>Dependency Injection: A Beginner's Guide</i>. [Blog]. <a href="https://stevescodingblog.co.uk/dependency-injection-beginners-guide/">https://stevescodingblog.co.uk/dependency-injection-beginners-guide/</a>. 28th April 2017.</br></br>
         </div>
 
-        <div id="footer">Michael, April 2017</div>
+        <div id="footer">Michael, May 2017</div>
     </body>
 </html>
