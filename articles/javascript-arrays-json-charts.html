@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>AmCharts with Complex JSON Responses</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>AmCharts with More Complex Web API JSON Responses</h1>
+        </div>
+
+        <div id="article">
+            Presenting data in <a href="https://www.amcharts.com">amCharts</a> and <a href="http://www.chartjs.org">Chart.js</a> from simple two-column tables was relatively straightforward. I had three Web APIs that each returned a two-column table that the charting scripts could easily read from. As I was finishing up the presentation, the application spec changed - all the data is now returned as a complex table by <i>one</i> stored procedure. What followed was a frustrating couple of days, as I Bill Nyed the code multiple times trying to extract and group items from the JSON objects.</br></br>
+
+            Given the main reason for using a single stored procedure was to reduce the load on the Service Broker, a single Web API call in my code is better than three. It also makes sense to implement all the querying features as JavaScript, since the browser fetches everything when the page loads.</br></br>
+
+            The code for my solution is published on GitHub (<a href="https://github.com/xerocrypt/Chart-API-Tests/blob/master/json-queries-to-chart-javascript.js">click here</a>).
+        </div>
+
+        <div id="article">
+            <h2>Revisiting Arrays and Objects</h2>
+            My solution was to populate an array, or multiple arrays, with items from the JSON response, so it's worth looking at JavaScript arrays to see the similarity between that and JSON.
+            An array could be static and predefined, e.g.
+            <code>var users = ["michael", "john", "andy"];</code>
+
+            Or it could be an empty array that's populated during runtime, for example, in a script that populates the array from another source, such as:
+            <code>var users = new Array("michael", "john", "andy");</code>
+
+            The other type of variable I'm working with here is an object with multiple attributes. e.g.
+            <code>var user = {userName:"michael", userID:"515", role:"Developer"};</code>
+
+            You'll notice this looks somewhat like a message object within our JSON response, because that's precisely because the JSON response is an array of such objects. For example, the JSON response for the Dashboard is:
+            <code>
+                [{"Id":"0001","Date":"2017-05-05","MessageType":"Pathology","HealthBoard":"7A6","HealthBoardDescription":"BC1","MessagesProcessed":1},{"Id":"0002","Date":"2017-05-05","MessageType":"Pathology","HealthBoard":"7A4","HealthBoardDescription":"BC2","MessagesProcessed":2}]
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>Getting Chart Data from a JSON Response Body</h2>
+            For the <i>Messages by Type</i> chart, I want a count of the number of instances for each <i>messageType</i> name in the Service Broker queue. If these counts could be presented as a doughnut chart, the user could readily see which category of systems is generating the most traffic - typically they're pathology systems, so if cardiology systems are sending most the traffic, we know something's not right.</br>
+            Anyway, what I did first was initialise an array called '<i>everything</i>', and push all the JSON response objects to it. From that I extracted the <i>messageType</i> items and pushed them into another array called '<i>myMessageType[]</i>'. This enabled me to use '<i>myMessageType.length</i>' to loop over it and increment the counter variables for each instance of 'Pathology', 'Radiology', 'Cardiology' and 'unknown'. More observant readers will notice I'm counting instances of rows, not what's actually contained in the <i>MessagesProcessed</i> column. Most rows in that column have a value of '1', so I can get away with that for now and add further logic in later.</br></br>
+
+            At this stage, I should have a set of counter variables that provide data for the chart. Since that might become a problem solving task in itself, now's a good time to establish, using a debugging tool and SQL Server Management Studio, whether the counter variables are indeed incremented. If everything's good at this point, the counter variables can now be used as the amCharts <i>dataProvider</i> source.
+        </div>
+
+        <div id="article">
+            <h2>Triggering</h2>
+            On running the application, the charts still aren't rendered even with the counter variables incrementing correctly. This is a timing issue, with the charts attempting to render before the arrays are populated and counted. The code needs to be modified so the sections of code are executed in the correct order.</br></br>
+
+            The chart code can be encapsulated within a function. Here it's called <i>chartByType()</i>.
+            <code>
+                function chartByTypes()
+                {
+                    // Charting code here
+                }
+            </code>
+
+            And add code for calling the above after a short delay when the counter arrays/variables have been populated:
+            <code>
+                // Insert call here to Chart 2
+                setTimeout(function () { chartByTypes(); }, 500);
+            </code>
+            And here was the result:</br></br>
+
+            <img src="images/messaging-metrics-dashboard-v2-pub.png" width="70%">
+
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            AMCHARTS. 2017. <i>amCharts: JavaScript Charts and Maps</i>. [WWW]. <a href="https://www.amcharts.com">www.amcharts.com</a>. 18th May 2017.</br></br>
+
+            HAVERBEKE, M. 2014. <i>Eloquent JavaScript</i>. Second Edition. Chapter 4 - Data Structures: Objects and Arrays. [WWW]. <a href="http://eloquentjavascript.net/04_data.html">http://eloquentjavascript.net/04_data.html</a>. 17th May 2017.</br></br>
+
+        </div>
+
+        <div id="footer">Michael, May 2017</div>
+    </body>
+</html>

@@ -5,7 +5,7 @@
 	</head>
 
 	<body>
-  
+
 		<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
@@ -15,36 +15,36 @@
 			<a href="resources.html">// Resources</a>
 			<a href="toolkit.html">// Toolkit</a>
 		</div>
-  
+
 		<script>
-			function openNav() 
+			function openNav()
 			{
 				document.getElementById("mySidenav").style.width = "100%";
 				document.getElementById("main").style.marginLeft = "100%";
 			}
 
-			function closeNav() 
+			function closeNav()
 			{
 				document.getElementById("mySidenav").style.width = "0";
 				document.getElementById("main").style.marginLeft = "0";
 			}
 		</script>
-  
+
 		<div id="main">
-  
+
 			<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; Menu</span>
-   
+
 			<h1>//clinical and healthcare-related software</h2>
 
 			<div id="article">
 				<h2>Test Automation</h2>
 				Using Microsoft's Coded UI Test libraries and a little knowledge of C#, I was able to deliver a test automation capability to a large healthcare software provider. Regression tests that previously required several weeks' manual work could be completed within a few hours. As it's not always possible to perfectly replicate user actions and get the same level of test coverage, automation was mainly used for testing the core functionality of applications.</br></br>
-				
+
 				Advantages:
 				<ul>
 					<li>Best used for automating regression tests against core features of an application, to avoid duplication of manual testing efforts.</li>
 				</ul>
-				
+
 				Disadvantages:
 				<ul>
 					<li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
@@ -78,7 +78,7 @@
 					<li>Entity Framework</li>
 					<li>Service Broker and Stored Procedures</li>
 				</ul>
-				
+
 				<img src="images/messaging-dashboard-index-view.png" width="60%"></br></br>
 
 				The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues, enabling the system administrators to more quickly determine the cause of message processing failures. Selected messages could be deleted, resubmitted or moved between Service Broker queues.
@@ -87,9 +87,9 @@
 			<div id="article">
 				<h2>Messaging Metrics Dashboard</h2>
 				This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br></br>
-				
-				<img src="images/metrics-dashboard-ui.png" width="50%"></br></br>
-				
+
+				<img src="images/messaging-metrics-dashboard-v2-pub.png" width="60%"></br></br>
+
 				The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
 				Uses:
 				<ul>

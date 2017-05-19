@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>WannaCrypt Incident</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>The WannaCrypt Incident</h1>
+        </div>
+
+        <div id="article">
+            The bad news is it's extremely unlikely the data could be decrypted directly. Recovery will depend on backups - most employees don't, and probably can't because of security policy, make personal backups of their work.</br>
+            The good news is there's a slim possibility GPs and hospital IT staff could recover their data (without paying the tossers who thought hospitals were a good target, of course). File encryption actually works by making encrypted copies of the data before erasing the original files, which means the latter <i>just might</i> be recoverable using common drive imaging and data carving tools. It's a long shot, but that's what I'd be attempting in their position.</br></br>
+
+            How did this happen? Actually I heard from others a couple of weeks ago there were spear phishing attempts at another NHS trust, and assumed it was related to a malicious hacker group that obtained staff addresses after <a href="https://www.theregister.co.uk/2017/03/13/thousands_of_nhs_staff_details_lost_in_breach_of_it_contractors_server/">a third-party was compromised</a>. However, that affected trusts here in Wales, and the current ransomware thing isn't affecting us (directly) yet.</br>
+            Not everyone in a large organisation can differentiate between a legitimate hyperlink and one that's disguised in an email. Someone, in fact several, <i>will</i> click the link or open the attachment. That's not really a problem if the anti-malware system has a signature for it, but there's still a good chance it doesn't. Exploit mitigation features on modern operating systems play a huge role in preventing malware. You probably know all this already.</br></br>
+
+            The thing is (and yes, this is a huge problem) the NHS does rely on outdated operating systems and software, and for roughly the same reasons banks still use COBOL and industrial systems might still use Windows XP. You can have a legacy system that works, or upgrade attempts that come with serious risks. Remember <a href="http://www.theregister.co.uk/2012/06/26/rbs_natwest_ca_technologies_outsourcing/">the chaos in 2012</a> after an update attempt crippled the mainframe of three major banks? So, to address <a href="http://www.independent.co.uk/news/uk/home-news/amber-rudd-nhs-cyber-attack-a7733901.html">the Home Secretary's point</a>, one doesn't simply move a system like this onto Windows 10.</br>
+            When you're dealing with critical software that's deployed nationally, and when lives depend on integrity of the data, any minor change in the configuration must be thoroughly tested before that change goes live. And there could be a stack of software from multiple vendors, and a range of hardware also, dependent on that same configuration.</br>
+            On top of that, I've also come across third-party clinical software that's been around since the 90s, and can't easily be replaced because it's critical, very complex, has features that are extremely specialised and became the standard across NHS trusts - and the software, in turn, depends on older operating systems. Some of these problems are outweighed by what recently happened, but still... Scary, isn't it?
+        </div>
+
+        <div id="article">
+            <h2>Technical Details</h2>
+            <i>This section will be updated shortly.</i></br></br>
+
+            According to The Guardian, <a href="https://www.profwoodward.org/">Professor Woodward</a> stated <a href="https://isc.sans.edu/forums/diary/ETERNALBLUE+Windows+SMBv1+Exploit+Patched/22304/">the exploit</a> is for an <a href="https://support.microsoft.com/en-us/help/2696547/how-to-enable-and-disable-smbv1,-smbv2,-and-smbv3-in-windows-vista,-windows-server-2008,-windows-7,-windows-server-2008-r2,-windows-8,-and-windows-server-2012">SMB vulnerability</a> that enabled the malware to spread, and the vulnerability was in Windows XP for which Microsoft didn't release a patch. Metasploit did include exploits for older versions of SMB since at least 2013, and SMB vulnerabilities showed up in Nessus scans against Server 2012 back then.</br>
+            Of academic interest is the exploit here was developed (or at least hoarded) by the NSA, and was among <a href="https://www.theregister.co.uk/2017/04/21/windows_hacked_nsa_shadow_brokers/">those published by the ShadowBrokers</a> - several years ago I warned that something like this was inevitable if governments started developing 'cyber weapons'.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, May 2017</div>
+    </body>
+</html>
