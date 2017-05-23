@@ -1,111 +1,142 @@
-<html>
-	<head>
-		<title>Healthcare</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Clinical Software Projects</title>
 
-	<body>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
-			<a href="index.html">// Home</a>
-			<a href="about.html">// About</a>
-			<a href="healthcare.html">// Clinical Projects</a>
-			<a href="resources.html">// Resources</a>
-			<a href="toolkit.html">// Toolkit</a>
-		</div>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
 
-		<script>
-			function openNav()
-			{
-				document.getElementById("mySidenav").style.width = "100%";
-				document.getElementById("main").style.marginLeft = "100%";
-			}
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="active"><a href="healthcare.html">Clinical Projects</a></li>
+            <li><a href="articles/index.html">Articles</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="toolkit.html">Toolkit</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-			function closeNav()
-			{
-				document.getElementById("mySidenav").style.width = "0";
-				document.getElementById("main").style.marginLeft = "0";
-			}
-		</script>
+<h1>// Clinical Projects</h1>
 
-		<div id="main">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Test Automation //</div>
+          <div class="panel-body">
+            Using Microsoft's Coded UI Test libraries and a little knowledge of C#, I was able to deliver a test automation capability to a large healthcare software provider. Regression tests that previously required several weeks' manual work could be completed within a few hours. As it's not always possible to perfectly replicate user actions and get the same level of test coverage, automation was mainly used for testing the core functionality of applications.</br></br>
 
-			<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; Menu</span>
+            Advantages:
+            <ul>
+              <li>Best used for automating regression tests against core features of an application, to avoid duplication of manual testing efforts.</li>
+            </ul>
+            Disadvantages:
+            <ul>
+              <li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
+              <li>The above point also means the creators and maintainers of the automation scripts would need some familiarity with the scripting language.</li>
+              <li>Automation scripts must be created for each feature added during a development iteration, which requires performing regression tests manually anyway.</li>
+            </ul>
+            We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
+          </div>
+        </div>
+      </div>
 
-			<h1>//clinical and healthcare-related software</h2>
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Web Services //</div>
+          <div class="panel-body">
+            Used for passing of data between several nationally-deployed clinical systems. The Web Service architecture followed the SOLID principles of software design, being loosely coupled across five layers:
+            <ul>
+              <li>API repository</li>
+              <li>Web Service helpers</li>
+              <li>Data access: Data response</li>
+              <li>Data access: Data response body</li>
+              <li>Data access: Data response items</li>
+            </ul>
 
-			<div id="article">
-				<h2>Test Automation</h2>
-				Using Microsoft's Coded UI Test libraries and a little knowledge of C#, I was able to deliver a test automation capability to a large healthcare software provider. Regression tests that previously required several weeks' manual work could be completed within a few hours. As it's not always possible to perfectly replicate user actions and get the same level of test coverage, automation was mainly used for testing the core functionality of applications.</br></br>
+            <img src="images/webservice-structure.png"></br></br>
 
-				Advantages:
-				<ul>
-					<li>Best used for automating regression tests against core features of an application, to avoid duplication of manual testing efforts.</li>
-				</ul>
+            The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations. The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
+            Testing and debugging was performed using SoapUI.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-				Disadvantages:
-				<ul>
-					<li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
-					<li>The above point also means the creators and maintainers of the automation scripts would need some familiarity with the scripting language.</li>
-					<li>Automation scripts must be created for each feature added during a development iteration, which requires performing regression tests manually anyway.</li>
-				</ul>
-				We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
-			</div>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">// Messaging Dashboard //</div>
+        <div class="panel-body">
+          Uses:
+          <ul>
+            <li>ASP.NET MVC 5</li>
+            <li>Entity Framework</li>
+            <li>Service Broker and Stored Procedures</li>
+          </ul>
 
-			<div id="article">
-				<h2>Web Services</h2>
-				Used for passing of data between several nationally-deployed clinical systems. The Web Service architecture followed the SOLID principles of software design, being loosely coupled across five layers:
-				<ul>
-					<li>API repository</li>
-					<li>Web Service helpers</li>
-					<li>Data access: Data response</li>
-					<li>Data access: Data response body</li>
-					<li>Data access: Data response items</li>
-				</ul>
+          <img src="images/messaging-dashboard-index-view.png" width="100%"></br></br>
 
-				<img src="images/webservice-structure.png"></br></br>
-				The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations.  The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
-				Testing and debugging was performed using SoapUI.
-			</div>
+          The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues, enabling the system administrators to more quickly determine the cause of message processing failures. Selected messages could be deleted, resubmitted or moved between Service Broker queues.
+        </div>
+      </div>
+    </div>
 
-			<div id="article">
-				<h2>Messaging Dashboard</h2>
-				Uses:
-				<ul>
-					<li>ASP.NET MVC 5</li>
-					<li>Entity Framework</li>
-					<li>Service Broker and Stored Procedures</li>
-				</ul>
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">// Messaging Metrics Dashboard //</div>
+        <div class="panel-body">
+          This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.
+          The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br></br>
 
-				<img src="images/messaging-dashboard-index-view.png" width="60%"></br></br>
+          <img src="images/messaging-metrics-dashboard-v2-pub.png" width="80%"></br></br>
 
-				The Messaging Dashboard interprets and displays the contents of Service Broker's error and duplicate message queues, enabling the system administrators to more quickly determine the cause of message processing failures. Selected messages could be deleted, resubmitted or moved between Service Broker queues.
-			</div>
+          Uses:
+          <ul>
+            <li>ASP.NET MVC 5</li>
+            <li>Entity Framework</li>
+            <li>amCharts and Chart.js</li>
+          </ul>
+          <a href="articles/messaging-metrics-dashboard.html">Development notes here...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-			<div id="article">
-				<h2>Messaging Metrics Dashboard</h2>
-				This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.</br></br>
-
-				<img src="images/messaging-metrics-dashboard-v2-pub.png" width="60%"></br></br>
-
-				The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br>
-				Uses:
-				<ul>
-					<li>ASP.NET MVC 5</li>
-					<li>Entity Framework</li>
-					<li>amCharts and Chart.js</li>
-				</ul>
-
-				<a href="articles/messaging-metrics-dashboard.html">Development notes here...</a>
-			</div>
-
-			<div id="footer">
-				Updated: April 2017
-			</div>
-
-		</div>
-
-	</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

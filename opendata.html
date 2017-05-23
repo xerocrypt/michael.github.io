@@ -1,327 +1,343 @@
-<html>
-    <head>
-        <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="scripts/amcharts/amcharts.js"></script>
-        <script type="text/javascript" src="scripts/amcharts/serial.js"></script>
-        <script type="text/javascript" src="scripts/amcharts/pie.js"></script>
-        <script type="text/javascript" src="scripts/amcharts/plugins/dataloader/dataloader.js"></script>
-        <script type="text/javascript" src="scripts/amcharts/themes/light.js"></script>
-        <script type="text/javascript" src="scripts/chart.js"></script>
-	    <link rel="stylesheet" type="text/css" href="css/main.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <body>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <img class="centerimage" src="images/sp-profile.jpg" width="10%">
-            <a href="index.html">// Home</a>
-            <a href="about.html">// About</a>
-            <a href="healthcare.html">// Clinical Projects</a>
-            <a href="resources.html">// Resources</a>
-            <a href="toolkit.html">// Toolkit</a>
+
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="scripts/amcharts/amcharts.js"></script>
+    <script type="text/javascript" src="scripts/amcharts/serial.js"></script>
+    <script type="text/javascript" src="scripts/amcharts/pie.js"></script>
+    <script type="text/javascript" src="scripts/amcharts/plugins/dataloader/dataloader.js"></script>
+    <script type="text/javascript" src="scripts/amcharts/themes/light.js"></script>
+    <script type="text/javascript" src="scripts/chart.js"></script>
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>openData</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">// xerocrypt //</a>
         </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="healthcare.html">Clinical Projects</a></li>
+            <li><a href="articles/index.html">Articles</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="toolkit.html">Toolkit</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-      <script>
-          function openNav()
-          {
-              document.getElementById("mySidenav").style.width = "100%";
-              document.getElementById("main").style.marginLeft = "100%";
-          }
+<h1>// OpenData</h1>
 
-          function closeNav()
-          {
-              document.getElementById("mySidenav").style.width = "0";
-              document.getElementById("main").style.marginLeft = "0";
-          }
-      </script>
-
-      <div id="main">
-
-          <script>
-            var chart = AmCharts.makeChart("chartdiv", {
-	               "type": "serial",
-                   "theme": "light",
-	               "categoryField": "week",
-	               "rotate": true,
-	               "startDuration": 1,
-	               "categoryAxis": {
-		                     "gridPosition": "start",
-		                     "position": "left"
-	               },
-	               "trendLines": [],
-	               "graphs": [
-		           {
-                       "balloonText": "Clients:[[value]]",
-			           "fillAlphas": 0.8,
-			           "id": "AmGraph-1",
-			           "lineAlpha": 0.2,
-                       "title": "Clients",
-                       "type": "column",
-                       "valueField": "clients"
-                   },
-                   {
-                       "balloonText": "Expenses:[[value]]",
-                       "fillAlphas": 0.8,
-                       "id": "AmGraph-2",
-                       "lineAlpha": 0.2,
-                       "title": "Expenses",
-                       "type": "column",
-                       "valueField": "expenses"
-		            }
-	                ],
-                    "guides": [],
-	                "valueAxes": [
-                        {
-                            "id": "ValueAxis-1",
-                            "position": "top",
-                            "axisAlpha": 0
-                        }
-                        ],
-                        "allLabels": [],
-                        "balloon": {},
-                        "titles": [],
-                        "dataProvider": [
-                            {
-                                "week": "March 1",
-                                "clients": 23,
-                                "expenses": 18.1
-                            },
-                            {
-                                "week": "March 2",
-                                "clients": 26,
-                                "expenses": 22.8
-                            },
-                            {
-                                "week": "March 3",
-                                "clients": 30,
-                                "expenses": 23.9
-                            },
-                            {
-                                "week": "March 4",
-                                "clients": 30,
-                                "expenses": 23.9
-                            },
-                            {
-                                "week": "March 5",
-                                "clients": 30,
-                                "expenses": 23.9
-                            },
-                            {
-                                "week": "March 9",
-                                "clients": 24,
-                                "expenses": 25
-                            }
-                        ],
-                        "export": {
-                            "enabled": true
-                        }
-                    });
-          </script>
-
-          <script>
-            var chart = AmCharts.makeChart( "chartdiv2", {
-                "type": "pie",
-                "theme": "light",
-                "dataProvider": [ {
-                    "title": "Accommodation",
-                    "value": 4852
-                }, {
-                    "title": "Food",
-                    "value": 9899
-                },
-                {
-                    "title": "Clothing",
-                    "value": 9899
-                },
-                {
-                    "title": "Accessories",
-                    "value": 9899
-                },
-                {
-                    "title": "Other Items",
-                    "value": 9899
-                }
-                ],
-                "titleField": "title",
-                "valueField": "value",
-                "labelRadius": 5,
-
-                "radius": "40%",
-                "innerRadius": "80%",
-                "labelText": "[[title]]",
-                "export": {
-                    "enabled": true
-                }
-            });
-          </script>
-
-
-          <script>
-          var chart = AmCharts.makeChart( "chartdiv3", {
-              "type": "pie",
-              "theme": "light",
-              "dataProvider": [ {
-                  "title": "Prevented",
-                  "value": 68
-              }, {
-                  "title": "Accommodated",
-                  "value": 15
-              },
+<script>
+  var chart = AmCharts.makeChart("chartdiv", {
+       "type": "serial",
+         "theme": "light",
+       "categoryField": "week",
+       "rotate": true,
+       "startDuration": 1,
+       "categoryAxis": {
+               "gridPosition": "start",
+               "position": "left"
+       },
+       "trendLines": [],
+       "graphs": [
+     {
+             "balloonText": "Clients:[[value]]",
+       "fillAlphas": 0.8,
+       "id": "AmGraph-1",
+       "lineAlpha": 0.2,
+             "title": "Clients",
+             "type": "column",
+             "valueField": "clients"
+         },
+         {
+             "balloonText": "Expenses:[[value]]",
+             "fillAlphas": 0.8,
+             "id": "AmGraph-2",
+             "lineAlpha": 0.2,
+             "title": "Expenses",
+             "type": "column",
+             "valueField": "expenses"
+      }
+        ],
+          "guides": [],
+        "valueAxes": [
               {
-                  "title": "Accommodated (Final Duty)",
-                  "value": 13.79
-              },
-              {
-                  "title": "Other",
-                  "value": 3.21
+                  "id": "ValueAxis-1",
+                  "position": "top",
+                  "axisAlpha": 0
               }
               ],
-              "titleField": "title",
-              "valueField": "value",
-              "labelRadius": 5,
-
-              "radius": "40%",
-              "innerRadius": "80%",
-              "labelText": "[[title]]",
+              "allLabels": [],
+              "balloon": {},
+              "titles": [],
+              "dataProvider": [
+                  {
+                      "week": "March 1",
+                      "clients": 23,
+                      "expenses": 18.1
+                  },
+                  {
+                      "week": "March 2",
+                      "clients": 26,
+                      "expenses": 22.8
+                  },
+                  {
+                      "week": "March 3",
+                      "clients": 30,
+                      "expenses": 23.9
+                  },
+                  {
+                      "week": "March 4",
+                      "clients": 30,
+                      "expenses": 23.9
+                  },
+                  {
+                      "week": "March 5",
+                      "clients": 30,
+                      "expenses": 23.9
+                  },
+                  {
+                      "week": "March 9",
+                      "clients": 24,
+                      "expenses": 25
+                  }
+              ],
               "export": {
                   "enabled": true
               }
           });
-          </script>
+</script>
 
-          <script>
-          var chart = AmCharts.makeChart("chartdiv4", {
-              "type": "serial",
-              "theme": "light",
-              "dataProvider": [{
-                  "date": "2009-10-02",
-                  "value": 5
-              }, {
-                  "date": "2009-10-03",
-                  "value": 15
-              }, {
-                  "date": "2009-10-04",
-                  "value": 13
-              }, {
-                  "date": "2009-10-05",
-                  "value": 17
-              }, {
-                  "date": "2009-10-06",
-                  "value": 15
-              }, {
-                  "date": "2009-10-09",
-                  "value": 19
-              }, {
-                  "date": "2009-10-10",
-                  "value": 21
-              }, {
-                  "date": "2009-10-11",
-                  "value": 20
-              }, {
-                  "date": "2009-11-04",
-                  "value": 26
-              }],
-              "valueAxes": [{
-                  "axisAlpha": 0,
-                  "dashLength": 4,
-                  "position": "left"
-              }],
-              "graphs": [{
-                  "bulletSize": 14,
-                  "valueField": "value",
-                   "balloonText":"<div style='margin:10px; text-align:left;'><span style='font-size:13px'>[[category]]</span><br><span style='font-size:18px'>Value:[[value]]</span>",
-              }],
-              "marginTop": 20,
-              "marginRight": 70,
-              "marginLeft": 40,
-              "marginBottom": 20,
-              "chartCursor": {
-                  "graphBulletSize": 1.5,
-               	"zoomable":false,
-                	"valueZoomable":false,
-                   "cursorAlpha":0,
-                   "valueLineEnabled":true,
-                   "valueLineBalloonEnabled":true,
-                   "valueLineAlpha":0.2
-              },
-              "autoMargins": false,
-              "dataDateFormat": "YYYY-MM-DD",
-              "categoryField": "date",
-              "valueScrollbar":{
-                "offset":30
-              },
-              "categoryAxis": {
-                  "parseDates": true,
-                  "axisAlpha": 0,
-                  "gridAlpha": 0,
-                  "inside": true,
-                  "tickLength": 0
-              },
-              "export": {
-                  "enabled": true
-              }
-          });
-          </script>
+<script>
+  var chart = AmCharts.makeChart( "chartdiv2", {
+      "type": "pie",
+      "theme": "light",
+      "dataProvider": [ {
+          "title": "Accommodation",
+          "value": 4852
+      }, {
+          "title": "Food",
+          "value": 9899
+      },
+      {
+          "title": "Clothing",
+          "value": 9899
+      },
+      {
+          "title": "Accessories",
+          "value": 9899
+      },
+      {
+          "title": "Other Items",
+          "value": 9899
+      }
+      ],
+      "titleField": "title",
+      "valueField": "value",
+      "labelRadius": 5,
+
+      "radius": "40%",
+      "innerRadius": "80%",
+      "labelText": "[[title]]",
+      "export": {
+          "enabled": true
+      }
+  });
+</script>
 
 
-          <span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; menu</span>
+<script>
+var chart = AmCharts.makeChart( "chartdiv3", {
+    "type": "pie",
+    "theme": "light",
+    "dataProvider": [ {
+        "title": "Prevented",
+        "value": 68
+    }, {
+        "title": "Accommodated",
+        "value": 15
+    },
+    {
+        "title": "Accommodated (Final Duty)",
+        "value": 13.79
+    },
+    {
+        "title": "Other",
+        "value": 3.21
+    }
+    ],
+    "titleField": "title",
+    "valueField": "value",
+    "labelRadius": 5,
 
-          <h1>How We Are Doing</h1>
+    "radius": "40%",
+    "innerRadius": "80%",
+    "labelText": "[[title]]",
+    "export": {
+        "enabled": true
+    }
+});
+</script>
 
-          <div id="article">
-              This graph provides an overview of how we are doing at the centre. It shows the number of clients and the allocation of resources.
+<script>
+var chart = AmCharts.makeChart("chartdiv4", {
+    "type": "serial",
+    "theme": "light",
+    "dataProvider": [{
+        "date": "2009-10-02",
+        "value": 5
+    }, {
+        "date": "2009-10-03",
+        "value": 15
+    }, {
+        "date": "2009-10-04",
+        "value": 13
+    }, {
+        "date": "2009-10-05",
+        "value": 17
+    }, {
+        "date": "2009-10-06",
+        "value": 15
+    }, {
+        "date": "2009-10-09",
+        "value": 19
+    }, {
+        "date": "2009-10-10",
+        "value": 21
+    }, {
+        "date": "2009-10-11",
+        "value": 20
+    }, {
+        "date": "2009-11-04",
+        "value": 26
+    }],
+    "valueAxes": [{
+        "axisAlpha": 0,
+        "dashLength": 4,
+        "position": "left"
+    }],
+    "graphs": [{
+        "bulletSize": 14,
+        "valueField": "value",
+         "balloonText":"<div style='margin:10px; text-align:left;'><span style='font-size:13px'>[[category]]</span><br><span style='font-size:18px'>Value:[[value]]</span>",
+    }],
+    "marginTop": 20,
+    "marginRight": 70,
+    "marginLeft": 40,
+    "marginBottom": 20,
+    "chartCursor": {
+        "graphBulletSize": 1.5,
+      "zoomable":false,
+        "valueZoomable":false,
+         "cursorAlpha":0,
+         "valueLineEnabled":true,
+         "valueLineBalloonEnabled":true,
+         "valueLineAlpha":0.2
+    },
+    "autoMargins": false,
+    "dataDateFormat": "YYYY-MM-DD",
+    "categoryField": "date",
+    "valueScrollbar":{
+      "offset":30
+    },
+    "categoryAxis": {
+        "parseDates": true,
+        "axisAlpha": 0,
+        "gridAlpha": 0,
+        "inside": true,
+        "tickLength": 0
+    },
+    "export": {
+        "enabled": true
+    }
+});
+</script>
+
+
+
+
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Number of Clients //</div>
+          <div class="panel-body">
+            Shows the number of clients that were referred to the night shelter by week. While this  isn't indicative of the number of homeless people around Gwent/Newport, it does indicate the number of people being assigned interim accommodation through the local authorities. <b>[Dummy Data]</b>.
+            <div id="chartdiv" style="min-width: 00px; max-width: 100%; height: 250px; left: 0px"></div></br></br>
           </div>
-
-          <div id="container">
-
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                  <td width="50%">
-                      <h2>Number of Clients</h2>
-                      <div id="article">
-                          Shows the number of clients that were referred to the night shelter by week. While this  isn't indicative of the number of homeless people around Gwent/Newport, it does indicate the number of people being assigned interim accommodation through the local authorities. <b>[Dummy Data]</b>.
-                      </div>
-                      <div id="chartdiv" style="min-width: 00px; max-width: 100%; height: 250px; left: 0px"></div></br></br>
-                  </td>
-
-                  <td width="50%">
-                      <h2>Resource Allocation</h2>
-                      <div id="article">
-                          Shows how we allocate resources. Very little is spent on management or administration, as we're not running a large organisation with a corporate structure. In fact, the night shelter spends most the finances on maintaining the property. With the other night shelter, the vast majority is spend on consumables. <b>[Dummy Data]</b>.
-                      </div>
-                      <div id="chartdiv2" style="min-width: 0px; max-width: 100%; height: 250px;"></div></br></br>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td>
-                      <h2>Housing (Wales) Act 2014 Outcomes</h2>
-                      <div id="article">
-                          These are rough and informal statistics regarding the 2015/2016 outcomes of the Housing (Wales) Act 2014. Most applications for assessment resulted in the prevention of homelessness. In the vast majority of cases where this outcome wasn't achieved, accommodation was provided. The failure rate is around 3.21%.
-                      </div>
-                      <div id="chartdiv3" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
-                  </td>
-                  <td>
-                      <h2>Clients</h2>
-                      <div id="article">
-                          Placeholder. [Dummy Data].
-                      </div>
-                      <div id="chartdiv4" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
-                  </td>
-
-              </tr>
-          </table>
-
+        </div>
       </div>
 
-</br></br>
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Resource Allocation //</div>
+          <div class="panel-body">
+            Shows how we allocate resources. Very little is spent on management or administration, as we're not running a large organisation with a corporate structure. In fact, the night shelter spends most the finances on maintaining the property. With the other night shelter, the vast majority is spend on consumables. <b>[Dummy Data]</b>.
+            <div id="chartdiv2" style="min-width: 0px; max-width: 100%; height: 250px;"></div></br></br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div id="footer">
-      Michael, May 2017
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">// Housing (Wales) Act 2014 Outcomes //</div>
+        <div class="panel-body">
+          These are rough and informal statistics regarding the 2015/2016 outcomes of the Housing (Wales) Act 2014. Most applications for assessment resulted in the prevention of homelessness. In the vast majority of cases where this outcome wasn't achieved, accommodation was provided. The failure rate is around 3.21%.
+          <div id="chartdiv3" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
+        </div>
+      </div>
     </div>
 
-</div>
 
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">//  Clients //</div>
+        <div class="panel-body">
+          Placeholder. [Dummy Data].
+          <div id="chartdiv4" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
   </body>
-
 </html>

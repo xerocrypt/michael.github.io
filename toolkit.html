@@ -1,102 +1,136 @@
-<html>
-	<head>
-		<title>//toolkit</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Toolkit</title>
 
-	<body>
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
-			<a href="index.html">// Home</a>
-			<a href="about.html">// About</a>
-			<a href="healthcare.html">// Clinical Projects</a>
-			<a href="resources.html">// Resources</a>
-			<a href="toolkit.html">// Toolkit</a>
-		</div>
- 
-		<script>
-			function openNav() 
-			{
-				document.getElementById("mySidenav").style.width = "100%";
-				document.getElementById("main").style.marginLeft = "100%";
-			}
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-			function closeNav() 
-			{
-				document.getElementById("mySidenav").style.width = "0";
-				document.getElementById("main").style.marginLeft = "0";
-			}
-		</script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
 
-		<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; Menu</span>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="healthcare.html">Clinical Projects</a></li>
+            <li><a href="articles/index.html">Articles</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li class="active"><a href="toolkit.html">Toolkit</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-		<div id="main">
-	
-			<h1>Toolkit</h1>
-	
-			<div id="article">
-				<h2>Editors and Developer Environments</h2>
-      
-				<h3>Geany</h3>
-				An alternative to Notepad++ for Linux. Like Notepad++, Geany supports all the commonly-used programming and scripting languages, and couild be configured to launnch compiler commands.</br>
-				<button onclick="window.location.href='https://www.geany.org/'">Go...</button></br></br>
-	  
-				<h3>Notepad++</h3>
-				<button onclick="window.location.href='https://notepad-plus-plus.org/'">Go...</button></br></br>
+<h1>// Toolkit</h1>
 
-				<h3>Visual Studio</h3>
-				The main developer environment I use.</br>
-				<button onclick="window.location.href='https://www.visualstudio.com/'">Go...</button></br></br>
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Editors and Developer Environments //</div>
+          <div class="panel-body">
+    				<h3>Geany</h3>
+    				An alternative to Notepad++ for Linux. Like Notepad++, Geany supports all the commonly-used programming and scripting languages, and couild be configured to launnch compiler commands.</br>
+            <a href="https://www.geany.org/" class="btn btn-info" role="button">Go...</a>
 
-				<h3>Visual Studio Code</h3>
-				Lightweight and open source code editor. Originally released for HTML/JavaScript development, there are extensions for additional languages..</br>
-				<button onclick="window.location.href='https://www.visualstudio.com/'">Go...</button>
-			</div>
+    				<h3>Notepad++</h3>
+            <a href="https://notepad-plus-plus.org/" class="btn btn-info" role="button">Go...</a>
+
+    				<h3>Visual Studio</h3>
+    				The main developer environment I use.</br>
+            <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
+
+    				<h3>Visual Studio Code</h3>
+    				Lightweight and open source code editor. Originally released for HTML/JavaScript development, there are extensions for additional languages..</br>
+            <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Database Tools //</div>
+          <div class="panel-body">
+            <h2>Database Tools</h2>
+
+    				<h3>Redgate SQL Scripts Manager</h3>
+    				One of the freely available tools developed by Redgate. Handy for storing and managing SQL scripts.</br>
+            <a href="http://www.red-gate.com/products/dba/sql-scripts-manager/" class="btn btn-info" role="button">Go...</a>
 
 
-			<div id="article">
-				<h2>Database Tools</h2>
+    				<h3>SQL Server Management Studio 2014/2016</h3>
+    				The standard way to access and manage database objects on SQL Server.</br>
+            <a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-				<h3>Redgate SQL Scripts Manager</h3>
-				One of the freely available tools developed by Redgate. Handy for storing and managing SQL scripts.</br>
-				<button onclick="window.location.href='http://www.red-gate.com/products/dba/sql-scripts-manager/'">Go...</button></br></br>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">// Software Testing and Debugging //</div>
+        <div class="panel-body">
+    				<h3>SoapUI</h3>
+            <a href="https://www.soapui.org/" class="btn btn-info" role="button">Go...</a>
 
-				<h3>SQL Server Management Studio 2014/2016</h3>
-				The standard way to access and manage database objects on SQL Server.</br>
-				<button onclick="window.location.href='https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms'">Go...</button>
-			</div>
+    				<h3>Telerik Fiddler</h3>
+    				Debugging proxy for Web applications. Enables the developer to inspect request and response traffic.</br>
+            <a href="http://www.telerik.com/fiddler" class="btn btn-info" role="button">Go...</a>
+        </div>
+      </div>
+    </div>
 
-			<div id="article">
-				<h2>Software Testing and Debugging</h2>
-      
-				<h3>SoapUI</h3>
-				<button onclick="window.location.href='https://www.soapui.org/'">Go...</button></br></br>
 
-				<h3>Telerik Fiddler</h3>
-				Debugging proxy for Web applications. Enables the developer to inspect request and response traffic.</br>
-				<button onclick="window.location.href='http://www.telerik.com/fiddler'">Go...</button>
-			</div>
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">// Application Lifecycle Management //</div>
+        <div class="panel-body">
+          <h3>Git Desktop Client</h3>
+          The official GitHub desktop client.</br>
+          <a href="https://github.com/xerocrypt/Python" class="btn btn-info" role="button">Go...</a>
 
-			<div id="article">
-				<h2>Application Lifecycle Management</h2>
 
-				<h3>Git Desktop Client</h3>
-				The official GitHub desktop client.</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/Python'">Go...</button></br></br>
+          <h3>Team Services and TFS</h3>
+          <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
 
-				<h3>Team Services and TFS</h3>
-				<button onclick="window.location.href='https://www.visualstudio.com/'">Go...</button></br></br>
+          <h3>Trello</h3>
+          <a href="https://www.trello.com" class="btn btn-info" role="button">Go...</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-				<h3>Trello</h3>
-				<button onclick="window.location.href='https://www.trello.com'">Go...</button>
-			</div>
 
-			<div id="footer">
-				Updated: April 2017
-			</div>
 
-		</div>
-	
-	</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

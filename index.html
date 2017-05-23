@@ -1,115 +1,169 @@
-<html>
-	<head>
-		<title>Home</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Michael's Home Page</title>
 
-	<body>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
-			<a href="index.html">// Home</a>
-			<a href="about.html">// About</a>
-			<a href="healthcare.html">// Clinical Projects</a>
-			<a href="resources.html">// Resources</a>
-			<a href="toolkit.html">// Toolkit</a>
-		</div>
-		
-		<script>
-			function openNav() 
-			{
-				document.getElementById("mySidenav").style.width = "100%";
-				document.getElementById("main").style.marginLeft = "100%";
-			}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
 
-			function closeNav() 
-			{
-				document.getElementById("mySidenav").style.width = "0";
-				document.getElementById("main").style.marginLeft = "0";
-			}
-		</script>
- 
-		<div id="main">
- 
-			<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; menu</span>
- 
-			<h1>//michael.xerocrypt</h1>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="healthcare.html">Clinical Projects</a></li>
+            <li><a href="articles/index.html">Articles</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="toolkit.html">Toolkit</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-			<div id="article">
-				<img src="images/sp-profile.jpg" width="15%"></br></br>
-			
-				Each repository and project has its own wiki. Consult those for technical information.</br></br>
-				<a href="articles/index.html">Articles are also posted here...</a>
-			</div>
- 
-			<div id="article">
-				<h2>// Misc //</h2>
-				This repository contains miscellaneous .NET code and hacks that other developers might find useful. The wiki also provides some general reference material.
-				</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/Misc'">Go...</button>
-			</div>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>// Michael //</h1>
 
-			<div id="article">
-				<h2>// NEXUS-CMS-Client //</h2>
-				This was going to be a case management system for malware analysis, an unfinished project I started as an undergraduate. The client is installed on multiple workstations in a malware analysis department, and is used for the submission, retrieval and updating of records on a MySQL server. Planned features included integration with Maltego Casefile and the Volatility Framework.
-				</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/NEXUS-CMS-Client'">Go...</button>
-			</div>
+        <img src="images/sp-profile.jpg" width="150" height="150">
+      </div>
+    </div>
 
-			<div id="article">
-				<h2>// NEXUS-Informatix //</h2>
-				A variation of the NEXUS case management system application, also based on Windows Forms and MySQL.</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/NEXUS-Informatix'">Go...</button>
-			</div>
 
-			<div id="article">
-				<h2>// PacketCrafter //</h2>
-				A C# application for manipulating TCP and HTTP packets. This is missing the pcap.net component for sending raw packets, so it manipulates only TCP and application layer packets.</br></br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/PacketCrafter'">Go...</button>
-			</div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        Each project has its own repository and wiki.</br>
+      </div>
 
-			<div id="article">
-				<h2>// SmartCard-Communications //</h2>
-				<img src="images/basiccard-dev-kit-small.jpg" width="30%"></br></br>
-				This repo contains various Python scripts for an unfinished prototype application being developed as part of a university group project. The plan was to use SmartCards to store cryptographic data for VPN communications between healthcare sites.</br>
-				This has become a placholder for my SmartCard research.</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/SmartCard-Communications'">Go...</button>
-			</div>
 
-			<div id="article">
-				<h2>// Python //</h2>
-				Various Python scripts. Here you'll find examples of how to use various Python modules to extend core functions. The wiki will be updated to include information on modules used.</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/Python'">Go...</button>
-			</div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Miscellaneous //</div>
+          <div class="panel-body">
+            This repository contains miscellaneous .NET code and hacks that other developers might find useful. The wiki also provides some general reference material.</br></br>
+            <a href="https://github.com/xerocrypt/Misc" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
 
-			<div id="article">
-				<h2>// XeroDrive //</h2>
-				<img src="images/xerodrive-ui.png" width="50%"></br></br>
-				Front-end for the <i>dd</i> and <i>foremost</i> tools. Should be capable of providing a GUI for volume imaging and file carving over an SSH connection in the command line.</br></br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/XeroDrive'">Go...</button>
-			</div>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// NEXUS-CMS Client //</div>
+          <div class="panel-body">
+            This was going to be a case management system for malware analysis, an unfinished project I started as an undergraduate. The client is installed on multiple workstations in a malware analysis department, and is used for the submission, retrieval and updating of records on a MySQL server. Planned features included integration with Maltego Casefile and the Volatility Framework.</br></br>
+            <a href="https://github.com/xerocrypt/NEXUS-CMS-Client" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
 
-			<div id="article">
-				<h2>// Chart-API-Tests //</h2>
-				<img src="images/chartjs-demo.png" width="40%"></br></br>
-				Demonstration of several JavaScript charting libraries. Here you'll find code for:
-				<ul>
-					<li>amCharts</li>
-					<li>Highcharts</li>
-					<li>Chart.js</li>
-					<li>Smoothie.js</li>
-					<li>jqPlot</li>
-				</ul>
-				</br>
-				<button onclick="window.location.href='https://github.com/xerocrypt/Chart-API-Tests'">Go...</button>
-			</div>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// NEXUS Informatix //</div>
+          <div class="panel-body">
+            A variation of the NEXUS case management system application, also based on Windows Forms and MySQL.</br></br>
+            <a href="https://github.com/xerocrypt/NEXUS-Informatix" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-			<div id="footer">
-			Updated: April 2017
-			</div>
-	
-		</div>
-    
-	</body>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Packet Crafter //</div>
+          <div class="panel-body">
+            A C# application for manipulating TCP and HTTP packets. This is missing the pcap.net component for sending raw packets, so it manipulates only TCP and application layer packets.</br></br>
+            <a href="https://github.com/xerocrypt/PacketCrafter" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// SmartCard Communications //</div>
+          <div class="panel-body">
+            <img src="images/basiccard-dev-kit-small.jpg" width="70%"></br></br>
+            This repo contains various Python scripts for an unfinished prototype application being developed as part of a university group project. The plan was to use SmartCards to store cryptographic data for VPN communications between healthcare sites.
+            This has become a placholder for my SmartCard research.</br></br>
+            <a href="https://github.com/xerocrypt/SmartCard-Communications" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Python //</div>
+          <div class="panel-body">
+            Various Python scripts. Here you'll find examples of how to use various Python modules to extend core functions. The wiki will be updated to include information on modules used.</br></br>
+            <a href="https://github.com/xerocrypt/Python" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// XeroDrive //</div>
+          <div class="panel-body">
+            <img src="images/xerodrive-ui.png" width="70%"></br></br>
+            Front-end for the dd and foremost tools. Should be capable of providing a GUI for volume imaging and file carving over an SSH connection in the command line.</br></br>
+            <a href="https://github.com/xerocrypt/XeroDrive" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Chart API Tests //</div>
+          <div class="panel-body">
+            <img src="images/chartjs-demo.png" width="70%"></br></br>
+            Demonstration of several JavaScript charting libraries. Here you'll find code for:
+            <ul>
+              <li>amCharts</li>
+              <li>Highcharts</li>
+              <li>Chart.js</li>
+              <li>Smoothie.js</li>
+              <li>jqPlot</li>
+            </ul></br>
+
+            <a href="https://github.com/xerocrypt/Chart-API-Tests" class="btn btn-info" role="button">Go...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

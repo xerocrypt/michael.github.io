@@ -1,80 +1,99 @@
-<html>
-	<head>
-		<title>//resources</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Resources</title>
 
-	<body>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<img class="centerimage" src="images/sp-profile.jpg" width="10%">
-			<a href="index.html">// Home</a>
-			<a href="about.html">// About</a>
-			<a href="healthcare.html">// Clinical Projects</a>
-			<a href="resources.html">// Resources</a>
-			<a href="toolkit.html">// Toolkit</a>
-		</div>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="healthcare.html">Clinical Projects</a></li>
+            <li><a href="articles/index.html">Articles</a></li>
+            <li class="active"><a href="resources.html">Resources</a></li>
+            <li><a href="toolkit.html">Toolkit</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<h1>// Resources</h1>
+
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <b>Code Complete</b></br>
+            (2nd Edition). 2004. McConnell, Steve.</br></br>
+
+            <b>Eloquent JavaScript</b></br>
+            HAVERBEKE, M. 2014. Eloquent JavaScript. Second Edition. Chapter 4 - Data Structures: Objects and Arrays. [WWW]. <a href="http://eloquentjavascript.net/04_data.html">http://eloquentjavascript.net/04_data.html</a>. 17th May 2017.</br></br>
+
+            <b>Entity Framework Tutorial</b></br>
+            ENTITYFRAMEWORKTUTORIAL.NET. 2016. Entity Framework Tutorial. [WWW]. <a href="http://www.entityframeworktutorial.net">www.entityframeworktutorial.net</a>. 21st April 2017.</br></br>
+
+            <b>jQuery</b></br>
+            JQUERY FOUNDATION. 2017. jQuery API Documentation. jQuery.ajax(). [WWW]. <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a>. 19th April 2017.</br></br>
+
+            <b>TutorialsPoint: Learn AngularJS</br></br>
+            TUTORIALSPOINT. 2017. Learn AngularJS. [WWW]. <a href="https://www.tutorialspoint.com/angularjs/index.htm">https://www.tutorialspoint.com/angularjs/index.htm</a>. April 2017.</br></br>
+
+            <b>TutorialsPoint: Learn Node JS</b></br>
+            TUTORIALSPOINT. 2017. Learn Node JS. [WWW]. <a href="https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm">https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm</a>. April 2017.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">// Links //</div>
+          <div class="panel-body">
+            <a href="http://www.entityframeworktutorial.net">Entity Framework Tutorial</a></br>
+    				<a href="https://www.meetup.com/MSFT-Stack/">MSFT Stack @ Meetup.com</a></br>
+    				<a href="http://openehr.org/ckm/">openEHR Clinical Knowledge Manager</a></br>
+    				<a href="http://stackoverflow.com/documentation">StackOverflow Dodumentation</a></br>
+    				<a href="https://trello.com">Trello</a></br>
+    				<a href="https://www.tutorialspoint.com/">TutorialsPoint</a></br>
+    				<a href="https://www.w3schools.com/">W3Schools.com</a></br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-		<script>
-			function openNav()
-			{
-				document.getElementById("mySidenav").style.width = "100%";
-				document.getElementById("main").style.marginLeft = "100%";
-			}
-
-			function closeNav()
-			{
-				document.getElementById("mySidenav").style.width = "0";
-				document.getElementById("main").style.marginLeft = "0";
-			}
-		</script>
-
-
-		<div id="main">
-
-			<span style="font-size:30px;cursor:pointer;font-family:'TitleFont';background-color:#7a00cc;color:#FFFFFF;" onclick="openNav()">&#9776; Menu</span>
-
-			<h1>Useful Resources</h1>
-
-			<div id="rightpanel">
-				<h2>Links</h2>
-				<a href="http://www.entityframeworktutorial.net">Entity Framework Tutorial</a></br>
-				<a href="https://www.meetup.com/MSFT-Stack/">MSFT Stack @ Meetup.com</a></br>
-				<a href="http://openehr.org/ckm/">openEHR Clinical Knowledge Manager</a></br>
-				<a href="http://stackoverflow.com/documentation">StackOverflow Dodumentation</a></br>
-				<a href="https://trello.com">Trello</a></br>
-				<a href="https://www.tutorialspoint.com/">TutorialsPoint</a></br>
-				<a href="https://www.w3schools.com/">W3Schools.com</a></br>
-			</div>
-
-			<div id="article">
-				<h3>Code Complete</h3>
-				(2nd Edition). 2004. McConnell, Steve.</br></br>
-
-				<h3>Eloquent JavaScript</h3>
-				HAVERBEKE, M. 2014. <i>Eloquent JavaScript</i>. Second Edition. Chapter 4 - Data Structures: Objects and Arrays. [WWW]. <a href="http://eloquentjavascript.net/04_data.html">http://eloquentjavascript.net/04_data.html</a>. 17th May 2017.</br></br>
-
-				<h3>Entity Framework Tutorial</h3>
-				ENTITYFRAMEWORKTUTORIAL.NET. 2016. <i>Entity Framework Tutorial</i>. [WWW]. <a href="http://www.entityframeworktutorial.net">www.entityframeworktutorial.net</a>. 21st April 2017.</br></br>
-
-				<h3>jQuery</h3>
-            	JQUERY FOUNDATION. 2017. jQuery API Documentation. <i>jQuery.ajax()</i>. [WWW]. <a href="http://api.jquery.com/jquery.ajax/">http://api.jquery.com/jquery.ajax/</a>. 19th April 2017.
-
-				<h3>TutorialsPoint: Learn AngularJS</h3>
-				TUTORIALSPOINT. 2017. <i>Learn AngularJS</i>. [WWW]. <a href="https://www.tutorialspoint.com/angularjs/index.htm">https://www.tutorialspoint.com/angularjs/index.htm</a>. April 2017.</br></br>
-
-				<h3>TutorialsPoint: Learn Node JS</h3>
-				TUTORIALSPOINT. 2017. <i>Learn Node JS</i>. [WWW]. <a href="https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm">https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm</a>. April 2017.</br></br>
-
-			</div>
-
-			<div id="footer">
-				Updated: May 2017
-			</div>
-
-		</div>
-
-	</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
