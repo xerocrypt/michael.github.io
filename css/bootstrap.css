@@ -1285,7 +1285,7 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 24px;
+  font-size: 20px;
 }
 h4,
 .h4 {
@@ -5479,6 +5479,21 @@ button.list-group-item-danger.active:focus {
   font-family: 'MyWebFont';
   font-size: 1.2em;
   color: #222222;
+
+  font-size: 1em;
+
+  width: 100%;
+  line-height: 25px;
+
+  border: 2px solid  #6600cc;
+  border-left-width: 15px;
+  top: 0px;
+
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
 }
 .panel-heading {
   font-family: 'TitleFont';

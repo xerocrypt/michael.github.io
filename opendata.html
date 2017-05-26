@@ -56,13 +56,117 @@
       </div>
     </nav>
 
-<h1>// OpenData</h1>
+<h1>// Messaging Metrics</h1>
+
 
 <script>
-  var chart = AmCharts.makeChart("chartdiv", {
+
+    // since v3, chart can accept data in JSON format
+    // if your category axis parses dates, you should only
+    // set date format of your data (dataDateFormat property of AmSerialChart)
+    var thirdChartData = [{"lineColor": "#6600cc", "date": "2017-04-31", "messages": 408},
+                        {"date": "2017-05-01", "messages": 482},
+                        {"date": "2017-05-02", "messages": 562},
+                        {"date": "2017-05-03", "messages": 379},
+                        {"lineColor": "#9966ff", "date": "2017-05-04", "messages": 501},
+                        {"date": "2017-05-05", "messages": 443},
+                        {"date": "2017-05-06", "messages": 405},
+                        {"date": "2017-05-07", "messages": 309, "lineColor": "#333333"},
+                        {"date": "2017-05-08", "messages": 287},
+                        {"date": "2017-05-09", "messages": 485},
+                        {"date": "2017-05-10", "messages": 890},
+                        {"date": "2017-05-11", "messages": 810}
+                        ];
+    var chart;
+
+    AmCharts.ready(function () {
+        // SERIAL CHART
+        chart = new AmCharts.AmSerialChart();
+        chart.dataProvider = thirdChartData;
+
+        chart.categoryField = "date";
+        chart.dataDateFormat = "YYYY-MM-DD";
+
+        var balloon = chart.balloon;
+        balloon.cornerRadius = 6;
+        balloon.adjustBorderColor = false;
+        balloon.horizontalPadding = 10;
+        balloon.verticalPadding = 10;
+
+        // AXES
+        // category axis
+        var categoryAxis = chart.categoryAxis;
+        categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+        categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+        categoryAxis.autoGridCount = false;
+        categoryAxis.gridCount = 50;
+        categoryAxis.gridAlpha = 0;
+        categoryAxis.gridColor = "#000000";
+        categoryAxis.axisColor = "#555555";
+        // we want custom date formatting, so we change it in next line
+        categoryAxis.dateFormats = [{period: 'DD', format: 'DD'},
+                                    {period: 'WW', format: 'MMM DD'},
+                                    {period: 'MM', format: 'MMM'},
+                                    {period: 'YYYY', format: 'YYYY'}];
+
+        // as we have data of different units, we create two different value axes
+        // Duration value axis
+        var messagesAxis = new AmCharts.ValueAxis();
+        messagesAxis.gridAlpha = 0.05;
+        messagesAxis.axisAlpha = 0;
+        // the following line makes this value axis to convert values to duration
+        // it tells the axis what duration unit it should use. mm - minute, hh - hour...
+        messagesAxis.messages = "mm";
+        messagesAxis.messagesUnits = {
+            DD: "d. ",
+            hh: "h ",
+            mm: "min",
+            ss: ""
+        };
+        chart.addValueAxis(messagesAxis);
+
+
+        // GRAPHS
+        // duration graph
+        var durationGraph = new AmCharts.AmGraph();
+        durationGraph.title = "messages";
+        durationGraph.valueField = "messages";
+        durationGraph.type = "line";
+        durationGraph.valueAxis = messagesAxis; // indicate which axis should be used
+        durationGraph.lineColorField = "lineColor";
+        durationGraph.fillColorsField = "lineColor";
+        durationGraph.fillAlphas = 0.3;
+        durationGraph.balloonText = "[[value]]";
+        durationGraph.lineThickness = 1;
+        durationGraph.legendValueText = "[[value]]";
+        durationGraph.bullet = "square";
+        durationGraph.bulletBorderThickness = 1;
+        durationGraph.bulletBorderAlpha = 1;
+        chart.addGraph(durationGraph);
+
+        // CURSOR
+        var chartCursor = new AmCharts.ChartCursor();
+        chartCursor.zoomable = false;
+        chartCursor.categoryBalloonDateFormat = "YYYY MMM DD";
+        chartCursor.cursorAlpha = 0;
+        chart.addChartCursor(chartCursor);
+
+
+        var chartScrollbar = new AmCharts.ChartScrollbar();
+        chart.addChartScrollbar(chartScrollbar);
+
+        // WRITE
+        chart.write("chartdiv");
+    });
+</script>
+
+
+
+<script>
+  var chart = AmCharts.makeChart("chartdiv2", {
        "type": "serial",
          "theme": "light",
-       "categoryField": "week",
+       "categoryField": "healthboard",
        "rotate": true,
        "startDuration": 1,
        "categoryAxis": {
@@ -72,22 +176,22 @@
        "trendLines": [],
        "graphs": [
      {
-             "balloonText": "Clients:[[value]]",
+             "balloonText": "Messages:[[value]]",
        "fillAlphas": 0.8,
        "id": "AmGraph-1",
        "lineAlpha": 0.2,
-             "title": "Clients",
+             "title": "Messages",
              "type": "column",
-             "valueField": "clients"
+             "valueField": "messages"
          },
          {
-             "balloonText": "Expenses:[[value]]",
+             "balloonText": "Processed:[[value]]",
              "fillAlphas": 0.8,
              "id": "AmGraph-2",
              "lineAlpha": 0.2,
-             "title": "Expenses",
+             "title": "Processed",
              "type": "column",
-             "valueField": "expenses"
+             "valueField": "processed"
       }
         ],
           "guides": [],
@@ -103,34 +207,29 @@
               "titles": [],
               "dataProvider": [
                   {
-                      "week": "March 1",
-                      "clients": 23,
-                      "expenses": 18.1
+                      "healthboard": "North",
+                      "messages": 4067,
+                      "processed": 4065
                   },
                   {
-                      "week": "March 2",
-                      "clients": 26,
-                      "expenses": 22.8
+                      "healthboard": "East",
+                      "messages": 3002,
+                      "processed": 3000
                   },
                   {
-                      "week": "March 3",
-                      "clients": 30,
-                      "expenses": 23.9
+                      "healthboard": "West",
+                      "messages": 2087,
+                      "processed": 2050
                   },
                   {
-                      "week": "March 4",
-                      "clients": 30,
-                      "expenses": 23.9
+                      "healthboard": "South East",
+                      "messages": 4523,
+                      "processed": 4522
                   },
                   {
-                      "week": "March 5",
-                      "clients": 30,
-                      "expenses": 23.9
-                  },
-                  {
-                      "week": "March 9",
-                      "clients": 24,
-                      "expenses": 25
+                      "healthboard": "South West",
+                      "messages": 6721,
+                      "processed": 6715
                   }
               ],
               "export": {
@@ -139,62 +238,25 @@
           });
 </script>
 
-<script>
-  var chart = AmCharts.makeChart( "chartdiv2", {
-      "type": "pie",
-      "theme": "light",
-      "dataProvider": [ {
-          "title": "Accommodation",
-          "value": 4852
-      }, {
-          "title": "Food",
-          "value": 9899
-      },
-      {
-          "title": "Clothing",
-          "value": 9899
-      },
-      {
-          "title": "Accessories",
-          "value": 9899
-      },
-      {
-          "title": "Other Items",
-          "value": 9899
-      }
-      ],
-      "titleField": "title",
-      "valueField": "value",
-      "labelRadius": 5,
-
-      "radius": "40%",
-      "innerRadius": "80%",
-      "labelText": "[[title]]",
-      "export": {
-          "enabled": true
-      }
-  });
-</script>
-
 
 <script>
 var chart = AmCharts.makeChart( "chartdiv3", {
     "type": "pie",
     "theme": "light",
     "dataProvider": [ {
-        "title": "Prevented",
-        "value": 68
+        "title": "Pathology",
+        "value": 9987
     }, {
-        "title": "Accommodated",
-        "value": 15
+        "title": "Radiology",
+        "value": 3432
     },
     {
-        "title": "Accommodated (Final Duty)",
-        "value": 13.79
+        "title": "Cardiology",
+        "value": 501
     },
     {
-        "title": "Other",
-        "value": 3.21
+        "title": "Unknown",
+        "value": 28
     }
     ],
     "titleField": "title",
@@ -284,15 +346,13 @@ var chart = AmCharts.makeChart("chartdiv4", {
 });
 </script>
 
-
-
-
     <div class="row">
       <div class="col-sm-5">
         <div class="panel panel-default">
-          <div class="panel-heading">// Number of Clients //</div>
+          <div class="panel-heading">// Total Message Volume //</div>
           <div class="panel-body">
-            Shows the number of clients that were referred to the night shelter by week. While this  isn't indicative of the number of homeless people around Gwent/Newport, it does indicate the number of people being assigned interim accommodation through the local authorities. <b>[Dummy Data]</b>.
+              Shows the total message volume by day.
+              <b>[Dummy Data]</b>.
             <div id="chartdiv" style="min-width: 00px; max-width: 100%; height: 250px; left: 0px"></div></br></br>
           </div>
         </div>
@@ -300,9 +360,9 @@ var chart = AmCharts.makeChart("chartdiv4", {
 
       <div class="col-sm-5">
         <div class="panel panel-default">
-          <div class="panel-heading">// Resource Allocation //</div>
+          <div class="panel-heading">// Messages by Health Board //</div>
           <div class="panel-body">
-            Shows how we allocate resources. Very little is spent on management or administration, as we're not running a large organisation with a corporate structure. In fact, the night shelter spends most the finances on maintaining the property. With the other night shelter, the vast majority is spend on consumables. <b>[Dummy Data]</b>.
+            Shows the message volumes by Health Board. <b>[Dummy Data]</b>.
             <div id="chartdiv2" style="min-width: 0px; max-width: 100%; height: 250px;"></div></br></br>
           </div>
         </div>
@@ -313,9 +373,9 @@ var chart = AmCharts.makeChart("chartdiv4", {
   <div class="row">
     <div class="col-sm-5">
       <div class="panel panel-default">
-        <div class="panel-heading">// Housing (Wales) Act 2014 Outcomes //</div>
+        <div class="panel-heading">// Messages by Type //</div>
         <div class="panel-body">
-          These are rough and informal statistics regarding the 2015/2016 outcomes of the Housing (Wales) Act 2014. Most applications for assessment resulted in the prevention of homelessness. In the vast majority of cases where this outcome wasn't achieved, accommodation was provided. The failure rate is around 3.21%.
+            Shows the number of messages processed by system type. <b>[Dummy DATA]</b>
           <div id="chartdiv3" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
         </div>
       </div>
@@ -326,14 +386,43 @@ var chart = AmCharts.makeChart("chartdiv4", {
       <div class="panel panel-default">
         <div class="panel-heading">//  Clients //</div>
         <div class="panel-body">
-          Placeholder. [Dummy Data].
-          <div id="chartdiv4" style="min-width: 0px; max-width: 100%; height: 250px;"></div>
+
+
+            <div class="tabstrip">
+              <button class="w3-bar-item button" onclick="openView('allmessages')">All Messages</button>
+              <button class="w3-bar-item button" onclick="openView('messagesbyhb')">Messages by HB</button>
+              <button class="w3-bar-item button" onclick="openView('messagesbytype')">Messages by Type</button>
+            </div>
+
+
+            <div id="allmessages" class="w3-container chartview">
+              <div id="article">All Messages</div>
+            </div>
+
+            <div id="messagesbyhb" class="w3-container chartview" style="display:none">
+              <div id="article">Messages by Health Board</div>
+            </div>
+
+            <div id="messagesbytype" class="w3-container chartview" style="display:none">
+                <div id="article">Messages by Type</div>
+            </div>
+
+            <script>
+            function openView(viewName) {
+                var i;
+                var x = document.getElementsByClassName("chartview");
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";
+                }
+                document.getElementById(viewName).style.display = "block";
+            }
+            </script>
+
+
         </div>
       </div>
     </div>
   </div>
-
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.2.1.min.js"></script>
