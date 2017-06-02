@@ -83,7 +83,7 @@
               <li>Data access: Data response items</li>
             </ul>
 
-            <img src="images/webservice-structure.png"></br></br>
+            <img src="images/webservice-structure.png" width="100%"></br></br>
 
             The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations. The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
             Testing and debugging was performed using SoapUI.
@@ -119,7 +119,7 @@
           This ASP.NET MVC 5 application displays graphs showing the number of messages processed by a) Total Message Volume, b) Messages by Organisation, and c) Messages by Type.
           The application works from an Entity Framework model that includes the stored procedures and data objects sent/returned. The stored procedures are called by Web API controllers that return JSON responses to the View layer. In the View layer, JavaScript charts are rendered from the JSON response data.</br></br>
 
-          <img src="images/messaging-metrics-dashboard-v2-pub.png" width="80%"></br></br>
+          <img src="images/clinical-metrics-dashboard-pub.png" width="100%"></br></br>
 
           Uses:
           <ul>
@@ -138,5 +138,8 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <div class="footer">Michael, June 2017</div>
+
   </body>
 </html>

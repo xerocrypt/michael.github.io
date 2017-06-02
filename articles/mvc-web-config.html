@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Web.config</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>ASP.NET MVC Web.config</h1>
+        </div>
+
+        <div id="article">
+            This is the application configuration file in the root directory of the project. Taking the form of an XML file, the sections are explained here. All the configuration elements are contained within the <i>configuration'</i> tag. The top-level elements are:
+            <ul>
+                <li><b>configSections:</b> There is one single entry here, relating to the Entity Framework DLL and Entity Framework version being used.</li>
+                <li><b>connectionStrings:</b> Each connection string for the application's data sources is stored here.</li>
+                <li><b>appSettings:</b> Could be used to store such things as port numbers and API keys.</li>
+                <li><b>system.web:</b> Specifies the .NET version the application is intended for, and the authentication mode.</li>
+                <li><b>system.webServer:</b> Determines the handlers for whatever URIs are sent to the application's address and port.</li>
+                <li><b>runtime:</b> Appears to list the assembly references and version numbers for dependencies.</li>
+                <li><b>entityFramework:</b> The data source driver required by Entity Framework.</li>
+            </ul>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>

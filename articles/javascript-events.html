@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>JavaScript Events</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>JavaScript Events</h1>
+        </div>
+
+        <div id="article">
+            <h2>HTML Form Elements and Events</h2>
+            <img src="images/javascript/datepicker-and-button-html.png"></br></br>
+
+            The button code calls the function <i>showSelectedEndDate()</i>:</br>
+
+            <code>
+                function showSelectedEndDate()</br>
+                {</br>
+                    var d = new Date(endDate.value);</br>
+                    document.getElementById("myenddate").innerHTML = d;</br>
+                }
+            </code>
+
+            This defines variable '<i>d</i>' as a new instance of '<i>Date</i>', and passes the value from the date picker named '<i>endDate</i>'. The variable is then set as the inner HTML content of the '<i>myenddate</i>' DIV element. With drop-down menus the principle is the same, but the '<i>onchange</i>' event listener is used to call '<i>showSelectedMessageType()</i>' if the selected item is changed:</br></br>
+
+            <img src="images/javascript/dropdown-menu-html.png"></br></br>
+
+            <code>
+                function showSelectedMessageType()</br>
+                {</br>
+                    var x = document.getElementById("messageTypes");</br>
+                    var i = x.selectedIndex;</br>
+                    document.getElementById("mymessagetype").innerHTML = x.options[i].text;</br>
+                }
+            </code>
+        </div>
+
+        <div id="article">
+            <h2>amCharts Events</h2>
+            Certain optional features of amCharts can save us writing code to filter JSON values. Charts can be <a href="https://www.amcharts.com/kbase/making-charts-responsive/">made responsive to user input</a> with:
+            <code>chart.responsive = { "enabled": true };</code></br></br>
+
+            One of these is a scroll bar for the serial charts:
+            <code>
+                var chartScrollbar = new AmCharts.ChartScrollbar();</br>
+                chart.addChartScrollbar(chartScrollbar);
+            </code>
+
+            And other features enable the user to zoom in on selected parts of the serial and column charts:
+            <code>
+                chartCursor.zoomable = true;</br>
+                chart.mouseWheelZoomEnabled = true;
+            </code>
+
+            The <a href="https://live.amcharts.com">amCharts Live Maker</a> enables you to create a chart and test these options before any coding.
+        </div>
+
+
+        <div id="article">
+            <h2>Switching Chart Views</h2>
+            Finally, we might want a feature that enables the user to switch between chart views. HTML tabs can be used for this. First we need buttons:
+
+            <img src="images/javascript/chart-tab-change-buttons.png"></br></br>
+
+            And the JavaScript event handler:</br></br>
+
+            <img src="images/javascript/switch-chart-tab-javascript.png"></br></br>
+
+            And place all the content for whichever chart in one of the tab DIV elements, as normal. With the correct CSS, the tab containers themselves can he hidden, so it appears the user is switching between charts with the three buttons.
+        </div>
+
+
+
+        <div id="article">
+            <h2>References</h2>
+            AMCHARTS. 2017. Knowledge Base. <i>Making charts and maps responsive</i>. [WWW]. <a href="https://www.amcharts.com/kbase/making-charts-responsive/">https://www.amcharts.com/kbase/making-charts-responsive/</a>. 31st May 2017.</br></br>
+        </div>
+
+        <div id="footer">Michael, May 2017</div>
+    </body>
+</html>

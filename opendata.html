@@ -28,6 +28,7 @@
     <![endif]-->
   </head>
   <body>
+    <div class="container-fluid">
 
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -86,6 +87,7 @@
 
         chart.categoryField = "date";
         chart.dataDateFormat = "YYYY-MM-DD";
+        chart.mouseWheelZoomEnabled = true;
 
         var balloon = chart.balloon;
         balloon.cornerRadius = 6;
@@ -169,6 +171,8 @@
        "categoryField": "healthboard",
        "rotate": true,
        "startDuration": 1,
+        "zoomable":true,
+        "mouseWheelZoomEnabled": true,
        "categoryAxis": {
                "gridPosition": "start",
                "position": "left"
@@ -273,77 +277,7 @@ var chart = AmCharts.makeChart( "chartdiv3", {
 </script>
 
 <script>
-var chart = AmCharts.makeChart("chartdiv4", {
-    "type": "serial",
-    "theme": "light",
-    "dataProvider": [{
-        "date": "2009-10-02",
-        "value": 5
-    }, {
-        "date": "2009-10-03",
-        "value": 15
-    }, {
-        "date": "2009-10-04",
-        "value": 13
-    }, {
-        "date": "2009-10-05",
-        "value": 17
-    }, {
-        "date": "2009-10-06",
-        "value": 15
-    }, {
-        "date": "2009-10-09",
-        "value": 19
-    }, {
-        "date": "2009-10-10",
-        "value": 21
-    }, {
-        "date": "2009-10-11",
-        "value": 20
-    }, {
-        "date": "2009-11-04",
-        "value": 26
-    }],
-    "valueAxes": [{
-        "axisAlpha": 0,
-        "dashLength": 4,
-        "position": "left"
-    }],
-    "graphs": [{
-        "bulletSize": 14,
-        "valueField": "value",
-         "balloonText":"<div style='margin:10px; text-align:left;'><span style='font-size:13px'>[[category]]</span><br><span style='font-size:18px'>Value:[[value]]</span>",
-    }],
-    "marginTop": 20,
-    "marginRight": 70,
-    "marginLeft": 40,
-    "marginBottom": 20,
-    "chartCursor": {
-        "graphBulletSize": 1.5,
-      "zoomable":false,
-        "valueZoomable":false,
-         "cursorAlpha":0,
-         "valueLineEnabled":true,
-         "valueLineBalloonEnabled":true,
-         "valueLineAlpha":0.2
-    },
-    "autoMargins": false,
-    "dataDateFormat": "YYYY-MM-DD",
-    "categoryField": "date",
-    "valueScrollbar":{
-      "offset":30
-    },
-    "categoryAxis": {
-        "parseDates": true,
-        "axisAlpha": 0,
-        "gridAlpha": 0,
-        "inside": true,
-        "tickLength": 0
-    },
-    "export": {
-        "enabled": true
-    }
-});
+
 </script>
 
     <div class="row">
@@ -384,41 +318,9 @@ var chart = AmCharts.makeChart("chartdiv4", {
 
     <div class="col-sm-5">
       <div class="panel panel-default">
-        <div class="panel-heading">//  Clients //</div>
+        <div class="panel-heading">//  Message by System //</div>
         <div class="panel-body">
-
-
-            <div class="tabstrip">
-              <button class="w3-bar-item button" onclick="openView('allmessages')">All Messages</button>
-              <button class="w3-bar-item button" onclick="openView('messagesbyhb')">Messages by HB</button>
-              <button class="w3-bar-item button" onclick="openView('messagesbytype')">Messages by Type</button>
-            </div>
-
-
-            <div id="allmessages" class="w3-container chartview">
-              <div id="article">All Messages</div>
-            </div>
-
-            <div id="messagesbyhb" class="w3-container chartview" style="display:none">
-              <div id="article">Messages by Health Board</div>
-            </div>
-
-            <div id="messagesbytype" class="w3-container chartview" style="display:none">
-                <div id="article">Messages by Type</div>
-            </div>
-
-            <script>
-            function openView(viewName) {
-                var i;
-                var x = document.getElementsByClassName("chartview");
-                for (i = 0; i < x.length; i++) {
-                   x[i].style.display = "none";
-                }
-                document.getElementById(viewName).style.display = "block";
-            }
-            </script>
-
-
+          <div id="chartdiv4"></div>
         </div>
       </div>
     </div>
@@ -428,5 +330,10 @@ var chart = AmCharts.makeChart("chartdiv4", {
     <script src="js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <div class="footer">Michael, June 2017</div>
+
+</div>
+
   </body>
 </html>
