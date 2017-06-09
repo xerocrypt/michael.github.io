@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Qt Designer and Python</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Qt Designer and Python</h1>
+        </div>
+
+
+        <div id="article">
+            The following are required:
+            <ul>
+                <li>Qt Designer</li>
+                <li>python-qt4</li>
+                <li>pyuic4</li>
+                <li>Creating the Interface</li>
+            </ul></br>
+
+            Qt Designer appears similar to the Windows Forms designer in Visual Studio, and the concept's roughly the same - there are form elements, and a Signal/Slot editor that seem to provide the handlers for the form objects. To demonstrate an event-driven Python application, we can create a form with just a Close button and Quit option in the toolbar. After setting out the form and elements, it's a good idea to rename everything in the Property Editor, as this makes coding easier. For example, <i>frmMain</i> for the form, <i>cmdClose</i> for a Close button and <i>menuQuit</i> for a Quit menu option.</br></br>
+
+            When the application interface layout is created, it's saved as a <i>.ui</i> file. This is a variant of XML that defines the interface appearance, element positions, names and layouts. From this, <i>pyuic4</i> will generate a Python script:
+
+            <code>$pyuic4 -x myFirstForm.ui -o myform.py</code>
+
+            The '<i>-x</i>' option creates the output as an executable file, and running <i>myform.py</i> gives us a Qt application.
+        </div>
+
+        <div id="article">
+            <h2>Coding the Events and Event Handlers</h2>
+            The generated <i>.py</i> file has a class that contains methods for each form element. Although it's possible to add events and handlers here, they'd need to be added each time the form's modified in Qt Designer. Instead, we can create another script (e.g. <i>main.py</i>) to contain the application logic, referencing the elements class in the forms script.</br></br>
+
+            <img src="images/qtform-launcher-script.png"></br></br>
+
+            Typically we'd place the events and event handlers in separate functions, with the events calling event handler functions.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            QT COMPANY. 2017. <i>Qt Creator: The IDE</i>. [WWW]. <a href="https://www.qt.io/ide/">www.qt.io/ide/</a>. 5th June 2017.</br>
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>
