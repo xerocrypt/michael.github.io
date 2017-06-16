@@ -31,12 +31,12 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="healthcare.html">Clinical Projects</a></li>
-            <li><a href="articles/index.html">Articles</a></li>
-            <li class="active"><a href="resources.html">Resources</a></li>
-            <li><a href="toolkit.html">Toolkit</a></li>
+            <li><a href="index.html"><img src="images/assets/home.png"></a></li>
+            <li><a href="about.html"><img src="images/assets/about.png"></a></li>
+            <li><a href="healthcare.html"><img src="images/assets/medical.png"></a></li>
+            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></a></li>
+            <li><a href="resources.html"><img src="images/assets/library.png"></a></li>
+            <li><a href="toolkit.html"><img src="images/assets/tools.png"></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -63,7 +63,10 @@
           <div class="panel-body">
               Abstract: The vast address space of IPv6 will have major implications for Internet and network security. The Research stage of this project included an analysis of current packet inspection and traffic filtering systems, and also the countermeasures, deployed on the IPv4-based Internet. The Development stage proposes a design for a secure communications system that is highly resistant to Internet surveillance and traffic filtering methods, incorporating IPv6 address switching, encryption and IPsec. The Evaluation stage assessed the potential for a real-world implementation of this system.</br></br>
 
-              The dissertation report and accompanying software was submitted at the University of Wales, Newport (now the University of South Wales) in May 2013.
+              The dissertation report and accompanying software was submitted at the University of Wales, Newport (now the <a href="http://www.southwales.ac.uk">University of South Wales</a>) in May 2013.</br></br>
+
+			  <a href="https://github.com/xerocrypt/Misc" class="btn btn-info" role="button">Project Source Repository...</a>
+
           </div>
         </div>
       </div>
@@ -73,10 +76,19 @@
   <div class="row">
     <div class="col-sm-5">
       <div class="panel panel-default">
-        <div class="panel-heading">// System Overview //</div>
+        <div class="panel-heading">// System Components //</div>
         <div class="panel-body">
-            A peer-to-peer system, this is based on a software client that manages application-layer encryption, IPsec tunneling and IP address management. To counter traffic inspection and filtering, communicating parties within a group select a specific address from within a range using a Secret Address Generation Algorithm - this address is known only within the group, and it changes every x number of minutes.</br>
-            After addresses are determined, the clients establish tunnel-mode IPsec connections to further protect the content of their communications, and symmetric encryption might be used in addition to this.
+            <b>Python GUI</b></br>
+            Developed using Qt Designer, a Python script is generated from the QML file. Events and handlers are contained in a separate main.py file.</br></br>
+
+            <b>.NET GUI</b></br>
+            Windows Forms application. This isn't the main application.</br></br>
+
+            <b>Application Database</b></br>
+            SQLite3 database. Drivers are available for Python and .NET.</br></br>
+
+            <b>Secret Address Generation Algorithm</b></br>
+            Code to generate new IPv6 addresses based on a session key and system time.</br></br>
         </div>
       </div>
     </div>
@@ -101,6 +113,9 @@
         </div>
       </div>
     </div>
+
+
+
 
     <div class="col-sm-5">
       <div class="panel panel-default">
