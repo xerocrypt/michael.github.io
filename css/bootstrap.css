@@ -6064,7 +6064,7 @@ button.close {
   word-wrap: normal;
   white-space: normal;
   filter: alpha(opacity=0);
-  opacity: 0;
+  opacity: 30;
 
   line-break: auto;
 }
