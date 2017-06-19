@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Vim Editor</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>The Vim Editor</h1>
+        </div>
+
+        <div id="article">
+			Vim is one of the many tools I've played around with before deciding it was a pain to use compared to the nano editor, but this weekend I finally got the hang of it. And it's definitely worth learning, being superior to almost every other editor out there for several reasons.</br>
+			For anyone developing skills with the Linux operating system, perhaps studying computer engineering, there'll be situations where text files must be modified in the command line. Applying those skills to the real world, it's likely you'd SSH into a server to modify scripts, configurations and code. So far I've gotten by using nano, but it's often not available on the systems I've worked with - some variation of vi or ed is more common.</br></br>
+
+			Being developed for terminals where only the keyboard is used, there are numerous keybindings and commands, and fluency with these enables the experienced use to perform actions faster than a GUI would allow. This is maybe one of the reasons we find this feature in Visual Studio Code also.
+		</div>
+		
+		<div id="article">
+			<h2>Basic Actions</h2>
+			Press the 'I' or 'A' key to start inserting text. There'll be '<i>-- INSERT --</i>' at the foot of the editor. In order to save the file or quit, press the '<i>Esc</i>' key and '</i>:</i>', then enter one of the following commands:
+			<ul>
+				<li>:w - Write buffer to file</li>
+				<li>:wq - Write buffer to file and quit</li>
+				<li>:q! - Quit without writing buffer</li>
+			</ul>
+			These are the commands that are quickest to pick up, and they're pretty much all that's needed for basic usage. Also, there is an online help feature, accessible by pressing the tab key after entering the first character of a command.
+		</div>
+
+		<div id="article">
+			<h2>Navigating Through Text</h2>
+			In addition to the 'I' or 'A' key for entering <i>INSERT</i> mode, there are several other key bindings for navigating through text: 'H', 'J', 'K' and 'L' are used for moving the cursor up, down, left and right one place.
+		</div>
+	
+		<div id="article">
+			<h2>Cutting and Pasting Text, and Reversing Changes</h2>
+			Sections of text can also be copied and pasted. Press 'V' and whichever direction keys to highlight a section of text. Pressing 'C' will cut that section and 'P' will insert it elsewhere. If the user wants to reverse that change (or any other change), this can be done with the 'U' key. Lastly vim enables the user to delete a character or section/paragraph with the 'X' and 'D' keys.
+		</div>
+
+		<div id="article">
+			<h2>Searching Text</h2>
+			Often you'd want to find a string within the current file. Press the '<i>Esc</i>' key, and use the following command:
+			<code>:/[keyword]</code>
+			
+			And press 'N' to scroll through the matches.
+		</div>
+
+		<div id="article">
+			<h2>Configuration</h2>
+			The editor's configuration is stored in <i>/etc/vim/vimrc</i>. If the GUI version is installed there'll also be a gvimrc in the same directory, although I found an easier way to configure that is to save and load a session file.</br></br>
+
+			The first thing you might want is a 'soft wrap' which wraps text within the editor without inserting line breaks in the file itself:
+			<code>set columns=90</code>
+
+			But we also don't want to wrap in the middle of words, so set a line break:
+			<code>set linebreak</code>
+
+			Also, I'm used to seeing line numbers when modifying code:
+			<code>set number</code>
+
+			In another directory, <i>/usr/share/vim/vim73/colors</i>, there'll also be a number of colour scheme files. Any of these can be set, e.g.
+			<code>colorscheme evening</code>
+		</div>
+		
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>
