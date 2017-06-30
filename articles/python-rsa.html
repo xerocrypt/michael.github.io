@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>RSA Encryption with Python</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <div id="header">
+            <h1>RSA Encryption with Python</h1>
+        </div>
+
+        <div id="article">
+			While it's more efficient to encrypt the actual messaging between clients using symmetric encryption, it's necessary to first communicate the session key (the Secret Address Generation Algorithm code) for this using an asymmetric cipher. The options we have for doing this with Python are PyCrypto, ncrypt and Python-RSA.</br>
+			The difference between this and other examples I've published in the past is that the RSA keys and the data to be encrypted are stored in an SQLite3 application database. Therefore, the program should provide the following operations:
+			<ul>
+				<li>getKeysFromDB() -Get RSA keys from database</li>
+				<li>genLocalKeys() - Generate client RSA keys</li>
+				<li>writeKeysToDB() - Write RSA keys to database</li>
+				<li>encryptSessionKey() - Encrypt session key</li>
+				<li>decryptSessionKey() - Decrypt session key</li>
+				<li>writeSessionKeyToDB() - Store session key</li>
+			</ul>
+
+		</div>
+
+		<div id="article">
+			<h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>

@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>PAM</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <div id="header">
+            <h1>Pluggable Authentication Modules (PAM)</h1>
+        </div>
+
+        <div id="article">
+			Questions were asked in the Cypherpunks mailing list about PAM. This is acheived using Pluggable Authentication Modules. As the name suggests, they're kernel modules. They can be added to an existing Linux installation, although you'd find they're often included by default.
+
+			<h2>Background</h2>
+			The old way of doing this was that programs that required user or elevated privileges would request a username/password and compare that with entries in /etc/passwd. PAM essentially swapped this method of authentication with the use of shared security modules, so each could authenticate independently.</br></br>
+
+			There are several categories of operation that could be performed by a module:
+			<ul>
+				<li>Authentication</li>
+				<li>Account</li>
+				<li>Credential</li>
+				<li>Session management</li>
+				<li>Password</li>
+			</ul>
+			
+			There are also implementations for variants of BSD, and Java-based implementations also.</br></br>
+			
+			If we look at the list returned by the apt package manager, we can see the list of installed and available modules for Ubuntu/Debian. We find there are modules for pretty much everything that might require authentication, such as SSH and FTP.</br></br>
+		</div>
+		
+		<div id="article">
+			<h2>PAM Configuration</h2>
+			Configuration files exist in <i>/etc/pam.d</i>, a central file being in <i>/etc/pam.d/other</i>. You might end up with several configuration files, each file for a PAM operation category, e.g.
+			<ul>
+				<li>/etc/pam.d/system-account ( account  required  pam_unix.so )</li>
+				<li>/etc/pam.d/system-auth ( auth  required  pam_unix.so )</li>
+				<li>/etc/pam.d/system-session (session  required  pam_unix.so )</li>
+			</ul>
+			
+			Meanwhile, <i>/etc/pam.d/other</i> might contain the restrictive rules. e.g.
+			<code>auth   required  pam_warn.so</code>
+			or:
+			<code>password  required  pam_deny.so</code>
+		</div>
+
+		<div id="article">
+			<h2>Configuration File Entries</h2>
+			Each line in a PAM configuration is in the following format:
+			<code>[Type]  [Control Flag]  [Module Name]</code>
+		
+			<b>Type</b> = The authentication action, such as authentication or password change, or session control.</br>
+			<b>Control Flag</b> = Is authentication required, denied or allowed?</br>
+			<b>Module</b> = The PAM module implementing the action. This could allow the action, return an authentication fail message or log a failed attempt.</br></br>
+
+			Supported types are:
+			<ul>
+				<li><b>account:</b> Manages account policies, such as whether the user is allowed to authenticate, account expiry, etc.</li>
+				<li><b>auth:</b> Handles authentication, which isn't necessarily user/password combination. Could be 2FA, biometric or token.</li>
+				<li><b>password:</b> Handles changes in authentication details, usually password changes.</li>
+				<li><b>session: </b>Typically handles the actions performed after the user has authenticated and signed out.</li>
+			</ul>
+			
+			Supported control flags:
+			<ul>
+				<li><b>requisite:</b> Authentication with the named module is required to perform whichever action.</li>
+				<li><b>required:</b> Same as above, but another module could be selected if authentication fails.</li>
+				<li><b>sufficient:</b> User is authenticated if successful with the specific module, even if previous attempts had failed.</li>
+				<li><b>optional:</b> Module is not strictly necessary for action to be performed.</li>
+			</ul>
+
+			Multiple actions can also be chained for an authentication attempt. e.g.
+			<code>
+				auth  required  pam_warn.so</br>
+				auth  required  pam_deny.so
+			</code>		
+		</div>
+		
+		<div id="article">
+			<h2>Module Structure and Content</h2>
+			Taking an example from Roy Keane's blog, we can quickly get an understanding of the module structure. The interfaces provided by the module are listed in the source header. You'll recognise these interface names:
+			<code>
+				#define PAM_SM_ACCOUNT</br>
+				#define PAM_SM_AUTH</br>
+				#define PAM_SM_PASSWORD</br>
+				#define PAM_SM_SESSION
+			</code>
+			
+			And there are also PAM module header files:
+			<code>
+				#include <security/pam_appl.h></br>
+				#include <security/pam_modules.h>
+			</code>
+
+			Now let's look at one of the functions within the module, picking just the first one in the example source:
+			<code>
+				int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **argv) </br>
+				{</br>
+					return(PAM_IGNORE);</br>
+				}
+			</code>
+			
+			This function, <i>pam_sm_open_session()</i> takes the following parameters, which seem common to PAM module functions:
+			<ul>
+				<li>pam_handle_t</li>
+				<li>pamh</li>
+				<li>flags</li>
+				<li>argc</li>
+				<li>argv</li>
+			</ul>
+				
+			These seem to correspond to the fields of a typical configuration entry, with flags referring to the <i>required/requisit/sufficient/optional</i> field, <i>argc</i> referring to the module name, and <i>argv</i> referring to the module option. I've looked up <i>argc</i> and <i>argv</i>, and this does seem the case.</br></br>
+
+			As we can see, the function does very little but return <i>PAM_IGNORE</i> to the calling function.
+		</div>
+		
+		<div id="article">
+			<h2>References</h2>
+			
+			KEENE, R. 2012. Writing Your First PAM Module. <i>Roy Keene's Wiki</i>. [BLOG]. <a href="http://www.rkeene.org/projects/info/wiki/222">http://www.rkeene.org/projects/info/wiki/222</a>. (26th June 2017).</br></br>
+			
+			LINUX DOCUMENTATION PROJECT. 2017. 3. PAM (Pluggable Authentication Modules). <i>The Linux Documentation Project: User Authentication HOWTO</i>. [WWW]. <a href="http://tldp.org/HOWTO/User-Authentication-HOWTO/x115.html">http://tldp.org/HOWTO/User-Authentication-HOWTO/x115.html</a>. (26th June 2017).</br></br>
+
+			LINUX FROM SCRATCH. 2017. Linux-PAM-1.3.0. <i>Beyond Linux from Scratch</i>. [WWW]. <a href="http://www.linuxfromscratch.org/blfs/view/svn/postlfs/linux-pam.html">http://www.linuxfromscratch.org/blfs/view/svn/postlfs/linux-pam.html</a>. (26th June 2017).</br></br>
+			
+			MORGAN, A. G. 2000. Pluggable Authentication Modules. <i>PAM Working Group. The Linux Kernel Archives</i>. [TXT]. <a href="https://www.kernel.org/pub/linux/libs/pam/pre/doc/draft-morgan-pam-07.txt">https://www.kernel.org/pub/linux/libs/pam/pre/doc/draft-morgan-pam-07.txt</a>. (26th June 2017).</br></br>
+
+			SRIVASTAVA, V. 2009. Understanding and configuring PAM. <i>IBM developerWorks</i>. [WWW]. <a href="https://www.ibm.com/developerworks/library/l-pam/">https://www.ibm.com/developerworks/library/l-pam/</a>. (26th June 2017).</br></br>
+			
+			TUXRADAR. 2009. How PAM works. <i>TuxRadar</i>. [WWW]. <a href="http://www.tuxradar.com/content/how-pam-works">http://www.tuxradar.com/content/how-pam-works</a>. (26th June 2017).
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>

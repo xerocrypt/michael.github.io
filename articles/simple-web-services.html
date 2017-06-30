@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Data Stores</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Data Stores</h1>
+        </div>
+
+        <div id="article">
+            <h2>Flat File</h2>
+            A flat file database is stored locally as an unstructured (non-indexed) file. Data access typically involves loading the entire file into memory before read/write operations are performed. Conventionally this was done with small file containing simple data.  The structure of a flat file database would be no more sophisticated than having one record per line, or alteratively comma-separated.</br></br>
+
+            Flat file data storage was considerably more popular in the 1970s and 1980s, as most personal computers were used primarily for text manipulation and calculations. Many applications continue to use flat file databases today for storing user configurations.
+        </div>
+
+        <div id="article">
+            <h2>XML</h2>
+            Is more verbose than databases, and is not recommended for large data sets.
+        </div>
+
+        <div id="article">
+            <h2>In-Memory Objects</h2>
+            In-memory databases allow for faster access, but the data is volatile and therefore only recommended for temporary data. This is a workaround where faster data access is required than persistent storage technologies allow for. Another advantage is that, when persistent database storage isn't being used, it doesn't require synchronisation between database servers. Also, the data objects could be compressed and decompressed more easily in memory, therefore making it easier to minimise the persistent storage and disk write times - while persistent storage is still used, efficient compression should greatly reduce the write times and therefore the overall performance.</br>
+            While it's possible to use a virtual disk or filesystem, the data would still be handled as if the virtual volume was physical, i.e. not efficiently as it could be.</br></br>
+
+            However, there are disadvantages with in-memory databases: first, persistent storage database solutions commit changes periodically, so there would always be recovery points. Secondly, high-performance system memory might be more expensive than persistent storage hardware (especially solid-state storage), making in-memory database solutions financially more costly.</br></br>
+
+            One of the solutions involves switching volatile RAM for persistent Flash storage in the same slot,  effectively moving solid state persistent storage closer to the processor (PCIe SSD). This is supported by recent IBM servers under the name 'eXflash'.
+        </div>
+
+
+        <div id="footer">Michael, April 2017</div>
+    </body>
+</html>

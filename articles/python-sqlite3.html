@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Python and SQLite</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <div id="header">
+            <h1>Python and SQLite3 Databases</h1>
+        </div>
+
+        <div id="article">
+			SQLite databases are the common method of storing application data, as they’re lightweight, and what passes for the database ‘engine’ exists inside the same process as the application. What often happens is a given application will store passwords and other sensitive information as plaintext in an SQLite record, as discovered recently with the Starbucks ‘app’.</br>
+			The programs here follow the same principle as with my last post – passwords are checked by their SHA256 values and are never stored in their original form. One thing I forgot to mention is the SHA256 value is always 256-bits in length, which is what enables any password to become a 256-bit encryption key. Where symmetric encryption is used, it might be worth checking if a stored hash is being used as a key.</br></br>
+			
+			For the demonstration here, we’ll need the following:
+			<ul>
+				<li>SQLite3 for Python</li>
+				<li>SQLite database browser/manager</li>
+				<li>PythonCard for the front-end</li>
+			</ul>
+			
+			To set things up, we use an SQLite browser/manager to create a database with a table called ‘Hashes‘. This will have two fields – ‘Username‘ and ‘Hash‘, and both are populated when the first program (AddHash.py) runs. The SQLite file itself is saved as ‘hashBase.db‘, and becomes the application database. All the files are available at SourceForge.net if anyone wants to re-use the code.
+		</div>
+		
+		<div id="article">
+			<h2>Adding an Account to the Database</h2>
+			The first script (<i>AddHash.py</i>) simply creates a record in the database to store a user name and the password’s SHA256 value. After importing the sqlite3 and hashlib modules, we connect to the database:
+			<code>
+				conn = sqlite3.connect('hashBase.db')</br>
+				c = conn.cursor()
+			</code>
+			
+			The user enters a login name and password, and an SHA256 hash is generated exactly as in my previous post:
+			<code>
+				currentUser = raw_input("User name: ")</br>
+				txtPassword = raw_input("Password: ")</br>
+				currentPassword = hashlib.sha256(txtPassword).hexdigest()
+			</code>
+			
+			Instead of writing <i>currentPassword</i> to a text file, a record is created and the two variables, <i>currentUser</i> and <i>currentPassword</i>, are written sequentially to it. The <i>conn.commit()</i> function makes the changes persistent:
+			<code>
+				c.execute("insert into Hashes values (?, ?)", (currentUser, currentPassword))</br>
+				conn.commit()</br>
+				print "Password added."
+			</code>
+			
+			Finally the connection to the database is closed:
+			<code>conn.close()</code>
+
+			After running the program several times with different user names, the database should have multiple records when viewed again in the SQLite browser.
+		</div>
+
+		<div id="article">
+			<h2>Checking Account Logins and Passwords</h2>
+			The second example is a little more tricky to create, as the program here (CheckPassword.py) must do three things:
+			<ul>
+				<li>1. Check whether the user account exists in the database.</li>
+				<li>2. Retrieve the correct SHA256 value as a string.</li>
+				<li>3. Compare the hashed password against the SHA256 value.</li>
+			</ul>
+
+			Again there are three variables, as we take the username and generate the hash for the login attempt:
+			<code>
+				currentUser = raw_input("Login: ")</br>
+				currentPass = raw_input("Enter password: ")</br>
+				currentHash = hashlib.sha256(currentPass).hexdigest()
+			</code>
+			
+			Pull the correct record and field from the database:
+			<code>
+				t = (currentUser,)</br>
+				c.execute('SELECT Hash FROM Hashes WHERE Username=?', t)
+			</code>
+			
+			To make this work properly, the program must check whether it’s pulled a record for the username, and fetch the SHA256 value only if it has:
+			<code>
+				row = c.fetchone()</br>
+				if row is None:</br>
+				print "Account not found"</br>
+				else:</br>
+				fetchedHash = row[0]
+			</code>
+			
+			The value is then compared with currentHash (the password attempt):
+			<code>
+				if fetchedHash == currentHash:</br>
+				print "Login Success."</br>
+				else:</br>
+				print "Login Fail."
+			</code>
+			
+			Both programs could also be implemented as a PythonCard GUI, although I still declared <i>c.fetchone()</i> and the input boxes locally as variables <i>currentUser</i> and <i>currentPassword</i> for both handlers, as a workaround for the return error problem.
+		</div>
+
+		<div id="article">
+			<h2>Real-World Applications and Vulnerabilities</h2>
+			Compared with the amount of code required for reading and writing plaintext passwords to SQLite, there’s only one variable and a couple of lines difference in Python, but this is a simplification as the underlying code for the <i>hashlib</i> and <i>sqlite3</i> functions is either C or C++. If a developer truly wanted to create an application for doing this securely, probably half the code (for a relatively small program) would be for preventing SQL injection and bruteforce attacks, ensuring passwords meet certain criteria, and ensuring that a specific part of the code is the only entry point to whatever the login screen’s supposed to protect.
+		</div>
+
+		<div id="article">
+			<h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, June 2017</div>
+    </body>
+</html>
