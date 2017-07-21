@@ -1,38 +1,107 @@
 <html>
     <head>
-        <title>Data Stores</title>
+        <title>Simple Web Services</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
 
         <div id="header">
-            <h1>Data Stores</h1>
+            <h1>Simple Web Services</h1>
         </div>
 
         <div id="article">
-            <h2>Flat File</h2>
-            A flat file database is stored locally as an unstructured (non-indexed) file. Data access typically involves loading the entire file into memory before read/write operations are performed. Conventionally this was done with small file containing simple data.  The structure of a flat file database would be no more sophisticated than having one record per line, or alteratively comma-separated.</br></br>
-
-            Flat file data storage was considerably more popular in the 1970s and 1980s, as most personal computers were used primarily for text manipulation and calculations. Many applications continue to use flat file databases today for storing user configurations.
+            <h2>Web Service Entry Point</h2>
+			Near the start of the <i>.asmx</i> file we have code that defines the application as conforming to Web Services Interoperability, anda reference to a general class called '<i>WebService</i>':
+			<code>
+				[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]</br>
+				public class NotificationServices : WebService
+			</code>
+			
+			There follows the interfaces for the Web Services in the application, e.g.
+			<code>
+				public class NotificationServices : WebService,</br>
+					IGetTestReportsAwaitingSignOff,</br>
+					ISignOffTestReport,</br>
+					IGetPersonalNotifications,</br>
+					IGetTestReport,</br>
+					IGetSignedOffTestReports,</br>
+					IGetCountTestsPlacedByMe,</br>
+					IGetListTestsPlacedByMe
+			</code>
+			
+			If we use 'Peek Definition' on an interface, we find it refers to a <i>public interface [interface]</i> class with a <i>WebServiceBinding</i> attribute. This contains a call to the Web Service method described below.
         </div>
 
-        <div id="article">
-            <h2>XML</h2>
-            Is more verbose than databases, and is not recommended for large data sets.
-        </div>
+		<div id="article">
+			<h2>A Description of the Web Service Method</h2>
+			The Web Service method here is called:
+			<code>
+				public GetTestReportsAwaitingSignOffResponse GetTestReportsAwaitingSignOff(GetTestReportsAwaitingSignOffRequest getTestReportsAwaitingSignOffRequest)</br>
+				GetTestReportsAwaitingSignOffResponse is a base class or 'singleton' being extended by GetTestReportsAwaitingSignOff().
+			</code>
 
-        <div id="article">
-            <h2>In-Memory Objects</h2>
-            In-memory databases allow for faster access, but the data is volatile and therefore only recommended for temporary data. This is a workaround where faster data access is required than persistent storage technologies allow for. Another advantage is that, when persistent database storage isn't being used, it doesn't require synchronisation between database servers. Also, the data objects could be compressed and decompressed more easily in memory, therefore making it easier to minimise the persistent storage and disk write times - while persistent storage is still used, efficient compression should greatly reduce the write times and therefore the overall performance.</br>
-            While it's possible to use a virtual disk or filesystem, the data would still be handled as if the virtual volume was physical, i.e. not efficiently as it could be.</br></br>
+			Using 'Peek Definition on the above, Visual Studio presents us with the properties for the data we expect to be returned by the Web Service. The main function of the implementing class, <i>GetTestReportsAwaitingSignOff</i>, calls a stored procedure named '<i>prGetTestReportsAwaitingSignOff</i>', passing values for parameters <i>@PatientList</i> and <i>@RetrieveTestReports</i>.</br></br>
+			
+			<img src="images/webservices/simple-web-service-input-parameters.png"></br></br>
+			
+			The next three parameters are values returned by the stored procedure, after the <i>DbConnectionManager</i> is used to make the request as a SQL command.</br></br>
+			
+			<img src="images/webservices/simple-web-service-return-parameters.png"></br></br>
 
-            However, there are disadvantages with in-memory databases: first, persistent storage database solutions commit changes periodically, so there would always be recovery points. Secondly, high-performance system memory might be more expensive than persistent storage hardware (especially solid-state storage), making in-memory database solutions financially more costly.</br></br>
+			What we get back from the Web Service are counts of total reports, sensitive reports and alerts. These are declared as <i>CountOfAllTestReports</i>, <i>CountOfSensitiveReports</i> and <i>CountOfAlertedTestReports</i>, then all three are collectively declared as '<i>response</i>'. This is what's returned by the Web Service method.</br>
+			Two more things need mentioning. Firstly, one of the input parameters, <i>@PatientList</i>, an XML string that's constructed by an instance of <i>StringBuilder</i> and declared as '<i>sb</i>'.</br>
+			And one of the variables in the response, which I haven't mentioned yet, is '<i>testReports</i>'. This isn't returned by the stored procedure, but instead comes from another method called '<i>TestReportStructure()</i>'.
+		</div>
+		
+		
+		<div id="article">
+			<h2>Web.config</h2>
+			As the name indicates, the <i>connectionStrings</i> element contains the connection strings for the data sources, in my case the database the Web Services are communicating with.
 
-            One of the solutions involves switching volatile RAM for persistent Flash storage in the same slot,  effectively moving solid state persistent storage closer to the processor (PCIe SSD). This is supported by recent IBM servers under the name 'eXflash'.
-        </div>
+			An example of this element and its attributes:
+			<code>
+			add name="myDatabaseConnection" connectionString="Data Source=mydatabaseserver,3023; Initial Catalog=myDatabase;integrated security=true; " providerName="System.Data.SqlClient"
+			</code>
+			
+			<ul>
+				<li>name: The connection string name.</li>
+				<li>Data Source: The server host name and port number.</li>
+				<li>Initial Catalog: The database hosted on the server.</li>
+				<li>Integrated Security: Set to 'True', if we're using the local system account to authenticate with the database server.</li>
+				</li>providerName: The assembly reference for the database driver.</li>
+			</ul>
+			
+			Each component has a root element. Here I have '<i>MyDatabase</i>', storing the config for the system my Web Services are working with.
+		</div>
 
+		<div id="article">
+			<h2>Global.asax</h2>
+			Controls access to the application. This class extends System.Web.HttpApplication. At the beginning on the class, we declare the following internal static variables:
 
-        <div id="footer">Michael, April 2017</div>
+			<code>
+				internal static DbConnectionManager DbConnectionInfoManager;</br>
+				internal static ObjectCache Cache = MemoryCache.Default;</br></br>
+
+				protected void Application_Start(object sender, EventArgs e)</br>
+				{</br>
+					DbConnectionInfoManager = new DbConnectionManager();</br>
+				}</br></br>
+
+				protected void Session_Start(object sender, EventArgs e) {}</br>
+				protected void Application_BeginRequest(object sender, EventArgs e) {}</br>
+				protected void Application_AuthenticateRequest(object sender, EventArgs e) {}</br>
+				protected void Application_Error(object sender, EventArgs e) {}</br>
+				protected void Session_End(object sender, EventArgs e) {}</br>
+				protected void Application_End(object sender, EventArgs e) {}
+			</code>
+		</div>
+		
+		<div id="article">
+			<h2>References</h2>
+			CHUMBLEY, R. DURAND, J. PILZ, G. 2010. Basic Profile Version 2.0: Final Material. <i>The Web Services-Interoperability Organization</i>. [WWW]. <a href="http://ws-i.org/profiles/BasicProfile-2.0-2010-11-09.html">http://ws-i.org/profiles/BasicProfile-2.0-2010-11-09.html</a>. (3rd July 2017).</br>
+		</div>
+
+        <div id="footer">Michael, July 2017</div>
     </body>
 </html>

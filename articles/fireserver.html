@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>FireServer</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>FireServer</h1>
+        </div>
+
+       <div id="article">
+			Lightweight C# server template.
+		</div>
+		
+		<div id="article">
+			<h2>Start Server</h2>
+			Method <i>startServer()</i>. Since we don't want the status messages cleared from the main text box, we use '<i>.AppendText</i>' and '<i>\r\n</i>' to add a new line.
+			Uses an instance of '<i>_httpListener</i>' to set the prefix and start the listener. Then start a new listener thread.
+		</div>
+		
+		<div id="article">
+			<h2>Server Listener and Response</h2>
+			Create new instance of '*HttpListenerContext*':
+			<code>HttpListenerContext context = _httpListener.GetContext();</code>
+
+			The response to incoming requests is a byte array, representing ASCII characters that form HTML markup to be displayed in the client browser:
+
+			<code>byte[] _responseArray = Encoding.UTF8.GetBytes("<html><head><title>FireServer</title></head>" + "<body>FireServer is running</body></html>");</code>
+
+			The byte array is then written to <i>HttpListenerContext</i> for the output stream, and the response is terminated after sending:
+			<code>
+				context.Response.OutputStream.Write(_responseArray, 0, _responseArray.Length);</br>
+				context.Response.KeepAlive = false;</br>
+				context.Response.Close();
+			</code>
+		</div>
+		
+		<div id="article">
+			<h2>Stop Server</h2>
+			Handled by '<i>stopServer()</i>'. This attempts to terminate the httpListener thread with '<i>_httpListener.Stop()</i>'.
+		</div>
+		
+		<div id="article">
+			<h2>Restart Server</h2>
+			I'm working on a method that terminates the existing <i>HttpListenerContext</i> and creates a new instance of it.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+
+        </div>
+		
+		<div id="footer">Michael, July 2017</div>
+    </body>
+</html>

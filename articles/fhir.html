@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>FHIR</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>FHIR</h1>
+        </div>
+		
+		<div id="article">
+			Is related to HL7, but seems an extension of it to cover how the messaging should be implemented (basically REST, serialisation, message validation, etc.). The official documentation is very dry and unstructured, so I recommend either reading Ewout Kramer's presentation material on SlideShare and researching the APIs.
+		</div>
+		
+		<div id="article">
+			<h2>Communication of HL7 Messages</h2>
+			While HL7 gives us a standardised messaging format, the standard doesn't say anything about how multiple applications and services get that data from A to B. For example, are the messages communicated over an HTTP session or over a terminal connection?</br></br>
+
+			It appears that FHIR mandates HTTP as the transport, with the HL7 message being the payload. At the higher level, data is queried using REST, with the response being XML or JSON.	Therefore we have four layers to this:</br>
+			<ul>
+				<li>REST</li>
+				<li>Documents</li>
+				<li>Messages</li>
+				<li>Services</li>
+			</ul>
+			And it means we use CRUD operations for querying and updating the data.</br></br>
+
+			The URI structure is:
+			
+			<code>http://[endpoint]/[resource type]/[identifier]</code>
+
+			e.g.
+			<code>http://medserver.uk/Patient/3341</code>
+
+			Sending a URI like this should cause the endpoint to return the resource in JSON or XML format.
+		</div>
+
+		<div id="article">
+			<h2>Message Structure</h2>
+			Note: the FHIR documentation refers almost always to version 3 HL7 messages, and not the older segmented version.
+			In HL7, we see data objects communicated as documents. With FHIR, data objects are accessed as services - this makes it more appropriate for REST, with each object being requested having its own URI.</br></br>
+
+			The Foundation module is what everything implementing FHIR uses, and it's what everything is built on. The foundation is the general specification.</br></br>
+
+			A 'resource' in FHIR is the smallest discreet data object that could be communicated. It's described as the 'smallest unit of transaction', which means it would be an HL7 message. </br>
+			It is the quantum of FHIR. In fact, a resource is basically an XML file containing the information about a subject, which could be a patient, a report, etc. Within a resource are components - a component has no meaning or context outside the resource. Unlike resources, components cannot be accessed directly.</br></br>
+
+			Within a resource there are also fields, which are referred to as 'composite datatypes', and they're so-called because they might contain multiple sub-items of different types, for example, 'identifier' might be a composite type based on 'varchar' or 'int', and 'Address' might be a composite of 'houseNumber(int)' and 'streetName(varchar)'. Each of these sub-items is referred to as a 'primitive'.
+		</div>
+		
+		
+        <div id="article">
+			<h2>The FHIR API</h2>
+			The FHIR API
+			The API has the following components:
+			<ul>
+				<li>Model</li>
+				<li>Parsing and Serialisation</li>
+				<li>REST (FhirClient)</li>
+				<li>Validation</li>
+			</ul>
+		</div>
+		
+		<div id="article">
+			<h2>References</h2>
+			BALTUS, M. 2014. FHIR API for .NET Programmers. <i>FHIR Developer Days</i>. [PDF]. <a href="https://www.slideshare.net/DevDays2014/04-b-fhir-api-for-net-mirjam">https://www.slideshare.net/DevDays2014/04-b-fhir-api-for-net-mirjam</a>. (7th July 2017).</br></br>
+
+			HEESCH, S. 2014. FHIR Client (Visual Studio 2013). <i>Windows Dev Center</i>. [WWW]. <a href="https://code.msdn.microsoft.com/windowsdesktop/Client-for-HL7-FHIR-server-0709be0b/">https://code.msdn.microsoft.com/windowsdesktop/Client-for-HL7-FHIR-server-0709be0b/</a>. (7th July 2017).</br></br>
+
+			HL7.ORG. 2011. Base Resource Definitions. <i>FHIR Release 3</i>. [WWW].  <a href="http://hl7.org/fhir/resource.html">http://hl7.org/fhir/resource.html">http://hl7.org/fhir/resource.html</a>. (7th July 2017).</br></br>
+			
+			KRAMER, E. 2014. HL7 FHIR Training Course - Morning. <i>HL7 International</i>. [PDF]. <a href="https://www.slideshare.net/ewoutkramer/fhir-tutorial-morning">https://www.slideshare.net/ewoutkramer/fhir-tutorial-morning</a>. (10th July 2017).</br></br>
+
+			KRAMER, E. 2014. HL7 FHIR Training Course - Afternoon. <i>HL7 International</i>. [PDF]. <a href="https://www.slideshare.net/ewoutkramer/afternoon-32654292">https://www.slideshare.net/ewoutkramer/afternoon-32654292</a>. (10th July 2017).</br></br>
+						
+		</div>
+
+        <div id="footer">Michael, July 2017</div>
+    </body>
+</html>

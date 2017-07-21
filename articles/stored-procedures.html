@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>Stored Procedures</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <div id="header">
+            <h1>Stored Procedures</h1>
+        </div>
+
+        <div id="article">
+			First specify the database the stored procedure applies to, set the encoding and set the <i>QUOTED_IDENTIFIER</i> to enable. Basically the '<i>ANSI_NULLS ON</i>' instruction causes SQL Server to process <i>NULL</i> as its own type, instead of as a variable assigned to something. In future versions of SQL Server, <i>ANSI_NULLS</i> might be set by default. The '<i>SET QUOTED_IDENTIFIER ON</i>' instruction causes the database server to handle anything in quote as identifiers, instead of as literal statements.</br></br>
+
+			<code>
+				USE [DRS]</br>
+				GO</br>
+				/****** Object:  StoredProcedure [dbo].[prGetReport]    Script Date: 06/07/2017 11:13:39 ******/</br>
+				SET ANSI_NULLS ON</br>
+				GO</br>
+				SET QUOTED_IDENTIFIER ON</br>
+				GO
+			</code>
+
+			Next we define the stored procedure name, e.g. 'prGetReport' as a database object (.dbo), and define the input parameters and their types.</br></br>
+			
+			</code>
+				ALTER PROCEDURE [dbo].[prGetReport]</br>
+				@reportId BIGINT,</br>
+				@ExcludePatientData BIT = 0,</br>
+				@ProfileReadCode VARCHAR(50) = NULL,</br>
+				@_debug TINYINT = 0
+			</code>
+			
+			The '<i>BEGIN TRY</i>' statement is important, as it simulates the changes without applying them until a '<i>COMMIT</i>'  command is issued. his is why it's called '<i>Transact SQL</i>'. We set '<i>XACT_ABORT ON</i>' to abort the operation if there's an error.</br></br>
+
+			<code>
+				AS</br>
+				SET NOCOUNT, XACT_ABORT ON;</br>
+				BEGIN TRY
+			</code>
+			
+			Following this, there might be a large collection of variable declarations. The following is an abbreviated version. One set assigns variables (column header names?) to parameters:</br>
+			
+			<code>
+				DECLARE @ReportSummary xml_ReportSummary</br>
+				DECLARE @SubjectIdentifier SubjectIdentifierType</br>
+				DECLARE @PatientVisit XML_PatientVisit</br>
+				DECLARE @ReportComments XML_ReportComments
+			</code>
+			
+			I guess it's possible, as with C#, to set a variable as a table:
+
+			<code>
+				DECLARE @ObservationResultComments TABLE ( ObservationRequestId BIGINT NULL, ObservationResultId BIGINT NULL, Comment VARCHAR(max) NULL, Node BIGINT NULL, orderbyid int)
+			</code>
+			
+			And there are examples of parameter typing:
+
+			<code>
+				DECLARE @ProviderDepartment VARCHAR(50), @ProviderDepartmentCode VARCHAR(50), @SubjectLocation VARCHAR(50),
+			</code>
+			
+			This seems to be formatting the stored procedure response as an XML message, using a schema from an XML namespace (xmlns).
+
+			<code>
+				EXEC @PrepareXmlStatus = sp_xml_preparedocument @handle OUTPUT, @ReportXML, '<root xmlns:r="https://wales.nhs.uk/nwis"/>'
+			</code>
+		</div>
+
+		<div id="article">
+			<h2>JOIN and UNION Statements</h2>
+		
+		</div>
+		
+		
+		<div id="article">
+			<h2>References</h2>
+
+        </div>
+
+        <div id="footer">Michael, July 2017</div>
+    </body>
+</html>
