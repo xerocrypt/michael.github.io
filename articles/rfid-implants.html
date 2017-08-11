@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>RFID Implants</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Counterpoints to the RFID Implant Snake Oil</h1>			
+        </div>
+
+		<div id="article">
+			When I read the opinion piece in The Independent, titled '<a href="http://www.independent.co.uk/voices/wisconsin-company-microchip-employees-robots-artificial-intelligence-data-three-square-market-a7874486.html"><i>A US company has microchipped its employees – we should welcome this as progress and get involved</i></a>', I noticed so much vagueness and inaccuracy in Ab Banerjee's evangelism of RFID implants that I just needed to post a counterpoint. He may be a CEO of a software company, but he seems to have weighed in without knowing anything about the technology itself or the risks of applying it in the way he advocates. If you want a more balanced and factual digest on this, I recommend the INFOSEC Institute's '<a href="http://resources.infosecinstitute.com/human-implanted-rfid-chips/"><i>Human-implanted RFID Chips</i></a>'.</br></br>
+
+			The first thing to know about the technology is it was originally developed for tagging and tracking <i>objects</i> for inventory control, and the tracking of livestock was an early application. However, the idea of implanting RFID chips into humans isn't new - it's said that Professor Kevn Warwick was the first person to receive an implant in 1998, and six years later VeriChip was approved by the FDA in the United States.
+			An RFID tag serves pretty much the same purpose as a barcode, but provides the ability to scan items in batches instead of individually, and probably much faster also. The security application of RFID is a sort of gray area: it's useful as a blunt tool for <i>identification</i> and access control to low-security environments, but not advisable for <i>authentication</i>. You wouldn't, for example, use RFID alone to authorise large payments or log into a corporate network, because not even an implanted tag could provide the same level of assurance as a Chip-and-PIN system, or some other 2FA thing that involves more elaborate hardware that was refined to deal with real-world threats. In fact, I've visited government facilities that are protected by several layers of three-factor authentication system.</br></br>
+
+			Admittedly I do have a somewhat less rational dislike of RFID implants, and not just because I find it astonishing that a group of adults could <a href="https://www.usatoday.com/story/tech/talkingtech/2017/08/01/wisconsin-employees-got-embedded-chips/529198001/">peer-pressure themselves into doing stupid shit like this</a> just to use a 'micro-market'- freaking vending machine. By the way, it's actually not the future. One thing I've learned from last year's -Microsoft marketing events- staff conferences is that things are going the way of biometrics, voice recognition and 'convergence'. Gradually the smartphone will become the 'hub' for everything in our digital lives, even authentication with corporate networks. Ergo, I figure the RFID implant would become just as obsolete as the stand-alone MP3 player.</br></br>
+
+			I can't help but <i>feel</i> there's something fundamentally dehumanising about the idea of 'chipping' people as if they were livestock, and I don't <i>feel</i> the ubiquity of such implants could bring anything other than a world of societal consequences. My fears aren't without some foundation.
+			Several things stood out immediately when first skimming through Banerjee's opinion piece: He shows a pattern of viewing people in terms of performance metrics and other quantifiables, and his advocacy of the implants is solely in terms of how people are managed. I also think that his dismissal of our objections as irrational actually masks his inability to address the more humanistic questions. Also, what he's describing, in his 'vision', is a workplace environment that most people would find psychologically unhealthy. The opinion piece was actually more about this than RFID technology.
+		</div>
+		
+		<div id="article">
+			<h2>Limits and Capabilities of RFID Implants</h2>
+			It seems a common misconception, one that Banerjee shares, that RFID chips store subjects' records. They don't. Instead they typically store an identification number, which usually refers to a database record - in other words it does the same thing as an RFID chip within an ID card. If you look on <a href="https://www.smartcardfocus.com/shop/ilp/se~72/rfid-and-nfc-tags/p/index.shtml">SmartCard Focus</a>, an RFID tag ~3-4cm diameter stores ~200 bytes. An Ultralight tag has 64 bytes of ROM. For an implant, the ROM size would be much smaller - the VeriChip (which was easily cloned), according to the INFOSEC Institute article, stored a 16-digit number. The chip I think <a href="https://32market.wordpress.com/2017/07/21/32m-microchips-employees-company-wide/">32M is implanting</a> into its employees (<a href="https://dangerousthings.com/wp-content/uploads/xEM_Atmel-9187-RFID-ATA5577C_Datasheet.pdf">the ATA5577C</a>) could store a 45-digit identifier.</br></br>
+
+			You're perhaps now asking why anyone would have a thick needle inserted deep into their right hand, between the dermis and fascia, as a delivery method for an RFID chip, when ID cards are substantially cheaper and technically more suited to what Banerjee was trying to describe? Hell if I know, which is why I've put 'Snake Oil' in the title of this post. But I've already answered his first question, and refuted his dismissal of our concerns as 'predictably hysterical', 'scaremongering' and 'puff about nothing'. He states: 
+			<code>
+				'At the moment this data is stored on companies' tech systems. But why couldn't it be stored locally on employee microchips? It would be more accessible, and might even give employees better ownership over the data.'
+			</code>
+
+			All three sentences are incorrect. The first is that many (maybe even most) companies nowadays use a third-party service for data storage, and that brings a whole different set of issues related to security and trust - I'm surprised he isn't already aware of this. Since we've established that an employee's record would still exist in a database and not the RFID chip, it would still be just as inaccessible to the employee and vulnerable to being stolen, misused and falsified, and there's nothing to suggest an employee could do <i>anything</i> whatsoever about it. Now, that alone isn't better or worse than where we're at now, per se, but if people received the implant <i>and multiple databases</i> were tied to it (because people aren't going to have multiple implants), that would pave the way for data mining, egregious privacy violations and all manner of abuses. A future government could also use this, if politicians jumped in, to control the purchasing and movement of individuals. I played my part in the NO2ID campaign against the National Identity Register many years ago precisely for these reasons.</br></br>
+
+			Banerjee's answer for this is just wishful thinking:
+			<code>
+				'make sure the software the chips are paired up with have strong privacy protections. For example, employees should be able to log into their microchip and control whether the data it holds is public or private. This could even be monitored and regulated by the Government.'
+			</code>
+
+			No, you cannot 'log into' an RFID chip, for reasons that are obvious to anyone who knows what an RFID chip is, and you cannot control whether the information is private since it exists elsewhere. And who exactly would implement and enforce strong privacy protections? There have been countless data breaches and privacy violations involving systems that should have been highly secure, and I can't think of a case in which it was followed by someone being properly held to account by the government. </br></br>
+
+			So, the moral of the story is that technology should serve people and improve our quality of life as humans. Don't blindly embrace a bad idea just because someone tells you it's 'the future'.
+		</div>
+
+		<div id="article">
+			<h2>References</h2>
+			
+			32MARKET. 2017. 32M Microchips Employees Company-Wide. <i>Three Square Market Blog</i>. [BLOG]. <a href="https://32market.wordpress.com/2017/07/21/32m-microchips-employees-company-wide/">https://32market.wordpress.com/2017/07/21/32m-microchips-employees-company-wide/</a>. (7th August 2017).</br></br>
+
+			
+			ATMEL. 2014. ATA5577C Read/Write LF RFID IDIC 100 to 150kHz DATASHEET. <i>Dangerous Things - Custom gadgetry for the discerning biohacker</i>. [PDF]. <a href="https://dangerousthings.com/wp-content/uploads/xEM_Atmel-9187-RFID-ATA5577C_Datasheet.pdf">https://dangerousthings.com/wp-content/uploads/xEM_Atmel-9187-RFID-ATA5577C_Datasheet.pdf</a>. (7th August 2017).</br></br>
+			
+			BANERJEE, A. 2017. Voices: A US company has microchipped its employees – we should welcome this as progress and get involved. <i>The Independent</i>. [WWW]. <a href="http://www.independent.co.uk/voices/wisconsin-company-microchip-employees-robots-artificial-intelligence-data-three-square-market-a7874486.html">http://www.independent.co.uk/voices/wisconsin-company-microchip-employees-robots-artificial-intelligence-data-three-square-market-a7874486.html.</a>. (4th August 2017).</br></br>
+			
+			DOT ORIGIN. 2017. Contactless RFID and NFC tags. <i>SmartCard Focus</i>. [WWW]. <a href="https://www.smartcardfocus.com/shop/ilp/se~72/rfid-and-nfc-tags/p/index.shtml">https://www.smartcardfocus.com/shop/ilp/se~72/rfid-and-nfc-tags/p/index.shtml</a>. (4th August 2017).</br></br>
+			
+			GRAHAM, J. SCHULTE, L. 2017.  Wisconsin workers embedded with microchips. <i>USA Today: Talking Tech</i>. [WWW]. <a href="https://www.usatoday.com/story/tech/talkingtech/2017/08/01/wisconsin-employees-got-embedded-chips/529198001/">https://www.usatoday.com/story/tech/talkingtech/2017/08/01/wisconsin-employees-got-embedded-chips/529198001/</a>. (4th August 2017).	
+		</div>
+
+        <div id="footer">Michael, August 2017</div>
+    </body>
+</html>

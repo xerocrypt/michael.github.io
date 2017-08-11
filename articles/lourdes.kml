@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Lourdes.kml</name>
+	<Style id="sn_Direction-East-128">
+		<IconStyle>
+			<scale>1.5</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Downloads/Direction-East-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="sh_airports">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/airports.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_Network-Home-128">
+		<IconStyle>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Downloads/Network-Home-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_Network-Home-128">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_Network-Home-128</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_Network-Home-128</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_hiker0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_hiker0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_hiker</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_trail">
+		<IconStyle>
+			<color>ff7fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/trail.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_arrow">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_arrow00">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin00</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_arrow0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_arrow0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_arrow</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_poi">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_poi</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_poi</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_arrow00">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_water">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_hiker">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_hiker</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_hiker0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_arrow00">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_arrow00</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_arrow0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_trail">
+		<IconStyle>
+			<color>ff7fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/trail.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_water">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_water</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_water</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_arrow0">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_hiker0">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_airports">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_airports</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_airports</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_Direction-East-128">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_Direction-East-128</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_Direction-East-128</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_water">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/water.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_trail">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_trail</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_trail</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin1">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/poi.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_Capitol-128">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_Capitol-128</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_Capitol-128</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_arrow0">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_Capitol-128">
+		<IconStyle>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Documents/Capitol-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="sn_arrow">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/arrow.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_Network-Home-128">
+		<IconStyle>
+			<scale>1.5</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Downloads/Network-Home-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="sh_Direction-East-128">
+		<IconStyle>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Downloads/Direction-East-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="sn_poi">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/poi.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_airports">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/airports.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<color>ff7fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/bars.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="sh_poi">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/poi.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_hiker">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_hiker0">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin00">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl00</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_hiker">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/hiker.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<color>ff7fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/bars.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="sn_Capitol-128">
+		<IconStyle>
+			<scale>1.5</scale>
+			<Icon>
+				<href>C:/Users/mi168661/Documents/Capitol-128.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl00">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/poi.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin00">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.5</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/picnic.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl1">
+		<IconStyle>
+			<color>b27fff55</color>
+			<scale>1.77273</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/picnic.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_arrow">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_arrow</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_arrow00</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder>
+		<name>Lourdes</name>
+		<Placemark>
+			<name>Le Dubliner</name>
+			<LookAt>
+				<gx:ViewerOptions>
+					<gx:option enabled="0" name="historicalimagery"></gx:option>
+					<gx:option enabled="0" name="sunlight"></gx:option>
+					<gx:option name="streetview"></gx:option>
+				</gx:ViewerOptions>
+				<longitude>-0.04428192466295334</longitude>
+				<latitude>43.10142141314279</latitude>
+				<altitude>0</altitude>
+				<heading>32.82791832660184</heading>
+				<tilt>85.89104227178595</tilt>
+				<range>32.33142664485002</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.04445656225954719,43.1012296156721,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Bar</name>
+			<LookAt>
+				<gx:ViewerOptions>
+					<gx:option enabled="0" name="historicalimagery"></gx:option>
+					<gx:option enabled="0" name="sunlight"></gx:option>
+					<gx:option name="streetview"></gx:option>
+				</gx:ViewerOptions>
+				<longitude>-0.009430729388135717</longitude>
+				<latitude>43.07046141999068</latitude>
+				<altitude>0</altitude>
+				<heading>121.2892612899507</heading>
+				<tilt>84.91401512282702</tilt>
+				<range>4258.428418258333</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05395622054936933,43.0902162404992,377.1854116728925</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Munster Bar</name>
+			<LookAt>
+				<gx:ViewerOptions>
+					<gx:option enabled="0" name="historicalimagery"></gx:option>
+					<gx:option enabled="0" name="sunlight"></gx:option>
+					<gx:option name="streetview"></gx:option>
+				</gx:ViewerOptions>
+				<longitude>-0.04845325665878031</longitude>
+				<latitude>43.09511049326493</latitude>
+				<altitude>0</altitude>
+				<heading>79.28168847622787</heading>
+				<tilt>52.63006709912557</tilt>
+				<range>4.137567714902291</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.04846006292758887,43.09510774137434,404.1669071713317</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Hotel St. Louis de France</name>
+			<LookAt>
+				<longitude>-0.0522575639715217</longitude>
+				<latitude>43.0950432409139</latitude>
+				<altitude>19.4096331079093</altitude>
+				<heading>58.14156829003159</heading>
+				<tilt>60.00361881136825</tilt>
+				<range>389.4049498313673</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_Network-Home-128</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05248182959471381,43.09458459221323,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Lac de Lourdes</name>
+			<visibility>0</visibility>
+			<description>Possibly visit this spot with the rest of the group. Doesn&apos;t seem to be much here.</description>
+			<LookAt>
+				<longitude>-0.07653235437496074</longitude>
+				<latitude>43.10700439021433</latitude>
+				<altitude>0</altitude>
+				<heading>0.007639807727045886</heading>
+				<tilt>21.16938077867857</tilt>
+				<range>1267.87489451078</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin1</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.07756438893834927,43.10580017283365,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Pic du Jer - Lourdes View</name>
+			<visibility>0</visibility>
+			<description>Follow the path left from the upper cable station to get a good view of the whole town.</description>
+			<LookAt>
+				<longitude>-0.02838277296851488</longitude>
+				<latitude>43.08506023728505</latitude>
+				<altitude>0</altitude>
+				<heading>95.67138683403654</heading>
+				<tilt>60.00984201613429</tilt>
+				<range>778.5990475445052</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin00</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.03098661292993077,43.08460185330701,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Pic du Jer - Pyrenees View</name>
+			<description>Follow the path right from the cable station to get a view of the mountain range.</description>
+			<LookAt>
+				<longitude>-0.02775928768625202</longitude>
+				<latitude>43.079288525877</latitude>
+				<altitude>0</altitude>
+				<heading>95.67181245134303</heading>
+				<tilt>60.00747871324746</tilt>
+				<range>596.0367868487889</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_Direction-East-128</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.03122228902485036,43.0793802739844,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Chateau forte de Lourdes</name>
+			<visibility>0</visibility>
+			<description>Overlooks the Basilica site. The highest point within Lourdes.</description>
+			<LookAt>
+				<longitude>-0.0495761346156065</longitude>
+				<latitude>43.09782656310013</latitude>
+				<altitude>10.76441478392356</altitude>
+				<heading>-58.17143581761204</heading>
+				<tilt>60.00863841118026</tilt>
+				<range>502.4181626334928</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_arrow</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.0484720194982724,43.09633830235104,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Grotte de Massabielle</name>
+			<visibility>0</visibility>
+			<LookAt>
+				<longitude>-0.05879711153902512</longitude>
+				<latitude>43.09758227573293</latitude>
+				<altitude>1.22237440485364</altitude>
+				<heading>-173.7416628761461</heading>
+				<tilt>60.00265287533556</tilt>
+				<range>75.72850172394328</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_water</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05862952992700787,43.09764112801985,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Chemin de Croix</name>
+			<description>Way of the Cross. Mountain trail.</description>
+			<Camera>
+				<longitude>-0.05930366860743663</longitude>
+				<latitude>43.09547664190218</latitude>
+				<altitude>361.5382659942806</altitude>
+				<heading>-38.19623058682436</heading>
+				<tilt>0.100750573692547</tilt>
+				<roll>-1.132019868399694</roll>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</Camera>
+			<styleUrl>#msn_arrow</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05930848933510369,43.0954811156687,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Chemin de Croix Entrance</name>
+			<visibility>0</visibility>
+			<LookAt>
+				<gx:ViewerOptions>
+					<gx:option enabled="0" name="historicalimagery"></gx:option>
+					<gx:option enabled="0" name="sunlight"></gx:option>
+					<gx:option name="streetview"></gx:option>
+				</gx:ViewerOptions>
+				<longitude>-0.06043515480892991</longitude>
+				<latitude>43.09276464788683</latitude>
+				<altitude>0</altitude>
+				<heading>-159.0808973034336</heading>
+				<tilt>54.00244784682306</tilt>
+				<range>664.7382322413846</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_poi</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05809029834453194,43.09724395809477,387.8704782046617</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Pic du Jer Lower Station</name>
+			<visibility>0</visibility>
+			<LookAt>
+				<longitude>-0.04425936371736161</longitude>
+				<latitude>43.0836535508759</latitude>
+				<altitude>0</altitude>
+				<heading>77.96303326088699</heading>
+				<tilt>60.0032494861786</tilt>
+				<range>169.6763497468833</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_hiker</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.04425936371736161,43.0836535508759,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Pic du Jer Upper Station</name>
+			<visibility>0</visibility>
+			<description><![CDATA[Two paths from here: one leads to a view of Lourdes, and the other to a view of the Pyrenees.<img style="max-width:500px;" src="file:///M:/Catholica/Lourdes-Images/lourdes-cable-station-paths.jpg">]]></description>
+			<LookAt>
+				<longitude>-0.03265662089637522</longitude>
+				<latitude>43.08039562220583</latitude>
+				<altitude>4.25806208894421</altitude>
+				<heading>-132.2979999561651</heading>
+				<tilt>45.08098056614679</tilt>
+				<range>93.48616508247748</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_hiker0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.03265662089637522,43.08039562220583,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Pyrenees Tab Destination</name>
+			<visibility>0</visibility>
+			<description>11KM from Lourdes.</description>
+			<LookAt>
+				<longitude>-0.07089958866677737</longitude>
+				<latitude>42.99330918849962</latitude>
+				<altitude>0</altitude>
+				<heading>-35.48390401761804</heading>
+				<tilt>0</tilt>
+				<range>27.10620418417666</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_trail</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.07089958866677737,42.99330918849962,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Underground Basilica</name>
+			<visibility>0</visibility>
+			<description><![CDATA[An underground basilica on the main Basilica site. Mass is held on Wednesday mornings.<img style="max-width:500px;" src="file:///M:/Catholica/Lourdes-Images/lourdes-underground-basilica-entrances.jpg">]]></description>
+			<LookAt>
+				<longitude>-0.05351397086474585</longitude>
+				<latitude>43.09716691682753</latitude>
+				<altitude>0</altitude>
+				<heading>-3.167943557199886</heading>
+				<tilt>60.0041251268403</tilt>
+				<range>231.9574871950237</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_arrow0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05351397086474585,43.09716691682754,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Rosary Basilica</name>
+			<description><![CDATA[Main Basilica site, housing the Sanctuaires Notre Dame de Lourdes and the Grotte de Massabielle.<img style="max-width:500px;" src="file:///M:/Catholica/Lourdes-Images/lourdes-3d-6.jpg">]]></description>
+			<LookAt>
+				<longitude>-0.05670521988350719</longitude>
+				<latitude>43.09761268094488</latitude>
+				<altitude>0</altitude>
+				<heading>-10.8701239301003</heading>
+				<tilt>60.00465661855918</tilt>
+				<range>117.3071023597781</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_Capitol-128</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05670521988350719,43.09761268094488,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sanctuaires Notre Dame de Lourdes</name>
+			<visibility>0</visibility>
+			<Camera>
+				<longitude>-0.0574409253930408</longitude>
+				<latitude>43.09749729591111</latitude>
+				<altitude>198.6599035480959</altitude>
+				<heading>-38.19496185487447</heading>
+				<tilt>0.100739126293939</tilt>
+				<roll>-1.132025491226579</roll>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</Camera>
+			<styleUrl>#msn_arrow00</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.05744348262217924,43.09749966925939,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Lourdes Airport</name>
+			<visibility>0</visibility>
+			<LookAt>
+				<longitude>-0.00775086542319392</longitude>
+				<latitude>43.18767256372762</latitude>
+				<altitude>0</altitude>
+				<heading>6.094797311514012</heading>
+				<tilt>56.37004860718243</tilt>
+				<range>3216.256168425849</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_airports</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-0.009044753771877412,43.18698946862674,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

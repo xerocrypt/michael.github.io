@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Key Storage Devices</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Key Storage Devices and the YubiKey</h1>			
+        </div>
+
+		<div id="article">
+			Browsing through the Crypto Museum site several years ago, around the same time I was researching Hardware Security Modules, I came across the <a href="http://cryptomuseum.com/crypto/usa/ksd64/index.htm">'Key Storage Device' (the KSD-64)</a>. Provided as a COMSEC solution by the NSA, the device stored the data required for a Secure Telephone Unit to load internally-stored cryptographic keys - an adversary would need both the STU and the KSD to recover the cryptographic keys.</br>
+			I don't think its use was limited to NATO or the STU II/III, though, as the KSD-64 was almost identical to another key that a relative of mine carried in the late-1980s/early-1990s. The version I saw was colour-coded yellow, and I'm speculating it had something to do with an ICL VME mainframe, perhaps for <a href="http://cryptomuseum.com/crypto/usa/kiv7/index.htm#cik">stream encryption over a serial line</a> between a terminal and controller. If I can get literature on this, it would make an interesting subject for a separate blog post.</br></br>
+
+			Whereas the Key Storage Device's real advantage was portability and easier distribution of cryptographic keys, it doesn't provide the same level of security we have in Hardware Security Modules and <a href="http://www.nxp.com/products/identification-and-security/secure-authentication-and-anti-counterfeit-technology/secure-authentication-microcontroller:A700X_FAMILY#overviewExpand">Smart Cards</a>. The main design differences, in order to provide that level of security are: a) Access to the data storage must be mediated by a processor or controller, and b) The hardware casing must be highly tamper-resistant.
+		</div>
+		
+		<div id="article">
+			<h2>The YubiKey</h2>
+				The reason I brought up this little bit of trivia is I've been experimenting with a <a href="https://www.yubico.com/products/yubikey-hardware/yubikey4/">YubiKey 4</a> that arrived in the post yesterday. In most configurations it performs roughly the same purpose as the KSD, where is would mimic a keyboard device and dump a password or code into a selected input field when the '<i>y</i>' button is pressed. It could also be configured to function in a very similar way to a <a href="https://en.wikipedia.org/wiki/RSA_SecurID">SecurID token</a>. Also it can be implemented as a 2FA device, where one section of a password is entered manually and another section dumped by the YubiKey.
+
+				Considering the device costed £40, the packaging is a little basic, but it's handy if you want to carry the YubiKey in a wallet.
+			</div>
+	
+			<div id="article">
+				<h2>Configuring the YubiKey (Windows and Linux)</h2>
+				For setup and configuration we need to run <a href="https://www.yubico.com/support/knowledge-base/categories/articles/yubikey-personalization-tools/">the YubiKey Personalization Tool</a>, which is a freely-available application.</br></br>
+
+				The Windows application is easy enough to download and run. The Linux version must be downloaded as a <i>.tar.gz</i> source archive, but I managed to compile this within a few minutes, by first executing the <i>prepare-travis.sh</i> script to fetch the dependencies then running the compiler with:
+				<code>$qmake && make</code>
+
+				The compiled application is generated in the <i>/build/release</i> sub-directory. To run the application from here:
+				<code>$./yubikey-personalization-gui</code>
+
+				When starting the application, the first thing users will notice are the configuration types along the top-level menu. These are:
+				<ul>
+					<li>Yubico OTP</li>
+					<li>OATH-HOTP</li>
+					<li>Static Password</li>
+					<li>Challenge-Response (HMAC-SHA1)</li>
+				</ul>
+
+				I'll try my best to explain these configurations without making a mess of it.
+			</div>
+	
+			<div id="article">
+				<h2>Things You Can Do with Static Password Mode</h2>
+				In this mode, the YubiKey can store a password that is later dumped to a password field when the button is pressed on the device - this is very useful if you've got a relatively long master password for something like KeePass, and if shoulder-surfing is a problem.
+				The YubiKey 4 actually has two configuration 'slots', which in this regard means the device can store two passwords. A short press of the button dumps the first password, and a long press dumps the second password. Of course, having two slots means it's also possible to have two different configurations on the same device, such as a short press to dump a password out, and a long press for OTP/HOTP/HMAC.</br></br>
+
+				Now, I've mentioned that a YubiKey in this configuration, much like the KSD, doesn't have protected storage, so anyone could swipe the device and access to whatever you're trying to protect. One way around this is to enter simple, easy-to-remember passwords manually and have the YubiKey append those with a more complex string - voila, two-factor authentication, sort of.
+			</div>
+
+			<div id="article">
+				<h2>OTP Configuration</h2>
+				For those who have used an RSA SecurID token, the <a href="https://www.yubico.com/support/knowledge-base/categories/articles/one-time-password-otp/">One-Time Password (OTP)</a> configuration will be slightly easier to understand. Each time the YubiKey is used to begin a session, a single-use password is generated that is very hard to forge or re-use.</br>
+				How does the server validate this password, though? Well, <a href="https://github.com/xerocrypt/IPv6-Secure/blob/master/Python/saga.py">my IPv6 Secure Address Generation algorithm</a> is an example of OTP, as a hash value is generated from a string containing the system time and a secret code. This value would always change, yet could still be calculated based on a shared key and the system time. Another example is the SecurID token, which displays a secret number generated mathematically from the system time and a 'seed value' - the RSA gateway will also know what the secret code should be. The code might be shared by the server with a device over a separate channel, such as SMS or postal service.</br>
+				The Yubico OTP works a little like this, as the server uses the YubiKey's Public Identity, Private Identity and Secret Key as the values for generating a password.
+			</div>
+
+			<div id="article">
+				<h2>OATH-HOTP Configuration</h2>
+				OATH is also known as 'Open Authentication', is a set open standards, and shouldn't be confused with 'OAUTH'.
+				The algorithms used here is <a href="https://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm">HMAC-based OTP</a>, in the form <i>HMAC(sharedSecret, counter)</i>. The counter is the 'seed value', and in this implemementation it's incremented each time the token is used.</br></br>
+
+				Here the HMAC combines the secret key with an XORed counter value, and generates a SHA fingerprint from this. The SHA fingerprint is communicated so the counter value and secret key are never sent between the client and server.
+				The counter value is supposed to increment each time the token is used, so it the server and client should have the same value.
+			</div>
+
+			<div id="article">
+				<h2>HMAC-SHA</h2>
+				Yubico recommends using this for offline use. This combines the secret key with the message to be authenticated (the message being the response to a challenge), and generates a SHA1 hash fingerprint for this. Here we have the option of using a 512-bit secret key.
+				For this method of authentication, the server presents a question, and the client (with YubiKey inserted) must provide the correct answer. This could be simple as a password request and response, or it could be more elaborate like a response mapped to a randomly-selected string.</br></br>
+
+				So, how does HMAC work with this? The server could select a random set of bytes or characters, and encrypt it before sending to the client as the challenge. The client uses the password to decrypt the challenge and return the hash fingerprint of the decrypted byte/character set. This would computationally prove that both client and server were using the same secret key, though neither the challenge or secret key were sent as plaintext during the transaction.
+		</div>
+		
+		<div id="article">
+			<h2>References</h2>
+				CRYPTO MUSEUM. 2014. KIV-7 Embeddable KG-84 COMSEC Module. <i>Crypto Museum</i>. [WWW]. <a href="http://cryptomuseum.com/crypto/usa/kiv7/index.htm#cik">http://cryptomuseum.com/crypto/usa/kiv7/index.htm#cik</a>. (11th August 2017).</br></br>
+				
+				YUBICO. 2016. What is a One-Time Password (OTP)?. <i>Knowledge Base - Basic Questions</i>. [WWW]. <a href="https://www.yubico.com/support/knowledge-base/categories/articles/one-time-password-otp/">https://www.yubico.com/support/knowledge-base/categories/articles/one-time-password-otp/</a>. (11th August 2017).</br></br>
+				
+				YUBICO. 2017. YubiKey 4 Series. <i>Products - YubiKeys</i>. [WWW]. <a href="https://www.yubico.com/products/yubikey-hardware/yubikey4/">https://www.yubico.com/products/yubikey-hardware/yubikey4/</a>. (11th August 2017).</br></br>
+				
+				YUBICO. 2017. YubiKey Personalization Tools. <i>Knowledge Base - Downloads</i>. [WWW]. <a href="https://www.yubico.com/support/knowledge-base/categories/articles/yubikey-personalization-tools/">https://www.yubico.com/support/knowledge-base/categories/articles/yubikey-personalization-tools/</a>. (11th August 2017).</br></br>
+				
+				
+		</div>
+
+        <div id="footer">Michael, August 2017</div>
+    </body>
+</html>
