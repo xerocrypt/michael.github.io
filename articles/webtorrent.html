@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>WebTorrent</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>WebTorrent</h1>			
+        </div>
+
+		<div id="article">
+			While researching some alternatives to YouTube (and other Google services), I came across BitChute, which uses somethng called 'WebTorrent' to decentralise content. There's a very good chance that WebTorrent would become a common Web 2.0 technology, as there are a multitude of ways WebTorrent could be solve the problems facing developers who want to release alternatives to the mainstream services like YouTube and FaceBook. For example, having the distributed content storage and sharing should reduce the demands on the service providers, and for the users make it much harder to censor content.
+		</div>
+
+		<div id="article">
+			<h2>BitTorrent</h2>
+			I guess a good place to start would be an overview of torrenting. It's a technology or communications method that was big early last decade, but never quite took off. Chances are you've never heard of the most popular torrenting sites.</br></br>
+
+			The selling point is that it's peer-to-peer, and therefore a distributed way of hosting a network's content. Although it might require one or more authoritive server(s) for bootstrapping, it isn't based on the client/server model. The authoritive server is known as a 'tracker' and it provides a metadata file.
+		</div>
+
+		<div id="article">
+			<h2>How the Browser-Based Technology Works</h2>
+			Uses a JavaScript file webtorrent.min.js. Also uses WebRTC, so WebTorrent could be seen as an extension of that with trackers being used to bootstrap the P2P network.</br></br>
+
+			The only real disadvantage is the client can only be peered with other WebRTC peers.
+		</div>
+
+		<div id="article">
+			<h2>Brower-Based Client</h2>
+			The only dependency here is the <i>webtorrent.min.js</i> file. Here I've cleaned up the demo page and its source code.</br></br>
+
+			As we can see, a torrent address must be supplied for this to work and for the client to find tracker. The format used in the WebTorrent examples are 'magnet:' links. This is provided to the WebTorrent code as the torrentId variable.</br></br>
+
+			Initialise torrent:</br></br>
+
+
+			After that there is the function onTorrent (torrent), which contains the code to be executed when the browser is peered and the torrent actually is initiated.</br>
+			Ignoring the 'log' parts of the code that print the torrenting status, we can see that very little code is actually required for this to work.</br></br>
+
+			From this we can extract the core parts of the script that aren't related to the log messages to get a better idea of how the torrenting works:</br></br>
+
+			First a new instance of WebTorrent() is declared as the 'client'. Just in case the torrent session fails, 'client.on('error', function(err))' is added to remove the client and clean the browser memory.</br></br>
+
+			Next we have an event listener for the download entry field and button, so when the Download button is clicked the contents of the text box is set as variable torrentId.</br>
+			The following line seens to initialise the instance of WebTorrent using the client.add API call. To this, torrentId and onTorrent are passed - the latter variable is returned by function onTorrent().</br>
+			client.add(torrentId, onTorrent)
+
+			The onTorrent() function waits for a completion message from torrent.on, and each file received is pushed into the page's 'mediacontainer' element.</br></br>
+
+			To this I've added 'Stop' and 'Pause' controls, but adding buttons and event handlers that call the following functions:
+			function pauseServer(torrent) { torrent.pause() }
+			function stopServer(torrent) { client.destroy() }
+
+			The torrent.pause() function stops the client from adding further connections, while client.destroy() removes the current instance of the WebTorrent client.
+		</div>
+
+		<div id="article">
+			<h2>Server Component</h2>
+			For WebTorrent to actually work for social networking and video publishing, the Web application would also require a server component to stream files to requesting peers.</br></br>
+
+			In my code, I'll add another two variables at the top of the JavaScript section.
+			<code>
+				var client2 = new WebTorrent()</br>
+				var magnetURI = 'magnet: ...'
+			</code>
+			
+			The first creates an additional instance of the WebTorrent client, just in case the server requires it. After that, the magnetURI determines the local server address.</br></br>
+
+			And we need to start the second instance of WebTorrent.</br>
+
+			<code>
+			client2.add(magnetURI, function (torrent)</br>
+			{</br>
+			var server = torrent.createServer()</br>
+			server.listen(43020)</br>
+			// access individual files at http://localhost:<port>/<index></br>
+			server.close()</br>
+			client2.destroy()</br>
+			})
+			</code>
+		</div>
+		
+		<div id="article">
+			<h2>References</h2>
+			BAQUERO, R. D. 2017. BTorrent. [WWW]. <a href="https://btorrent.xyz/">https://btorrent.xyz/</a>. (1st September 2017).</br></br>
+			
+			BAQUERO, R. D. 2017. webtorrent. <i>GitHub</i>. [CODE]. <a href="https://github.com/webtorrent/webtorrent">https://github.com/webtorrent/webtorrent</a>. (1st September 2017).</br></br>
+			
+			TORRENTFREAK. 2017. Top 10 Most Popular Torrent Sites of 2017. [WWW]. <a href="https://torrentfreak.com/top-10-most-popular-torrent-sites-of-2017-170107/">https://torrentfreak.com/top-10-most-popular-torrent-sites-of-2017-170107/</a>(1st September 2017).</br></br>
+
+			WEBTORRENT.IO. 2017. WebTorrent Documentation. <i>webtorrent.io</i>. [WWW]. <a href="https://webtorrent.io/docs">https://webtorrent.io/docs</a>. (1st September 2017).</br></br>
+		</div>
+
+        <div id="footer">Michael, September 2017</div>
+    </body>
+</html>
