@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="scripts/amcharts/amcharts.js"></script>
     <script type="text/javascript" src="scripts/amcharts/serial.js"></script>
@@ -41,15 +40,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li><a href="index.html"><img src="images/assets/home.png"></a></li>
-            <li><a href="about.html"><img src="images/assets/about.png"></a></li>
-            <li><a href="healthcare.html"><img src="images/assets/medical.png"></a></li>
-            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></a></li>
-            <li><a href="resources.html"><img src="images/assets/library.png"></a></li>
-            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></a></li>
+            <li><a href="index.html"><img src="images/assets/home.png"></br>Home</a></li>
+            <li><a href="about.html"><img src="images/assets/about.png"></br>About</a></li>
+            <li><a href="healthcare.html"><img src="images/assets/medical.png"></br>Healthcare</a></li>
+            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></br>Articles</a></li>
+            <li><a href="resources.html"><img src="images/assets/library.png"></br>Resources</a></li>
+            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></br>Toolkit</a></li>
 			<li></li>
-			<li class="active"><a href="opendata.html"><img src="images/assets/charts.png"></a></li>
-			<li><a href="ipv6secure.html"><img src="images/assets/group.png"></a></li>
+			<li class="active"><a href="opendata.html"><img src="images/assets/charts.png"></br>Open Data</a></li>
+			<li><a href="ipv6secure.html"><img src="images/assets/group.png"><br>IPv6Secure</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -61,9 +60,7 @@
 
 <h1>// Messaging Metrics</h1>
 
-
 <script>
-
     // since v3, chart can accept data in JSON format
     // if your category axis parses dates, you should only
     // set date format of your data (dataDateFormat property of AmSerialChart)
@@ -212,31 +209,11 @@
               "balloon": {},
               "titles": [],
               "dataProvider": [
-                  {
-                      "healthboard": "North",
-                      "messages": 4067,
-                      "processed": 4065
-                  },
-                  {
-                      "healthboard": "East",
-                      "messages": 3002,
-                      "processed": 3000
-                  },
-                  {
-                      "healthboard": "West",
-                      "messages": 2087,
-                      "processed": 2050
-                  },
-                  {
-                      "healthboard": "South East",
-                      "messages": 4523,
-                      "processed": 4522
-                  },
-                  {
-                      "healthboard": "South West",
-                      "messages": 6721,
-                      "processed": 6715
-                  }
+					{ "healthboard": "North", "messages": 4067, "processed": 4065 },
+					{ "healthboard": "East", "messages": 3002, "processed": 3000 },
+					{ "healthboard": "West", "messages": 2087, "processed": 2050 },
+					{ "healthboard": "South East", "messages": 4523, "processed": 4522 },
+					{ "healthboard": "South West", "messages": 6721, "processed": 6715 }
               ],
               "export": {
                   "enabled": true
@@ -249,21 +226,11 @@
 var chart = AmCharts.makeChart( "chartdiv3", {
     "type": "pie",
     "theme": "light",
-    "dataProvider": [ {
-        "title": "Pathology",
-        "value": 9987
-    }, {
-        "title": "Radiology",
-        "value": 3432
-    },
-    {
-        "title": "Cardiology",
-        "value": 501
-    },
-    {
-        "title": "Unknown",
-        "value": 28
-    }
+    "dataProvider": [ 
+	{ "title": "Pathology", "value": 9987}, 
+	{ "title": "Radiology", "value": 3432 },
+    { "title": "Cardiology", "value": 501 },
+    { "title": "Unknown", "value": 28 }
     ],
     "titleField": "title",
     "valueField": "value",

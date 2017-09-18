@@ -32,15 +32,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li><a href="index.html"><img src="images/assets/home.png"></a></li>
-            <li><a href="about.html"><img src="images/assets/about.png"></a></li>
-            <li class="active"><a href="healthcare.html"><img src="images/assets/medical.png"></a></li>
-            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></a></li>
-            <li><a href="resources.html"><img src="images/assets/library.png"></a></li>
-            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></a></li>
+            <li><a href="index.html"><img src="images/assets/home.png"></br>Home</a></li>
+            <li><a href="about.html"><img src="images/assets/about.png"></br>About</a></li>
+            <li class="active"><a href="healthcare.html"><img src="images/assets/medical.png"></br>Healthcare</a></li>
+            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></br>Articles</a></li>
+            <li><a href="resources.html"><img src="images/assets/library.png"></br>Resources</a></li>
+            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></br>Toolkit</a></li>
 			<li></li>
-			<li><a href="opendata.html"><img src="images/assets/charts.png"></a></li>
-			<li><a href="ipv6secure.html"><img src="images/assets/group.png"></a></li>
+			<li><a href="opendata.html"><img src="images/assets/charts.png"></br>Open Data</a></li>
+			<li><a href="ipv6secure.html"><img src="images/assets/group.png"><br>IPv6Secure</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -56,21 +56,10 @@
       <div class="col-sm-5">
         <div class="panel panel-default">
           <div class="panel-heading">// Test Automation //</div>
-          <div class="panel-body">
-            Using Microsoft's Coded UI Test libraries and a little knowledge of C#, I was able to deliver a test automation capability to a large healthcare software provider. Regression tests that previously required several weeks' manual work could be completed within a few hours. As it's not always possible to perfectly replicate user actions and get the same level of test coverage, automation was mainly used for testing the core functionality of applications.</br></br>
-
-            Advantages:
-            <ul>
-              <li>Best used for automating regression tests against core features of an application, to avoid duplication of manual testing efforts.</li>
-            </ul>
-            Disadvantages:
-            <ul>
-              <li>Automated tests aren't adaptable. If there are intended changes to the application under test, the test scripts should be modified to reflect those changes.</li>
-              <li>The above point also means the creators and maintainers of the automation scripts would need some familiarity with the scripting language.</li>
-              <li>Automation scripts must be created for each feature added during a development iteration, which requires performing regression tests manually anyway.</li>
-            </ul>
-            We also managed to use Test Manager so recordings of manual regression tests could be converted to C# code and modified as required.
-          </div>
+			<div class="panel-body">
+				Using Microsoft's Coded UI Test libraries included with Visual Studio Enterprise, and a little understanding of C#, I was able to deliver a test automation capability to a clinical applications development organisation. The timeframe for regression testing a large clinical application, which had to be repeated with each release, was reduced from several weeks to several hours. Quite often an automated test run would be used to detect functional defects before commencing a lengthy period of manual testing. Another advantage of test automation is consistency: The same set of tests are applied to each build or iteration of the application under test.</br>
+				Test automation is'nt without its disadvantages. A typical test script would consist of several thousand lines of C# code, and scripts needed to be managed as software projects. A test automation system also isn't as flexible or adaptive as a human tester, and the code frequently requires changes just as often as the application under test, and, of course, this requires some amount of expertise in programming.
+			</div>
         </div>
       </div>
 
@@ -82,14 +71,14 @@
             <ul>
               <li>API repository</li>
               <li>Web Service helpers</li>
-              <li>Data access: Data response</li>
-              <li>Data access: Data response body</li>
-              <li>Data access: Data response items</li>
+				<li>Data access layer(s)</li>
             </ul>
 
             <img src="images/webservice-structure.png" width="100%"></br></br>
 
-            The API repository is a .asmx file containing all the entry points for our collection of Web services. Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations. The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
+            The API repository is a .asmx file containing all the entry points for our collection of Web services. With some Web Services the helpers (the executable part of the service) are in the same file, but they can be separated out into a different <i>.cs</i> file.
+			
+			Requests are passed to the relevant Web Service helpers, which are coded in C# to perform whatever operations. The data access layer for a typical Web Service is broken down into three sub-components that collectively form a response populated by data objects.</br>
             Testing and debugging was performed using SoapUI.
           </div>
         </div>

@@ -7,142 +7,139 @@
     <body>
 
         <div id="header">
-            <h1>Node.js</h1>
+            <h1>A Basic MVC Application with Node.js and Express</h1>
         </div>
 
         <div id="article">
-            Server-Side JavaScript Framework, or a JavaScript runtime environment. Node.js was introduced in 2009/2010, but is already widely used and well-supported.</br></br>
-            
-            The main purpose of Node.js is to enable the creation of Web servers and associated network tools using JavaScript, and there are additional modules for performing server-side operations.  Node.js enables communication between the client-side JavaScript and the server.</br></br>
+			Using Node.js, JSON and jQuery, I've managed to develop something much like an MVC application that's considerably more lightweight than a .NET project, and anyone can use this as a template or basis for their own Web application project.</br>
+			Node.js enables the creation of Web servers, and enables communication between client-side JavaScript and the server. A Node.js application has the following:
+			<ul>
+				<li>Module imports</li>
+				<li>Server creation</li>
+				<li>Response</li>
+			</ul>
 
-            A Node.js application has the following:
-            <ul>
-                <li>Module imports</li>
-                <li>Server creation</li>
-                <li>Response</li>
-            </ul>
-        </div>
+			The source code in the following screenshots is available on GitHub.
+		</div>
+		
+		<div id="article">
+			<h2>Creating a Simple Node.js Server</h2>
+			The server-side code for this is fairly basic:</br></br>
+		
+			<img src="images/nodejs-test/node-simple-server-code.png"></br></br>
+			
+			Note the server created by this method is just a process listening on port 8090 (or whichever port is specified), and doesn't host Web pages at this stage. Instead it returns an HTTP response using <i>response.writeHead()</i> to determine the header and <i>response.end()</i> to determine the body. When this code executes <i>console.log()</i> will print the 'Server running' message in the command line. A browser sending a request to localhost:8090 will display 'Hello World' as the response. I saved this file as 'nodeserver.js'.
 
-        <div id="article">
-            <h2>Creating a Simple Server</h2>
-            The server-side code for this is simple:</br>
+			To start the server using the Node.js interpreter, simply navigate the command line to the directory where the .js file's stored, and enter the following:</br>
+			<code>node nodeserver.js</code>
+		</div>
 
-            <code>
-                var http = require("http");</br></br>
+		<div id="article">
+			<h2>File Operations</h2>
+			Perhaps the main reason we want server-side code, rather than something entirely client-based is data persistence. An application isn't much use if it can't store and retrieve data. Here I have two files: <i>file-op.js</i> server-side script, and the <i>serverdata.txt</i> data file. The latter simply contains two lines of text.</br></br>
 
-                http.createServer(function (request, response)</br>
-                {</br>
-                    response.writeHead(200, {'Content-Type': 'text/plain'});</br>
-                    response.end('Hello World\n');</br>
-                }).listen(8090);</br></br>
+			<img src="images/nodejs-test/node-file-op-code.png"></br></br>
+			
+			This time we import both the <i>http</i> and filesystem (<i>fs</i>) modules:</br></br>
 
-                console.log('Server running at http://127.0.0.1:8090/');
-            </code></br>
+			<code>
+				var http = require("http");</br>
+				var fs = require("fs");
+			</code>
 
-            I saved this as '<i>nodeserver.js</i>'.</br></br>
+			And specify the file to read:
+			<code>
+				var data = fs.readFileSync('serverdata.txt');
+			</code>
 
-            In the command prompt:
-            <code>node nodeserver.js</code></br>
+			And this time, the HTTP response is defined as the contents of <i>serverdata.txt</i>:
 
-            You'll see the message in the <i>console.log</i> displayed.</br></br>
+			<code>
+				http.createServer(function (request, response) </br>
+				{</br>
+					response.writeHead(200, {'Content-Type': 'text/plain'});</br>
+					response.end(data.toString());</br>
+				}).listen(8090);
+			</code>
+		</div>
 
-            Now navigate the browser to <i>http://localhost:8090</i> to see the response body (just '<i>Hello World</i>') displayed in the browser.
-        </div>
+		<div id="article">
+			<h2>Streaming Data and Writing to File</h2>
+			The filesystem module enables the JavaScript to perform I/O with files using <i>createReadStream()</i> and <i>createWriteStream()</i>. As before, we import http and the filesystem modules, but leave the data as a null value. Another variable is needed to declare the read stream. The data returned by the <i>fs.createReadStream()</i> function populates <i>readerStream</i>.</br></br>
 
-        <div id="article">
-            <h2>File Operations</h2>
-            Perhaps the main reason we want server-side code, rather than something entirely client-based is data persistence - storing and retrieving data on a server is a core feature of a Web application.</br></br>
+			<img src="images/nodejs-test/node-readstream-server.png"></br></br>
 
-            Here I have two files: <i>file-op.js</i> server-side script, and the <i>serverdata.txt</i> data file. The latter simply contains two lines of text.</br></br>
+			And to write to file using <i>createWriteStream</i>:</br></br>
+			
+			<img src="images/nodejs-test/node-writestream-code.png"></br></br>
+			
+			Although this isn't much at this point, it demonsrates that we can use persistent storage with a bit of JavaScript.
+		</div>
 
-            This time we import both the <i>http</i> and filesystem (<i>fs</i>) modules:</br>
-            <code>
-                var http = require("http");</br>
-                var fs = require("fs");
-            </code></br></br>
+		<div id="article">
+			<h2>Node.js Express</h2>
+			This can be used to achieve the same thing as ASP.NET MVC, as it handles routing, REST requests and other server-side operations. First we need to use npm to install Express.js.
+			<code>npm install express --save</code>
 
-            And specify the file to read:</br>
-            <code>var data = fs.readFileSync('serverdata.txt');</code></br>
+			We'll use the following simple express server to understand routing:</br></br>
+			
+			<img src="images/nodejs-test/simple-node-express-controllers.png"></br></br>
+			
+			As with ASP.NET MVC, the controllers here determine actions to be performed  when the server receives a given request in the form of a URI. To initiate an action, we only need to send its name as part of the URI in the browser. For example, 'http://localhost:8090/listusers' will cause express to return the response for that <i>app.get()</i> method. It responds by calling the <i>sendFile()</i> function that returns <i>users.html</i>. This is the equivalent of MVC's '<i>return view()</i>'.
+		</div>
+		
+		<div id="article">
+			<h2>Reading and Writing JSON Files</h2>
+			Of course, most Web applications function as an interface to some data source. Here I'll try and use a JSON-based source to store and retrieve the data, with data being sent between the HTML and the JavaScript controllers. The Express.js site lists the database integrations it supports.
 
-            And this time, the HTTP response is defined as the contents of <i>serverdata.txt</i>:</br>
-            <code>
-                http.createServer(function (request, response)</br> 
-                {</br>
-                    response.writeHead(200, {'Content-Type': 'text/plain'});</br>
-                    response.end(data.toString());</br>
-                }).listen(8090);</br>
-            </code>
-        </div>
+			For the following the body-parser is required through npm:
+			<code>npm install body-parser --save</code></br>
+			
+			In the HTML file we have a simple form with four fields. To the JavaScript file we add another method for handling the data submitted from the HTML.</br></br>
+			
+			<img src="images/nodejs-test/node-express-html-form.png"></br></br>
+			<img src="images/nodejs-test/node-express-form-handler.png"></br></br>
+			
+			If the fields are populated and submitted, the following JSON output is generated:
 
-        <div id="article">
-            <h2>Streaming Data and Writing to File</h2>
-            The <i>filesystem</i> module enables the JavaScript to perform I/O with files using <i>createReadStream()</i> and <i>createWriteStream()</i>.</br></br>
+			<code>
+				{"firstName":"michael","secondName":"mysecondname","user_name":"michael","user_email":"michael@mail.com"}
+			</code>
 
-            As before, we import <i>http</i> and the <i>filesystem</i> modules, but declare the data as null. Another variable is needed to declare the read stream.</br></br>
+			Now we need a <i>.json</i> file for the application to append, for example 'users.json'. Here's the solution I hacked together, by trial and error:</br></br>
 
-            And to write to file using <i>createWriteStream</i>:</br>
+			<img src="images/nodejs-test/nodejs-express-writer-hack.png"></br></br>
+			
+			This can also be extended to MongoDB, which is also JSON-based, if a data access layer needs to be added to the application.
 
-            <code>
-                var http = require("http");</br>
-                var fs = require("fs");</br>
-                var writedata = 'This is another new line written to the file';</br>
-                var readdata = '';</br></br>
+			To do the reverse - rendering JSON data in an HTML page - we'll need jQuery and a script that fetches the data returned by the Node.js controller. In the HTML I have two elements, '<i>get-data</i>' and '<i>show-data</i>'. The first is a link that triggers the JSON reader JavaScript.</br></br?
+			
+			<img src="images/nodejs-test/node-jquery-get-show-data.png"></br></br>
 
-                var writerStream = fs.createWriteStream('serverdata.txt');</br></br>
-
-                writerStream.write(writedata,'UTF8');</br>
-                writerStream.end();</br></br>
-
-                writerStream.on('finish', function() {</br>
-                console.log("Write completed.");</br>
-                });
-            </code></br></br>
-
-            Although this isn't much at this point, it demonsrates that we can use persistent storage with a bit of JavaScript.
-        </div>
-
-        <div id="article">
-            <h2>Node.js Express</h2>
-            This can be used to achieve the same thing as ASP.NET MVC, as it handles routing, REST requests and other server-side operations.</br></br>
-
-            First we need to use npm to install Express.js.</br>
-            <code>npm install express --save</code></br>
-
-            We'll use the following simple express server to understand routing:</br></br>
-
-            <img src="images/simple-node-express-controllers.png"></br></br>
-
-            Here we have two functions/methods for responding to requests in different ways.</br></br>
-
-            To initiate an action, we only need to send its name as part of the URI in the browser. For example, '<i>http://localhost:8090/listusers</i>' will cause express to return the response for that <i>app.get()</i> method.</br></br>
-
-            As you've probably noticed, this looks much like the ASP.NET MVC controllers. The <i>res.sendFile()</i> line is equivalent to the <i>Return(View)</i> in an MVC controller, redirecting the browser to a view after an action was completed.
-        </div>
-
-        <div id="article">
-            <h2>JSON</h2>
-            Of course, most Web applications function as an interface to some data source. Here I'll try and use a JSON-based source to store and retrieve the data, with data being sent between the HTML and the JavaScript controllers.</br></br>
-
-            For the following the <i>body-parser</i> is required through npm:
-            <code>npm install body-parser --save</code></br></br>
-
-            In the HTML file we have a simple form with two fields. To the JavaScript file we add another method for handling the data submitted from the HTML.</br></br>
-
-            Submitting data in the running Web site at this point will result in the data being JSON-formatted:
-            <code>{"firstName":"michael","secondName":"mysecondname","user_name":"michael","user_email":"michael@mail.com"}</code></br></br>
-
-            Now we need a <i>.json</i> file for the application to append. Mine is called '<i>users.json</i>'.</br></br>
-
-            The solution I hacked together after much trial and error is posted in the GitHub repo.
-        </div>
-       
+			The handler function will read the JSON file and return the output to the 'show-data' element, placing the read values in an HTML list.</br></br>
+			
+			<img src="images/nodejs-test/node-jquery-json-reader.png"></br></br>
+			
+			<img src="images/nodejs-test/node-show-json-view.png"></br></br>
+			
+		</div>
 
         <div id="article">
             <h2>References</h2>
-            <a href="https://nodejs.org/en/">Node.js Home...</a></br>
-            <a href="https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm">TutorialsPoint Node.js Introduction</a>
+			
+			JQUERY FOUNDATION. 2017. jQuery. [WWW]. <a href="https://jquery.com">https://jquery.com</a>. (6th September 2017).</br></br>
+			
+			MICHAEL. 2017. NodeJS. <i>GitHub</i>. [CODE]. <a href="https://github.com/xerocrypt/Misc/tree/master/NodeJS">https://github.com/xerocrypt/Misc/tree/master/NodeJS</a>. (6th September 2017).</br></br>
+			
+			NODE.JS FOUNDATION. 2017. Node.js. [WWW]. <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>. (6th September 2017).</br></br>
+			
+			NODE.JS FOUNDATION. 2017. Express. [WWW]. <a href="https://expressjs.com">https://expressjs.com</a>. (6th Setptember 2017).</br></br>
+			
+			NODE.JS FOUNDATION. 2017. Express Database Integration. <i>Express</i>. [WWW]. <a ref="https://expressjs.com/en/guide/database-integration.html">https://expressjs.com/en/guide/database-integration.html</a>. (6th September 2017). </br></br>
+			
+			TUTORIALSPOINT. 2017. Node.js - Introduction. <i>Learn Node.js</i>. [WWW]. <a href="https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm">https://www.tutorialspoint.com/nodejs/nodejs_introduction.htm</a>. (6th September 2017).</br></br>	
         </div>
 
-        <div id="footer">Michael, April 2017</div>
+        <div id="footer">Michael, September 2017</div>
     </body>
 </html>

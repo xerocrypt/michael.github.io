@@ -77,7 +77,7 @@ dfn {
 }
 h1 {
   margin: .67em 0;
-  font-size: 1.0em;
+  font-size: 0.8em;
 }
 mark {
   color: #000;
@@ -4357,6 +4357,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
+  font-size: 10px;
+	text-align: center;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
@@ -5740,11 +5742,14 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default {
   border-color: #ddd;
+  overflow: hidden;
+  display: table-cell;  
 }
 .panel-default > .panel-heading {
   color: #ffffff;
   background-color: #6600cc;
   border-color: #ddd;
+  
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;

@@ -24,7 +24,7 @@ h1 {
 
 h2 {
     font-family: 'TitleFont';
-    color: #00e600;
+    color: #00ff55;
     font-size: 2em;
 }
 
@@ -111,7 +111,7 @@ button {
 #article {
     font-family: 'MyWebFont';
     font-size: 1em;
-    color: #80ff80;
+    color: #ffffff;
 
 	background-color: #001A00;
 	width: 70%;

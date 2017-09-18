@@ -11,44 +11,68 @@
         </div>
 		
 		<div id="article">
-			There are many points I'd like to add to <a href="https://uwnthesis.wordpress.com/2017/07/15/can-anyone-become-a-programmer/">UWNThesis' post</a> 'Can anyone become a programmer?' and the <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/">study papers</a> linked to it. My answer is that yes, anyone can become a programmer, but that's putting it simply.</br></br>
-
-			It just so happens that I attended a talk many years ago, by a computer scientist from Cardiff University, <a href="https://langbein.org">Dr. Frank Langbein</a>, who argued that anyone can and <i>should</i> learn to program. It's very important to note that Dr. Langbein was not arguing that people should 'learn to code' for the sake of being able to 'code' - the usefulness of doing that in isolation is pretty questionable.</br>
-			No, his argument was that users have more control of their computers, more freedom, without 'user-friendly' interfaces, and therefore everyone should learn how to use the command line. I've probably made a post on his talk at some point, as it covers some interesting observations on how companies like FaceBook and Twitter can subtly manipulate their users simply by shaping the design of their interfaces. 
-			Eventually I was in the habit of doing everything in the Linux command line - browsing the Internet, accessing emails, modifying spreadsheets, configuring and administrating servers, drafting research papers and generating them in the same format as you'd see in a scientific journal, etc. etc.</br></br>
-
-			How is this related to whether one could learn programming, you might ask? Well, I'm firmly convinced that, given enough time, anyone can install Linux or FreeBSD on an old computer, start experimenting with the command line and become reasonably adept at it. And with some familiarity with the command line syntax, putting together a BASH script is a relatively trivial task. From there, one could learn Python, and perhaps move onto a more 'serious' language.</br>
-			I'm convinced that everyone has the innate ability to do this. The real problem is that actual software engineering or development as a profession requires a much broader skillset. As a bare minimum, you'd need to learn Agile development principles, SOLID design patterns, version control, unit testing, continuous integration, configuration management and some variant of SQL. And not just that. As with any profession, your expertise needs to be current, and that often means learning how to work with new languages and frameworks. It takes several years' hard work, not some 'bootcamp'/'dojo', to make it stick.</br></br>
-
-			What does this mean in relation to UWNthesis' post and the linked study papers discussing the success/failure/dropout rates in undergraduate programming courses? The <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/paper1.pdf">2006 paper's</a> abstract claims that '<i>programming teaching is useless for those who are bound to fail and pointless for those who are certain to succeed.</i>'</br>
-			Aside from it being unfair and a serious misjudgement to write off anyone before they've grasped the technical theory and structured methods of reasoning - which is what's supposed to be learned at university - both assertions are correct, but for a very different reason. The typical  programming course (at least the ones I've encountered) follows a standard syllabus that concentrates on the syntax of an arbitrarily-chosen language, using an arbitrarily-chosen IDE, completing arbitrary tasks that aren't reflective of  real-world problems. <br></br>
-
-			My experience tells me that informal methods of learning are more effective: Despite most decent hacking tools being command-line utilities, it was actually possible (but not common) to graduate in computer security without having done any programming beyond a first year module in Visual Basic, yet most the highly-motivated undergraduates were successfully teaching themselves BASH scripting and Python during their <i>final</i> year.</br></br>
-
-			Nacko, commenting on Ars Technica, put is much better than I could:</br>
-			<code>
-			'Saying a person "can't program" is like saying he can't build a house. There is a lot of foundation skill and knowledge that goes into being able to successfully build a house. I would think the only way forward is to identify a more specific deficiency than "unable to build a house" and correct that with appropriate study and training. I suspect that applies to programming as well, and that most people can at least achieve competency'.
-			</code>
+			I'd answer the question posed by <a href="https://uwnthesis.wordpress.com/2017/07/15/can-anyone-become-a-programmer/">UWNThesis' post '<i>Can anyone become a programmer?</i>'</a> and <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/">the study papers</a> linked to it with 'yes'. Anyone could become a programmer. After some thought, I've come up with three learning methods that might work better than conventional programming courses. Ultimately, though, I think that people run into problems because programming languages are tools that require context and technical understanding to use. I guess that anyone could become a programmer in <i>generally</i> the same way anyone could become an engineer.
 		</div>
 
 		<div id="article">
-			<h2>A Suggested Approach</h2>
-			If the formal methods of teaching have such a high failure rate, then the approach of telling everyone they should 'learn to code' before throwing yet more textbook excercises at them obviously isn't working.  If I'm right, anyone could learn a programming language, but 
-			there's a huge difference between the kind of programming taught in courses and the kind of programming done in commercial software development.</br></br>
+			<h2>1. Usability and Control - The Command Line as an Ideal Interface</h2>
+			It was almost a decade ago, around the time I was discovering the Linux operating system, that I attended a talk given by a computer scientist from Cardiff University, <a href="https://langbein.org">Dr. Frank Langbein</a>, who argued that anyone can and <i>should</i> learn to program. He didn't argue that people should 'learn to code' for the sake of just being able to, but because it gives us the ability to break through the limitations imposed by 'user-friendly' graphical interfaces. And sure enough, the same arguments, and distilled computing wisdom, could be found in Neal Stephenson's <i>Cryptonomicon</i> and <a href="http://www.cryptonomicon.com/beginning.html"><i>In the Beginning was the Command Line</i></a> - please do read them for yourself.</br></br>
 
-			Doing this with the right language and IDE are also important. Python is good for beginners, because a brief introduction to the language and syntax is all that's needed before focussing entirely on how to make Python scripts work with third-party modules. A course, could for example, take the form of an eight-week project to build an interface to a MySQL database, during which students could gain an understanding of what the code and modules are doing in the background. You'd also find that syntax and the minutae of the language actually matters little compared to the problem-solving.</br>
-			The right IDE is important, because you don't want something advanced that presents a mess to novices. I recommend a lightweight, clean IDE that has just enough features to present things as abstractions. Geany or Notepad++ is a good choice, with the Python interpreter being used separately.</br></br>
+			Perhaps the clearest illustrations of Langbein's argument would be the horrid (in my opinion) desktop interface that became the default in Ubuntu since ~2012, and the widely disliked Windows 8 desktop. Despite these entirely cosmetic changes, they were still the same Linux and Windows operating systems as before, and both just as usable in the command line. The only change was the graphical interface, but nevertheless there was a demand for programmers to fork Gnome and develop a third-party program to reintroduce a start menu for Windows 8.</br></br>
 
-			Many of the concepts learned using Python could then be carried over into a secondary course with Java or C#, which might introduce real-world software design and engineering concepts - the SOLID design principles being chief among them.
+			I had other reasons to dispense with the desktop interface: I'm composing this post on an old Compaq that's barely powerful enough to run a modern desktop interface, and it certainly can't handle graphics or video without almost combusting, yet it's too good to throw away. Consequently I got into the habit of doing most things in the Linux command line - browsing the Internet, accessing emails, modifying spreadsheets, configuring and administrating servers remotely, drafting research papers and generating them in the same format as you'd see in a scientific journal, etc. etc. And it's important to mention that I'm <i>not</i> intelligent - the command line was designed to be usable for humans, and proficiency is just another learned pattern of behaviour, a habit.</br></br>
+
+			This is actually a good way to begin learning how to program. Given enough time (say three months), and with very little experience, a novice can install Linux or FreeBSD on a VirtualBox, start experimenting with the command line and become reasonably adept at it. I'd state that much as fact. With some familiarity with the command line syntax, it's a trivial step to string together the execution of shell binaries in a BASH script, much like you'd string together modules in Python. From there, one could learn Python, and perhaps later move onto a more 'serious' language.
+		</div>
+
+		
+		<div id="article">
+			<h2>2. Context and Technical Understanding</h2>
+			The abstract of <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/paper1.pdf">Saeed's 2006 paper</a> claims that '<i>programming teaching is useless for those who are bound to fail and pointless for those who are certain to succeed.</i>'
+			I think that it's unfair and unreasonable to make that determination about undergraduates (and anyone else, for that matter) before they grasped the technical theory and methodical reasoning. Both assertions are still correct, though, but for a very different reason.
+
+			Where I studied, it was actually possible (but not common) to graduate in computer security without having done any programming beyond a first year module in Visual Basic. What I observed is that many of us were successfully teaching ourselves BASH scripting and Python during our final year, and we skipped over the standard tutorials to instead focus on scripting the execution of security-related tools and third-party Python modules. Basically programming became simply a means to achieving something, <i>after</i> we gained some level of technical understanding and consequently the ability to clarify the problems. For example, if you wanted to develop a database-driven application, you might fetch a graphics rendering module, a database driver module, an Object Relational Mapper module, and so on, and we'd simply develop code that brings those modules together as a software application. Could we have done that two years prior? Maybe, but certainly not without some difficulty.
+
+			What this suggests, especially given there's a world of difference between coding and having the skills required to properly engineer software, is there's a lot of additional expertise required to become a decent software developer. I think that programming courses should be taught in that context, and not necessarily as a first step. <a href="https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/?comments=1&start=40">Nacko, commenting on Ars Technica</a>, put it another way:
+
+			<code>
+				'Saying a person "can't program" is like saying he can't build a house. There is a lot of foundation skill and knowledge that goes into being able to successfully build a house. I would think the only way forward is to identify a more specific deficiency than "unable to build a house" and correct that with appropriate study and training. I suspect that applies to programming as well, and that most people can at least achieve competency'.
+			</code>
+
+			By the way, I've put together <a href="https://github.com/xerocrypt/Misc/wiki/Things-to-Learn">a short list of required skills</a> on GitHub for someone applying for an entry-level developer role.
+		</div>
+
+		<div id="article">
+			<h2>3. Learning Through Real-World Projects</h2>
+			Does a course need to teach how to print 'hello world', how to manipulate arrays and how to loop operations in a given order? Not necessarily. I think the typical syllabus is inadequate, ineffective and often not very motivating. Using Python, Java and C#, it's possible for beginners to start making things with third-party extensions following the briefest of introductions to the language - I actually flicked through a £7 Python book in WH Smiths' magazine section the other month that uses this method. A course might take the form of a project to build a Python-based graphical interface to a MySQL database, during which students would gain a broader and more applicable understanding. Many of the concepts learned using Python could then be carried over into a secondary course with Java or C#, which might introduce real-world software design and engineering concepts - the SOLID design principles being chief among them.</br></br>
+
+			Another thing I've noticed over the years is that a developer environment's font style and colour scheme can make a huge difference to the comprehensibility of a source file, just as surely as the way source is formatted. Quite often I switch to another editor such as Notepad++ and Atom for modifying tricky-to-follow .NET projects. And it's important to use the right editor - you don't want an IDE that's dauntingly feature-rich and presents its own learning curve.
+		</div>
+
 		</div>
 		
 		<div id="article">
 			<h2>References</h2>
-			STACK EXCHANGE. 2012. Technology Lab: Is it true that “not everyone can be a programmer”?. <i>Ars Technica</i>. [WWW]. <a href="https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/">https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/</a>. (19th July 2017).</br></br>
+			ARS TECHNICA. 2012. Is it true that “not everyone can be a programmer”?. <i>Stack Exchange</i>. [WWW]. <a href="https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/?comments=1&start=40">https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/?comments=1&start=40</a>. (4th Steptember 2017).</br></br>
+			
+			ATWOOD, J. 2012. Please Don't Learn to Code. <i>Coding Horror</i>. [BLOG]. <a href="https://blog.codinghorror.com/please-dont-learn-to-code/">https://blog.codinghorror.com/please-dont-learn-to-code/</a>. (4th September 2017).</br></br>
+			
+			DEHNADI, S. 2006. Saeed Dehnadi's Homepage (historical). [WWW]. <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/">http://www.eis.mdx.ac.uk/research/PhDArea/saeed/</a>. (4th September 2017).</br></br>
 			
 			DEHNADI, S. BORNAT, R. 2006. The camel has two humps. <i>School of Computing, Middlesex University, UK</i>. [PDF]. <a href="http://www.eis.mdx.ac.uk/research/PhDArea/saeed/paper1.pdf">http://www.eis.mdx.ac.uk/research/PhDArea/saeed/paper1.pdf</a>. (19th July 2017).</br></br>
+			
+			LANGBEIN, F. 2017. Frank C. Langbein: Ex Tenebris Scientia. [WWW]. <a href="https://langbein.org/">https://langbein.org/</a>. (4th Steptember 2017).</br></br>
+		
+			MICHAEL. 2017. Things to Learn. <i>XeroCrypt Project Wiki</i>. [WWW]. <a href="https://github.com/xerocrypt/Misc/wiki/Things-to-Learn">https://github.com/xerocrypt/Misc/wiki/Things-to-Learn</a>. (4th September 2017).</br></br>
+		
+			STACK EXCHANGE. 2012. Technology Lab: Is it true that “not everyone can be a programmer”?. <i>Ars Technica</i>. [WWW]. <a href="https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/">https://arstechnica.com/information-technology/2012/09/is-it-true-that-not-everyone-can-be-a-programmer/</a>. (19th July 2017).</br></br>
+
+			STEPHENSON, N. 1999. In the Beginning Was the Command Line. <i>Cryptonomicon</i>. [TEXT]. <a href="http://www.cryptonomicon.com/beginning.html">http://www.cryptonomicon.com/beginning.html</a>. (4th September 2017).</br></br>
+			
+			UWNTHESIS. 2017. Can anyone become a programmer. [BLOG]. <a href="https://uwnthesis.wordpress.com/2017/07/15/can-anyone-become-a-programmer/">https://uwnthesis.wordpress.com/2017/07/15/can-anyone-become-a-programmer/</a>. (4th September 2017).</br></br>
+			
 		</div>
 
-        <div id="footer">Michael, July 2017</div>
+        <div id="footer">Michael, September 2017</div>
     </body>
 </html>
