@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>SQL Server</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>SQL Server</h1>
+        </div>
+		
+		<div id="article">
+			<h2>SQL Server CE Setup</h2>
+			CE should have been installed as part of SQL Server Express, but you'll require the assembly references if developing a Windows application that uses an embedded database. The CE server wasn't listed anywhere on my laptop, and I couldn't use it without knowing the connection string or name. There is a command for getting information about the local SQL Server configuration, though:
+			<code>sqllocaldb.exe info</code></br>
+
+			For my project I chose the <i>MSSQLLocalDB instance</i>, and started that using the following command:
+			<code>sqllocaldb.exe start MSSQLLocalDB</code></br>
+
+			Then got information about it using:
+			<code>sqllocaldb.exe info MSSQLLocalDB</code>
+
+			The Command Prompt returns information about the server. From this, we need the server name, and possibly the instance pipe name. 
+		</div>
+		
+		<div id="article">
+			<h2>Creating a Database and Table</h2>
+			Now we want to create a database and at least one table. Databases can be administrated in Visual Studio's the SQL Server Object Explorer, but I find it easier to work with SQL Server Management Studio.</br>
+			To connect the SQL Server Management Studio to the local server, enter '<i>(localdb)\MSSQLLocalDB</i>' as the Server name. The Object Explorer will list the features available for the database server, and it's here that tables, views and stored procedures can be created.</br></br>
+ 
+			Right-click and select '<i>Generate Change Script...</i>', if you want to save the SQL code for replicating the schema to additional tables. It isn't obvious how to commit the changes to the database, though - to do this, right-click the current tab, and select '<i>Save Table_1</i>'. 
+			Table rows can be added and modified by selecting '<i>Edit Top 200 Rows</i>', if you're not versed in MS SQL scripting.
+		</div>
+
+		<div id="article">
+			<h2>Adding Reference Assemblies to a Project</h2>
+			The chances are SQL Server CE was already installed along with Visual Studio, but the DLLs must be dowloaded and installed to enable the addition of the assembly references to a project. After installation, you might need to browse for the DLLs in Reference Manager. They should be stored in '<i>C:\Program Files\Microsoft SQL Server Compact Edition\v4.0\Desktop</i>'. From this you'll want the assembly reference for System.Data.SqlServerCe.dll, and the following import statement in the code:
+			<code>using System.Data.SqlServerCe;</code>
+
+			Since I'm only testing this as a data source, I've created a basic Windows Form with a DataGridView element. After creating a connection to <i>(localdb)\MSSQLLocalDB)</i> in the Data Source Configuration Wizard, I used the database as the data grid's source.</br></br>
+ 
+			This adds a connection string to the project, and we can select the table/view to be displayed in the data grid.
+			<code>
+				private void Form1_Load(object sender, EventArgs e)
+				{	 
+					this.allphrasesTableAdapter.Fill(this.phrasesDataSet.allphrases);
+				}
+			</code>
+
+			And we can add several text boxes and a button to update the database table.
+			
+			<code>
+				private void button2_Click(object sender, EventArgs e)
+				{	
+					// Insert new record
+					this.allphrasesTableAdapter.Insert(00, txtEnglish.Text, txtGerman.Text, txtNote.Text, cmbPhraseCategory.Text);
+				}
+			</code>
+		</div>
+        
+		<div id="footer">Michael, October 2017</div>
+    </body>
+</html>

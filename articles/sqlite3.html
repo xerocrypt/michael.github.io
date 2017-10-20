@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>SQLite3</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>SQLite3</h1>
+        </div>
+		
+		<div id="article">
+			<h2>SQLite 3 Commands</h2>
+			Create a new table:
+			<code>
+				CREATE TABLE Introduction (Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, English TEXT, German TEXT, Note TEXT, Category TEXT);
+			</code></br>
+
+			Insert a record into a table:
+			<code>
+				INSERT INTO Introduction VALUES (0001, 'Test', 'Test', '', 'Introduction');
+			</code></br>
+
+			Select all records from a table:
+			<code>SELECT * FROM Introduction</code></br>
+		
+			Display the schema of a table:
+			<code>.schema Introduction</code></br>
+
+			Update an entry:
+			<code>
+				UPDATE Introduction SET English = 'How are you?' WHERE Id = 2;
+			</code>
+			
+		</div>
+
+        <div id="footer">Michael, October 2017</div>
+    </body>
+</html>

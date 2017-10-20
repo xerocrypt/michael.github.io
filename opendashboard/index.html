@@ -1,0 +1,293 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="bootstrap.css">
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
+                
+        <title>OpenDashboard</title>
+    </head>
+
+    <body>
+
+        <div class="page-header">
+            <a href="#" class="navbar-left"><img src="logo.png" width="50px"></a>
+            <h1>OpenDashboard 1.9</h1>
+        </div>
+
+        <script type="text/javascript">
+            AmCharts.makeChart("chartdiv",
+            {
+                "type": "serial",
+                "balloonDateFormat": "MMMM DD, YYYY",
+                "categoryField": "category",
+                "mouseWheelScrollEnabled": true,
+                "plotAreaBorderColor": "#222222",
+                "plotAreaFillColors": "#66CCFF",
+                "colors": [
+                    "#66ccff",
+                    "#ffffff",
+                    "#b6d2ff",
+                    "#c9e6f2",
+                    "#c9f0e1",
+                    "#e8d685"
+                ],
+                "startDuration": 1,
+                "theme": "dark",
+                "categoryAxis": {"gridPosition": "start"},
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 0.7,
+                        "id": "AmGraph-1",
+                        "lineAlpha": 0,
+                        "title": "Messages Processed",
+                        "valueField": "column-1"
+                    },
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 0.7,
+                        "id": "AmGraph-2",
+                        "lineAlpha": 0,
+                        "title": "Time",
+                        "valueField": "column-2"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "title": "Messages"
+                    }
+                ],
+                "allLabels": [],
+                "balloon": {"fillColor": "#222222"},
+                "legend": {
+                    "enabled": true,
+                    "borderColor": "#66CCFF",
+                    "color": "#FFFFFF"
+                },
+                "titles": [
+                    {
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": "Messages Processed"
+                    }
+                ],
+                "dataProvider": [
+                    { "category": "category 1", "column-1": 8, "column-2": 5 },
+                    { "category": "category 2", "column-1": 6, "column-2": 7 },
+                    { "category": "category 3","column-1": 2, "column-2": 3 },
+                    { "category": "category 4", "column-1": 1, "column-2": 3 },
+                    { "category": "category 5", "column-1": 2,"column-2": 1 },
+                    { "category": "category 6", "column-1": 3, "column-2": 2 },
+                    { "category": "category 7", "column-1": 6, "column-2": 8 }
+                ]
+            });
+        </script>
+
+        <script type="text/javascript">
+            AmCharts.makeChart("chartdiv3",
+            {
+                "type": "serial",
+                "balloonDateFormat": "DD MMM, YYYY",
+                "categoryField": "category",
+                "plotAreaBorderColor": "#66CCFF",
+                "plotAreaFillColors": "#66CCFF",
+                "colors": [
+                    "#66CCFF",
+                    "#AAAAAA",
+                    "#B0DE09",
+                    "#0D8ECF",
+                    "#2A0CD0",
+                    "#990000"
+                ],
+                "startDuration": 1,
+                "borderColor": "#66CCFF",
+                "color": "#FFFFFF",
+                "theme": "dark",
+                "categoryAxis": { "gridPosition": "start" },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-1",
+                        "labelText": "[[value]]",
+                        "title": "graph 1",
+                        "type": "column",
+                        "valueField": "column-1"
+                    },
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "bullet": "round",
+                        "id": "AmGraph-2",
+                        "labelText": "[[value]]",
+                        "lineThickness": 2,
+                        "title": "graph 2",
+                        "valueField": "column-2"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    { "id": "ValueAxis-1", "title": "Axis title" }
+                ],
+                "allLabels": [],
+                "balloon": {},
+                "legend": { "enabled": true, "useGraphSettings": true },
+                "titles": [
+                    { "id": "Title-1", "size": 15, "text": "Message Processing Delay Times" }
+                ],
+                "dataProvider": [
+                    { "category": "category 1", "column-1": 8, "column-2": 5 },
+                    { "category": "category 2", "column-1": 6, "column-2": 8 },
+                    { "category": "category 3", "column-1": 2, "column-2": 5 }
+                ]
+            });
+        </script>
+
+        <script type="text/javascript">
+            AmCharts.makeChart("chartdiv2",
+            {
+                "type": "serial",
+                "balloonDateFormat": "DD MMMM, YYYY",
+                "categoryField": "category",
+                "plotAreaBorderColor": "#66CCFF",
+                "plotAreaFillColors": "#000000",
+                "colors": [
+                    "#66CCFF",
+                    "#FFFFFF",
+                    "#b6d2ff",
+                    "#c9e6f2",
+                    "#c9f0e1",
+                    "#e8d685",
+                    "#8881cc"
+                ],
+                "startDuration": 1,
+                "color": "#FFFFFF",
+                "theme": "dark",
+                "categoryAxis": {
+                    "autoRotateAngle": 45,
+                    "gridPosition": "start",
+                    "axisColor": "#66CCFF"
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "id": "AmGraph-1",
+                        "lineThickness": 2,
+                        "title": "graph 1",
+                        "type": "step",
+                        "valueField": "column-1"
+                    },
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "id": "AmGraph-2",
+                        "lineThickness": 2,
+                        "title": "graph 2",
+                        "type": "step",
+                        "valueField": "column-2"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [ { "id": "ValueAxis-1", "title": "Axis title"}],
+                "allLabels": [],
+                "balloon": {},
+                "legend": { "enabled": true, "useGraphSettings": true },
+                "titles": [ { "id": "Title-1", "size": 15, "text": "Message Processing Errors" } ],
+                "dataProvider": [
+                    { "category": "category 1", "column-1": 8, "column-2": 5 },
+                    { "category": "category 2", "column-1": 6, "column-2": "2" },
+                    { "category": "category 3", "column-1": "7", "column-2": 3 },
+                    { "category": "category 4", "column-1": "9", "column-2": 3 },
+                    { "category": "category 5", "column-1": "7", "column-2": 1 },
+                    { "category": "category 6", "column-1": "8", "column-2": 2 },
+                    { "category": "category 7", "column-1": "7", "column-2": "6" }
+                ]
+            });
+        </script>
+
+        <script type="text/javascript">
+            AmCharts.makeChart("chartdiv4",
+            {
+                "type": "pie",
+                "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                "gradientType": "linear",
+                "innerRadius": "70%",
+                "labelRadius": 15,
+                "colors": [
+                    "#66ffff",
+                    "#0099cc",
+                    "#aaaaaa",
+                    "#719dc3"
+                ],
+                "labelColorField": "#FFFFFF",
+                "labelTickColor": "#66CCFF",
+                "outlineColor": "#222222",
+                "outlineThickness": 0,
+                "pullOutOnlyOne": true,
+                "titleField": "category",
+                "valueField": "column-1",
+                "borderColor": "#66CCFF",
+                "theme": "dark",
+                "allLabels": [],
+                "balloon": { "borderColor": "#66CCFF", "color": "#FFFFFF", "fillColor": "#222222" },
+                "legend": { "enabled": true, "align": "center", "markerType": "circle" },
+                "titles": [ { "id": "Title-1", "size": 15, "text": "Messages by Type" }],
+                "dataProvider": [
+                    { "category": "Pathology", "column-1": 8 },
+                    { "category": "Radiology", "column-1": 6 },
+                    { "category": "Cardiology", "column-1": 2 }
+                ]
+            });
+        </script>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="chartdiv" style="width: 100%; height: 400px; background-color: #282828;" ></div>
+            </div>
+            <div class="col-sm-4">
+                <div id="chartdiv2" style="width: 100%; height: 400px; background-color: #282828;" ></div>
+            </div>
+            <div class="col-sm-4">
+                <h2>Current Message Stack</h2>
+                <ul>
+                    <li>Message 1</li>
+                    <li>Message 2</li>
+                    <li>Message 3</li>
+                    <li>Message 4</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="chartdiv3" style="width: 100%; height: 400px; background-color: #282828;" ></div>
+            </div>
+            <div class="col-sm-4">
+                <div id="chartdiv4" style="width: 100%; height: 400px; background-color: #282828;" ></div>
+            </div>
+            <div class="col-sm-4">
+                <h2>Help</h2>
+                This dashboard was designed for clinical message system monitoring, to include:
+                <ul>
+                    <li>Total Messages Processed</li>
+                    <li>Messages by Type</li>
+                    <li>Number of Message Processing Failures</li>
+                    <li>Message Processing Delay Times</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="navbar-default navbar-fixed-bottom">
+            <div class="container-fluid">
+                <span>Michael, October 2017</span>
+            </div>
+        </footer>
+    </body>
+
+</html>

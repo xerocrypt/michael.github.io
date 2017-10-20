@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>Windows Subsystem for Linux (WSL)</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Windows Subsystem for Linux (WSL)</h1>
+		</div>
+		
+		<div id="article">
+			Primarily the Windows Subsystem for Linux was released for developers used to deploying things on Linux servers, but after a week using it, I have to say it's proven a stable and capable substitute for what I was using on my previous laptop. The application for launching the command line is known as 'Bash on Ubuntu on Windows'. As we'll see, this is no mere command line emulator, although it's the inverse of <a href="https://www.winehq.org">WINE</a> in a very approximate sense. From the users' point of view it appears to function just like a virtual machine.
+		</div>
+		
+		<div id="article">
+			<h2>Setup</h2>
+			In order to use the Windows Subsystem for Linux (WSL) and '<i>Bash on Ubuntu on Windows</i>', the feature must be enabled. In <i>Update and Security</i>, enable the Windows' developer mode (under the '<i>For developers</i>' tab). In Windows Features, there should be the option to enable '<i>Windows Subsystem for Linux (Beta)</i>'. Once that's done, the relevant components will be installed after the operating system is restarted.</br></br>
+
+			The setup process is quick and straightforward when <i>Bash.exe</i> is first run.
+		</div>
+		
+		<div id="article">
+			<h2>Finding Your Way Around the Command Line</h2>
+			The first thing I wanted to do was learn something about the Linux subsystem's environment, and running '<i>ls -l</i>' in the root directory, I could see there was a full Linux/UNIX filesystem present.</br> 
+			And this is isolated from the host machine's actual filesystem, which is mounted as an external volume at <i>/mnt/C/</i>. If I wanted to use the nano editor to modify a text file in MyDocuments on the C: drive, I'd therefore need a command like:
+			<code>$nano /mnt/c/Users/User/MyDocuments/[filename]</code></br></br>
+
+			If the '<i>top</i>' command (or '<i>ps</i>' or '<i>pstree</i>') is used immediately after starting the application, and before switching to the root account, you'd see only two processes listed: <i>init</i> and <i>bash</i>, because we aren't working with a full operating system. That's also why there aren't any kernel modules loaded either.</br></br>
+
+			For the command line to be of any real use, we'll need to install other programs for browsing the Internet, reading emails, modifying configuration files, developing and compiling code, etc. Here WSL provides us with dpkg and apt, which we can use to query the repositories and install whatever programs we need from them. Programs I typically use include:
+			<ul>
+				<li><a href="https://www.washington.edu/alpine/">alpine</a>: Email client</li>
+				<li>apt: My package manager of choice</li>
+				<li>binutils: For various analysis and reverse-engineering</li>
+				<li>gcc: Just in case things need compililng</li>
+				<li>hexcurse: Hex viewer and editor</li>
+				<li>HT(E): Disassembler and hex viewer</li>
+				<li><a href="http://lynx.invisible-island.net">lynx</a>: A decent command line Web browser</li>
+				<li>Midnight Commander (mc): Semi-graphical file manager interface</li>
+				<li><a href="https://www.nano-editor.org">nano</a>: Perhaps the most accessible command line text editor</li>
+				<li>pal: Calendar application</li>
+				<li>poppler-utils: Contains the utilities required to read the text contents of a PDF in the command line</li>
+				<li>sc: Spreadsheet application</li>
+				<li><a href="https://vim.sourceforge.io">vim</a>: My fallback text editor, if nano isn't present on a remote server</li>
+			</ul>
+
+			There's <a href="https://xerocrypt.wordpress.com/2015/08/17/another-apt-tutorial/">a post elsewhere on this blog</a> on how to perform various installation and upgrade operations using the apt package manager. To install, upgrade and remove programs, you must switch to the root account using the following command and providing the setup password:
+			<code>$sudo su</code></br></br>
+
+			To avoid the same broken package header problems I sometimes encountered before, I run '<i>apt-get update</i>' prior to installing/upgrading anything.
+	</div>
+	
+	<div id="article">
+		<h2>The Subsystem Internals</h2>
+		What is the Windows Subsystem for Linux (WSL)? Is it an interpreter? Is it a virtual machine? Or is it an emulator? WSL is, roughly speaking, <a href="https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/">an interpreter for ELF64 executables</a>, and I've mentioned it as a sort of reverse-WINE. It has three general components: 1) A session manager running in user mode to handle the Linux instance, 2) The LXSS Manager Service and LXCore components that emulate a Linux kernel system call interface within the Windows kernel space, and 3) A Pico process for the Bash command line itself.</br>
+		The LXCore translates the UNIX system calls to NT API calls, thus enabling Linux executables to run on the Windows system and use the host system resources. In order to simulate a Linux environment, the LXSS Manager needs to maintain an instance of the Linux system to manage the processes and threads associated with the system calls.</br>
+		Lxcore.sys contains a system call layer, a Virtual Filesystem layer, and the several filesystems that comprise the directory structure you see when running '<i>$cd / ls</i>'. VolFs and DrvFs might send system calls to the actual Windows NT kernel.</br></br>
+
+		The best abstraction of the WSL concept I've seen is posted on the WSL development team's blog, where a comparison is made between the '<i>ls</i>' command and its Windows Command Prompt counterpart, '<i>dir</i>'. Both appear to do the same thing for the user, and both are user-space processes sending their system calls to kernel space. The difference is '<i>dir</i>' sends its calls directly through the Windows NT API to the kernel, whereas '<i>ls</i>' must communicate through the WSL core (Lxss.sys). You'll find LXSS as a DLL in <i>C:\Windows\System32\lxss\LxssManager.dll</i>.</br>
+		Another difference is '<i>ls</i>' launches a 'Pico process' to achieve this, which differs from a conventional Windows process in that some of the regions, including the Process Environment Block and Thread Environment Block, are absent from its virtual address space. Basically a Pico process is a stripped-down process that requires a driver (such as WSL) to execute.</br></br>
+
+		Therefore, the appearance of working within a Linux VM is illusory: bash.exe actually initiates another executable on behalf of the user, and WSL translates the system calls of both into NT API calls.</br></br>
+
+		A consequence of this is that Linux shell executables can be run through Bash.exe in the Windows Command Prompt, using the following:
+		<code>bash.exe -c "[command]"</code>
+
+		Here I've run the '<i>top</i>' command this way:
+ 
+		Well, that's the Windows Subsystem for Linux. Here are a few of the development team's blog posts if you want to learn more about it:
+		<ul>
+			<li><a href="https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/">Windows Subsystem for Linux Overview</a></li>
+			<li><a href="https://blogs.msdn.microsoft.com/wsl/2016/05/23/pico-process-overview/">Pico Process Overview</a></li>
+			<li><a href="https://blogs.msdn.microsoft.com/wsl/2016/06/08/wsl-system-calls/">Windows Subsystem for Linux System Calls</a></li>
+			<li><a href="https://blogs.msdn.microsoft.com/wsl/2016/10/19/windows-and-ubuntu-interoperability/">Windows and Ubuntu Interoperability</a></li>
+		</ul>
+	</div>
+
+	<div id="article">
+		<h2>Further reading</h2>
+		Windows Subsystem for Linux Overview: https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/
+		Pico Process Overview: https://blogs.msdn.microsoft.com/wsl/2016/05/23/pico-process-overview/
+		Windows Subsystem for Linux System Calls: https://blogs.msdn.microsoft.com/wsl/2016/06/08/wsl-system-calls/
+	</div>
+	
+
+		<div id="article">
+			<h2>References</h2>
+			https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/
+			https://blogs.msdn.microsoft.com/wsl/
+			https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
+			http://www.zdnet.com/article/under-the-hood-of-microsofts-windows-subsystem-for-linux/
+			https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/
+			https://www.microsoft.com/en-us/research/project/drawbridge/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fprojects%2Fdrawbridge%2F
+			https://blogs.msdn.microsoft.com/wsl/2016/04/22/windows-subsystem-for-linux-overview/
+			https://www.winehq.org
+			https://betanews.com/2016/04/24/windows-10-linux-subsystem/
+			https://xerocrypt.wordpress.com/2015/08/17/another-apt-tutorial/
+
+
+		</div>
+
+        <div id="footer">Michael, September 2017</div>
+    </body>
+</html>
