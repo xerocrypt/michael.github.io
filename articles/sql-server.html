@@ -59,6 +59,83 @@
 			</code>
 		</div>
         
+		<div id="article">
+			<h2>Creating Web Services for Stored Procedures</h2>
+			In the last post I described how to get started with using SQL Server Compact Edition in Visual Studio, with a database and table accessible in SQL Server Object Explorer. From that point it's possible to develop an application that sends query commands to the database server, but that could allow for arbitrary query execution if the traffic between the application and server was being forged, or if a vulnerability in the application was exploited. It's a good idea to use something like stored procedures and Web Services to decouple the database from the application.</br>
+			A Web Service consists essentially of those three things: A connection string, a Web Service method and the base classes in <i>System.Web.Services</i>. The Web Service (ASMX) template is provided in Visual Studio 2015 and is added as an item to an existing ASP.NET project. This will create an empty Web Service class file, assembly references and import statements.</br></br>
+ 
+			Like any database application, the Web Service requires a connection string for the database server, and this can be acquired in the SQL Server Object Explorer. The <i>Web.config</i> file should include a <i>connectionStrings</i> section that contains the connection string.</br></br>
+ 
+			A WebMethod instantiates the <i>SqlConnection</i> and implements a <i>SqlCommand</i>. Although it's possible to pass a conventional SQL command to the database server, it's better to call a stored procedure instead. In the example below I've placed '<i>spGetAllPhrases</i>' into the <i>SqlCommand</i> function.</br></br>
+			
+			<img src="images/webservices/default-webservice-connection-method.png">
+		</div>	
+			
+		<div id="article">
+			<h2>Stored Procedures</h2>
+			In the database, I now need a stored procedure called 'spGetAllPhrases' that returns all records from a table:
+			<code>
+				SET ANSI_NULLS ON</br>
+				GO</br>
+				SET QUOTED_IDENTIFIER ON</br>
+				GO</br></br>
+
+				CREATE PROCEDURE spGetAllPhrases</br>
+				AS</br>
+				SELECT * FROM [dbo].[allphrases]</br>
+				GO
+			</code>
+
+			With the stored procedure added, I've checked again to ensure <i>SqlCommand</i> refers to it:
+			<code>using (SqlCommand cmd = new SqlCommand("spGetAllPhrases"));</code>
+
+			So far I've added a very basic Web Service and stored procedure combination. The chances are we could need Web Services that passes input parameters from a client that requests only records matching whatever criteria.</br></br>
+
+			The first thing we need is to translate this requirement into a stored procedure. Here the stored procedure queries the database table for records with a given <i>Category</i> value:
+
+			<code>
+				SET ANSI_NULLS ON</br>
+				GO</br>
+				SET QUOTED_IDENTIFIER ON</br>
+				GO</br></br>
+
+				CREATE PROCEDURE spGetPhrasesByCategory @Category VarChar(50)</br></br>
+
+				AS</br>
+				SELECT * FROM [dbo].[allphrases] WHERE Category LIKE @Category</br>
+				GO
+			</code>
+
+			When the stored procedure is executed, it will request the input parameter, which in this case is <i>@Category</i>, and return the results of the query. Now we need to create a Web Service method that gets and passes the <i>Category</i> variable to the stored procedure as an input variable.</br></br>
+ 
+			Here, <i>GetPhraseByCategory()</i> is returned as a <i>DataTable</i>, as with the other Web Methods, and like the other Web Methods, the data table is populated by whatever's returned by the stored procedure.</br>
+			The difference here is we declare <i>categoryName</i> as the method's input string - when the ASMX file is launched and the method is called, it will expect the client to supply a value for this. This variable is used as the stored procedure's <i>@Category</i> parameter.</br></br>
+
+			When using a browser to launch the Web Service, results are presented as an XML document.
+		</div>
+
+		<div id="article">
+			<h2>Adding Records</h2>
+			A Web Service can also update a database table through a stored procedure created to accept input parameters. These parameters and their data types are defined after the stored procedure name.
+
+			<code>
+				CREATE PROCEDURE spAddPhrase @English VarChar(200), @German VarChar(200), @Note VarChar(200), @Category VarChar(50)</br>
+				AS</br>
+				BEGIN</br>
+				SET NOCOUNT ON;</br></br>
+
+				INSERT INTO [dbo].[allphrases] (English, German, Note, Category)</br>
+				VALUES (@English, @German, @Note, @Category)</br>
+				END
+			</code>
+
+			After running the stored procedure to check it works, it's time to add a Web Method that calls and passes the variables to it.</br></br>
+
+			<img src="images/webservices/addphrase-webservice.png"></br></br>
+			
+			This time we declare the method as 'public string' since we only need to return a message string telling the client whether the execution was successful.
+		</div>
+
 		<div id="footer">Michael, October 2017</div>
     </body>
 </html>
