@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>OpenDashboard Documentation</title>
+
+		<style>
+			body { background-color: #FFFFFF; font-family: Verdana, Arial; }
+			h1 { color: #6600CC; }
+			h2 { color: #6600CC; font-size: 1.5em; }
+			#article { margin-left: 5px; width: 70%; background-color: #EFEFEF; }
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>Open Dashboard and Diagnostics Service</h1>
+
+		<div id="article">
+			<h2>Context</h2>
+			This application was developed to display metrics for a clinical systems messaging service, to assist a database operations team in the detection and timely resolution of messaging errors. While ASP.NET MVC provides an excellent framework on which to build such a metrics dashboard, a considerably more lightweight alternative would be to develop it from JavaScript and Node.js.
+		</div>
+
+		<div id="article">
+			<h2>Requirements</h2>
+			<ul>
+				<li>Node.js</li>
+			</ul>
+			Also assumes there are stored procedures for the data you wish to extract from the SQL server (MS SQL or MySQL). The code is to be customised for your installation.
+		</div>
+
+		<div id="article">
+			<h2>Technical Overview</h2>
+			Is based on JavaScript and Node.js for the controllers and logic.
+			<ul>
+				<li>Bootstrap CSS</li>
+				<li>jQuery</li>
+				<li>Amcharts</li>
+				<li>Node.js</li>
+			</ul>
+
+			Also the following Node.js packages:
+			<ul>
+			<li>mssql</li>
+			</ul>
+		</div>
+
+		<div id="article">
+			<h2>Server</h2>
+			If deploying on IIS, please follow the instructions for setting up iisnode.
+		</div>
+
+	</body>
+</html>
+
