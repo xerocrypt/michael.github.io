@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Arduino</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Arduino Uno and Microprocessors</h1>
+        </div>
+        
+        <div id="article">
+             I did this sort of stuff for my A-Levels, they made us program in assembler code on a large (and expensive) Motorola 68000 development board. The Arduino, in comparison, is much more accessible and easier to work with. Also, I think this is a more appropriate resource for teaching the foundation of computing, and if we look closer at the hardware we can see why.</br></br>
+
+            Don't feel daunted by the complexity of the schematics and what's on the board - most the components are for voltage regulation. What we're interested in here is a microcontroller, 14 GPIO pins, 6 analogue input pins and other ancilliary features.</br>
+            The single important component on the Arduino board is the large chip. This is the <a href="https://www.microchip.com/wwwproducts/en/ATmega328">ATmega328 microcontroller</a>, which is essentially a microprocessor with a really basic architecture.</br></br>
+
+            In order to work with the microcontroller, a bootloader and application bytecode are written to the integrated Flash memory. Apparently has a capacity of 32KB - more than sufficient for a moderately complicated program.</br>
+            And, just like any computer system, the ATmega328 has RAM (actually Static RAM, or 'SRAM'). This has a 2KB region allocated to general data, 32 general purpose data registers and 64 I/O registers. The stack pointer, program counter and status registers are separate from the general registers. Unlike the memory typically used in computing devices, SRAM doesn't contain dynamic data, since the microcontroller runs a single program with fixed buffers and data types.</br></br>
+
+            On the Arduino Uno board, all the pins to the right of the IC are connected directly to the GPIO rail.     Also on the board there's the ATmega16U2 IC, which is another, smaller, microcontroller. This appears to be the USB controller, though. According to the specs, this particular IC functions as the USB-to-Serial converter.
+        </div>
+
+        <div id="article">
+            <h2>Developer Environment, Language and API</h2>
+            Available from the official site (linked here), <a href="https://www.arduino.cc/en/Main/Software">the Arduino IDE</a> is a simple editor, compiler and library of header files. The programs are coded in a version of C++. You'll notice that there are libraries available for the various hardware modules that can be added to the main board. Each of these libraries in defined by the header imports. For example, if we use the Ethernet hardware module, we'd import Ethernet.h. The include statements are auto-completed by the Arduino IDE when selecting the hardware from the '<i>Include Library</i>' list under the '<i>Tools</i>' tab.</br></br>
+
+            Each program starts with a setup function. This function is executed each time the reset button is pressed or there is a reset signal:</br>
+
+            <code>
+                void setup()</br>
+                {</br>
+                    // initialize serial communication at 9600 bits per second:</br>
+                    Serial.begin(9600);</br>
+                }
+        </code>
+
+            The above code seems to be common to all the examples included with the IDE, and I'm assuming it causes the microcontroller to poll the serial interface 9,600 times per second.</br></br>
+
+            The difference between this and a conventional C++ program is we use '<i>void loop()</i>' instead of '<i>void main()</i>' for our main code. This is because we're doing event-drive programming, where we want the microcontroller to continue looping through the code until there is a hardware interrupt. Or perhaps there is no hardware interrupt, and we just want a set of instructions to loop continuously without any input signals.</br></br>
+
+            Let's look at the setup function for the Ethernet programming example:
+            <code>
+                void setup()</br>
+                {</br>
+                    Ethernet.begin(mac, ip, myDns, gateway, subnet);</br>
+                    server.begin();</br>
+                    Serial.begin(9600);</br>
+                    while (!Serial) {;}</br>
+                }
+            </code>
+            
+            We can read from a GPIO pin and manipulate the input as a value. e.g.
+            <code>
+                int sensorValue = analogRead(A0);</br>
+                Serial.println(sensorValue);
+            </code>
+
+            So, in the above function, it passes five variables to Ethernet.begin, which must be another function somewhere in the header file. The <i>server.begin()</i> and <i>Serial.begin()</i> also are imported from header files.</br></br>
+
+            After coding we use the Verify/Compile operation to create a binary. This will be a bytecode image containing the machine code for our program and bootloader. This bytecode image is loaded into the microcontroller's memory.
+        </div>
+
+        <div id="article">
+            ARDUINO. 2018. Software. [WWW]. <a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a>. 9th February 2018.</br></br>
+
+            MICROCHIP. 2018. ATmega328 in Production. [WWW]. <a href="https://www.microchip.com/wwwproducts/en/ATmega328">https://www.microchip.com/wwwproducts/en/ATmega328</a>. 9th February 2018.</br></br>
+
+            RS COMPONENTS. 2018. Arduino Uno. [WWW]. <a href="https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/">https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/</a>. 9th February 2018.</br></br>
+        </div>
+
+        <div id="footer">Michael, February 2018</div>
+        
+    </body>
+</html>
