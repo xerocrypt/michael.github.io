@@ -1,185 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Toolkit</title>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <title>Michael's GitHub Site</title>
+    </head>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <body>
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> 
+                            </button>
+                            <a class="navbar-brand" href="#">Michael's Projects</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="healthcare.html">Healthcare</a></li>
+                                <li><a href="articles/index.html">Articles</a></li> 
+                                <li><a href="resources.html">Resources</a></li> 
+                                <li><a href="toolkit.html">Toolkit</a></li>
+                                <li><a href="opendata.html">OpenData</a></li>
+                                <li><a href="ipv6secure.html">IPv6Secure</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="container-fluid">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Developer Environments</h3>
+                <b>Geany</b></br>
+                An alternative to Notepad++ for Linux. Like Notepad++, Geany supports all the commonly-used programming and scripting languages, and couild be configured to launnch compiler commands.</br>
+                <a href="https://www.geany.org//" class="btn btn-info" role="button">Go...</a></br></br>
+
+                <b>Notepad++</b></br>
+                <a href="https://notepad-plus-plus.org/" class="btn btn-info" role="button">Go...</a></br></br>          
+
+                <b>Visual Studio</b></br>
+                The main developer environment I use.</br>
+                <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a></br></br>
+
+                <b>Visual Studio Code</b></br>
+                Lightweight and open source code editor. Originally released for HTML/JavaScript development, there are extensions for additional languages.</br>
+                <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Database Tools</h3>
+                  <b>Redgate SQL Scripts Manager</b></br>
+                  One of the freely available tools developed by Redgate. Handy for storing and managing SQL scripts.</br>
+                  <a href="http://www.red-gate.com/products/dba/sql-scripts-manager/" class="btn btn-info" role="button">Go...</a></br></br>
+      
+                  <b>SQL Server Management Studio 2014/2016</b></br>
+                  The standard way to access and manage database objects on SQL Server.</br>
+                  <a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms" class="btn btn-info" role="button">Go...</a>
+            </div>
+            <div class="col-md-4">
+                <h3>Testing & Debugging</h3>
+
+                <b>HxD Hex Editor</b></br>
+                Windows-based hex editor and reverse engineering application.</br>
+                <a href="https://mh-nexus.de/en/hxd/" class="btn btn-info" role="button">Go...</a></br></br>
+    
+                <b>SoapUI</b></br>
+                <a href="https://www.soapui.org/" class="btn btn-info" role="button">Go...</a></br></br>
+    
+                <b>Telerik Fiddler</b></br>
+                Debugging proxy for Web applications. Enables the developer to inspect request and response traffic.</br>
+                <a href="http://www.telerik.com/fiddler" class="btn btn-info" role="button">Go...</a></br>
+            </div>
+            <div class="col-md-4">
+                <h3>Application Lifecycle Management</h3>
+
+                <b>Git Desktop Client</b></br>
+                The official GitHub desktop client.</br>
+                <a href="https://github.com/xerocrypt/Python" class="btn btn-info" role="button">Go...</a></br></br>
+      
+      
+                <b>Team Services and TFS</b></br>
+                <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a></br></br>
+      
+                <b>Trello</b></br>
+                <a href="https://www.trello.com" class="btn btn-info" role="button">Go...</a>
+              </div>
+
+
+            </div>
+            <div class="col-md-4">
+                <h3>Clinical / Healthcare</h3>
+
+                <b>HL7 Analyst</b></br>
+                HL7 message viewer and editor.</br>
+                <a href="http://en.freedownloadmanager.org/Windows-PC/HL7-Analyst-FREE.html" class="btn btn-info" role="button">Go...</a></br></br>
+   
+                <b>Ocean Informatics Archetype Editor</b></br>
+                openEHR editor.</br>
+                <a href="http://oceanhealthsystems.com/products/archetype-editor" class="btn btn-info" role="button">Go...</a></br></br>
+   
+               <b>Ocean Informatics Template Designer</b></br>
+               openEHR template designer.</br>
+               <a href="http://oceanhealthsystems.com/products/template-designer" class="btn btn-info" role="button">Go...</a></br></br>
+   
+              <b>QuickView HL7</b></br>
+              HL7 message viewer and editor.</br>
+              <a href="http://quickviewhl7.sourceforge.net/" class="btn btn-info" role="button">Go...</a></br>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html"><img src="images/assets/home.png"></br>Home</a></li>
-            <li><a href="about.html"><img src="images/assets/about.png"></br>About</a></li>
-            <li><a href="healthcare.html"><img src="images/assets/medical.png"></br>Healthcare</a></li>
-            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></br>Articles</a></li>
-            <li><a href="resources.html"><img src="images/assets/library.png"></br>Resources</a></li>
-            <li class="active"><a href="toolkit.html"><img src="images/assets/toolkit.png"></br>Toolkit</a></li>
-			<li></li>
-			<li><a href="opendata.html"><img src="images/assets/charts.png"></br>Open Data</a></li>
-			<li><a href="ipv6secure.html"><img src="images/assets/group.png"><br>IPv6Secure</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-<h1>// Toolkit</h1>
-
-    <div class="row">
-      <div class="col-sm-5">
-        <div class="panel panel-default">
-          <div class="panel-heading">// Editors and Developer Environments //</div>
-          <div class="panel-body">
-            <h3>Atom</h3>
-            A 'hackable' editor.</br>
-            <a href="https://atom.io/" class="btn btn-info" role="button">Go...</a>
-
-    		<h3>Geany</h3>
-    		An alternative to Notepad++ for Linux. Like Notepad++, Geany supports all the commonly-used programming and scripting languages, and couild be configured to launnch compiler commands.</br>
-            <a href="https://www.geany.org/" class="btn btn-info" role="button">Go...</a>
-
-    		<h3>Notepad++</h3>
-            <a href="https://notepad-plus-plus.org/" class="btn btn-info" role="button">Go...</a>
-
-    		<h3>Visual Studio</h3>
-    		The main developer environment I use.</br>
-            <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
-
-			<h3>Visual Studio Code</h3>
-			Lightweight and open source code editor. Originally released for HTML/JavaScript development, there are extensions for additional languages..</br>
-            <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-5">
-        <div class="panel panel-default">
-          <div class="panel-heading">// Database Tools //</div>
-          <div class="panel-body">
-            <h3>Redgate SQL Scripts Manager</h3>
-    		One of the freely available tools developed by Redgate. Handy for storing and managing SQL scripts.</br>
-            <a href="http://www.red-gate.com/products/dba/sql-scripts-manager/" class="btn btn-info" role="button">Go...</a>
-
-    		<h3>SQL Server Management Studio 2014/2016</h3>
-    		The standard way to access and manage database objects on SQL Server.</br>
-            <a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms" class="btn btn-info" role="button">Go...</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// Software Testing and Debugging //</div>
-        <div class="panel-body">
-            <h3>HxD Hex Editor</h3>
-            Windows-based hex editor and reverse engineering application.
-            <a href="https://mh-nexus.de/en/hxd/" class="btn btn-info" role="button">Go...</a>
-
-			<h3>SoapUI</h3>
-            <a href="https://www.soapui.org/" class="btn btn-info" role="button">Go...</a>
-
-			<h3>Telerik Fiddler</h3>
-			Debugging proxy for Web applications. Enables the developer to inspect request and response traffic.</br>
-            <a href="http://www.telerik.com/fiddler" class="btn btn-info" role="button">Go...</a>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// Application Lifecycle Management //</div>
-        <div class="panel-body">
-          <h3>Git Desktop Client</h3>
-          The official GitHub desktop client.</br>
-          <a href="https://github.com/xerocrypt/Python" class="btn btn-info" role="button">Go...</a>
-
-
-          <h3>Team Services and TFS</h3>
-          <a href="https://www.visualstudio.com/" class="btn btn-info" role="button">Go...</a>
-
-          <h3>Trello</h3>
-          <a href="https://www.trello.com" class="btn btn-info" role="button">Go...</a>
-        </div>
-      </div>
     </div>
 
-   <div class="row">
-       <div class="col-sm-5">
-         <div class="panel panel-default">
-           <div class="panel-heading">// Other //</div>
-           <div class="panel-body">
-             <h3>ArgoUML</h3>
-             UML and diagram editor.</br>
-             <a href="http://argouml.tigris.org/" class="btn btn-info" role="button">Go...</a>
-           </div>
-         </div>
-       </div>
+        <footer>Michael. February 2018</footer>
 
-
-       <div class="col-sm-5">
-         <div class="panel panel-default">
-           <div class="panel-heading">// Clinical / Healthcare //</div>
-           <div class="panel-body">
-             <h3>HL7 Analyst</h3>
-             HL7 message viewer and editor.</br>
-             <a href="http://en.freedownloadmanager.org/Windows-PC/HL7-Analyst-FREE.html" class="btn btn-info" role="button">Go...</a>
-
-             <h3>Ocean Informatics Archetype Editor</h3>
-             openEHR editor.</br>
-             <a href="http://oceanhealthsystems.com/products/archetype-editor" class="btn btn-info" role="button">Go...</a>
-
-            <h3>Ocean Informatics Template Designer</h3>
-            openEHR template designer.</br>
-            <a href="http://oceanhealthsystems.com/products/template-designer" class="btn btn-info" role="button">Go...</a>
-
-           <h3>QuickView HL7</h3>
-           HL7 message viewer and editor.</br>
-           <a href="http://quickviewhl7.sourceforge.net/" class="btn btn-info" role="button">Go...</a>
-
-           </div>
-         </div>
-       </div>
-</div>
-</div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <div class="footer">Michael, June 2017</div>
-
-</div>
-
-  </body>
+    </body>
 </html>

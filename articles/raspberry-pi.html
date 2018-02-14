@@ -11,64 +11,66 @@
         </div>
         
         <div id="article">
-
-        These were really popular among the lecturers and high-grade students at university, probably because they were the cheapest and most convenient way of getting an actual physical Linux box. I never got my hands on one until now.</br></br>
+            These were really popular among the lecturers and high-grade students at university, probably because they were the cheapest and most convenient way of getting an actual physical Linux box. I never got my hands on one until now.</br></br>
         
-        <img src="images/raspberry-pi-encased.jpg" width="50%"></br></br>
+            <img src="images/raspberry-pi-encased.jpg" width="50%"></br></br>
 
-        What I have here is a Raspberry Pi 3 (model B), which has a Broadcom quad-core processor, 1GB memory, four USB ports and HDMI. </br></br>
+            What I have here is a Raspberry Pi 3 (model B), which has a Broadcom quad-core processor, 1GB memory, four USB ports and HDMI. </br></br>
 
-        As you can see, the Pi has a set of GPIO ports along the side for hardware and I/O programming. If you're into that sort of thing, you'd get a stronger foundation in computer science learning with a simple development board, such as the Arduino Uno. But I think it would primarily it would make a decent base system for a desktop.</br></br>
+            As you can see, the Pi has a set of GPIO ports along the side for hardware and I/O programming. If you're into that sort of thing, you'd get a stronger foundation in computer science learning with a simple development board, such as the Arduino Uno. But I think it would primarily it would make a decent base system for a desktop.</br></br>
 
-        The PiBow Tangerine case I bought from ModMyPi for £12, and it was nicely packaged. The construction is pretty solid and easy to assemble.</br></br>
+            The PiBow Tangerine case I bought from ModMyPi for £12, and it was nicely packaged. The construction is pretty solid and easy to assemble.</br></br>
         
-        Okay, the Pi needs a few other things:
-        <ul>
-            <li>Power supply</li>
-            <li>Case: Orange case, available from ModMyPi.</li>
-            <li>MicroSD card with operating system</li>
-            <li>Keyboard</li>
-            <li>Mouse</li>
-            <li>Monitor</li>
-        </ul>
+            Okay, the Pi needs a few other things:
+            <ul>
+                <li>Power supply</li>
+                <li>Case: Orange case, available from ModMyPi.</li>
+                <li>MicroSD card with operating system</li>
+                <li>Keyboard</li>
+                <li>Mouse</li>
+                <li>Monitor</li>
+            </ul>
+        </div>
+
+
+        <div id="article">
+            <h2>Power Supply</h2>
+            Power Supply
+            It looks as if the device will require the official power supply, as it's important to get one that's capable of supplying 2.5A.</br></br>
         
-        It looks as if the device will require the official power supply, as it's important to get one that's capable of supplying 2.5A.</br></br>
+            I wouldn't recommend attaching anything fancy or running devices through multiple USB hubs, as that could draw enough current to fry part of the board. I've seen that happen with laptops a couple of times.
+        </div>
+
+        <div id="article">        
+            <h2>Operating System</h2>
+            One of the nice things about the Pi is it'll run whatever operating system happens to be on the inserted MicroSD card, so it's easy to switch between them. Alternatives to the recommended Raspbian OS include Debian, PwnPi and several media player setups. A colleague also showed me a pen testing installation called 'PwnPi'. An operating system can also be loaded from an attached USB drive or portable HDD.</br></br>
         
-        I wouldn't recommend attaching anything fancy or running devices through multiple USB hubs, as that could draw enough current to fry part of the board. I've seen that happen with laptops a couple of times.</br></br>
-    </div>
-
-    <div id="article">        
-        <h2>Operating System</h2>
-        One of the nice things about the Pi is it'll run whatever operating system happens to be on the inserted MicroSD card, so it's easy to switch between them. Alternatives to the recommended Raspbian OS include Debian, PwnPi and several media player setups. A colleague also showed me a pen testing installation called 'PwnPi'. An operating system can also be loaded from an attached USB drive or portable HDD.</br></br>
+            While the official Ubuntu MATE site states that it's possible to get a usable installation on an 8GB card, but I strongly recommend using at least 16GB since developer toolchains, programming libraries, customisations and other applications will require several more GBs.</br>
+            Another thing to remember, especially when running the OS from the microSD is the data transfer rate might be a bottleneck, and therefore a higher-performance microSDHC card is recommended.</br></br>
         
-        While the official Ubuntu MATE site states that it's possible to get a usable installation on an 8GB card, but I strongly recommend using at least 16GB since developer toolchains, programming libraries, customisations and other applications will require several more GBs.</br>
-        Another thing to remember, especially when running the OS from the microSD is the data transfer rate might be a bottleneck, and therefore a higher-performance microSDHC card is recommended.</br></br>
+            It's not so much the Pi hardware itself that makes is an educational resource, but rather what you're doing with the operating system.</br>
         
-        It's not so much the Pi hardware itself that makes is an educational resource, but rather what you're doing with the operating system.</br>
+            Now, the next thing you'll need is the Ubuntu MATE download specifically for the Pi. The download is a .xz archive - the .img file needs to be extracted from this, using something like 7-Zip. The image file must then be 'burned' to the SD card, so you'll need a program for that also. I'm using Etcher, which is recommended in the official Pi documentation.</br></br>
         
-        Now, the next thing you'll need is the Ubuntu MATE download specifically for the Pi. The download is a .xz archive - the .img file needs to be extracted from this, using something like 7-Zip. The image file must then be 'burned' to the SD card, so you'll need a program for that also. I'm using Etcher, which is recommended in the official Pi documentation.</br></br>
-        
-        I'll be installing Ubuntu MATE. This should run fine on 1GB memory, and it's quite possible to scrap the desktop manager and interface if I need to, and simply use the command line.</br>
-        I'm giving this the hostname 'ORAC', after that annoying acrylic box of components off Blake's 7.
-    </div>
+            I'll be installing Ubuntu MATE. This should run fine on 1GB memory, and it's quite possible to scrap the desktop manager and interface if I need to, and simply use the command line.</br>
+            I'm giving this the hostname 'ORAC', after that annoying acrylic box of components off Blake's 7.
+        </div>
 
-    <div id="article">
-        <h2>Links</h2>
+        <div id="article">
+            <h2>Links</h2>
 
-        CPC. 2018. Introducing the NEW Raspberry Pi 3 Model B. <i>Maker Space</i>. [WWW]. <a href="http://cpc.farnell.com/mksp2-raspberry-pi3">http://cpc.farnell.com/mksp2-raspberry-pi3</a>. (9th February 2018).</br></br>
+            CPC. 2018. Introducing the NEW Raspberry Pi 3 Model B. <i>Maker Space</i>. [WWW]. <a href="http://cpc.farnell.com/mksp2-raspberry-pi3">http://cpc.farnell.com/mksp2-raspberry-pi3</a>. (9th February 2018).</br></br>
 
-        MODMYPI. 2018. Tangerine PiBow Raspberry Pi Case - Model B+/2/3. <I> Raspberry Pi B+,2 & 3 Cases</i>. [WWW]. <a href="https://www.modmypi.com/raspberry-pi/cases-183/raspberry-pi-b-plus2-and-3-cases-1122/plastic-cases-1142/tangerine-pibow-raspberry-pi-case-model-b-plus-and-2/?search=tangerine">https://www.modmypi.com/raspberry-pi/cases-183/raspberry-pi-b-plus2-and-3-cases-1122/plastic-cases-1142/tangerine-pibow-raspberry-pi-case-model-b-plus-and-2/?search=tangerine</a>. (9th February 2018).</br></br>
+            MODMYPI. 2018. Tangerine PiBow Raspberry Pi Case - Model B+/2/3. <I> Raspberry Pi B+,2 & 3 Cases</i>. [WWW]. <a href="https://www.modmypi.com/raspberry-pi/cases-183/raspberry-pi-b-plus2-and-3-cases-1122/plastic-cases-1142/tangerine-pibow-raspberry-pi-case-model-b-plus-and-2/?search=tangerine">https://www.modmypi.com/raspberry-pi/cases-183/raspberry-pi-b-plus2-and-3-cases-1122/plastic-cases-1142/tangerine-pibow-raspberry-pi-case-model-b-plus-and-2/?search=tangerine</a>. (9th February 2018).</br></br>
 
-        RASPBERRY PI FOUNDATION. 2018. INSTALLING OPERATING SYSTEM IMAGES. <i>Documentation, Installing Images</i>. [WWW]. <a href="https://www.raspberrypi.org/documentation/installation/installing-images/">https://www.raspberrypi.org/documentation/installation/installing-images/</a>. (9th February 2018).</br></br>
+            RASPBERRY PI FOUNDATION. 2018. INSTALLING OPERATING SYSTEM IMAGES. <i>Documentation, Installing Images</i>. [WWW]. <a href="https://www.raspberrypi.org/documentation/installation/installing-images/">https://www.raspberrypi.org/documentation/installation/installing-images/</a>. (9th February 2018).</br></br>
 
-        RESIN.IO. Etcher. [WWW]. <a href="https://etcher.io/">https://etcher.io/</a>. (9th February 2018).</br></br>
+            RESIN.IO. Etcher. [WWW]. <a href="https://etcher.io/">https://etcher.io/</a>. (9th February 2018).</br></br>
 
-        UBUNTU MATE TEAM. 2018. Ubuntu MATE for the Raspberry Pi 2 and Raspberry Pi 3. [WWW]. <a href="https://ubuntu-mate.org/raspberry-pi/">https://ubuntu-mate.org/raspberry-pi/</a>. (9th February 2018).</br></br>
-
-
-    </div>
+            UBUNTU MATE TEAM. 2018. Ubuntu MATE for the Raspberry Pi 2 and Raspberry Pi 3. [WWW]. <a href="https://ubuntu-mate.org/raspberry-pi/">https://ubuntu-mate.org/raspberry-pi/</a>. (9th February 2018).</br></br>
+        </div>
     
-    <div id="footer">Michael, February 2018</div>
+        <div id="footer">Michael, February 2018</div>
         
     </body>
 </html>

@@ -1,151 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>IPv6Secure Project</title>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <title>Michael's GitHub Site</title>
+    </head>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <body>
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> 
+                            </button>
+                            <a class="navbar-brand" href="#">Michael's Projects</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="healthcare.html">Healthcare</a></li>
+                                <li><a href="articles/index.html">Articles</a></li> 
+                                <li><a href="resources.html">Resources</a></li> 
+                                <li><a href="toolkit.html">Toolkit</a></li>
+                                <li><a href="opendata.html">OpenData</a></li>
+                                <li><a href="ipv6secure.html">IPv6Secure</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="container-fluid">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">// xerocrypt //</a>
+        <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-4">
+                    Image here.
+            </div>
+            <div class="col-md-4">
+                <h3>// Title: Secure IPv6 Communications across Multiple Untrusted Networks //</h3>
+                Abstract: The vast address space of IPv6 will have major implications for Internet and network security. The Research stage of this project included an analysis of current packet inspection and traffic filtering systems, and also the countermeasures, deployed on the IPv4-based Internet. The Development stage proposes a design for a secure communications system that is highly resistant to Internet surveillance and traffic filtering methods, incorporating IPv6 address switching, encryption and IPsec. The Evaluation stage assessed the potential for a real-world implementation of this system.</br></br>
+                
+                The dissertation report and accompanying software was submitted at the University of Wales, Newport (now the University of South Wales) in May 2013.</br>
+                <a href="https://github.com/xerocrypt/Misc" class="btn btn-info" role="button">Project Source Repository...</a>
+                
+            </div>
+            <div class="col-md-4">
+                <h3>// Published Components //</h3>
+                <b>Python GUI</b></br>
+                Developed using Qt Designer, a Python script is generated from the QML file. Events and handlers are contained in a separate main.py file.</br></br>
+                
+                <b>.NET GUI</b></br>
+                Windows Forms application. This isn't the main application.</br></br>
+                
+                <b>Application Database</b></br>
+                SQLite3 database. Drivers are available for Python and .NET.</br></br>
+                
+                <b>Secret Address Generation Algorithm</b></br>
+                Code to generate new IPv6 addresses based on a session key and system time.
+            </div>
+            <div class="col-md-4">
+                <h3>// Current Status //</h3>
+                A proof-of-concept application and RFC document are in development. When fully developed, the software can be modified for a range of other applications, such as distributed hosting, social networking and even online banking.
+            </div>
+            <div class="col-md-4">
+                <h3>// Links //</h3>
+                HUGHES, L. 2010. The Second Internet. InfoWeapons. [PDF]. <a href="http://www.ipv6forum.com/dl/books/the_second_internet.pdf">www.ipv6forum.com/dl/books/the_second_internet.pdf</a>. (6th June 2017).</br></br>
+                
+                HURRICANE ELECTRIC.2017. Hurricane Electric Free IPv6 Tunnel Broker. [WWW]. <a href="https://tunnelbroker.net">https://tunnelbroker.net</a>. (8th June 2017).</br></br>
+                
+                NARTEN, T., HUSTONM, G., ROBERTS, L. 2011. IETF Network Working Group. RFC 6177: IPv6 Address Assignment to End Sites. [TXT]. <a href="https://tools.ietf.org/html/rfc6177">https://tools.ietf.org/html/rfc6177</a>. (7th June 2017).</br></br>
+                
+                NARTEN, T., NORDMARK, E., SIMPSON, W. 2007. IETF Network Working Group. RFC 4861: Neighbor Discovery for IP version 6 (IPv6). [TXT]. <a href="https://tools.ietf.org/html/rfc4861">https://tools.ietf.org/html/rfc4861</a>. (6th June 2017).</br></br>
+                
+                PYTHON SOFTWARE FOUNDATION. 2017. Python 3.6.1 Documentation. ipaddress — IPv4/IPv6 manipulation library. [WWW]. <a href="https://docs.python.org/3/library/ipaddress.html#module-ipaddress">https://docs.python.org/3/library/ipaddress.html#module-ipaddress</a>. (6th June 2017).
+            </div>
+
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html"><img src="images/assets/home.png"></br>Home</a></li>
-            <li><a href="about.html"><img src="images/assets/about.png"></br>About</a></li>
-            <li><a href="healthcare.html"><img src="images/assets/medical.png"></br>Healthcare</a></li>
-            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></br>Articles</a></li>
-            <li><a href="resources.html"><img src="images/assets/library.png"></br>Resources</a></li>
-            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></br>Toolkit</a></li>
-			<li></li>
-			<li><a href="opendata.html"><img src="images/assets/charts.png"></br>Open Data</a></li>
-			<li class="active"><a href="ipv6secure.html"><img src="images/assets/group.png"><br>IPv6Secure</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-<h1>// IPv6Secure Project</h1>
-
-    <div class="row">
-      <div class="col-sm-5">
-        <div class="panel panel-default">
-          <div class="panel-body">
-              <img src="images/dissertation.jpg" width="70%" height="70%">
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-5">
-        <div class="panel panel-default">
-          <div class="panel-heading">// Title: Secure IPv6 Communications across Multiple Untrusted Networks //</div>
-          <div class="panel-body">
-              Abstract: The vast address space of IPv6 will have major implications for Internet and network security. The Research stage of this project included an analysis of current packet inspection and traffic filtering systems, and also the countermeasures, deployed on the IPv4-based Internet. The Development stage proposes a design for a secure communications system that is highly resistant to Internet surveillance and traffic filtering methods, incorporating IPv6 address switching, encryption and IPsec. The Evaluation stage assessed the potential for a real-world implementation of this system.</br></br>
-
-              The dissertation report and accompanying software was submitted at the University of Wales, Newport (now the <a href="http://www.southwales.ac.uk">University of South Wales</a>) in May 2013.</br></br>
-
-			  <a href="https://github.com/xerocrypt/Misc" class="btn btn-info" role="button">Project Source Repository...</a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// Published Components //</div>
-        <div class="panel-body">
-            <b>Python GUI</b></br>
-            Developed using Qt Designer, a Python script is generated from the QML file. Events and handlers are contained in a separate main.py file.</br></br>
-
-            <b>.NET GUI</b></br>
-            Windows Forms application. This isn't the main application.</br></br>
-
-            <b>Application Database</b></br>
-            SQLite3 database. Drivers are available for Python and .NET.</br></br>
-
-            <b>Secret Address Generation Algorithm</b></br>
-            Code to generate new IPv6 addresses based on a session key and system time.</br></br>
-        </div>
-      </div>
     </div>
 
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// LCSP Secret Address Generation Algorithm //</div>
-        <div class="panel-body">
-            This is the algorithm for cycling through addresses within a range, the specific address determined by a shared session key.
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+        <footer>Michael. February 2018</footer>
 
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// Current Status //</div>
-        <div class="panel-body">
-            A proof-of-concept application and RFC document are in development. When fully developed, the software can be modified for a range of other applications, such as distributed hosting, social networking and even online banking.</br></br>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    <div class="col-sm-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">// Links //</div>
-        <div class="panel-body">
-            HUGHES, L. 2010. <i>The Second Internet</i>. InfoWeapons. [PDF]. <a href="https://www.ipv6forum.com/dl/books/the_second_internet.pdf">www.ipv6forum.com/dl/books/the_second_internet.pdf</a>. 6th June 2017.</br></br>
-
-            HURRICANE ELECTRIC.2017. <i>Hurricane Electric Free IPv6 Tunnel Broker</i>. [WWW]. <a href="https://tunnelbroker.net">https://tunnelbroker.net</a>. 8th June 2017.</br></br>
-
-            NARTEN, T., HUSTONM, G., ROBERTS, L. 2011. IETF Network Working Group. <i>RFC 6177: IPv6 Address Assignment to End Sites</i>. [TXT]. <a href="https://tools.ietf.org/html/rfc6177">https://tools.ietf.org/html/rfc6177</a>. 7th June 2017.</br></br>
-
-            NARTEN, T., NORDMARK, E., SIMPSON, W. 2007. IETF Network Working Group. <i>RFC 4861: Neighbor Discovery for IP version 6 (IPv6)</i>. [TXT]. <a href="https://tools.ietf.org/html/rfc4861">https://tools.ietf.org/html/rfc4861</a>. 6th June 2017.</br></br>
-
-            PYTHON SOFTWARE FOUNDATION. 2017. Python 3.6.1 Documentation. <i>ipaddress — IPv4/IPv6 manipulation library</i>. [WWW]. <a href="https://docs.python.org/3/library/ipaddress.html#module-ipaddress">https://docs.python.org/3/library/ipaddress.html#module-ipaddress</a>. 6th June 2017.</br>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <div class="footer">Michael, June 2017</div>
-
-</div>
-  </body>
+    </body>
 </html>
