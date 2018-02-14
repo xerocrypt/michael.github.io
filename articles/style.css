@@ -9,46 +9,44 @@
 }
 
 body {
-    background-image: url("images/divbg.png");
-    background-repeat: repeat;
-    background-color: #22222;
+    background-color: #FFFFFF;
     background-attachment: fixed;
     background-position: left top;
 }
 
 h1 {
     font-family: 'TitleFont';
-    color: #333333;
+    color: #FFFFFF;
         font-size: 2.6em;
 }
 
 h2 {
     font-family: 'TitleFont';
-    color: #00ff55;
+    color: #OOOOOO;
     font-size: 2em;
 }
 
 /* unvisited link */
 a:link {
-    color: #00ff00;
+    color: #6600CC;
     text-decoration: none;
 }
 
 /* visited link */
 a:visited {
-    color:  #00ff00;
+    color:  #6600CC;
     text-decoration: none;
 }
 
 /* mouse over link */
 a:hover {
-    color:  #00ff00;
+    color:  #9966ff;
     text-decoration: none;
 }
 
 /* selected link */
 a:active {
-    color:  #00ff00;
+    color:  #6600CC;
     text-decoration: none;
 }
 
@@ -111,13 +109,13 @@ button {
 #article {
     font-family: 'MyWebFont';
     font-size: 1em;
-    color: #ffffff;
+    color: #000000;
 
-	background-color: #001A00;
+	background-color: #FFFFFF;
 	width: 70%;
-	line-height: 25px;
-
-    border: 2px solid  #00ff55;
+    line-height: 25px;
+    
+    border: 2px solid  #6600CC;
     border-left-width: 15px;
     top: 0px;
 
@@ -136,7 +134,7 @@ button {
     font-family: Arial, Verdana;
     font-size: 1em;
     color:  #000000;
-    background-color:   #00ff55;
+    background-color:   #6600CC;
     width: 100%;
   position: relative;
   right: 0;
@@ -206,12 +204,12 @@ button {
 }
 
 code {
-  background-color: #222222;
-  color: #00ff55;
+  background-color: #DEDEDE;
+  color: #333333;
 	max-width: 100%;
   font-size: 1em;
   display: block;
-  border: 1px solid  #00ff55;;
+  border: 1px solid  #AAAAAA;
   border-left-width: 10px;
 
     margin-top: 5px;
@@ -229,8 +227,8 @@ code {
 #footer {
         font-family: "Courier New";
     font-size: 1em;
-    color:  #000000;
-    background-color:   #00ff55;
+    color:  #FFFFFF;
+    background-color:   #6600CC;
     width: 100%;
   position: relative;
   right: 0;
