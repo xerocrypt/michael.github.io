@@ -11,49 +11,37 @@
         </div>
         
         <div id="article">
-            These were really popular among the lecturers and high-grade students at university, probably because they were the cheapest and most convenient way of getting an actual physical Linux box. I never got my hands on one until now.</br></br>
-        
-            <img src="images/raspberry-pi-encased.jpg" width="50%"></br></br>
-
-            What I have here is a Raspberry Pi 3 (model B), which has a Broadcom quad-core processor, 1GB memory, four USB ports and HDMI. </br></br>
-
-            As you can see, the Pi has a set of GPIO ports along the side for hardware and I/O programming. If you're into that sort of thing, you'd get a stronger foundation in computer science learning with a simple development board, such as the Arduino Uno. But I think it would primarily it would make a decent base system for a desktop.</br></br>
-
-            The PiBow Tangerine case I bought from ModMyPi for £12, and it was nicely packaged. The construction is pretty solid and easy to assemble.</br></br>
-        
-            Okay, the Pi needs a few other things:
-            <ul>
-                <li>Power supply</li>
-                <li>Case: Orange case, available from ModMyPi.</li>
-                <li>MicroSD card with operating system</li>
-                <li>Keyboard</li>
-                <li>Mouse</li>
-                <li>Monitor</li>
-            </ul>
-        </div>
-
-
-        <div id="article">
-            <h2>Power Supply</h2>
-            Power Supply
-            It looks as if the device will require the official power supply, as it's important to get one that's capable of supplying 2.5A.</br></br>
-        
-            I wouldn't recommend attaching anything fancy or running devices through multiple USB hubs, as that could draw enough current to fry part of the board. I've seen that happen with laptops a couple of times.
+            I've only recently managed to get my hands on a <a href="http://cpc.farnell.com/mksp2-raspberry-pi3">Raspberry Pi</a>, which was really popular at my university and the local hackspace. The credit card-sized board houses an ARM v8 quad-core processor, 1GB memory, a wireless interface and plenty of USB ports. More than enough to function as a desktop with a minimal Linux installation.</br>
+            As you can see, the Pi has a set of GPIO pins along the side for hardware and I/O programming, though I think an Arduino board is more suitable for learning that kind of thing.
+            
+            <img src="images/raspberry-pi-encased.jpg" width="40%" align="left"></br></br>
+            
+            I've housed the Pi in a <a href="https://www.modmypi.com/raspberry-pi/cases-183/raspberry-pi-b-plus2-and-3-cases-1122/plastic-cases-1142/tangerine-pibow-raspberry-pi-case-model-b-plus-and-2/?search=tangerine">PiBow Tangerine case</a>, which ModMyPi sells for ~£12. Since I hadn't gotten around to completing my desktop build, I had to order a few extras from  ModMyPi and Farnell Components - both pretty good suppliers.
+            One of these is an official power supply, as it requires a 5v adaptor capable of supplying 2.5A. ModMyPi sells these for ~£7. I wouldn't recommend attaching anything fancy through the USB ports or attaching multiple hubs, as that could draw enough current to fry part of the board. I've seen that happen with laptops a couple of times.
         </div>
 
         <div id="article">        
-            <h2>Operating System</h2>
-            One of the nice things about the Pi is it'll run whatever operating system happens to be on the inserted MicroSD card, so it's easy to switch between them. Alternatives to the recommended Raspbian OS include Debian, PwnPi and several media player setups. A colleague also showed me a pen testing installation called 'PwnPi'. An operating system can also be loaded from an attached USB drive or portable HDD.</br></br>
-        
-            While the official Ubuntu MATE site states that it's possible to get a usable installation on an 8GB card, but I strongly recommend using at least 16GB since developer toolchains, programming libraries, customisations and other applications will require several more GBs.</br>
-            Another thing to remember, especially when running the OS from the microSD is the data transfer rate might be a bottleneck, and therefore a higher-performance microSDHC card is recommended.</br></br>
-        
-            It's not so much the Pi hardware itself that makes is an educational resource, but rather what you're doing with the operating system.</br>
-        
-            Now, the next thing you'll need is the Ubuntu MATE download specifically for the Pi. The download is a .xz archive - the .img file needs to be extracted from this, using something like 7-Zip. The image file must then be 'burned' to the SD card, so you'll need a program for that also. I'm using Etcher, which is recommended in the official Pi documentation.</br></br>
-        
-            I'll be installing Ubuntu MATE. This should run fine on 1GB memory, and it's quite possible to scrap the desktop manager and interface if I need to, and simply use the command line.</br>
-            I'm giving this the hostname 'ORAC', after that annoying acrylic box of components off Blake's 7.
+            <h2>microSD Card and Operating System</h2>
+            The Pi will automatically load whatever operating system is discovered on the inserted microSD card, so it's easy to switch between them by swapping cards. Alternatives to the recommended Raspbian OS include Debian, PwnPi, Ubuntu MATE and several distributions that can turn the Pi into a media centre. </br>
+            Whichever operating system is chosen, I recommend using a microSD with at least double the recommended capacity. It's likely more space would be required for extending and customising the installation. There'll also be personal files you'd want to keep on the same volumes as the root file system. Another potentially important factor is the data transfer rate for the microSD, as that could be a bottleneck, and therefore the operating system would ideally be installed on a microSDHC card.</br></br>
+            
+            If installing <a href="https://ubuntu-mate.org/raspberry-pi/">Ubuntu MATE</a>, the first step is to download the version specifically for the Pi, and this will be a <i>.xz</i> archive from which the <i>.img</i> file is extracted. This image file is then 'burned' to the microSD card. I've used 7-Zip and <a href="https://etcher.io/">Etcher</a>, as recommended in the <a href="https://www.raspberrypi.org/documentation/installation/installing-images/">official Pi documentation,</a>.</br></br>
+            
+            Since there is no swap partition on the microSD, the 1GB of physical memory won't be extended. That would also mean the hibernation feature wouldn't work. If the memory proves too limited for the MATE desktop, we could install XCFE and configure that as the default in the </i>.xsession</i> file Another option is to disable X11 using '<i>raspi-config</i>' - almost every desktop application has a decent command line substitute.</br></br>
+            
+            Well, that was my plan, but I wasn't initially able to get this operating system running on the Pi, as it apparently couldn't find the partition for the root file system. I kept getting the following error message:</br>
+            <code>
+                Kernel panic-not syncing: VFS: unable to mount root fs on unknown-block(179,2)
+            </code></br>
+            
+            I've come across this error before, when I had a multi-boot system spanning several hard drives. The kernel is attempting to create or read a file system on a non-existent volume.</br>
+            I managed to pin this down (I think) to a configuration line in '<i>command.txt</i>', which has either an incorrect partition number or incorrect filesystem set. Multiple times I swapped the microSD between my laptop and the Pi, trying to find the correct values by trial-and-error (e.g. <i>root=/dev/mmcblk0p2</i> instead of <i>root=/dev/mmcblk0p6</i>).</br></br> 
+            
+            The problem was I created a partition table on the card <i>before</i> flashing it, not realising the Ubuntu MATE image will create the partitions on unallocated space anyway. To fix this, remove all partitions on the card using the Windows Disk Management application, so the entire 30-32GB is unallocated and flash the card again using Etcher. Disk Management should display the following partition scheme after flashing and verification:</br></br>
+            
+            <img src="images/ubuntu-mate-microsd-partitions.png"></br></br>
+            
+            Note, the boot partition (~5GB) is marked as primary. The third partition is unallocated, and this is where the root file system is created.
         </div>
 
         <div id="article">
@@ -69,7 +57,7 @@
 
             UBUNTU MATE TEAM. 2018. Ubuntu MATE for the Raspberry Pi 2 and Raspberry Pi 3. [WWW]. <a href="https://ubuntu-mate.org/raspberry-pi/">https://ubuntu-mate.org/raspberry-pi/</a>. (9th February 2018).</br></br>
         </div>
-    
+
         <div id="footer">Michael, February 2018</div>
         
     </body>

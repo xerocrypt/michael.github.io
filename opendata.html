@@ -27,38 +27,43 @@
     <![endif]-->
   </head>
   <body>
-     <div class="container-fluid">
+
+
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">// xerocrypt //</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html"><img src="images/assets/home.png"></br>Home</a></li>
-            <li><a href="about.html"><img src="images/assets/about.png"></br>About</a></li>
-            <li><a href="healthcare.html"><img src="images/assets/medical.png"></br>Healthcare</a></li>
-            <li><a href="articles/index.html"><img src="images/assets/data-files.png"></br>Articles</a></li>
-            <li><a href="resources.html"><img src="images/assets/library.png"></br>Resources</a></li>
-            <li><a href="toolkit.html"><img src="images/assets/toolkit.png"></br>Toolkit</a></li>
-			<li></li>
-			<li class="active"><a href="opendata.html"><img src="images/assets/charts.png"></br>Open Data</a></li>
-			<li><a href="ipv6secure.html"><img src="images/assets/group.png"><br>IPv6Secure</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
-        </div>
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span> 
+              </button>
+              <a class="navbar-brand" href="#">Michael's Projects</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="healthcare.html">Healthcare</a></li>
+                  <li><a href="articles/index.html">Articles</a></li> 
+                  <li><a href="resources.html">Resources</a></li> 
+                  <li><a href="toolkit.html">Toolkit</a></li>
+                  <li><a href="opendata.html">OpenData</a></li>
+                  <li><a href="ipv6secure.html">IPv6Secure</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="https://github.com/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="https://github.com/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul>
+          </div>
       </div>
-    </nav>
+  </nav>
 
-<h1>// Messaging Metrics</h1>
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="opendata.html">Messaging Metrics Demo</a></li>
+</ul>
+
+<div class="container">
 
 <script>
     // since v3, chart can accept data in JSON format
@@ -295,12 +300,14 @@ var chart = AmCharts.makeChart( "chartdiv3", {
     </div>
   </div>
 
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
-    <div class="footer">Michael, June 2017</div>
+<footer>Michael, February 2018</footer>
 
 </div>
 
