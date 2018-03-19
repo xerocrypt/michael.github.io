@@ -4,6 +4,9 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <script src="jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+
         <title>Michael's GitHub Site</title>
     </head>
 
@@ -41,13 +44,15 @@
             <li><a href="index.html">Home</a></li>
         </ul>
 
+        <div id="wpcontainer" width="100%" height="100px"></div>
+
         <div class="container">
-            <table width="70%">
+            <table width="100%">
                 <tr>
                     <td valign="top">
                         <img src="images/logo.png">
                     </td>
-                    <td>
+                    <td valign="top">
                         Welcome to my GitHub site, where I post and maintain a variety of projects, along with miscellaneous code and documentation. Each project on this page has its own repository and wiki page.
                     </td>
                 </tr>
@@ -110,6 +115,39 @@
                 </div>
             </div>
         </div>
-        <footer>Michael. February 2018</footer>
+
+        <script>
+                var text = 'repository miscellaneous .NET hacks developers wiki reference repository ASP.NET MVC5 hacks HTML/JavaScript examples C# application projects Web Services WebAPI REST examples management system malware analysis project client workstations malware analysis records MySQL server integration Maltego Casefile Volatility Framework C# application TCP HTTP packets pcap.net component packets TCP application layer packets repo Python scripts prototype application project SmartCards cryptographic data VPN communications healthcare SmartCard research Python scripts examples Python modules wiki modules Qt Designer Project Python Application Build Compilation Front-end dd foremost tools Python ncurses module GUI imaging file carving SSH connection command line Demonstration JavaScript charting libraries code amCharts Highcharts Chart.js Smoothie.js jqPlot';
+        
+                var lines = text.split(/[,\. ]+/g),
+                    data = Highcharts.reduce(lines, function (arr, word) {
+                        var obj = Highcharts.find(arr, function (obj) {
+                            return obj.name === word;
+                        });
+                        if (obj) {
+                            obj.weight += 1;
+                        } else {
+                            obj = {
+                                name: word,
+                                weight: 1
+                            };
+                            arr.push(obj);
+                        }
+                        return arr;
+                    }, []);
+        
+                Highcharts.chart('wpcontainer', {
+                    series: [{
+                        type: 'wordcloud',
+                        data: data,
+                        name: 'Occurrences'
+                    }],
+                    title: {
+                        text: ''
+                    }
+                });
+            </script>
+
+        <footer>Michael. March 2018</footer>
     </body>
 </html>

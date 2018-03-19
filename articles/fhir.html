@@ -1,68 +1,112 @@
 <html>
-    <head>
-        <title>FHIR</title>
+	<head>
+    	<title>FHIR</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
 
-        <div id="header">
-            <h1>FHIR</h1>
+		<div id="header">
+        	<h1>FHIR</h1>
         </div>
 		
 		<div id="article">
-			Is related to HL7, but seems an extension of it to cover how the messaging should be implemented (basically REST, serialisation, message validation, etc.). The official documentation is very dry and unstructured, so I recommend either reading Ewout Kramer's presentation material on SlideShare and researching the APIs.
-		</div>
-		
-		<div id="article">
-			<h2>Communication of HL7 Messages</h2>
-			While HL7 gives us a standardised messaging format, the standard doesn't say anything about how multiple applications and services get that data from A to B. For example, are the messages communicated over an HTTP session or over a terminal connection?</br></br>
-
-			It appears that FHIR mandates HTTP as the transport, with the HL7 message being the payload. At the higher level, data is queried using REST, with the response being XML or JSON.	Therefore we have four layers to this:</br>
+			The official documentation is pretty dry and hard to follow, so I decided to create a simple client to get a better understanding of how it's implemented. I recommend reading Ewout Kramer's presentation material on this.</br></br>
+			
+			It appears that FHIR mandates HTTP as the transport method, with the repositories of patient records being queried using REST.</br></br>
+			
+			There are four layers to this:
 			<ul>
 				<li>REST</li>
 				<li>Documents</li>
 				<li>Messages</li>
 				<li>Services</li>
 			</ul>
-			And it means we use CRUD operations for querying and updating the data.</br></br>
-
-			The URI structure is:
 			
+			The URI structure for a request is:
 			<code>http://[endpoint]/[resource type]/[identifier]</code>
 
-			e.g.
-			<code>http://medserver.uk/Patient/3341</code>
+			The patient record should be returned by the server as an XML or JSON document.</br></br>
+			
+			Note: the FHIR documentation refers almost always to version 3 HL7 messages, and not the older segmented version. In HL7, we see data objects communicated as documents. With FHIR, data objects are accessed as services - this makes it more appropriate for REST, with each object being requested having its own URI.</br></br>
 
-			Sending a URI like this should cause the endpoint to return the resource in JSON or XML format.
+			A 'resource' in FHIR is the smallest discreet data object that could be communicated. It's described as the 'smallest unit of transaction', which means it would be an HL7 message.</br>
+			It is the quantum of FHIR. In fact, a resource is basically an XML file containing the information about a subject, which could be a patient, a report, etc. Within a resource are components - a component has no meaning or context outside the resource. Unlike resources, components cannot be accessed directly.</br></br>
+			
+			Within a resource there are also fields, which are referred to as 'composite datatypes', and they're so-called because they might contain multiple sub-items of different types, for example, 'identifier' might be a composite type based on 'varchar' or 'int', and 'Address' might be a composite of '<i>houseNumber(int)</i>' and '<i>streetName(varchar)</i>'. Each of these sub-items is referred to as a 'primitive'.			
+		</div>
+		
+
+		<div id="article">
+			<h2>Creating a Client Application Using the C# .NET API</h2>
+			When implementing in a C# .NET project, you'll require the Hl7.Fhir.DSTU2 package through NuGet. </br></br>
+			
+			Add the following import statements:
+			<code>
+				using Hl7.Fhir;</br>
+				using Hl7.Fhir.Rest;</br>
+				using Hl7.Fhir.Model; 
+			</code></br></br>
+
+			<img src="images/informatics/fhir-recordcount-code.png"></br></br>
+
+			Executing the program:</br></br>
+
+			<img src="images/informatics/fhir-client-record-count.png"></br></br>
+
+			In WireShark we can see the requests and response.</br>
+
+			<code>
+				GET /r3/Patient?name=Rob HTTP/1.1</br>
+				User-Agent: .NET FhirClient for FHIR 1.0.2</br>
+				Host: test.fhir.org
+			</code>
+
+			What we get back is a large XML message containing FHIR resource elements for each patient record discovered on the server.</br></br>
+			
+			We should also be able to extract that data to display in the Windows form application.
 		</div>
 
 		<div id="article">
-			<h2>Message Structure</h2>
-			Note: the FHIR documentation refers almost always to version 3 HL7 messages, and not the older segmented version.
-			In HL7, we see data objects communicated as documents. With FHIR, data objects are accessed as services - this makes it more appropriate for REST, with each object being requested having its own URI.</br></br>
+			<h2>Creating a Patient Record</h2>
+			The next feature I added was to enable the user to create a very basic patient record.</br></br>
 
-			The Foundation module is what everything implementing FHIR uses, and it's what everything is built on. The foundation is the general specification.</br></br>
+			<img src="images/informatics/fhir-client-create-patient.png"></br></br>
 
-			A 'resource' in FHIR is the smallest discreet data object that could be communicated. It's described as the 'smallest unit of transaction', which means it would be an HL7 message. </br>
-			It is the quantum of FHIR. In fact, a resource is basically an XML file containing the information about a subject, which could be a patient, a report, etc. Within a resource are components - a component has no meaning or context outside the resource. Unlike resources, components cannot be accessed directly.</br></br>
+			Create a new instance of the patient object from the HL7 FHIR model:
+			<code>
+				var MyPatient = new Hl7.Fhir.Model.Patient();</br>
+				var PatientName = new Hl7.Fhir.Model.HumanName();</br>
+				PatientName.Use = Hl7.Fhir.Model.HumanName.NameUse.Official;
+			</code>
 
-			Within a resource there are also fields, which are referred to as 'composite datatypes', and they're so-called because they might contain multiple sub-items of different types, for example, 'identifier' might be a composite type based on 'varchar' or 'int', and 'Address' might be a composite of 'houseNumber(int)' and 'streetName(varchar)'. Each of these sub-items is referred to as a 'primitive'.
+			Next I'm simply taking the variables <i>patientFirstName</i>, <i>patientSurname</i>, <i>patientTitle</i> and <i>patientNumber</i> from Windows Forms elements:
+			<code>
+				PatientName.Prefix = new string[] { patientTitle };</br>
+				PatientName.Given = new string[] { patientFirstName };</br>
+				PatientName.Family = new string[] { patientSurname };
+			</code>
+
+			Added to the record are the System and Value objects from the Identifier model.
+			<code>
+				var PatientIdentifier = new Hl7.Fhir.Model.Identifier();</br>
+				PatientIdentifier.System = "https://medical-test.net";</br>
+				PatientIdentifier.Value = patientNumber;</br>
+				MyPatient.Identifier = new List<Hl7.Fhir.Model.Identifier>();</br>
+				MyPatient.Identifier.Add(PatientIdentifier);
+			</code>
+
+			The next several lines is the serialisation.
+			<code>
+				string xml = Hl7.Fhir.Serialization.FhirSerializer.SerializeResourceToXml(MyPatient);
+				XDocument xDoc = XDocument.Parse(xml);
+				txtOutput.Text = xDoc.ToString();
+			</code>
+
+			Note the serialisation options. The output can be formatted as JSON as well as XML.
 		</div>
-		
-		
-        <div id="article">
-			<h2>The FHIR API</h2>
-			The FHIR API
-			The API has the following components:
-			<ul>
-				<li>Model</li>
-				<li>Parsing and Serialisation</li>
-				<li>REST (FhirClient)</li>
-				<li>Validation</li>
-			</ul>
-		</div>
-		
+
+
 		<div id="article">
 			<h2>References</h2>
 			BALTUS, M. 2014. FHIR API for .NET Programmers. <i>FHIR Developer Days</i>. [PDF]. <a href="https://www.slideshare.net/DevDays2014/04-b-fhir-api-for-net-mirjam">https://www.slideshare.net/DevDays2014/04-b-fhir-api-for-net-mirjam</a>. (7th July 2017).</br></br>

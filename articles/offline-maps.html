@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Leaflet.js</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Offline Maps with Leaflet.js</h1>
+        </div>
+        
+        <div id="article">
+            Normally Microsoft's Map application on a Lumia device is perfect for travelling, but it turns out there isn't an offline map available for Japan. After trying several alternatives, I figured that I could maybe create something better as a feature to my side project. I needed this to be compatible with the Edge browser, and for it to function effectively without a WiFi connection. Is this achievable using just HTML5, CSS and JavaScript? Yes, it is.
+        </div>
+
+        <div id="article">
+            <h2>Creating the Offline Map Files</h2>
+            The first thing we need is data, in the form of map tiles, and the easiest way of getting this is by generating them using the <a href="https://sourceforge.net/projects/mobac/">Mobile Atlas Creator</a>. This is straightforward to use - simply select the region to map and the zoom levels the application would display (e.g. all of them), and create the atlas .zip archive. The archive contains sets of numbered directories and files - I'll explain why they're structured that way and how they're read by the application. For the data source, '<i>OpenStreetMap Public Transport</i>' gave the clearest tile images.
+        </div>
+
+        <div id="article">
+            <h2>Leaflet.js API</h2>
+            There are multiple JavaScript APIs for rendering maps in the browser and showing the current GPS position. I went with <a href="http://leafletjs.com/">Leaflet.js</a>, as it's lightweight, functional and reasonably well-documented.</br>
+            This is roughly how Leaflet.js does the rendering: Leaflet.js will select the images to display according to the co-ordinates set in the code. The API will translate the co-ordinates into two five-digit numbers to select the file paths of the tiles to display. There is a third variable, which is the zoom level and layer - this determines the root directory that Leaflet.js will fetch the tiles from.</br></br>
+            
+            <img src="images/javascript/show-map-js.png"></br></br>
+
+            The three aforementioned factors are variables, <i>z</i>, <i>x</i> and <i>y</i> in the code. These correspond to the zoom level, latitude and longitude. All three are initially determined by the <i>setview()</i> parameters - the default zoom level and initial map frame displayed, but they're changed by the JavaScript controls as the user scrolls and zooms in and out.
+        </div>
+
+        <div id="article">
+            <h2>Geolocation</h2>
+            Leaflet.js includes a feature that makes use of the browser's geolocation API. We include a button with this event trigger:
+            <code>onClick="javascript:getLocationLeaflet();"</code>
+            
+            Which calls this function:
+            <code>
+                function getLocationLeaflet()</br>
+                {</br>
+                    map.on('locationfound', onLocationFound);</br>
+                    map.on('locationerror', onLocationError);</br>
+                    map.locate({setView: true, maxZoom: 16});</br>
+                }
+            </code>
+            
+            Which, in turn, calls this function if the current location can be read from the device:
+            <code>
+                function onLocationFound(e)</br>
+                {</br>
+                    var radius = e.accuracy / 2;</br>
+                    var location = e.latlng</br>
+                    L.marker(location).addTo(map)</br>
+                    L.circle(location, radius).addTo(map);</br>
+                }
+            </code>
+        </br>
+            <img src="images/javascript/geolocation-feature-basic.png" width="60%"></br></br>
+            
+            Of course, there's no map in the screenshot here, as there aren't any tiles for that location.
+        </div>
+
+        <div id="article">
+            <h2>Location Markers</h2>
+            Another feature essential to my application is the ability to mark important locations on the map and display information about them. In this example, the placemark locations and popup messages are hard-coded into the JavaScript, though it should be possible to load that information from a <a href="           http://geojson.io/">GeoJSON</a> file without having to use something like Node.js (I'm still working on this).</br></br>
+            
+            With the markers, the <i>init()</i> function should look something like this:
+            <code>
+                function init() {</br>
+                map = new L.Map('map');</br>
+                L.tileLayer('maps/kyoto-atlas/kyoto/{z}/{x}/{y}.png', { maxZoom: 15 })</br>
+                .addTo(map);</br>
+                map.setView(new L.LatLng(34.98852, 135.764982), 16);</br></br>
+            
+                L.marker([34.967169, 135.772437]).addTo(map)</br>
+                .bindPopup('<b>Fushimi Inari Shrine</b>')</br>
+                .closePopup();</br></br>
+            
+                L.marker([35.016917, 135.782388]).addTo(map)</br>
+                .bindPopup('<b>Heian Shrine</b>')</br>
+                .closePopup();</br></br>
+            
+                L.marker([35.008699, 135.767091]).addTo(map)</br>
+                .bindPopup('<b>Market Square</b>')</br>
+                .closePopup();</br></br>
+            
+                L.marker([34.985985, 135.741648]).addTo(map)</br>
+                .bindPopup('<b>Kyoto Railway Museum</b>')</br>
+                .closePopup();</br>
+                }
+            </code>
+            
+            Don't forget there is always the CSS file included with Leaflet.js.</br></br>
+            
+            <img src="images/javascript/leaflet-map-markers.png" width="60%"></br></br>
+
+            It shouldn't matter whether the map files are replaced with something better from the Mobile Atlas Creator, as the co-ordinates within the JavaScript will always be mapped to the correct places.</br></br>
+            
+            To minimise the download size, I've published <a href="https://github.com/xerocrypt/Misc/tree/master/OfflineMaps">this example on GitHub</a> with map tiles for only one zoom level, but it's easy to recreate what I've done in the Mobile Atlas Creator.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            AGAFONKIN, V. 2017.  Leaflet: an open-source JavaScript library for mobile-friendly interactive maps. [WWW]. <a href="http://leafletjs.com/">http://leafletjs.com/</a>. (17th March 2018).</br></br>
+
+            r_x. 2018. Mobile Atlas Creator. <i>SourceForge</i>. [WWW]. <a href="https://sourceforge.net/projects/mobac/">https://sourceforge.net/projects/mobac/</a>. (18th March 2018).</br></br>
+        </div>
+
+        <div id="footer">Michael, March 2018</div>
+        
+    </body>
+</html>
