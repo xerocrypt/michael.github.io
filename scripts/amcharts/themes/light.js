@@ -7,7 +7,7 @@ AmCharts.themes.light = {
 	},
 
 	AmCoordinateChart: {
-		colors: ["#7300e6", "#a64dff", "#222222", "#AAAAAA", " #cc99ff", "#DDDDDD", "#448e4d", "#b7b83f", "#b9783f", "#b93e3d", "#913167"]
+		colors: ["#cccccc", "#a64dff", "#222222", "#AAAAAA", " #cc99ff", "#DDDDDD", "#448e4d", "#b7b83f", "#b9783f", "#b93e3d", "#913167"]
 	},
 
 	AmStockChart: {
@@ -88,7 +88,7 @@ AmCharts.themes.light = {
 	// ammap
 	AreasSettings: {
 		alpha: 0.8,
-		color: "#7300e6",
+		color: "#6600cc",
 		colorSolid: "#003767",
 		unlistedAreasAlpha: 0.4,
 		unlistedAreasColor: "#000000",
