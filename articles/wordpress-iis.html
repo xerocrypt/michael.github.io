@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>ACS ACOS3</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>WordPress Installation and Configuration on IIS</h1>
+        </div>
+
+        <div id="article">
+            <h2>Installing the Dependencies</h2>
+            WordPress requires a few things to run:
+            <ul>
+                <li>A Web server, such as Apache or IIS</li>
+                <li>PHP</li>
+                <li>MySQL Server (several alternative DB engines can be used, though)</li>
+            </ul></br>
+
+            IIS Express might already be installed on your machine if you have Visual Studio with Web development features. There wasn't much required in terms of configuring the server itself, but to see whether the IIS Welcome page appears in the browser at http://localhost.</br></br>
+
+            WordPress can use several different database engines, but I've chosen <a href="https://dev.mysql.com/downloads/windows/">MySQL</a> in particular because it plays well with .NET, Python and Java. I recommend installing and configuring MySQL prior to downloading WordPress itself, and getting the release that includes MySQL and ODBC.</br></br>
+
+            <img src="images/mysql-installer.png" width="50%">></br></br>
+
+            When configuring the database server, I selected the 'Development Machine' option, with the port number '3308' (the default was already in use). The server is also configured here as a Windows service that launches during startup. Also, very important: Do not forget the MySQL root password!</br></br>
+
+            When using the Web Platform Installer, we can install WordPress and PHP together. Install the latest stable version of PHP, which in his case appears to be PHP 7.2.2.</br>
+            During the WordPress installation I encountered a configuration error, something about access control list incompatibility, but that can be ignored if the WordPress are still present in the <i>inetpub</i> directory. If the WordPress files are accidentally downloaded to the <i>Documents</i> directory instead, and WebMatrix launches, simply copy/move the <i>wordpress</i> directory to <i>inetpub</i>.</br>
+            If there's a 502 error when trying to access WordPress, launch the Windows Features utility and check that CGI is enabled under <i>Internet Information Services</i> / <i>Application Development Features</i>.</br></br>
+
+            <img src="images/windows-features-iis-cgi.png" height="400px"></br></br>
+
+            Now it's a matter of navigating a browser to http://localhost/wordpress. This will, if PHP is working correctly, display the initial configuration page.</br></br>
+
+            <img src="images/wordpress-initialisation-page.png" width="60%"></br></br>
+
+            Once past this stage, there should now be an almost fully working dashboard. There are three highly customisable themes included with this release.
+        </div>
+
+        <div id="article">
+            <h2>Fixing the Content Upload Error and Reactivating the Links Manager</h2>
+            You might get the following error message when trying to upload an image to the Media Library:</br>
+            <img src="images/wordpress-content-upload-error.png"></br></br>
+
+            Is the parent directory writeable by the server? Give the following users permissions to write/modify the <i>wp-content</i> directory:
+            <ul>
+                <li>Users</li>
+                <li>IIS_IUSRS</li>
+            </ul></br></br>
+
+            And insert the following line in <i>wp-config.php</i>:
+            <code>define('UPLOADS', 'wp-content/uploads');</code>
+            Before the line: 
+            <code>require_once(ABSPATH, 'wp-settings.php');</code></br></br>
+
+            You might need to restart the IIS server and reload the browser page for the media upload to work.
+            Another feature that's disabled by default is the Links Manager. To reactivate this, add the following line in the current WordPress theme's <i>functions.php</i> file:
+            <code>add_filter( 'pre_option_link_manager_enabled', '__return_true' );</code>
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+        </div>
+
+    </body>
+</html>
