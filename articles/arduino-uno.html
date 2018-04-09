@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>Arduino Uno</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>Arduino Uno</h1>
+        </div>
+
+        <div id="article">
+            When I last did anything with Microcontrollers, it was programming, in <a href="http://mrjester.hapisan.com/04_MC68/">assembler language</a>, large and quite expensive <a href="https://www.crossware.com/Flt68k">Motorola M68000 development boards</a>. The <a href="https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/">Arduino Uno</a>, in comparison to the 68K development system, is much more accessible, cheaper and easier to work with. Though there's not much one could do with <a href="https://store.arduino.cc/usa/arduino-uno-rev3">an Arduino board</a> without additional I/O hardware (because it's a <i>controller</i>), it's still a better resource than the Raspberry Pi for learning how a microprocessor system works at a low level. If we look at the hardware, we can see why:</br></br>
+
+            <img src="images/arduino/arduino-uno-v3.jpg" width="400px"></br></br>
+
+            <img src="images/arduino/arduino-uno-schematic.png" width="100%"></br></br>
+            
+            Don't feel daunted by the apparent complexity of the schematics and what's on the board - most the components are for voltage regulation. What we're interested in here is a microcontroller, 14 GPIO pins, 6 analogue input pins and a few ancilliary features.</br>
+            The core component on the Arduino board is the large chip to the right of the schematic. This is the <a href="https://www.microchip.com/wwwproducts/en/ATmega328">ATmega328 microcontroller</a>, which is essentially a relatively basic microprocessor. The following diagram shows how each element within that chip maps to its pins:</br></br>
+
+            <img src="images/arduino/atmega328-pin-block-map.png" width="60%"></br></br>
+            
+            Most the labels are self-explanatory, showing the I/O, system clock, memory for op code and runtime data, and a data bus. In the main schematic, you'll notice that every pin to the right of the ATmega IC is connected directly to one of three GPIO rails, and on the physical board the ATmega IC itself isn't soldered, so in principle the Arduino can serve as a development board while the chip can be transferred to a custom-made PCB.</br>
+            And let's look closer-at the AVR CPU core:</br></br>
+
+            <img src="images/arduino/atmega328-cpu-core.png" width="50%"></br></br>
+
+            The processor reads a bootloader and application bytecode from the integrated Flash memory, which I believe has a capacity of 32KB - more than sufficient for a moderately complex program. And just like any computer system, the ATmega328 has RAM, which is actually Static RAM, or 'SRAM'. This has a 2KB region allocated to general data, 32 general purpose data registers and 64 I/O registers. Separate to these are the stack pointer program counter and status registers.</br>
+            Unlike the memory typically used in computing devices, SRAM doesn't contain dynamic data, since the microcontroller runs a single program with static buffers and data types - the data structure here is static.</br></br>
+            
+            Also on the board, by the way, is an ATmega16U2 IC, which is another, smaller, microcontroller. This appears to be the USB controller, though, functioning as the USB-to-Serial converter.
+        </div>
+        
+        <div id="article">            
+            <h2>Developer Environment, Language and API</h2>
+            Available from the official site (linked here), <a href="https://www.arduino.cc/en/Main/Software">the Arduino IDE</a> is a simple editor, compiler and library of header files. Programs are coded in a variant of C++,  with includes for libraries relating to various hardware modules that might be connected to the board. For example, if we use the Ethernet hardware module, we'd import <i>Ethernet.h</i>. The include statements are auto-completed by the Arduino IDE when selecting the hardware from the '<i>Include Library</i>' list under the '<i>Tools</i>' tab.</br></br>
+            
+            The following is the typical program structure:</br></br>
+
+            <img src="images/arduino/arduino-code-structure.png" width="350px"></br></br>
+            
+            Each program starts with a <i>setup()</i> function, which executes whenever the reset button is pressed or there's a reset signal to the processor. This function appears to poll the serial interface at 9,600 times per second.</br>
+            
+            <code>
+            void setup()</br>
+            {</br>
+              // initialize serial communication at 9600 bits per second:</br>
+              Serial.begin(9600);</br>
+            }
+            </code></br>
+            
+            The difference between this and a conventional C++ program is '<i>void loop()</i>' is used in place of '<i>void main()</i>' for our main function. This is because we're doing event-drive programming, where we want the microcontroller to continue looping through the same routine until there is a hardware interrupt.</br></br>
+            
+            Let's look at the setup function for the Ethernet programming example:</br>
+            <code>
+            void setup() </br>
+            {</br>
+              Ethernet.begin(mac, ip, myDns, gateway, subnet);</br>
+              server.begin();</br>
+              Serial.begin(9600);</br>
+              while (!Serial) {;}</br>
+            }</br>
+            </code></br>
+            
+            We can read from a GPIO pin and manipulate the input as a value. e.g.</br>
+            <code>
+            int sensorValue = analogRead(A0);</br>
+            Serial.println(sensorValue);
+            </code></br>
+            
+            So, in the above function, five variables are passed to <i>Ethernet.begin()</i>, which must be another function somewhere in the header file. The <i>server.begin()</i> and <i>Serial.begin()</i> also are imported from header files.</br></br>
+            
+            After coding we use the Verify/Compile operation to create a binary. This will be a bytecode image containing the machine code for our program and bootloader. This bytecode image is loaded into the microcontroller's memory.</br></br>
+        </div>            
+        
+        <div id="article">
+            <h2>A Real Example</h2>
+            Since I have only the Arduino Uno with no additional hardware, I need to demonstrate something pretty lame.</br></br>
+            
+            Notice there are two LEDs marked 'TX' and 'RX'. The first will flash when data is being written, and the latter flashes when data is being read. So, we can get two-way communication through USB.</br></br>
+            
+            Under 'Tools' tab in the IDE, there's a 'Serial Monitor' option, so we could indeed get data from the USB interface.
+        </div>
+
+        <div id="article">
+            <h2>References</h2>
+            ARDUINO. 2018. Arduino UnoRev3. <i>Store Home - Arduino Uno Rev3</i>. [WWW]. <a href="https://store.arduino.cc/usa/arduino-uno-rev3">https://store.arduino.cc/usa/arduino-uno-rev3</a>. 8th April 2018.</br></br>
+
+            ARDUINO. 2018. Software. [WWW]. <a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a>. (8th April 2018).</br></br>
+
+            CROSSWARE. FLT-68K Training Suite. [WWW]. <a href="https://www.crossware.com/Flt68k">https://www.crossware.com/Flt68k</a>. (8th April 2018).</br></br>
+
+            MICROCHIP TECHNOLOGY INC. 2018. ATmega328. [WWW]. <a href="https://www.microchip.com/wwwproducts/en/ATmega328">https://www.microchip.com/wwwproducts/en/ATmega328</a>. (8th April 2018).</br></br>
+
+            RS COMPONENTS. 2018. Ardiuno Uno. <i>Processor & Microcontroller Development Kits</i>. [WWW]. <a href="https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/">https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/</a>. (8th April 2018).
+        </div>
+
+    </body>
+</html>
