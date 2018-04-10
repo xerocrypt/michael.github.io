@@ -11,37 +11,34 @@
         </div>
 
         <div id="article">
-            When I last did anything with Microcontrollers, it was programming, in <a href="http://mrjester.hapisan.com/04_MC68/">assembler language</a>, large and quite expensive <a href="https://www.crossware.com/Flt68k">Motorola M68000 development boards</a>. The <a href="https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/">Arduino Uno</a>, in comparison to the 68K development system, is much more accessible, cheaper and easier to work with. Though there's not much one could do with <a href="https://store.arduino.cc/usa/arduino-uno-rev3">an Arduino board</a> without additional I/O hardware (because it's a <i>controller</i>), it's still a better resource than the Raspberry Pi for learning how a microprocessor system works at a low level. If we look at the hardware, we can see why:</br></br>
-
-            <img src="images/arduino/arduino-uno-v3.jpg" width="400px"></br></br>
+            When I last did anything with microcontrollers, it was programming, in <a href="http://mrjester.hapisan.com/04_MC68/">assembler language</a>, <a href="https://www.crossware.com/Flt68k">Motorola M68000 development boards</a>. The <a href="https://store.arduino.cc/usa/arduino-uno-rev3">Arduino Uno</a>, in comparison to the M68K, is much more accessible, cheaper and easier to work with. It's also <a href="https://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7154081/">extremely well documented</a>. Though there's not much one could do with an Arduino board without additional I/O hardware (because it's a <i>controller</i>), it's still a better resource than the Raspberry Pi for learning how a microprocessor system works at a low level. If we look at the hardware, we can see why:</br></br>
 
             <img src="images/arduino/arduino-uno-schematic.png" width="100%"></br></br>
-            
-            Don't feel daunted by the apparent complexity of the schematics and what's on the board - most the components are for voltage regulation. What we're interested in here is a microcontroller, 14 GPIO pins, 6 analogue input pins and a few ancilliary features.</br>
-            The core component on the Arduino board is the large chip to the right of the schematic. This is the <a href="https://www.microchip.com/wwwproducts/en/ATmega328">ATmega328 microcontroller</a>, which is essentially a relatively basic microprocessor. The following diagram shows how each element within that chip maps to its pins:</br></br>
 
-            <img src="images/arduino/atmega328-pin-block-map.png" width="60%"></br></br>
-            
-            Most the labels are self-explanatory, showing the I/O, system clock, memory for op code and runtime data, and a data bus. In the main schematic, you'll notice that every pin to the right of the ATmega IC is connected directly to one of three GPIO rails, and on the physical board the ATmega IC itself isn't soldered, so in principle the Arduino can serve as a development board while the chip can be transferred to a custom-made PCB.</br>
-            And let's look closer-at the AVR CPU core:</br></br>
+            Don't feel daunted by the apparent complexity of the schematics and what's on the board - most the components are for voltage regulation. What we're interested in here is a microcontroller, 14 GPIO pins, 6 analogue input pins and a few ancilliary features. </br>
+            The core component on the Arduino board is the large chip to the right of the schematic. This is <a href="https://www.microchip.com/wwwproducts/en/ATmega328">the ATmega328 microcontroller</a>, which is essentially a microprocessor. The following diagram shows how each element of that chip maps to its pins:</br></br>
 
-            <img src="images/arduino/atmega328-cpu-core.png" width="50%"></br></br>
+            <img src="images/arduino-atmega328-pin-block-map.png"></br></br>
 
-            The processor reads a bootloader and application bytecode from the integrated Flash memory, which I believe has a capacity of 32KB - more than sufficient for a moderately complex program. And just like any computer system, the ATmega328 has RAM, which is actually Static RAM, or 'SRAM'. This has a 2KB region allocated to general data, 32 general purpose data registers and 64 I/O registers. Separate to these are the stack pointer program counter and status registers.</br>
-            Unlike the memory typically used in computing devices, SRAM doesn't contain dynamic data, since the microcontroller runs a single program with static buffers and data types - the data structure here is static.</br></br>
+            Most the labels are self-explanatory, showing the I/O, system clock, memory for op code and runtime data, and a data bus. In the main schematic, you'll notice that every pin to the right of the ATmega IC is connected directly to one of three GPIO rails, and the ATmega IC itself isn't soldered to the board, so it can be transferred to a custom-made PCB after being programmed.
+            A diagram is also available for the AVR CPU core:</br></br>
+
+            <img src="images/arduino/atmega328-cpu-core.png"></br></br>
             
-            Also on the board, by the way, is an ATmega16U2 IC, which is another, smaller, microcontroller. This appears to be the USB controller, though, functioning as the USB-to-Serial converter.
+            The processor reads a bootloader and application bytecode from the integrated Flash memory, which I believe has a capacity of 32KB - more than sufficient for a moderately complex program. In practice, there's a lot more space to play with than I initially thought.</br>
+            And just like any computer system, the ATmega328 has RAM, which is actually Static RAM, or 'SRAM'. This has a 2KB region allocated to general data, 32 general purpose data registers and 64 I/O registers. Separate to these are the stack pointer program counter and status registers. Unlike the memory typically used in computing devices, the data structure wouldn't be dynamic, since there's a single program with static buffers and data types.</br></br>
+            
+            Also on the board, by the way, is an ATmega16U2 IC, which is another, smaller, microcontroller. This appears to be the USB controller, though, functioning as the USB-to-Serial converter.</br></br>
         </div>
-        
-        <div id="article">            
-            <h2>Developer Environment, Language and API</h2>
-            Available from the official site (linked here), <a href="https://www.arduino.cc/en/Main/Software">the Arduino IDE</a> is a simple editor, compiler and library of header files. Programs are coded in a variant of C++,  with includes for libraries relating to various hardware modules that might be connected to the board. For example, if we use the Ethernet hardware module, we'd import <i>Ethernet.h</i>. The include statements are auto-completed by the Arduino IDE when selecting the hardware from the '<i>Include Library</i>' list under the '<i>Tools</i>' tab.</br></br>
-            
-            The following is the typical program structure:</br></br>
 
-            <img src="images/arduino/arduino-code-structure.png" width="350px"></br></br>
+        <div id="article">          
+            <h2>Developer Environment, Language and API</h2>
+            Available from the official site (<a href="https://www.arduino.cc/en/Main/Software">linked here</a>), the Arduino IDE is a simple editor, compiler and library of header files. Programs are coded in a variant of C++,  with includes for libraries relating to various hardware modules that might be connected to the board. For example, if to use the Ethernet hardware module, we'd import <i>Ethernet.h</i>. The include statements are auto-completed by the Arduino IDE when selecting the hardware from the '<i>Include Library,</i>' list under the '<i>Tools</i>' tab.</br></br>
             
-            Each program starts with a <i>setup()</i> function, which executes whenever the reset button is pressed or there's a reset signal to the processor. This function appears to poll the serial interface at 9,600 times per second.</br>
+            The following is the typical program structure:
+            <img src="images/arduino/arduino-code-structure.png"></br></br>
+
+            This is what the IDE presents us with whenever a new file is opened. Each program starts with a <i>setup()</i> function, which executes whenever the reset button is pressed or there's a reset signal to the processor. This function appears to poll the serial interface at 9,600 times per second.</br>
             
             <code>
             void setup()</br>
@@ -49,39 +46,95 @@
               // initialize serial communication at 9600 bits per second:</br>
               Serial.begin(9600);</br>
             }
-            </code></br>
+            </code>
             
-            The difference between this and a conventional C++ program is '<i>void loop()</i>' is used in place of '<i>void main()</i>' for our main function. This is because we're doing event-drive programming, where we want the microcontroller to continue looping through the same routine until there is a hardware interrupt.</br></br>
+            The difference between this and a conventional C++ program is we use '<i>void loop()</i>' instead of '<i>void main()</i>' for our main code. This is because we're doing event-driven programming, where we want the microcontroller to continue looping through the same routine until there is a hardware interrupt. If we wanted a program to execute just once, the main section can be placed in <i>setup()</i> instead.</br></br>
             
-            Let's look at the setup function for the Ethernet programming example:</br>
+            Let's look at the setup function for the Ethernet programming example:
             <code>
-            void setup() </br>
+            void setup()</br>
             {</br>
               Ethernet.begin(mac, ip, myDns, gateway, subnet);</br>
               server.begin();</br>
               Serial.begin(9600);</br>
               while (!Serial) {;}</br>
-            }</br>
-            </code></br>
+            }
+            </code>
             
-            We can read from a GPIO pin and manipulate the input as a value. e.g.</br>
+            We can read from a GPIO pin and manipulate the input as a value. e.g.
             <code>
             int sensorValue = analogRead(A0);</br>
             Serial.println(sensorValue);
-            </code></br>
+            </code>
             
             So, in the above function, five variables are passed to <i>Ethernet.begin()</i>, which must be another function somewhere in the header file. The <i>server.begin()</i> and <i>Serial.begin()</i> also are imported from header files.</br></br>
             
-            After coding we use the Verify/Compile operation to create a binary. This will be a bytecode image containing the machine code for our program and bootloader. This bytecode image is loaded into the microcontroller's memory.</br></br>
-        </div>            
-        
-        <div id="article">
-            <h2>A Real Example</h2>
-            Since I have only the Arduino Uno with no additional hardware, I need to demonstrate something pretty lame.</br></br>
+            After coding we use the <i>Verify/Compile</i> operation to create a binary. This will be a bytecode image containing the machine code for our program and bootloader. This bytecode image is loaded into the microcontroller's memory.</br></br>
+        </div>
             
-            Notice there are two LEDs marked 'TX' and 'RX'. The first will flash when data is being written, and the latter flashes when data is being read. So, we can get two-way communication through USB.</br></br>
+        <div id="article">            
+            <h2>A Couple of My Own Lame Examples</h2>
+            Just to try it out, I added <a href="https://github.com/xerocrypt/Misc/blob/master/Arduino/basic-arithmetic.ino">a program</a> that adds, subtracts, multiplies and divides two integers. The main code is in the <i>setup()</i> function.
+            <code>
+            void setup() {</br>
+              // put your setup code here, to run once:</br>
+              Serial.begin(9600);</br></br>
+              
+              int firstNum = 124;</br>
+              int secondNum = 1334;</br>
+              int summed = firstNum + secondNum;</br>
+              int multiplied = firstNum * secondNum;</br>
+              int divided = secondNum / firstNum;</br>
+              int subtracted = secondNum - firstNum;</br></br>
             
-            Under 'Tools' tab in the IDE, there's a 'Serial Monitor' option, so we could indeed get data from the USB interface.
+              Serial.println("Summed: ");</br>
+              Serial.println(summed);</br>
+              Serial.println("Multiplied: ");</br>
+              Serial.println(multiplied);</br>
+              Serial.println("Divided: ");</br>
+              Serial.println(divided);</br>
+              Serial.println("Subtracted: ");</br>
+              Serial.println(subtracted);</br>
+            }</br></br>
+            
+            void loop()</br>
+            {</br>
+            }
+            </code>
+            
+            All I needed to do was click the '<i>Verify/Compile</i>' option, wait about 20 seconds and get a compiler message giving some info about the created image:</br>
+            '<code>Sketch uses 1934 bytes (5%) of program storage space. Maximum is 32256 bytes.
+            Global variables use 232 bytes (11%) of dynamic memory, leaving 1816 bytes for local variables. Maximum is 2048 bytes.</code>'</br></br>
+            
+            The program is then ready to be uploaded - that is, the image is copied to the controller's Flash memory. Notice there are two LEDs marked 'TX' and 'RX'. The first will flash when data is being written, and the latter flashes when data is being read. The program starts to execute immediately after it's been uploaded. Under the '<i>Tools</i>' tab there's a '<i>Serial Monitor</i>' option for viewing the output.</br></br>
+            
+            <a href="https://github.com/xerocrypt/Misc/blob/master/Arduino/name-in-morse.ino">Another simple example</a> uses the integrated LED to signal my name in Morse code. An abbreviated version of the code:
+            <code>
+            void setup() {</br>
+              // initialize the integrated LED</br>
+              pinMode(LED_BUILTIN, OUTPUT);</br>
+            }</br></br>
+            
+            void loop() {</br>
+              // This is a dash</br>
+              digitalWrite(LED_BUILTIN, HIGH);</br>
+              delay(200);</br>
+              digitalWrite(LED_BUILTIN, LOW);</br>
+              Serial.print("-");</br></br>
+            
+              // This is also a dash</br>
+              digitalWrite(LED_BUILTIN, HIGH);</br>
+              delay(200);</br>
+              digitalWrite(LED_BUILTIN, LOW);</br>
+              delay(50);</br>
+              Serial.print("-");</br></br>
+            
+              // This is a space</br>
+              delay(100);</br>
+              Serial.print(" ");</br>
+            [...]</br>
+            }
+            </code>
         </div>
 
         <div id="article">
