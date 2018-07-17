@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/bootstrap.css">
-        <script src="jquery-3.2.1.min.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
@@ -47,6 +47,29 @@
         <div id="wpcontainer" width="100%" height="100px"></div>
 
         <div class="container">
+
+                <div class="btn-group dropup">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Main Menu
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <ul>
+                            <li><button class="dropdown-item btn btn-primary" type="button" href="healthcare.html">Healthcare</button></li>
+                            <li><button class="dropdown-item btn btn-primary" type="button" href="articles/index.html">Articles</button></li>
+                            <li><button class="dropdown-item btn btn-primary" type="button" href="apps.html">Hosted Applications</button></li>
+                            <li>
+                                <ul>
+                                        <li><button class="dropdown-item btn btn-primary" type="button" href="opendata.html">Chart API Demo</button></li>
+                                        <li><button class="dropdown-item btn btn-primary" type="button" href="fhir-client/index.html">FHIR Client</button></li>
+                                        <li><button class="dropdown-item btn btn-primary" type="button" href="offlinemap.html">Offline Maps</button></li>
+                                </ul>
+                            </li>
+                            <li><button class="dropdown-item btn btn-primary" type="button" href="resources.html">Resources</button></li>
+                            <li><button class="dropdown-item btn btn-primary" type="button" href="toolkit.html">Toolkit</button></li>
+                        </ul>
+                        </div>
+                    </div>
+
             <table width="100%">
                 <tr>
                     <td valign="top">
@@ -96,6 +119,20 @@
                     </ul>
                     <a href="https://github.com/xerocrypt/Python"><img src="images/assets/source-button.png"></a>
                 </div>
+
+                <div class="col-md-4">
+                    <h3>SecurePad</h3>
+                    Encryption plugin for Notepad++ that uses Bruce Schneier's implementation of the Blowfish cipher that accompanies Applied Cryptography. I have forked the original repo and modified PluginDefinition.cpp after discovering the plugin uses Blowfish in ECB mode. </br>
+                    The DLL here is the original, so the code must be recompiled to apply the fix.
+                    <a href="https://github.com/xerocrypt/SecurePad/"><img src="images/assets/source-button.png"></a>
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Catholic Blockchain</h3>
+                    Project started by Devin Rose to store Sacramental Registry as a blockchain. Currently using Node.js as the server, and JSON.</br>
+                    <a href="https://github.com/xerocrypt/SacramentalRegistry"><img src="images/assets/source-button.png"></a>
+                </div>
+
                 <div class="col-md-4">
                     <h3>XeroDrive</h3>
                     Front-end for the dd and foremost tools developed using Python and using the ncurses module. Should be capable of providing a GUI for volume imaging and file carving over an SSH connection in the command line.</br>
