@@ -1219,8 +1219,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: TitleFont;
-  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 200;
   line-height: 1.1;
   background-color: #6600cc;
   color: #ffffff;
@@ -1259,8 +1259,8 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 h1 small,
 .h1 small,
@@ -5729,8 +5729,8 @@ button.list-group-item-danger.active:focus {
   border-color: #ddd;
 }
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
+  color: #FFFFFF;
+  background-color: #6600cc;
   border-color: #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
