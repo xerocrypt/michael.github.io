@@ -15,66 +15,79 @@
         </div>
 
         <div id="article">
-            <h2>Single Responsibility Principle</h2>
-            Robert C. Martin explains this principle with the statement: 'A class should have only one reason to change.'. What it actually means is that each module or function should have only one specific responsibility. We should avoid creating a module that does more than one specific thing. A <i>class</i> should perform one <i>type</i> of function  only. For example, a class shouldn't perform one function and log errors - a separate class, for logging, should be used for the latter.
-            </br></br>
-
-            To give a real-world example:</br></br>
-            <img src="images/single-responsibility-example.png"></br></br>
-
-            As you can see, it simply returns the date and time to the calling function. It doesn't print the time or do anything except return it.</br>
-            And another function that simply sets the username and password properties:</br></br>
-
-            <img src="images/single-responsibility-example-2.png"></br></br>
-            You'd also expect there to be fewer compile errors, and the code is more easily unit tested.
-            </br></br>
+            <h2>Class, Method, Variable and Property Naming</h2>
+            As anyone who's tried to analyse the output of a decompiler would attest, the descriptive naming of objects within code makes a huge difference to its readability. This principle should be applied to classes, methods, variables and other objects, so the names are descriptive of their purpose and function. This will become important as we refactor our code.
         </div>
 
         <div id="article">
-            <h2>Open/Closed Principle</h2>
-            Basically means it should be possible to modify or extend the behaviour of a module without changing its source code. If a module is 'open' it could be extended to accommodate additional data structures. If the module is 'closed' it has a stable and defined behaviour.
-            Modules 'should be open for extension but closed for modification', as the Wikipedia entry states. The following rules are also stated:</br>
-            <ul>
-                <li>A module is considered open if it can be extended.</li>
-                <li>A module is closed if it's available to use by other modules, and has a well-defined and stable description.</li>
-            </ul>
+            <h2>Minimal-Responsibility Methods</h2>
+            This is conventionally referred to as the 'Single Responsibility Principle', and states that a method or function should do one thing only, and have a single responsibility. Structuring code this way should make testing each unit in isolation easier (when loose-coupling is applied), and it should be easier to extend/modify units without inadvertently affecting the general behaviour of the program. However, I'm calling it the 'minimal-responsibility principle' here, as I find it's not always possible or productive to refactor methods/classes to multiple single-function units.</br></br>
 
-            Basically this expands on the principle of single responsibility, the two being a guide to the proper design of a module. It should be possible to create multiple instances of a 'closed' module as an abstract base class.
-            </br></br>
+            In an existing project, I'm looking at methods for distinct units of operation that could be extracted out. There is a '<i>Quick Actions and Refactorings...</i>' feature in Visual Studio that can do this for us.
+        </div>
+
+        <div id="article">
+            <h2>Open/Closed Principle - Maker of Things Visible and Invisible</h2>
+            This SOLID principle states that a unit should be closed to modification, but open for extension. The idea behind this principle is that developers should extend existing units of code, instead of modifying them, when adding features instead of modifying them. </br>
+            A good reason for this is the assumption that a working iteration of a program is dependent on code that already exists, and therefore modifications come with a higher risk of introducing defects. Secondly, the practice of extending existing methods or classes helps us to avoid the duplication of code.</br></br>
+            
+            What does this mean in practice, though? Any class that could be re-used should be instantiated as a base class for something that extends it. Visual Studio already does this by default with commonly-implemented features, such as MVC controllers. Let's look at a WebAPI controller that I've refactored:</br></br>
+            
+            <img src="images/solid-cs/extending-apicontroller-base.png" width="70%"></br></br>
+
+            As we can see, <i>GetLookupDataController</i> is a class that's derived from <i>ApiController</i>, and everything visible here is really an extension of that base class. Whenever we want to add a new WebAPI controller to a project, we declare the same <i>ApiController</i> as a base class instead of duplicating it under a different name.</br></br>
+            
+            I can provide an even simpler illustration: In my project I have a data object called '<i>Item</i>', which has three properties:</br></br>
+
+            <img src="images/solid-cs/starting-item-class.png" width="50%"></br></br>
+
+            What if I anticipated a feature request that involves a similar object with several more properties? In that case, I'd rename the '<i>Item</i>' class  as '<i>BaseItem</i>':</br></br>
+
+            <img src="images/solid-cs/base-item-class.png" width="50%"></br></br>         
+            
+            I'd add another class containing the additional properties that extend <i>BaseItem</i>:</br></br>
+            
+            <img src="images/solid-cs/item-class-extensions.png"></br></br>
+            
+            When executed, the software would construct a data structure containing all properties from the base and derived classes.
         </div>
 
         <div id="article">
             <h2>Liskov Substitution Principle</h2>
-            The official definition is '<quote>if S is a subtype of T, then objects of type T in a program may be replaced with objects of type S without altering any of the desirable properties of that program</quote>'</br>
-            All this means is a derived class should function exactly as if its base class was used. The derived class implements the base class, thereby making the code re-usable as needed. This enables multiple instances of a class to be extended and used without duplicating its code.
-            </br></br>
+            This principle essentially seems an extension of the previous one. A derived class should implement all the functionality provided by its base class, and without modifying whatever's being inherited. If the latter isn't the case, it's an indication that the base class violates the minimal responsibility principle.</br>
+            In other words, a program's behaviour should remain unchanged if the reference to a base class was replaced with a duplicate of its code.
         </div>
 
         <div id="article">
-            <h2>Interface Segregation Principles</h2>
-            Apparently 'many client-specific interfaces are better than one general-purpose interface'. I think it refers to having multiple entry points, each for something specific. If the other principles are followed, it should be more straightforward to trace the code for each entry point and modify it as required.
-            The other idea here is that clients shouldn't have dependencies on components it doesn't use.</br></br>
-
-            This principle is applied by breaking down large interfaces into smaller specific ones.
-            Say, for example, we have a large interface. A problem with that interface could break the interoperability with clients that don't use the affected part of that interface. Conversely, if the interface was broken down into smaller interfaces, the problem would be isolated and would have more limited effects on the clients.</br></br>
-
-            This principle also creates layers of abstraction to reduce dependencies. You could design the software to have interfaces and implementation classes - interfaces describe the intention, and implementation classes perform the intended task.</br>
-            If this principle is followed, a developer shouldn't need to be concerned with the details of how a feature works, but only with what the feature does. The developer should be able to make use of the function/component purely by its interface. The implementation could also be changed without breaking the software.</br>
-            This information hiding is referred to as 'encapsulation'.
-            </br></br>
+            <h2>Interface Segregation</h2>
+            A client shouldn't be dependent on things it doesn't use. This dependency could be inadvertently created if we're setting up an interface with multiple methods.</br>
+            Imagine an interface called '<i>IFileOperations</i>' that contains three methods: <i>Read()</i>, <i>Write()</i> and <i>Save()</i>, that respectively implements three operations, read file, write to file and save. Any client calling that interface would need to either use all three methods, even if only one is needed, or throw a 'not implemented' exception.</br></br>
+            
+            One way to solve this would be to put each method within its own interface, <i>IRead</i>, <i>IWrite</i> and <i>ISave</i>. Or we could logically segregate the interfaces by mapping the names to the methods, e.g.
+            
+            <code>
+                class FileOperations : IRead, IWrite, ISave</br>
+                { // All three methods here }
+        </code>
         </div>
 
         <div id="article">
-            <h2>Dependency Inversion Principle</h2>
-            A program should depend upon abstractions instead of depending on concretions. In other words, the program should be dependent on the higher-level stuff instead of the low-level components. It's easy to see why.
-            Everything should be determined on what the abstractions specify the program should do.</br></br>
+            <h2>Dependency Injection</h2>
+            Here I'm using the constructor injection method of resolving the tight coupling between a Web API helper and a <i>GetDbReader</i> class. In this project, <i>GetReader()</i> is the method that executes <i>SqlCommand()</i> using parameters passed from the helper method. I started out with the following code in <i>Helper.cs</i>:</br></br>
 
-            In practice this refers to the decoupling or loose coupling of software modules. This is referred to as 'dependency inversion' because it inverts the way people think about object-oriented programming.
-            Traditionally the higher-level functioning of a program depend on the lower level components that perform tasks. A defect in the lower-level could therefore break the high-level functions. Plus it limits the potential for re-using modules.</br>
-            One way to solve this is to add a mediation layer (or interface) between the high and low-level components.</br></br>
+            <img src="images/solid-cs/helper-before-injection.png" width="70%"></br></br>
 
-            <button onclick="window.location.href='dependency-inversion.html'">Main Article...</button>
+            As we can see, <i>GetLookupDataHelper()</i> is dependent on an instance of <i>GetDbReader()</i>, which contains a method that implements the database reader function.</br></br>
+            
+            <img src="images/solid-cs/getdbreader-before-injection.png" width="70%"></br></br>
+            
+            It is possible to use a form of dependency injection here, so the helper class and <i>GetDbReader()</i> aren't so tightly coupled. I added an interface called '<i>IGetDbReader</i>' and declared the <i>GetDbReader</i> class as a member of it. After the interface is created, the helper instantiates the interface:</br></br>
 
+            <img src="images/solid-cs/getdbreader-with-interface.png" width="70%"></br></br>
+        
+            Getting the helper method to use the interface was easy, a simple matter of changing a line so that the interface was instantiated as '<i>getDbReader</i>'.</br></br>
+            
+            <img src="images/solid-cs/helper-with-injection.png" width="70%"></br></br>
         </div>
 
     </body>
