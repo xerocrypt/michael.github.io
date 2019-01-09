@@ -1,0 +1,165 @@
+<html>
+    <head>
+			<title>JSON Web Tokens</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div id="header">
+            <h1>JSON Web Tokens</h1>
+        </div>
+
+       <div id="article">
+       	An <a href="https://blog.codecentric.de/en/2017/08/use-json-web-tokens-services/">authentication server provides a client</a> with a <a href="https://jwt.io">JSON Web Token</a>, and the <a href="https://auth0.com/?utm_source=jwtio&utm_campaign=craftedby">authentication server</a> will also handle requests from application servers to verify tokens supplied by clients.
+        
+        <h2>Algorithm</h2>
+        Generally, the token generation code follows this process:
+        <ul>
+        	<li>1. Initialise the token header as a set of JSON objects.</li>
+        	<li>2. Initialise the token payload as a set of JSON objects.</li>
+        	<li>3. Base64-encode the header and payload independently. This gives us the unsigned token.</li>
+	        <li>4. Using the HMAC SHA256 algorithm, and a secret key value, generate the signature for the unsigned payload.</li>
+        </ul>
+        
+		A token, therefore, will have three segments: a) header, b) payload, and c) signature. The first two are Base64-encoded JSON objects, and the third is the encoded signature of the first two segments. This can be seen in action when generating a token with the debugger at jwt.io:</br></br>
+        
+		<code>
+				https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX</br>
+				VCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxN</br>
+				TE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        </code>
+        
+        When decoded, the token would look something like this:
+        
+        <code>
+			{ "alg": "HS256", "typ": "JWT" }</br>
+			{ "sub": "Web Application", "name": "Michael", "iat": 45435334 }</br>
+        	{ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c }
+        </code>
+	   </div>
+        
+	   <div id="article">
+       	<h2>.NET Implementation</h2>
+        When working with .NET, one could use <i>System.IdentityModel.Tokens.Jwt</i>, but it can also be done using <i>Newtonsoft.Json</i> and <i>System.Security.Cryptography</i>.
+        
+        I defined the header properties in a <i>TokenHeader</i> class:
+        
+        <code>
+			public class TokenHeader</br>
+			{</br>
+				public string alg { get; set; }</br>
+				public string typ { get; set; }</br>
+	        }
+        </code>
+        
+        Instantiating the <i>TokenHeader</i> class in the main method, we can declare static variables for the objects:
+        
+        <code>
+			TokenHeader tokenHeader = new TokenHeader();</br>
+			tokenHeader.alg = "HS256";</br>
+			tokenHeader.typ = "JWT";</br>
+        </code>
+        
+        The variables are formatted as JSON objects, then Base64-encoded:
+        
+        <code>
+			string headerString = JsonConvert.SerializeObject(tokenHeader);</br>
+			string encodedHeaderString = ConvertHeaderToJson(headerString);</br></br>
+        
+			private static string ConvertHeaderToJson(string headerString)</br>
+			{</br>
+				byte[] headerStringAsBytes = Encoding.ASCII.GetBytes(headerString);</br>
+				string encodedHeaderString = Convert.ToBase64String(headerStringAsBytes);</br>
+				return encodedHeaderString;</br>
+        	}
+        </code>
+        
+		For generating the third segment of the token - the signature - the process is different. In this case, we need to generate a hash digest of the header and payload, along with a 256-bit secret value, then encode that digest. The algorithm for this is given as:
+        
+        <code>
+			HMACSHA256(</br>
+				base64UrlEncode(header) + "." +</br>
+				base64UrlEncode(payload), your-256-bit-secret</br>
+        	)
+        </code>
+        
+        This algorithm is implemented by the following code:
+        
+        <code>
+			string message = encodedHeaderString + "." + encodedPayloadString;</br>
+			System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();</br>
+			byte[] keyByte = encoding.GetBytes(myKey);</br></br>
+        
+			HMACSHA256 hmacsha256 = new HMACSHA256(keyByte);</br></br>
+        
+			byte[] messageBytes = encoding.GetBytes(message);</bR>
+			byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);</br>
+			string hashAsString = BitConverter.ToString(hashmessage);</br><?br>
+                    
+			byte[] signatureStringAsBytes = Encoding.ASCII.GetBytes(hashAsString);</br>
+			string encodedSignature = Convert.ToBase64String(signatureStringAsBytes);</br>
+        	return encodedSignature;
+        </code>
+	   </div>
+
+	   <div id="article">
+        <h2>JavaScript Implementation</h2>
+        Several JavaScript libraries are needed for the implementation here. The crypto ones are referenced on <a href="https://www.jokecamp.com/blog/examples-of-creating-base64-hashes-using-hmac-sha256-in-different-languages/">Joe Kampschmidt's blog</a>:
+        
+        <ul>
+	        <li>jquery-3.3.1.min.js</li>
+	        <li>jquery.base64.min.js</li>
+	        <li>crypto-js.min.js</li>
+	        <li>hmac-sha256.min.js</li>
+    	    <li>enc-base64.min.js</li>
+        </ul>
+        
+        To initialise the header and payload as JSON objects, <i>JSON.parse()</i> is used.
+        
+        <code>
+			var headerjson = '{ "alg": "HS256", "typ": "JWT" }',</br>
+			headerobj = JSON.parse(headerjson);</br></br>
+        
+			var payloadjson = '{ "sub": "x555", "name": "Michael", "iat": 445644543534, "issued": ' + Math.floor(Date.now() / 1000) + ' }',</br>
+	        payloadobj = JSON.parse(payloadjson);
+        </code>
+        
+        Next, independently <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding">encode</a> the header and the payload:
+        
+        <code>
+			headerb64 = btoa(unescape(encodeURIComponent(headerjson)));</br>
+			headerb64str = decodeURIComponent(escape(window.atob(headerb64)));</br></br>
+        
+			payloadb64 = btoa(unescape(encodeURIComponent(payloadjson)));</br>
+			payloadb64str = decodeURIComponent(escape(window.atob(payloadb64)));
+        </code>
+        
+        The unsigned token will consist of two segments, one for the encoded header and the other the encoded payload:
+        <code>var unsignedToken = headerb64 + "." + payloadb64;</code>
+        
+        Finally, the crypto libraries provide the HMAC SHA256 algorithm used here for signing the token: 
+        
+        <code>
+			var secretKey = "Password1";</br>
+				var tokenSignature = CryptoJS.HmacSHA256(unsignedToken, secretKey);</br>
+				var encodedTokenSignature = CryptoJS.enc.Base64.stringify(tokenSignature);</br>
+    	    gentoken.value = encodedTokenSignature;
+        </code>
+        
+        And finaly, I've put all three segments together to form the signed token:
+        <code>allsegments.value = headerb64 + "." + payloadb64 + "." + encodedTokenSignature;</code>
+	   </div>
+
+	   <div id="article">
+        <a href="https://github.com/xerocrypt/JSON-Web-Token-Generator">Get the .NET and JavaScript code here...</a>
+		</div>
+
+
+        <div id="article">
+            <h2>References</h2>
+  
+        </div>
+
+    </body>
+</html>
