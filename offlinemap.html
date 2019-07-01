@@ -22,9 +22,17 @@
                     L.tileLayer('scripts/lourdes-atlas/lourdes/{z}/{x}/{y}.png', { maxZoom: 15 }).addTo(map);
                     // map view before we get the location
                     map.setView(new L.LatLng(43.096556, -0.045987), 15);
+
+                    L.marker([43.02525, -0.093946]).addTo(map)
+                    .bindPopup('<b>Ayzac-Ost</b></br>')
+                    .closePopup();
 			
                     L.marker([43.095105, -0.052787]).addTo(map)
-                    .bindPopup('<b>Bar Restaurant Le Jeanne d'Arc</b></br> A very nice bar.')
+                    .bindPopup('<b>Bar Restaurant Le Jeanne d-Arc</b></br> A very nice bar.')
+                    .closePopup();
+			
+                    L.marker([43.123705, -0.049132]).addTo(map)
+                    .bindPopup('<b>Bartres</b></br>')
                     .closePopup();
 			
                     L.marker([43.096556, -0.045987]).addTo(map)
@@ -35,6 +43,10 @@
                     .bindPopup('<b>Chemin de Croix (Entrance)</b>')
                     .closePopup();
     
+                    L.marker([43.096479, -0.044955]).addTo(map)
+                    .bindPopup('<b>Eglise du Sacre Coeur: </b>')
+                    .closePopup();	
+			
                     L.marker([43.611107, 1.453556]).addTo(map)
                     .bindPopup('<b>Gare de Toulouse-Matabiau</b></br>Railway station.')
                     .closePopup();
@@ -55,8 +67,16 @@
                     .bindPopup('<b>Maison Paternell de Sainte Bernadette</b>')
                     .closePopup();
 			
+                    L.marker([43.07702, -0.071132]).addTo(map)
+                    .bindPopup('<b>Mountain Path Entry</b>')
+                    .closePopup();
+
                     L.marker([43.095076, -0.048549]).addTo(map)
                     .bindPopup('<b>Munster Bar</b>')
+                    .closePopup();
+
+                    L.marker([43.090222, -0.055399]).addTo(map)
+                    .bindPopup('<b>Musee de Petit Lourdes</b>')
                     .closePopup();
     
                     L.marker([43.18697, 0.003733]).addTo(map)
