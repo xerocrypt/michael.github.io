@@ -22,7 +22,11 @@
                     L.tileLayer('scripts/lourdes-atlas/lourdes/{z}/{x}/{y}.png', { maxZoom: 15 }).addTo(map);
                     // map view before we get the location
                     map.setView(new L.LatLng(43.096556, -0.045987), 15);
-    
+			
+                    L.marker([43.095105, -0.052787]).addTo(map)
+                    .bindPopup('<b>Bar Restaurant Le Jeanne d'Arc</b></br> A very nice bar.')
+                    .closePopup();
+			
                     L.marker([43.096556, -0.045987]).addTo(map)
                     .bindPopup('<b>Chateau Fort de Lourdes</b></br> Historical site.')
                     .closePopup();
@@ -45,6 +49,10 @@
     
                     L.marker([43.112201, -0.035415]).addTo(map)
                     .bindPopup('<b>Le Dubliner</b></br>Irish pub')
+                    .closePopup();
+			
+                    L.marker([43.095076, -0.048549]).addTo(map)
+                    .bindPopup('<b>Munster Bar</b>')
                     .closePopup();
     
                     L.marker([43.18697, 0.003733]).addTo(map)
@@ -86,9 +94,9 @@
                     L.marker([43.097495, -0.0573]).addTo(map)
                     .bindPopup('<b>Sanctuaires Notre Dame de Lourdes</b>')
                     .closePopup();
-    
-                    L.marker([43.095076, -0.048549]).addTo(map)
-                    .bindPopup('<b>Munster Bar</b>')
+			
+                    L.marker([43.097356, -0.053398]).addTo(map)
+                    .bindPopup('<b>Underground Basilica: </b><br />Giant underground basilica.')
                     .closePopup();
                 }
     
